@@ -88,7 +88,7 @@
 
   <div class="field">
     <%= form.label :country %>
-    <%= form.text_field :country %>
+    <%= form.country_select :country, priority_countries: ["US"], include_blank: true %>
   </div>
 
   <div class="field">
@@ -133,7 +133,7 @@
 
   <div class="field">
     <%= form.label :parentcountry %>
-    <%= form.text_field :parentcountry %>
+    <%= form.country_select  :parentcountry, priority_countries: ["US"], include_blank: true %>
   </div>
 
   <div class="field">

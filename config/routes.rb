@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :genders
+  resources :demographics
   resources :applicant_details
   resources :camp_configurations
   devise_for :users
