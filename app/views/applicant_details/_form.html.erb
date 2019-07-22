@@ -1,0 +1,157 @@
+<%= form_with(model: applicant_detail, local: true) do |form| %>
+  <% if applicant_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(applicant_detail.errors.count, "error") %> prohibited this applicant_detail from being saved:</h2>
+
+      <ul>
+        <% applicant_detail.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :firstname %>
+    <%= form.text_field :firstname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :middlename %>
+    <%= form.text_field :middlename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lastname %>
+    <%= form.text_field :lastname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.text_field :gender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :us_citizen %>
+    <%= form.check_box :us_citizen %>
+  </div>
+
+  <div class="field">
+    <%= form.label :demographic %>
+    <%= form.text_field :demographic %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birthdate %>
+    <%= form.date_select :birthdate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :diet_restrictions %>
+    <%= form.text_area :diet_restrictions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shirt_size %>
+    <%= form.text_field :shirt_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address1 %>
+    <%= form.text_field :address1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address2 %>
+    <%= form.text_field :address2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state_non_us %>
+    <%= form.text_field :state_non_us %>
+  </div>
+
+  <div class="field">
+    <%= form.label :postalcode %>
+    <%= form.text_field :postalcode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentname %>
+    <%= form.text_field :parentname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentaddress1 %>
+    <%= form.text_field :parentaddress1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentaddress2 %>
+    <%= form.text_field :parentaddress2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentcity %>
+    <%= form.text_field :parentcity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentstate %>
+    <%= form.text_field :parentstate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentstate_non_us %>
+    <%= form.text_field :parentstate_non_us %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentzip %>
+    <%= form.text_field :parentzip %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentcountry %>
+    <%= form.text_field :parentcountry %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentphone %>
+    <%= form.text_field :parentphone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentworkphone %>
+    <%= form.text_field :parentworkphone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parentemail %>
+    <%= form.text_field :parentemail %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
