@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Camp year:</strong>
+  <%= @camp_configuration.camp_year %>
+</p>
+
+<p>
+  <strong>Application open:</strong>
+  <%= @camp_configuration.application_open %>
+</p>
+
+<p>
+  <strong>Application close:</strong>
+  <%= @camp_configuration.application_close %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @camp_configuration.priority %>
+</p>
+
+<p>
+  <strong>Application materials due:</strong>
+  <%= @camp_configuration.application_materials_due %>
+</p>
+
+<p>
+  <strong>Camper acceptance due:</strong>
+  <%= @camp_configuration.camper_acceptance_due %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @camp_configuration.active %>
+</p>
+
+<%= link_to 'Edit', edit_camp_configuration_path(@camp_configuration) %> |
+<%= link_to 'Back', camp_configurations_path %>

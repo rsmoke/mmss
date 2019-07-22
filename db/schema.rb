@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_190712) do
+ActiveRecord::Schema.define(version: 2019_07_17_214205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "camp_configurations", force: :cascade do |t|
+    t.integer "camp_year", null: false
+    t.date "application_open", null: false
+    t.date "application_close", null: false
+    t.date "priority", null: false
+    t.date "application_materials_due", null: false
+    t.date "camper_acceptance_due", null: false
+    t.boolean "active", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_year"], name: "index_camp_configurations_on_camp_year"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
