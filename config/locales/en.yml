@@ -31,3 +31,14 @@
 
 en:
   hello: "Hello world"
+  number:
+    currency:
+      format:
+      delimiter: ","
+      separator: "."
+
+# falling back to
+number:
+  format:
+    delimiter: ","
+    separator: "."

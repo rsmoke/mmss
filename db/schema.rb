@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_201732) do
+ActiveRecord::Schema.define(version: 2019_07_23_210844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.bigint "session_id", null: false
+    t.string "description", null: false
+    t.string "cost_in_cents", null: false
+    t.date "date_occurs", null: false
+    t.boolean "active", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["session_id"], name: "index_activities_on_session_id"
+  end
 
   create_table "applicant_details", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -105,6 +116,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_201732) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activities", "sessions"
   add_foreign_key "applicant_details", "users"
   add_foreign_key "sessions", "camp_configurations"
 end
