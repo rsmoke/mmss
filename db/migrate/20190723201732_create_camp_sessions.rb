@@ -1,6 +1,6 @@
-class CreateSessions < ActiveRecord::Migration[6.0]
+class CreateCampSessions < ActiveRecord::Migration[6.0]
   def change
-    create_table :sessions do |t|
+    create_table :camp_sessions do |t|
       t.references :camp_configuration, null: false, foreign_key: true
       t.string :description, null: false
       t.date :begin_date, null: false

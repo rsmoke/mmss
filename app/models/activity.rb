@@ -1,5 +1,5 @@
 class Activity < ApplicationRecord
-  belongs_to :session
+  belongs_to :camp_session
 
   monetize :cost_in_cents
 

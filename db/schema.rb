@@ -16,14 +16,14 @@ ActiveRecord::Schema.define(version: 2019_07_23_210844) do
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.bigint "session_id", null: false
+    t.bigint "camp_session_id", null: false
     t.string "description", null: false
     t.string "cost_in_cents", null: false
     t.date "date_occurs", null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["session_id"], name: "index_activities_on_session_id"
+    t.index ["camp_session_id"], name: "index_activities_on_camp_session_id"
   end
 
   create_table "applicant_details", force: :cascade do |t|
@@ -74,6 +74,17 @@ ActiveRecord::Schema.define(version: 2019_07_23_210844) do
     t.index ["camp_year"], name: "index_camp_configurations_on_camp_year"
   end
 
+  create_table "camp_sessions", force: :cascade do |t|
+    t.bigint "camp_configuration_id", null: false
+    t.string "description", null: false
+    t.date "begin_date", null: false
+    t.date "end_date", null: false
+    t.boolean "active", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_configuration_id"], name: "index_camp_sessions_on_camp_configuration_id"
+  end
+
   create_table "demographics", force: :cascade do |t|
     t.string "name", null: false
     t.string "description", null: false
@@ -86,17 +97,6 @@ ActiveRecord::Schema.define(version: 2019_07_23_210844) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.bigint "camp_configuration_id", null: false
-    t.string "description", null: false
-    t.date "begin_date", null: false
-    t.date "end_date", null: false
-    t.boolean "active", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["camp_configuration_id"], name: "index_sessions_on_camp_configuration_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_210844) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "activities", "sessions"
+  add_foreign_key "activities", "camp_sessions"
   add_foreign_key "applicant_details", "users"
-  add_foreign_key "sessions", "camp_configurations"
+  add_foreign_key "camp_sessions", "camp_configurations"
 end

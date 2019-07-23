@@ -1,5 +1,5 @@
 class CampConfiguration < ApplicationRecord
-  has_many :sessions, dependent: :destroy
+  has_many :camp_sessions, dependent: :destroy
 
   validates :camp_year, presence: true
   validates :application_open, presence: true

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Camp configuration:</strong>
+  <%= @camp_session.camp_configuration_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @camp_session.description %>
+</p>
+
+<p>
+  <strong>Begin date:</strong>
+  <%= @camp_session.begin_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @camp_session.end_date %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @camp_session.active %>
+</p>
+
+<%= link_to 'Edit', edit_session_path(@camp_session) %> |
+<%= link_to 'Back', camp_sessions_path %>
