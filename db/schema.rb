@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_214803) do
     t.string "middlename"
     t.string "lastname", null: false
     t.string "gender", null: false
-    t.boolean "us_citizen", null: false
+    t.boolean "us_citizen", default: false, null: false
     t.string "demographic", null: false
     t.date "birthdate", null: false
     t.text "diet_restrictions", null: false
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_214803) do
     t.date "priority", null: false
     t.date "application_materials_due", null: false
     t.date "camper_acceptance_due", null: false
-    t.boolean "active", default: false
+    t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["camp_year"], name: "index_camp_configurations_on_camp_year"
@@ -83,6 +83,11 @@ ActiveRecord::Schema.define(version: 2019_07_22_214803) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

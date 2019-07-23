@@ -6,7 +6,7 @@ class CreateApplicantDetails < ActiveRecord::Migration[6.0]
       t.string :middlename
       t.string :lastname, null: false
       t.string :gender, null: false
-      t.boolean :us_citizen, null: false
+      t.boolean :us_citizen, null: false, default: false
       t.string :demographic, null: false
       t.date :birthdate, null: false
       t.text :diet_restrictions, null: false

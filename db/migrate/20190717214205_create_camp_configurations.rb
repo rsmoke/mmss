@@ -7,7 +7,7 @@ class CreateCampConfigurations < ActiveRecord::Migration[6.0]
       t.date :priority, null: false
       t.date :application_materials_due, null: false
       t.date :camper_acceptance_due, null: false
-      t.boolean :active, default: false
+      t.boolean :active, null: false, default: false
 
       t.timestamps
     end

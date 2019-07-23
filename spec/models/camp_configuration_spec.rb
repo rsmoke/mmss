@@ -17,7 +17,7 @@ RSpec.describe CampConfiguration, type: :model do
     it { should validate_presence_of(:priority) }
     it { should validate_presence_of(:application_materials_due) }
     it { should validate_presence_of(:camper_acceptance_due) }
-    it { should validate_presence_of(:active) }
+    
   end
   
 end

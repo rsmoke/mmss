@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :applicant_detail do
-    user { nil }
+    user
     firstname { "MyString" }
     middlename { "MyString" }
     lastname { "MyString" }

@@ -1,11 +1,10 @@
 class ApplicantDetail < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, required: true
 
-  validates :user_id, presence: true
+  validates :user_id, presence: true, uniqueness: { case_sensitive: false }
   validates :firstname, presence: true
   validates :lastname, presence: true
   validates :gender, presence: true
-  validates :us_citizen, presence: true
   validates :demographic, presence: true
   validates :birthdate, presence: true
   validates :diet_restrictions, presence: true
