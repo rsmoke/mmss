@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :sessions
   resources :genders
   resources :demographics
   resources :applicant_details

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_22_214803) do
+ActiveRecord::Schema.define(version: 2019_07_23_201732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,17 @@ ActiveRecord::Schema.define(version: 2019_07_22_214803) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "camp_configuration_id", null: false
+    t.string "description", null: false
+    t.date "begin_date", null: false
+    t.date "end_date", null: false
+    t.boolean "active", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_configuration_id"], name: "index_sessions_on_camp_configuration_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -95,4 +106,5 @@ ActiveRecord::Schema.define(version: 2019_07_22_214803) do
   end
 
   add_foreign_key "applicant_details", "users"
+  add_foreign_key "sessions", "camp_configurations"
 end
