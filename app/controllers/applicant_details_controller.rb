@@ -24,8 +24,8 @@ class ApplicantDetailsController < ApplicationController
   # POST /applicant_details
   # POST /applicant_details.json
   def create
-    @applicant_detail = ApplicantDetail.new(applicant_detail_params)
-    @applicant_detail.user_id = current_user.id if current_user
+    @applicant_detail = current_user.create_applicant_details(applicant_detail_params)
+    # @applicant_detail.user_id = .id if current_user
 
     respond_to do |format|
       if @applicant_detail.save
