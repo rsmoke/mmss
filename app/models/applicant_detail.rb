@@ -1,5 +1,5 @@
 class ApplicantDetail < ApplicationRecord
-  belongs_to :user, required: true
+  belongs_to :user, required: true, inverse_of: :applicant_detail
 
   validates :user_id, presence: true, uniqueness: { case_sensitive: false }
   validates :firstname, presence: true
@@ -21,4 +21,14 @@ class ApplicantDetail < ApplicationRecord
   validates :parentzip, presence: true
   validates :parentcountry, presence: true
   validates :parentphone, presence: true
+
+
+
+  # def applicant_profile_link
+  #   if self.find(current_user)
+  #     edit_applicant_detail_path(current_user)
+  #   else
+  #     new_applicant_detail_path(current_user)
+  #   end
+  # end
 end
