@@ -1,5 +1,7 @@
 class ApplicantDetailsController < ApplicationController
   before_action :set_applicant_detail, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_admin!, only: [:index]
 
   # GET /applicant_details
   # GET /applicant_details.json
@@ -24,7 +26,7 @@ class ApplicantDetailsController < ApplicationController
   # POST /applicant_details
   # POST /applicant_details.json
   def create
-    @applicant_detail = current_user.create_applicant_details(applicant_detail_params)
+    @applicant_detail = current_user.create_applicant_detail!(applicant_detail_params)
     # @applicant_detail.user_id = .id if current_user
 
     respond_to do |format|
