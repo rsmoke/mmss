@@ -28,7 +28,8 @@
 
   <div class="field">
     <%= form.label :gender %>
-    <%= form.text_field :gender %>
+    <%= form.collection_select(:gender, Gender.all, :name, :name, :include_blank => "-- Please Select --") %>
+
   </div>
 
   <div class="field">
@@ -38,7 +39,7 @@
 
   <div class="field">
     <%= form.label :demographic %>
-    <%= form.text_field :demographic %>
+    <%= form.collection_select(:demographic, Demographic.all, :id, :name, :include_blank => "-- Please Select --") %>
   </div>
 
   <div class="field">
