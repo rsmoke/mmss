@@ -1,10 +1,22 @@
 <% if user_signed_in? %>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-  <li><%= button_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+  <li><%= link_to current_user.email, edit_user_registration_path %>
+  <% if current_user.applicant_detail.nil? %>
+    <li> <%= link_to 'New Applicant Details', new_applicant_detail_path %> </li>
+  <% else %>
+    <li> <%= link_to 'Applicant Details', applicant_detail_path(current_user) %> </li>
+  <% end %>
+  
+  <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
 <% else %>
   <li><%= link_to 'Sign in', new_user_session_path %></li>
   <li><%= link_to 'Sign up', new_user_registration_path %></li>
 <% end %>
 <% if user_signed_in? %>
   <li><%= link_to 'Home', root_path %></li>
+<% end %>
+
+<% if admin_signed_in? %>
+  <li><%= link_to 'Admin Sign out', destroy_admin_session_path, method: :delete %></li>
+<% else %>
+  <li><%= link_to 'Admin Sign in', new_admin_session_path %></li>
 <% end %>
