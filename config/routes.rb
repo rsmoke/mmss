@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  
-  resources :genders
-  resources :demographics
-  resources :applicant_details
-  resources :camp_configurations
-  resources :camp_sessions
-  resources :activities
+  devise_for :admins
+  authenticated :admin do
+    resources :genders
+    resources :demographics
 
+    resources :camp_configurations do
+      resources :camp_sessions do
+        resources :activities
+      end
+    end
+  end
+
+  resources :applicant_details
   devise_for :users
   root to: 'static_pages#index'
   get 'static_pages/index'
