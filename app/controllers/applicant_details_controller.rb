@@ -1,6 +1,5 @@
 class ApplicantDetailsController < ApplicationController
   before_action :set_applicant_detail, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index]
   before_action :authenticate_admin!, only: [:index]
 
   # GET /applicant_details
