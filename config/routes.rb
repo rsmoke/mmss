@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'static_pages#index'
+  
   devise_for :admins
   authenticated :admin do
     resources :genders
@@ -13,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :applicant_details
   devise_for :users
-  root to: 'static_pages#index'
+
   get 'static_pages/index'
   get 'static_pages/contact'
   get 'static_pages/privacy'
