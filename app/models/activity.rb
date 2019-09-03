@@ -1,5 +1,7 @@
 class Activity < ApplicationRecord
-  belongs_to :camp_session
+  belongs_to :camp_occurrence
+  has_many :enrollment_activities
+  has_many :enrollments, through: :enrollment_activities
 
   monetize :cost_in_cents
 
