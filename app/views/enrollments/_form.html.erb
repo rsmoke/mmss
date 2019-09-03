@@ -1,0 +1,112 @@
+<%= form_with(model: enrollment, local: true) do |form| %>
+  <% if enrollment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+
+      <ul>
+        <% enrollment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :international %>
+    <%= form.check_box :international %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_name %>
+    <%= form.text_field :high_school_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_address1 %>
+    <%= form.text_field :high_school_address1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_address2 %>
+    <%= form.text_field :high_school_address2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_city %>
+    <%= form.text_field :high_school_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_state %>
+    <%= form.text_field :high_school_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_non_us %>
+    <%= form.text_field :high_school_non_us %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_postalcode %>
+    <%= form.text_field :high_school_postalcode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_country %>
+    <%= form.text_field :high_school_country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :year_in_school %>
+    <%= form.text_field :year_in_school %>
+  </div>
+
+  <div class="field">
+    <%= form.label :anticipated_graduation_year %>
+    <%= form.text_field :anticipated_graduation_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :room_mate_request %>
+    <%= form.text_field :room_mate_request %>
+  </div>
+
+  <div class="field">
+    <%= form.label :personal_statement %>
+    <%= form.text_area :personal_statement %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shirt_size %>
+    <%= form.text_field :shirt_size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :application_status %>
+    <%= form.text_field :application_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :offer_status %>
+    <%= form.text_field :offer_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :partner_program %>
+    <%= form.text_field :partner_program %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

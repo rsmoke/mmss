@@ -1,0 +1,99 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @enrollment.user_id %>
+</p>
+
+<p>
+  <strong>International:</strong>
+  <%= @enrollment.international %>
+</p>
+
+<p>
+  <strong>High school name:</strong>
+  <%= @enrollment.high_school_name %>
+</p>
+
+<p>
+  <strong>High school address1:</strong>
+  <%= @enrollment.high_school_address1 %>
+</p>
+
+<p>
+  <strong>High school address2:</strong>
+  <%= @enrollment.high_school_address2 %>
+</p>
+
+<p>
+  <strong>High school city:</strong>
+  <%= @enrollment.high_school_city %>
+</p>
+
+<p>
+  <strong>High school state:</strong>
+  <%= @enrollment.high_school_state %>
+</p>
+
+<p>
+  <strong>High school non us:</strong>
+  <%= @enrollment.high_school_non_us %>
+</p>
+
+<p>
+  <strong>High school postalcode:</strong>
+  <%= @enrollment.high_school_postalcode %>
+</p>
+
+<p>
+  <strong>High school country:</strong>
+  <%= @enrollment.high_school_country %>
+</p>
+
+<p>
+  <strong>Year in school:</strong>
+  <%= @enrollment.year_in_school %>
+</p>
+
+<p>
+  <strong>Anticipated graduation year:</strong>
+  <%= @enrollment.anticipated_graduation_year %>
+</p>
+
+<p>
+  <strong>Room mate request:</strong>
+  <%= @enrollment.room_mate_request %>
+</p>
+
+<p>
+  <strong>Personal statement:</strong>
+  <%= @enrollment.personal_statement %>
+</p>
+
+<p>
+  <strong>Shirt size:</strong>
+  <%= @enrollment.shirt_size %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @enrollment.notes %>
+</p>
+
+<p>
+  <strong>Application status:</strong>
+  <%= @enrollment.application_status %>
+</p>
+
+<p>
+  <strong>Offer status:</strong>
+  <%= @enrollment.offer_status %>
+</p>
+
+<p>
+  <strong>Partner program:</strong>
+  <%= @enrollment.partner_program %>
+</p>
+
+<%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
+<%= link_to 'Back', enrollments_path %>
