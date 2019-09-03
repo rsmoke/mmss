@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Camp configuration:</strong>
+  <%= @camp_occurrence.camp_configuration_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @camp_occurrence.description %>
+</p>
+
+<p>
+  <strong>Begin date:</strong>
+  <%= @camp_occurrence.begin_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @camp_occurrence.end_date %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @camp_occurrence.active %>
+</p>
+
+<%= link_to 'Edit', edit_occurrence_path(@camp_occurrence) %> |
+<%= link_to 'Back', camp_occurrences_path %>
