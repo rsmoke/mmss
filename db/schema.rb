@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_133953) do
+ActiveRecord::Schema.define(version: 2019_09_03_154052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.bigint "camp_session_id", null: false
+    t.bigint "camp_occurrence_id", null: false
     t.string "description", null: false
     t.string "cost_in_cents", null: false
     t.date "date_occurs", null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["camp_session_id"], name: "index_activities_on_camp_session_id"
+    t.index ["camp_occurrence_id"], name: "index_activities_on_camp_occurrence_id"
   end
 
   create_table "admins", force: :cascade do |t|
@@ -87,10 +87,10 @@ ActiveRecord::Schema.define(version: 2019_08_20_133953) do
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["camp_year"], name: "index_camp_configurations_on_camp_year"
+    t.index ["camp_year"], name: "index_camp_configurations_on_camp_year", unique: true
   end
 
-  create_table "camp_sessions", force: :cascade do |t|
+  create_table "camp_occurrences", force: :cascade do |t|
     t.bigint "camp_configuration_id", null: false
     t.string "description", null: false
     t.date "begin_date", null: false
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2019_08_20_133953) do
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["camp_configuration_id"], name: "index_camp_sessions_on_camp_configuration_id"
+    t.index ["camp_configuration_id"], name: "index_camp_occurrences_on_camp_configuration_id"
   end
 
   create_table "demographics", force: :cascade do |t|
@@ -106,6 +106,40 @@ ActiveRecord::Schema.define(version: 2019_08_20_133953) do
     t.string "description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "enrollment_activities", force: :cascade do |t|
+    t.bigint "enrollment_id", null: false
+    t.bigint "activity_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activity_id"], name: "index_enrollment_activities_on_activity_id"
+    t.index ["enrollment_id"], name: "index_enrollment_activities_on_enrollment_id"
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "international", default: false, null: false
+    t.string "high_school_name", null: false
+    t.string "high_school_address1", null: false
+    t.string "high_school_address2"
+    t.string "high_school_city", null: false
+    t.string "high_school_state"
+    t.string "high_school_non_us"
+    t.string "high_school_postalcode"
+    t.string "high_school_country", null: false
+    t.string "year_in_school", null: false
+    t.string "anticipated_graduation_year", null: false
+    t.string "room_mate_request"
+    t.text "personal_statement", null: false
+    t.string "shirt_size"
+    t.text "notes"
+    t.string "application_status"
+    t.string "offer_status"
+    t.string "partner_program"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
   create_table "genders", force: :cascade do |t|
@@ -132,7 +166,10 @@ ActiveRecord::Schema.define(version: 2019_08_20_133953) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "activities", "camp_sessions"
+  add_foreign_key "activities", "camp_occurrences"
   add_foreign_key "applicant_details", "users"
-  add_foreign_key "camp_sessions", "camp_configurations"
+  add_foreign_key "camp_occurrences", "camp_configurations"
+  add_foreign_key "enrollment_activities", "activities"
+  add_foreign_key "enrollment_activities", "enrollments"
+  add_foreign_key "enrollments", "users"
 end
