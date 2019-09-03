@@ -1,4 +1,5 @@
 class CampConfigurationsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_camp_configuration, only: [:show, :edit, :update, :destroy]
 
   # GET /camp_configurations

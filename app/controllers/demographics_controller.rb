@@ -1,4 +1,5 @@
 class DemographicsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_demographic, only: [:show, :edit, :update, :destroy]
 
   # GET /demographics
