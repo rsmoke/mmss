@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Camp year:</strong>
@@ -35,5 +34,19 @@
   <%= @camp_configuration.active %>
 </p>
 
+
 <%= link_to 'Edit', edit_camp_configuration_path(@camp_configuration) %> |
 <%= link_to 'Back', camp_configurations_path %>
+
+<% if @camp_configuration.camp_occurrences.any? %>
+  <hr>
+  <h2>Camp Occurrences for <%= @camp_configuration.camp_year %>: </h2>
+  <%= render @camp_configuration.camp_occurrences %>
+  <% end %>
+
+<hr>
+
+<h2>Add an occurrence:</h2>
+<%= render 'camp_occurrences/form', camp_occurrence: @camp_configuration.camp_occurrences.build %>
+
+
