@@ -1,4 +1,4 @@
-<%= form_with(model: camp_occurrence, local: true) do |form| %>
+<%= form_with(model: [ @camp_configuration, camp_occurrence ], local: true) do |form| %>
   <% if camp_occurrence.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(camp_occurrence.errors.count, "error") %> prohibited this camp_occurrence from being saved:</h2>
