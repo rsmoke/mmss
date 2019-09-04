@@ -1,4 +1,4 @@
-class CampSession < ApplicationRecord
+class CampOccurrence < ApplicationRecord
   belongs_to :camp_configuration
   has_many :activities, dependent: :destroy
 
