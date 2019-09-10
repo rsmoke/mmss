@@ -3,9 +3,9 @@ class Activity < ApplicationRecord
   has_many :enrollment_activities
   has_many :enrollments, through: :enrollment_activities
 
-  monetize :cost_in_cents
+  monetize :cost_cents
 
   validates :description, presence: true
   validates :date_occurs, presence: true, format: { with: ConstantData::VALID_DATE_REGEX }
-  validates :cost_in_cents, presence: true, numericality: { only_integer: true }
+  validates :cost_cents, presence: true, numericality: { only_integer: true }
 end

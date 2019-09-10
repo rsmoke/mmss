@@ -1,6 +1,8 @@
 class ActivitiesController < ApplicationController
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!, only: [:show, :edit, :update, :destroy]
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index]
+  # before_action :set_camp_occurrence, only: [:show, :edit, :update, :destroy]
 
   # GET /activities
   # GET /activities.json
@@ -13,10 +15,6 @@ class ActivitiesController < ApplicationController
   def show
   end
 
-  # GET /activities/new
-  def new
-    @activity = Activity.new
-  end
 
   # GET /activities/1/edit
   def edit
@@ -25,16 +23,13 @@ class ActivitiesController < ApplicationController
   # POST /activities
   # POST /activities.json
   def create
-    @activity = Activity.new(activity_params)
-
-    respond_to do |format|
-      if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
-        format.json { render :show, status: :created, location: @activity }
-      else
-        format.html { render :new }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
-      end
+    @camp_occurrence = CampOccurrence.find(params[:camp_occurrence_id])
+    @camp_configuration = @camp_occurrence.camp_configuration_id
+    @activity = @camp_occurrence.activities.create(activity_params)
+    if @activity.errors 
+      render :edit
+    else 
+      redirect_to activities_path, notice: 'Activity was successfully created.'
     end
   end
 
@@ -68,8 +63,12 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
     end
 
+    def set_camp_occurrence
+      @camp_occurrence = CampOccurrence.find(params[:camp_occurrence_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:session_id, :description, :cost_in_cents, :date_occurs, :active)
+      params.require(:activity).permit(:camp_occurrence_id, :description, :cost_cents, :date_occurs, :active)
     end
 end
