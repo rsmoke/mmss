@@ -3,16 +3,20 @@ Rails.application.routes.draw do
   root to: 'static_pages#index'
   
   devise_for :admins
-  authenticated :admin do
+  # authenticated :admin do
     resources :genders
     resources :demographics
 
     resources :camp_configurations do
-      resources :camp_occurrences do
-        resources :activities
-      end
+      resources :camp_occurrences
     end
-  end
+
+    resources :camp_occurrences do
+      resources :activities
+    end
+
+    resources :activities
+  # end
   
   devise_for :users
   resources :applicant_details
