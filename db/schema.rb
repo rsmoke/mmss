@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_154052) do
+ActiveRecord::Schema.define(version: 2019_09_10_173112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_09_03_154052) do
   create_table "activities", force: :cascade do |t|
     t.bigint "camp_occurrence_id", null: false
     t.string "description", null: false
-    t.string "cost_in_cents", null: false
+    t.string "cost_cents", null: false
     t.date "date_occurs", null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
