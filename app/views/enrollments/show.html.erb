@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <p>
   <strong>User:</strong>
@@ -97,3 +97,19 @@
 
 <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
 <%= link_to 'Back', enrollments_path %>
+
+<div class="bg-blue-200 border border-blue-500 ">
+<h2>Activities connected to this enrollment</h2>
+<% @activities.each do |activity| %>
+  <li>
+    <%= " #{ activity.description } ( #{activity.camp_occurrence.camp_configuration.camp_year } #{ activity.camp_occurrence.description } ) --  #{ humanized_money_with_symbol(activity.cost) }" %>
+  </li>
+<% end %>
+</div>
+
+<div class="bg-green-200 border border-green-500 ">
+<h2>Add an Activity</h2>
+</div>
+
+
+
