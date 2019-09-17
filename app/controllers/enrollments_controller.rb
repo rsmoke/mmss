@@ -1,15 +1,21 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
-
+  devise_group :logged_in, contains: [:user, :admin]
+  before_action :authenticate_logged_in!
   # GET /enrollments
   # GET /enrollments.json
   def index
-    @enrollments = Enrollment.all
+    if admin_signed_in? 
+      @enrollments = Enrollment.all
+    else
+      @enrollments = Enrollment.current_user_enrollments(current_user)
+    end
   end
 
   # GET /enrollments/1
   # GET /enrollments/1.json
   def show
+    @activities = @enrollment.activities
   end
 
   # GET /enrollments/new
@@ -24,7 +30,7 @@ class EnrollmentsController < ApplicationController
   # POST /enrollments
   # POST /enrollments.json
   def create
-    @enrollment = Enrollment.new(enrollment_params)
+    @enrollment = current_user.enrollments.create(enrollment_params)
 
     respond_to do |format|
       if @enrollment.save
