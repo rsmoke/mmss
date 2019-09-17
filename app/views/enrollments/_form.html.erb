@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+    
+    <%= form.text_field :user_id, hidden: true %>
   </div>
 
   <div class="field">
@@ -58,7 +58,7 @@
 
   <div class="field">
     <%= form.label :high_school_country %>
-    <%= form.text_field :high_school_country %>
+    <%= form.country_select :high_school_country, priority_countries: ["US"], include_blank: true %>
   </div>
 
   <div class="field">
