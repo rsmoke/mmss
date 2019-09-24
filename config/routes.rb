@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :travels
   resources :financial_aids
   root to: 'static_pages#index'
   

@@ -1,0 +1,57 @@
+<%= form_with(model: travel, local: true) do |form| %>
+  <% if travel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(travel.errors.count, "error") %> prohibited this travel from being saved:</h2>
+
+      <ul>
+        <% travel.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :enrollment_id %>
+    <%= form.text_field :enrollment_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :direction %>
+    <%= form.text_field :direction %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transport_needed %>
+    <%= form.text_field :transport_needed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.datetime_select :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mode %>
+    <%= form.text_field :mode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :carrier %>
+    <%= form.text_field :carrier %>
+  </div>
+
+  <div class="field">
+    <%= form.label :route_num %>
+    <%= form.text_field :route_num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :note %>
+    <%= form.text_area :note %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

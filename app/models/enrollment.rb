@@ -3,6 +3,7 @@ class Enrollment < ApplicationRecord
   has_many :enrollment_activities
   has_many :activities, through: :enrollment_activities
   has_one :financial_aid
+  has_many :travels
 
 
   validates :high_school_name, presence: true

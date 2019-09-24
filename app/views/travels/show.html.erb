@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Enrollment:</strong>
+  <%= @travel.enrollment_id %>
+</p>
+
+<p>
+  <strong>Direction:</strong>
+  <%= @travel.direction %>
+</p>
+
+<p>
+  <strong>Transport needed:</strong>
+  <%= @travel.transport_needed %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @travel.date %>
+</p>
+
+<p>
+  <strong>Mode:</strong>
+  <%= @travel.mode %>
+</p>
+
+<p>
+  <strong>Carrier:</strong>
+  <%= @travel.carrier %>
+</p>
+
+<p>
+  <strong>Route num:</strong>
+  <%= @travel.route_num %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @travel.note %>
+</p>
+
+<%= link_to 'Edit', edit_travel_path(@travel) %> |
+<%= link_to 'Back', travels_path %>
