@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :financial_aids
   root to: 'static_pages#index'
   
   devise_for :admins

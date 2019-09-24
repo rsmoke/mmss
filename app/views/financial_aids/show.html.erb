@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Enrollment:</strong>
+  <%= @financial_aid.enrollment_id %>
+</p>
+
+<p>
+  <strong>Amount cents:</strong>
+  <%= @financial_aid.amount_cents %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @financial_aid.source %>
+</p>
+
+<p>
+  <strong>Awarded:</strong>
+  <%= @financial_aid.awarded %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @financial_aid.note %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @financial_aid.status %>
+</p>
+
+<%= link_to 'Edit', edit_financial_aid_path(@financial_aid) %> |
+<%= link_to 'Back', financial_aids_path %>

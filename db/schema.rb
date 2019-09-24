@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_173112) do
+ActiveRecord::Schema.define(version: 2019_09_24_203027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,18 @@ ActiveRecord::Schema.define(version: 2019_09_10_173112) do
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
+  create_table "financial_aids", force: :cascade do |t|
+    t.bigint "enrollment_id", null: false
+    t.integer "amount_cents"
+    t.string "source"
+    t.boolean "awarded"
+    t.text "note"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enrollment_id"], name: "index_financial_aids_on_enrollment_id"
+  end
+
   create_table "genders", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
@@ -172,4 +184,5 @@ ActiveRecord::Schema.define(version: 2019_09_10_173112) do
   add_foreign_key "enrollment_activities", "activities"
   add_foreign_key "enrollment_activities", "enrollments"
   add_foreign_key "enrollments", "users"
+  add_foreign_key "financial_aids", "enrollments"
 end
