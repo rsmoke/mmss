@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :travels
-  resources :financial_aids
   root to: 'static_pages#index'
   
   devise_for :admins
@@ -17,12 +15,24 @@ Rails.application.routes.draw do
       resources :activities
     end
 
+    resources :camp_occurrences do
+      resources :courses
+    end
+
     resources :activities
+    resources :courses
   # end
   
   devise_for :users
   resources :applicant_details
-  resources :enrollments
+
+  resources :enrollments do 
+    resources :travels
+  end
+
+  resources :enrollments do 
+    resources :financial_aids
+  end
 
 
   get 'static_pages/index'

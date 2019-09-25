@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_205431) do
+ActiveRecord::Schema.define(version: 2019_09_25_192128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,26 @@ ActiveRecord::Schema.define(version: 2019_09_24_205431) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["camp_configuration_id"], name: "index_camp_occurrences_on_camp_configuration_id"
+  end
+
+  create_table "course_preferences", force: :cascade do |t|
+    t.bigint "enrollment_id", null: false
+    t.bigint "course_id", null: false
+    t.integer "ranking"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_preferences_on_course_id"
+    t.index ["enrollment_id"], name: "index_course_preferences_on_enrollment_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.bigint "camp_occurrence_id", null: false
+    t.string "title"
+    t.integer "available_spaces"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_occurrence_id"], name: "index_courses_on_camp_occurrence_id"
   end
 
   create_table "demographics", force: :cascade do |t|
@@ -195,6 +215,9 @@ ActiveRecord::Schema.define(version: 2019_09_24_205431) do
   add_foreign_key "activities", "camp_occurrences"
   add_foreign_key "applicant_details", "users"
   add_foreign_key "camp_occurrences", "camp_configurations"
+  add_foreign_key "course_preferences", "courses"
+  add_foreign_key "course_preferences", "enrollments"
+  add_foreign_key "courses", "camp_occurrences"
   add_foreign_key "enrollment_activities", "activities"
   add_foreign_key "enrollment_activities", "enrollments"
   add_foreign_key "enrollments", "users"
