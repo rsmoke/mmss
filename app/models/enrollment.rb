@@ -2,6 +2,8 @@ class Enrollment < ApplicationRecord
   belongs_to :user
   has_many :enrollment_activities
   has_many :activities, through: :enrollment_activities
+  has_many :course_preferences
+  has_many :courses, through: :course_preferences
   has_one :financial_aid
   has_many :travels
 
