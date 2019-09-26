@@ -77,6 +77,11 @@
 
 <p>
   <strong>Notes:</strong>
+  <%= @enrollment.documents.attach(params[:documents]) %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
   <%= @enrollment.notes %>
 </p>
 
