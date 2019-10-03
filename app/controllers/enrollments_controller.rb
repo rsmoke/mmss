@@ -84,6 +84,6 @@ class EnrollmentsController < ApplicationController
                           :anticipated_graduation_year, :room_mate_request, 
                           :personal_statement, :shirt_size, :notes, 
                           :application_status, :offer_status, 
-                          :partner_program, documents: [])
+                          :partner_program, :transcript)
     end
 end

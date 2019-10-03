@@ -7,7 +7,7 @@ class Enrollment < ApplicationRecord
   has_one :financial_aid
   has_many :travels
 
-  has_many_attached :documents
+  has_one_attached :transcript
 
 
   validates :high_school_name, presence: true

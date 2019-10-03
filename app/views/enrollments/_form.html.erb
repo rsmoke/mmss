@@ -91,6 +91,25 @@
     <%= form.text_area :notes %>
   </div>
 
+  
+  <% if @enrollment.transcript.attached? %>
+    <div class='current-uploaded-docs'>
+      <p>
+        <strong>Transcript currently uploaded:</strong>
+        <%= link_to @enrollment.transcript.filename, url_for(@enrollment.transcript) %>
+      </p>
+    </div>
+    <div class="field">
+      <%= form.label :transcript, 'Update Transcript' %>
+      <%= form.file_field :transcript %>
+    </div>
+  <% else %>
+    <div class="field">
+      <%= form.label :transcript %>
+      <%= form.file_field :transcript %>
+    </div>
+  <% end %>
+<br><hr>
   <div class="field">
     <%= form.label :application_status %>
     <%= form.text_field :application_status %>
