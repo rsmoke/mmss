@@ -34,7 +34,6 @@ Rails.application.routes.draw do
     resources :financial_aids
   end
 
-
   get 'static_pages/index'
   get 'static_pages/contact'
   get 'static_pages/privacy'
