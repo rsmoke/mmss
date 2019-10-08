@@ -33,6 +33,10 @@ Rails.application.routes.draw do
   resources :enrollments do 
     resources :financial_aids
   end
+  
+  resources :enrollments do
+    resources :recommendations
+  end
 
   get 'static_pages/index'
   get 'static_pages/contact'

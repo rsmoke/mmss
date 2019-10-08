@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Enrollment:</strong>
+  <%= @recommendation.enrollment_id %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @recommendation.email %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @recommendation.lastname %>
+</p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @recommendation.firstname %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @recommendation.organization %>
+</p>
+
+<p>
+  <strong>Address1:</strong>
+  <%= @recommendation.address1 %>
+</p>
+
+<p>
+  <strong>Address2:</strong>
+  <%= @recommendation.address2 %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @recommendation.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @recommendation.state %>
+</p>
+
+<p>
+  <strong>State non us:</strong>
+  <%= @recommendation.state_non_us %>
+</p>
+
+<p>
+  <strong>Postalcode:</strong>
+  <%= @recommendation.postalcode %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @recommendation.country %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @recommendation.phone_number %>
+</p>
+
+<p>
+  <strong>Best contact time:</strong>
+  <%= @recommendation.best_contact_time %>
+</p>
+
+<p>
+  <strong>Submitted recommendation:</strong>
+  <%= @recommendation.submitted_recommendation %>
+</p>
+
+<p>
+  <strong>Date submitted:</strong>
+  <%= @recommendation.date_submitted %>
+</p>
+
+<%= link_to 'Edit', edit_recommendation_path(@recommendation) %> |
+<%= link_to 'Back', recommendations_path %>

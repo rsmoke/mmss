@@ -6,6 +6,7 @@ class Enrollment < ApplicationRecord
   has_many :courses, through: :course_preferences
   has_one :financial_aid
   has_many :travels
+  has_one :recommendation
 
   has_one_attached :transcript
 

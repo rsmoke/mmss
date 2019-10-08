@@ -1,0 +1,97 @@
+<%= form_with(model: recommendation, local: true) do |form| %>
+  <% if recommendation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recommendation.errors.count, "error") %> prohibited this recommendation from being saved:</h2>
+
+      <ul>
+        <% recommendation.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :enrollment_id %>
+    <%= form.text_field :enrollment_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :lastname %>
+    <%= form.text_field :lastname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :firstname %>
+    <%= form.text_field :firstname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :organization %>
+    <%= form.text_field :organization %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address1 %>
+    <%= form.text_field :address1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address2 %>
+    <%= form.text_field :address2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state_non_us %>
+    <%= form.text_field :state_non_us %>
+  </div>
+
+  <div class="field">
+    <%= form.label :postalcode %>
+    <%= form.text_field :postalcode %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :best_contact_time %>
+    <%= form.text_field :best_contact_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :submitted_recommendation %>
+    <%= form.text_field :submitted_recommendation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_submitted %>
+    <%= form.datetime_select :date_submitted %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
