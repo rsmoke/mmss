@@ -28,6 +28,7 @@ class RecommendationsController < ApplicationController
 
     respond_to do |format|
       if @recommendation.save
+        RecommendationMailer.with(user: @user).welcome_email.deliver_later
         format.html { redirect_to @recommendation, notice: 'Recommendation was successfully created.' }
         format.json { render :show, status: :created, location: @recommendation }
       else
