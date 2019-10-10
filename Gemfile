@@ -40,6 +40,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 4.1'
   gem 'capybara'
   gem 'webdrivers'
+  gem 'letter_opener'
 end
 
 group :development do

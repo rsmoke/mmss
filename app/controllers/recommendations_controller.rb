@@ -4,17 +4,20 @@ class RecommendationsController < ApplicationController
   # GET /recommendations
   # GET /recommendations.json
   def index
+    @enrollment = Enrollment.find(params[:enrollment_id])
     @recommendations = Recommendation.all
   end
 
   # GET /recommendations/1
   # GET /recommendations/1.json
   def show
+    @enrollment = Enrollment.find(params[:enrollment_id])
   end
 
   # GET /recommendations/new
   def new
-    @recommendation = Recommendation.new
+    @enrollment = Enrollment.find_by(id: params[:enrollment_id])
+    @recommendation = @enrollment.build_recommendation
   end
 
   # GET /recommendations/1/edit
@@ -24,12 +27,13 @@ class RecommendationsController < ApplicationController
   # POST /recommendations
   # POST /recommendations.json
   def create
-    @recommendation = Recommendation.new(recommendation_params)
+    @enrollment = Enrollment.find_by(id: params[:enrollment_id])
+    @recommendation = @enrollment.build_recommendation(recommendation_params)
 
     respond_to do |format|
       if @recommendation.save
-        RecommendationMailer.with(user: @user).welcome_email.deliver_later
-        format.html { redirect_to @recommendation, notice: 'Recommendation was successfully created.' }
+        RecommendationMailer.with(recommendation: @recommendation).welcome_email.deliver_now
+        format.html { redirect_to enrollment_recommendation_path(@enrollment, @recommendation), notice: 'Recommendation was successfully created.' }
         format.json { render :show, status: :created, location: @recommendation }
       else
         format.html { render :new }
@@ -55,9 +59,10 @@ class RecommendationsController < ApplicationController
   # DELETE /recommendations/1
   # DELETE /recommendations/1.json
   def destroy
+    @enrollment = Enrollment.find_by(id: params[:enrollment_id])
     @recommendation.destroy
     respond_to do |format|
-      format.html { redirect_to recommendations_url, notice: 'Recommendation was successfully destroyed.' }
+      format.html { redirect_to enrollment_recommendations_url, notice: 'Recommendation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

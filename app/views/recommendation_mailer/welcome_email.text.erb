@@ -1,13 +1,15 @@
-   Hello <%= "#{@recommender.firstname} #{@recommender.lastname}" %>
+   Hello <%= "#{@recommendation.firstname} #{@recommendation.lastname}" %>
    ======================================================================
     
-      You are receiving this email because a student applying to the University of Michigan's Michigan Math & Science Scholars High School Summer Program has listed you as a recommender. \r\n
+      You are receiving this email because a student applying to the University of Michigan's Michigan Math & Science Scholars High School Summer Program has listed you as a recommender.
+      <%= "\r\n" %>
       Please follow the link below by either clicking on it, or pasting it into the address line of your favorite web browser.
-      You will be taken to a web-page where you can type or paste in your recommendation for <%= "#{@user.firstname} #{@user.lastname}" %>.
+      You will be taken to a web-page where you can type or paste in your recommendation for <%= "#{@student.firstname} #{@student.lastname}" %>.
 
-      To login to the site, just follow this link: <%= @url %>.
+      To login to the site, just follow this link: 
+      <%= "\r\n" %><%= @url %>.
 
-      Thank you very much for assisting with <%= "#{@user.firstname} #{@user.lastname}" %>'s academic development. 
+      Thank you very much for assisting with <%= "#{@student.firstname} #{@student.lastname}" %>'s academic development. 
 
       MMSS Office Staff
       mmss@umich.edu
