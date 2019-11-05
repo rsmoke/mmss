@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: mmss_production
-  username: mmss
-  password: <%= ENV['MMSS_DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.credentials.PRODUCTION_DB_USERNAME %>
+  password: <%= Rails.application.credentials.PRODUCTION_DB_PASSWORD %>
