@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :payments
   root to: 'static_pages#index'
   
   devise_for :admins, ActiveAdmin::Devise.config
