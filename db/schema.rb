@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_19_193749) do
+ActiveRecord::Schema.define(version: 2019_11_21_000442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -232,6 +232,25 @@ ActiveRecord::Schema.define(version: 2019_11_19_193749) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.string "transaction_type"
+    t.string "transaction_status"
+    t.string "transaction_id"
+    t.string "total_amount"
+    t.string "transaction_date"
+    t.string "account_type"
+    t.string "result_code"
+    t.string "result_message"
+    t.string "user_account"
+    t.string "payer_identity"
+    t.string "timestamp"
+    t.string "transaction_hash"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
   create_table "recommendations", force: :cascade do |t|
     t.bigint "enrollment_id", null: false
     t.string "email", null: false
@@ -296,6 +315,7 @@ ActiveRecord::Schema.define(version: 2019_11_19_193749) do
   add_foreign_key "enrollment_activities", "enrollments"
   add_foreign_key "enrollments", "users"
   add_foreign_key "financial_aids", "enrollments"
+  add_foreign_key "payments", "users"
   add_foreign_key "recommendations", "enrollments"
   add_foreign_key "travels", "enrollments"
 end
