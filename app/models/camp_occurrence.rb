@@ -6,8 +6,8 @@ class CampOccurrence < ApplicationRecord
   validates :description, presence: true
   validates :begin_date, presence: true, format: { with: ConstantData::VALID_DATE_REGEX }
   validates :end_date, presence: true, format: { with: ConstantData::VALID_DATE_REGEX }
-  
-  
-  
-  
+
+
+  scope :active, -> { where(active: true) }
+
 end

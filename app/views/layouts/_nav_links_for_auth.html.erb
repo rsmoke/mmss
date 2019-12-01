@@ -17,7 +17,12 @@
         <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"> <%= link_to 'Add Applicant Details', new_applicant_detail_path %> </li>
       <% else %>
         <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> </li>
-        <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"> <%= link_to 'Camp Enrollments', enrollments_path %> </li>
+      <% end %>
+      <% if current_user.enrollments.nil? %>
+        <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"> <%= link_to 'New Camp Enrollment', new_enrollment_path %> </li>
+      <% else %>
+        <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"> <%= link_to 'Camp Enrollment', enrollment_path(current_user.enrollments.last) %> </li>
+
       <% end %>
 
       <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>

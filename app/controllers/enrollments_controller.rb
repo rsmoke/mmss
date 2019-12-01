@@ -5,7 +5,7 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments
   # GET /enrollments.json
   def index
-    if admin_signed_in? 
+    if admin_signed_in?
       @enrollments = Enrollment.all
     else
       @enrollments = Enrollment.current_user_enrollments(current_user)
@@ -15,7 +15,8 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/1
   # GET /enrollments/1.json
   def show
-    @activities = @enrollment.activities
+    @registration_activities = @enrollment.registration_activities
+    @courses = @enrollment.courses
   end
 
   # GET /enrollments/new
@@ -76,14 +77,15 @@ class EnrollmentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def enrollment_params
       params.require(:enrollment).permit(
-                          :user_id, :international, :high_school_name, 
-                          :high_school_address1, :high_school_address2, 
-                          :high_school_city, :high_school_state, 
-                          :high_school_non_us, :high_school_postalcode, 
-                          :high_school_country, :year_in_school, 
-                          :anticipated_graduation_year, :room_mate_request, 
-                          :personal_statement, :shirt_size, :notes, 
-                          :application_status, :offer_status, 
-                          :partner_program, :transcript)
+                          :user_id, :international, :high_school_name,
+                          :high_school_address1, :high_school_address2,
+                          :high_school_city, :high_school_state,
+                          :high_school_non_us, :high_school_postalcode,
+                          :high_school_country, :year_in_school,
+                          :anticipated_graduation_year, :room_mate_request,
+                          :personal_statement, :shirt_size, :notes,
+                          :application_status, :offer_status,
+                          :partner_program, :transcript,
+                          registration_activity_ids: [])
     end
 end
