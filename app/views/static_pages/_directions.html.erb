@@ -28,11 +28,11 @@
             Check your work before submitting! Once you click the SUBMIT button,
             you will not be able to make changes to your application.
           </p>
-      <% elsif current_user.enrollments.empty? || current_user.enrollments.last.course_preferences.empty? %>
+      <% elsif current_user.enrollments.empty? || current_user.enrollments.last.course_preferences.blank? %>
         <li>The next step is to rank your
           <%= link_to "Course Preferences", root_path, class: 'btn-sm btn-green' %>
           for the sessions you selected to attend.</li>
-      <% elsif current_user.enrollments.empty? || current_user.enrollments.last.recommendation.empty? %>
+      <% elsif current_user.enrollments.empty? || current_user.enrollments.last.recommendation.blank? %>
         <li>The next step is requesting a
           <%= link_to "Letter of Recommendation",
                       new_enrollment_recommendation_path(current_user.enrollments.last),
@@ -54,8 +54,8 @@
           transaction.
         </p>
       <% else %>
-        <p>Your application is complete! Watch the activity bar in the upper right side of this window to
-          track the status of your application materials. You will receive an
+        <p>Your application is complete!<br> Watch the progress window at the right
+          to track the status of your application materials. You will receive an
           email with instructions for any additional steps that are required.
         </p>
       <% end %>
