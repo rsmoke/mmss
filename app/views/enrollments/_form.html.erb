@@ -13,12 +13,13 @@
 
 <h4>Sessions</h4>
   <div class="checkboxes">
-    <%= form.collection_check_boxes(:registration_activity_ids, Activity.active, :id, :description_with_cost) %>
+    <%= form.collection_check_boxes(:session_registration_ids, CampOccurrence.active, :id, :description_with_date) %>
+
   </div>
 
 <h4>Services</h4>
   <div class="checkboxes">
-    <%= form.collection_check_boxes(:registration_activity_ids, Activity.all, :id, :description_with_cost) %>
+    <%= form.collection_check_boxes(:registration_activity_ids, Activity.active, :id, :description_with_cost) %>
   </div>
 
 
@@ -29,23 +30,23 @@
   </div>
 
   <div class="field">
-    <%= form.label :year_in_school, "Current Grade", :class => 'important' %>
-    <%= form.text_field :year_in_school, :required => true %>
+    <%= form.label :year_in_school, "Current Grade", class: 'important' %>
+    <%= form.text_field :year_in_school, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :anticipated_graduation_year, :class => 'important' %>
-    <%= form.text_field :anticipated_graduation_year, :required => true %>
+    <%= form.label :anticipated_graduation_year, class: 'important' %>
+    <%= form.text_field :anticipated_graduation_year, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_name, :class => 'important'  %>
-    <%= form.text_field :high_school_name, :required => true %>
+    <%= form.label :high_school_name, class: 'important'  %>
+    <%= form.text_field :high_school_name, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_address1, :class => 'important'  %>
-    <%= form.text_field :high_school_address1, :required => true %>
+    <%= form.label :high_school_address1, class: 'important'  %>
+    <%= form.text_field :high_school_address1, required: true %>
   </div>
 
   <div class="field">
@@ -54,13 +55,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :high_school_city, :class => 'important'  %>
-    <%= form.text_field :high_school_city, :required => true %>
+    <%= form.label :high_school_city, class: 'important'  %>
+    <%= form.text_field :high_school_city, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_state, :class => 'important'  %>
-    <%= form.text_field :high_school_state, :required => true %>
+    <%= form.label :high_school_state, class: 'important'  %>
+    <%= form.text_field :high_school_state, required: true %>
   </div>
 
   <div class="field">
@@ -69,13 +70,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :high_school_postalcode, :class => 'important' %>
-    <%= form.text_field :high_school_postalcode, :required => true %>
+    <%= form.label :high_school_postalcode, class: 'important' %>
+    <%= form.text_field :high_school_postalcode, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_country, :class => 'important' %>
-    <%= form.country_select :high_school_country, priority_countries: ["US"], include_blank: true, :required => true %>
+    <%= form.label :high_school_country, class: 'important' %>
+    <%= form.country_select :high_school_country, priority_countries: ["US"], include_blank: true, required: true %>
   </div>
 
 <hr class= "form-divider">
@@ -94,11 +95,28 @@
   information to help us evaluate your application material.
 </p>
   <div class="field">
-    <%= form.label :personal_statement, :class => 'important' %>
-    <%= form.text_area :personal_statement, size: "30x10", :required => true %>
+    <%= form.label :personal_statement, class: 'important' %>
+    <%= form.text_area :personal_statement, size: "30x10", required: true %>
   </div>
 
 <h4>Transcripts</h4>
+  <% if @enrollment.transcript.attached? %>
+    <div class='current-uploaded-docs'>
+      <p>
+        <strong>Transcript currently uploaded:</strong>
+        <%= link_to @enrollment.transcript.filename, url_for(@enrollment.transcript) %>
+      </p>
+    </div>
+    <div class="field">
+      <%= form.label :transcript, 'Update Transcript' %>
+      <%= form.file_field :transcript %>
+    </div>
+  <% else %>
+    <div class="field">
+      <%= form.label :transcript, class: 'important' %>
+      <%= form.file_field :transcript, required: true %>
+    </div>
+  <% end %>
 <p class="direction_notes">
   <span class="text-red-500">
     Please upload a pdf copy of your high school transcript
@@ -130,25 +148,6 @@
     received this material.
   </span>
 </p>
-
-  <% if @enrollment.transcript.attached? %>
-    <div class='current-uploaded-docs'>
-      <p>
-        <strong>Transcript currently uploaded:</strong>
-        <%= link_to @enrollment.transcript.filename, url_for(@enrollment.transcript) %>
-      </p>
-    </div>
-    <div class="field">
-      <%= form.label :transcript, 'Update Transcript' %>
-      <%= form.file_field :transcript %>
-    </div>
-  <% else %>
-    <div class="field">
-      <%= form.label :transcript, :class => 'important' %>
-      <%= form.file_field :transcript, :required => true %>
-    </div>
-  <% end %>
-
 
 <% if admin_signed_in? %>
 <h4>Administrative area</h4>
