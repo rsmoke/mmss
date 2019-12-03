@@ -16,16 +16,23 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/1.json
   def show
     @registration_activities = @enrollment.registration_activities
+    @session_registrations = @enrollment.session_registrations
     @courses = @enrollment.courses
   end
 
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
+    @courses_session1 = CampOccurrence.session_description("Session 1").courses
+    @courses_session2 = CampOccurrence.session_description("Session 2").courses
+    @courses_session3 = CampOccurrence.session_description("Session 3").courses
   end
 
   # GET /enrollments/1/edit
   def edit
+    @courses_session1 = CampOccurrence.session_description("Session 1").courses
+    @courses_session2 = CampOccurrence.session_description("Session 2").courses
+    @courses_session3 = CampOccurrence.session_description("Session 3").courses
   end
 
   # POST /enrollments
@@ -86,6 +93,7 @@ class EnrollmentsController < ApplicationController
                           :personal_statement, :shirt_size, :notes,
                           :application_status, :offer_status,
                           :partner_program, :transcript,
-                          registration_activity_ids: [])
+                          registration_activity_ids: [],
+                          session_registration_ids: [])
     end
 end

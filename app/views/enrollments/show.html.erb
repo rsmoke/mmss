@@ -87,12 +87,12 @@
 <% end %>
 
 <div class="bg-blue-200 border border-blue-500 ">
-    <% if @registration_activities.present? %>
-    <h4>Activities</h4>
+    <% if @session_registrations.present? %>
+    <h4>Sessions</h4>
       <ul>
-        <% @registration_activities.each do |r| %>
+        <% @session_registrations.each do |s| %>
           <li>
-            <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
+            <%= s.description_with_date %>
           </li>
         <% end %>
       </ul>

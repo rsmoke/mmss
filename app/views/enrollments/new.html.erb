@@ -1,5 +1,7 @@
 <h1>New Enrollment</h1>
 <small class='text-red-700'>Note: Items in Red are required</small>
+
+<%= render 'course_preview' %>
 <%= render 'form', enrollment: @enrollment %>
 
 <%= link_to 'Back', enrollments_path %>

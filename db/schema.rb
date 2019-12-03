@@ -272,6 +272,15 @@ ActiveRecord::Schema.define(version: 2019_12_01_222306) do
     t.index ["enrollment_id"], name: "index_recommendations_on_enrollment_id"
   end
 
+  create_table "session_activities", force: :cascade do |t|
+    t.bigint "enrollment_id", null: false
+    t.bigint "camp_occurrence_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_occurrence_id"], name: "index_session_activities_on_camp_occurrence_id"
+    t.index ["enrollment_id"], name: "index_session_activities_on_enrollment_id"
+  end
+
   create_table "travels", force: :cascade do |t|
     t.bigint "enrollment_id", null: false
     t.string "direction"
@@ -316,5 +325,7 @@ ActiveRecord::Schema.define(version: 2019_12_01_222306) do
   add_foreign_key "financial_aids", "enrollments"
   add_foreign_key "payments", "users"
   add_foreign_key "recommendations", "enrollments"
+  add_foreign_key "session_activities", "camp_occurrences"
+  add_foreign_key "session_activities", "enrollments"
   add_foreign_key "travels", "enrollments"
 end

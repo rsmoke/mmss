@@ -5,6 +5,9 @@ class Enrollment < ApplicationRecord
   has_many :enrollment_activities
   has_many :registration_activities, through: :enrollment_activities, source: :activity
 
+  has_many :session_activities
+  has_many :session_registrations, through: :session_activities, source: :camp_occurrence
+
   has_many :course_preferences
   has_many :courses, through: :course_preferences
 
