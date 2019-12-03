@@ -1,0 +1,41 @@
+
+<% if user_signed_in? %>
+
+  <% if current_user.applicant_detail.present? %>
+    <div id="sidebox">
+      <p><strong>Progress Window</strong><p>
+      <% if current_user.enrollments.present? && current_user.enrollments.last.course_preferences.exists? && current_user.enrollments.last.recommendation.present? && current_user.payments.present? %>
+        <span class="text-green-700 font-semibold">Enrollment Complete</span>
+      <% else %>
+        <span class="text-red-500 font-semibold">Enrollment InComplete</span>
+      <% end %>
+      <div class="sidebox_element"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> - submitted </div>
+    <% if current_user.enrollments.present? %>
+      <div class="sidebox_element">
+        <%= link_to 'Camp Enrollment',
+                      enrollment_path(current_user.enrollments.last) %> - submitted
+      </div>
+
+      <% if current_user.enrollments.last.course_preferences.exists? %>
+          <div class="sidebox_element">
+            <%= link_to "Course Preferences", root_path %> - submitted
+          </div>
+      <% end %>
+      <% if current_user.enrollments.last.recommendation.present? %>
+        <div class="sidebox_element">
+          <%= link_to "Letter of Recommendation",
+                      enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
+             - submitted
+        </div>
+      <% end %>
+      <% if current_user.payments.present? %>
+        <div class="sidebox_element">
+          <%= link_to "Application Fee",
+                      enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
+             - Paid
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+  <% end %>
+<% end %>

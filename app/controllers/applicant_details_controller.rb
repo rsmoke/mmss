@@ -30,7 +30,7 @@ class ApplicantDetailsController < ApplicationController
 
     respond_to do |format|
       if @applicant_detail.save
-        format.html { redirect_to @applicant_detail, notice: 'Applicant detail was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Applicant detail was successfully created.' }
         format.json { render :show, status: :created, location: @applicant_detail }
       else
         format.html { render :new }

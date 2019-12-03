@@ -2,81 +2,79 @@
 @import "tailwindcss/components"
 @import "tailwindcss/utilities"
 
-// .modal-backdrop
-//   z-index: -1 !important
-// // You Forgot The Alt Message
-// body[data-environment="development"]
-//   img[alt=""], img:not([alt])
-//     border: 5px dashed #c00
-//     @apply border-4 border-red-700 border-dotted p-2
+#sidebox
+  @apply mt-4 flex flex-col border-2 w-2/6 border-yellow-600 bg-yellow-200 float-right
+  .sidebox_element
+    @apply block inline-block mx-4 text-blue-800 text-xs
+    a
+      &:hover
+        @apply text-blue-400
+h1
+  @apply text-2xl mb-2
 
-// body
-//   @apply flex flex-col min-h-full h-screen
+h2
+  @apply text-xl mb-2
 
-// h1
-//   @apply text-3xl mb-2
+h3
+  @apply text-lg mb-2
 
-// .container
-//   @apply bg-green-500 flex flex-col min-h-screen
+h4
+  @apply text-base mt-4 p-2 font-bold bg-blue-900 border-t-2 text-white
 
-// .content
-//   @apply flex-grow px-10 py-4  h-screen
+h5
+  @apply w-1/4 text-xs mt-4 p-2 bg-blue-700 border-t-2 text-white
 
-// .debug_dump
-//   @apply bg-blue-100 border-4 border-red-800 rounded-lg p-4 text-sm font-mono text-blue-900 mx-auto my-4 max-w-2xl w-auto
-
-// /*! debug.css | MIT License | https://gist.github.com/zaydek/6b2e55258734deabbd2b4a284321d6f6 */
-// // To use add a {:debug => ""} to any element you want to understand better
-// [debug], [debug] *:not(g):not(path)
-// 	color:hsla(210, 100%, 100%, 0.9) !important
-// 	background: hsla(210, 100%,  50%, 0.5) !important
-// 	outline: solid 0.25rem hsla(210, 100%, 100%, 0.5) !important
-// 	box-shadow: none !important
-// 	filter:     none !important
-
-//errors
-#error_explanation
-  @apply text-red-700 shadow border rounded py-2 px-3 w-2/4 bg-yellow-100
-  li
-    @apply list-disc mx-4
-
-//forms
-input, textarea
-  @apply shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight 
-  // focus
-  //   @apply outline-none shadow-outline
-
-  &[type="checkbox"]
-    @apply w-4
-
-a
-  @apply underline
-  &[data-method="delete"]
-    @apply underline text-red-700
-    &:hover 
-      @apply shadow-inner text-red-500
-
-.btn 
+.btn
   @apply font-bold py-2 px-4 rounded
 
-.btn-blue 
+.btn-sm
+  @apply font-medium py-1 px-2 rounded
+
+.btn-blue
   @apply bg-blue-500 text-white
 
-.btn-blue:hover 
+.btn-blue:hover
   @apply bg-blue-700
 
-.btn-green 
+.btn-green
   @apply bg-green-500 text-white
 
-.btn-green:hover 
+.btn-green:hover
   @apply bg-green-700
 
-input
-  &[type="submit"]
-   @apply btn btn-green w-1/4
+form
+  @apply w-3/4
+  input, textarea, select
+    @apply shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight
+    &[type="submit"]
+      @apply btn btn-green w-1/2
+  .checkboxes
+    @apply flex flex-col
+    label
+
+    input[type="checkbox"]
+      @apply shadow-none
+      text-align: center
+      width: 5%
 
 .debug_dump
-  @apply bg-blue-100 border-4 border-red-800 rounded-lg p-4 text-sm font-mono text-blue-900 mx-auto my-4 max-w-2xl w-auto
+  @apply bg-blue-100 border-4 border-red-800 rounded-lg p-4 text-sm font-mono
+  text-blue-900 mx-auto my-4 max-w-2xl w-auto
 
-.current-uploaded-docs 
-  @apply bg-yellow-100 border-2 border-yellow-600 rounded-lg p-2 text-sm font-mono text-yellow-600 mx-1 my-1 max-w-xl w-auto
+.direction_notes
+  @apply bg-yellow-100 text-gray-700 p-4 text-sm
+
+label.important
+  @apply text-red-700
+
+.current-uploaded-docs
+  @apply bg-yellow-100 border-2 border-yellow-600 rounded-lg p-2 text-sm
+  font-mono text-yellow-600 mx-1 my-1 max-w-xl w-auto
+
+.form-divider
+  @apply m-4
+
+address
+  @apply mx-8 my-4
+
+
