@@ -100,12 +100,12 @@
 </div>
 
 <div class="bg-blue-200 border border-blue-500 ">
-    <% if @courses.present? %>
-    <h4>Courses</h4>
+    <% if @registration_activities.present? %>
+    <h4>Activities</h4>
       <ul>
-        <% @courses.each do |c| %>
+        <% @registration_activities.each do |r| %>
           <li>
-            <%= c.title %>
+            <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
           </li>
         <% end %>
       </ul>
