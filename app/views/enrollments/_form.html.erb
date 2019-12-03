@@ -11,24 +11,42 @@
     </div>
   <% end %>
 
+<h4>Sessions</h4>
+  <div class="checkboxes">
+    <%= form.collection_check_boxes(:session_registration_ids, CampOccurrence.active, :id, :description_with_date) %>
+
+  </div>
+
+<h4>Services</h4>
+  <div class="checkboxes">
+    <%= form.collection_check_boxes(:registration_activity_ids, Activity.active, :id, :description_with_cost) %>
+  </div>
+
+
+<h4>Applicant School History</h4>
   <div class="field">
-    
+
     <%= form.text_field :user_id, hidden: true %>
   </div>
 
   <div class="field">
-    <%= form.label :international %>
-    <%= form.check_box :international %>
+    <%= form.label :year_in_school, "Current Grade", class: 'important' %>
+    <%= form.text_field :year_in_school, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_name %>
-    <%= form.text_field :high_school_name %>
+    <%= form.label :anticipated_graduation_year, class: 'important' %>
+    <%= form.text_field :anticipated_graduation_year, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_address1 %>
-    <%= form.text_field :high_school_address1 %>
+    <%= form.label :high_school_name, class: 'important'  %>
+    <%= form.text_field :high_school_name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :high_school_address1, class: 'important'  %>
+    <%= form.text_field :high_school_address1, required: true %>
   </div>
 
   <div class="field">
@@ -37,13 +55,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :high_school_city %>
-    <%= form.text_field :high_school_city %>
+    <%= form.label :high_school_city, class: 'important'  %>
+    <%= form.text_field :high_school_city, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_state %>
-    <%= form.text_field :high_school_state %>
+    <%= form.label :high_school_state, class: 'important'  %>
+    <%= form.text_field :high_school_state, required: true %>
   </div>
 
   <div class="field">
@@ -52,46 +70,36 @@
   </div>
 
   <div class="field">
-    <%= form.label :high_school_postalcode %>
-    <%= form.text_field :high_school_postalcode %>
+    <%= form.label :high_school_postalcode, class: 'important' %>
+    <%= form.text_field :high_school_postalcode, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_country %>
-    <%= form.country_select :high_school_country, priority_countries: ["US"], include_blank: true %>
+    <%= form.label :high_school_country, class: 'important' %>
+    <%= form.country_select :high_school_country, priority_countries: ["US"], include_blank: true, required: true %>
   </div>
 
+<hr class= "form-divider">
   <div class="field">
-    <%= form.label :year_in_school %>
-    <%= form.text_field :year_in_school %>
-  </div>
-
-  <div class="field">
-    <%= form.label :anticipated_graduation_year %>
-    <%= form.text_field :anticipated_graduation_year %>
-  </div>
-
-  <div class="field">
-    <%= form.label :room_mate_request %>
+    <%= form.label :room_mate_request, "Name of preferred roommate (optional, and for residential program only): " %>
     <%= form.text_field :room_mate_request %>
   </div>
+<hr class= "form-divider">
 
+<h4>Student Personal Statement</h4>
+<p class="direction_notes">
+  Please complete the Student Personal Statement by either typing or pasting it
+  into the field below. This is a <strong>required</strong> part of your application. You should
+  include courses you have taken, external influences, computer experience, and
+  research interests that draw you to this program, or other relevant
+  information to help us evaluate your application material.
+</p>
   <div class="field">
-    <%= form.label :personal_statement %>
-    <%= form.text_area :personal_statement %>
+    <%= form.label :personal_statement, class: 'important' %>
+    <%= form.text_area :personal_statement, size: "30x10", required: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :shirt_size %>
-    <%= form.text_field :shirt_size %>
-  </div>
-
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes %>
-  </div>
-
-  
+<h4>Transcripts</h4>
   <% if @enrollment.transcript.attached? %>
     <div class='current-uploaded-docs'>
       <p>
@@ -105,11 +113,50 @@
     </div>
   <% else %>
     <div class="field">
-      <%= form.label :transcript %>
-      <%= form.file_field :transcript %>
+      <%= form.label :transcript, class: 'important' %>
+      <%= form.file_field :transcript, required: true %>
     </div>
   <% end %>
-<br><hr>
+<p class="direction_notes">
+  <span class="text-red-500">
+    Please upload a pdf copy of your high school transcript
+  </span>
+  <br>
+    This is a required part of your application. It does NOT need to be an
+    official copy sent directly from your school's office. Screen print outs are
+    accepted as well as composite copies of report cards from ALL previous high
+    school terms/years.
+  <br>
+    If you can not upload your transcript electronically, please send a copy
+    (or have your high school send a copy) of your high school transcript to:
+</p>
+  <address>
+    Michigan Math and Science Scholars<br>
+    Department of Mathematics<br>
+    530 Church Street<br>
+    2074 East Hall<br>
+    Ann Arbor, MI 48109-1043
+  </address>
+<p class="direction_notes">
+    The transcript can be mailed to the above address, faxed to 734.763.0937 or
+    e-mailed as a scanned attachment to mmss@umich.edu, if you can not upload
+    your transcript electronically. You will be notified by email when your
+    transcript has arrived in the MMSS office.
+  <br>
+  <span class="text-red-500">
+    Your application will not be considered complete and reviewed until we have
+    received this material.
+  </span>
+</p>
+
+<% if admin_signed_in? %>
+<h4>Administrative area</h4>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
   <div class="field">
     <%= form.label :application_status %>
     <%= form.text_field :application_status %>
@@ -124,6 +171,7 @@
     <%= form.label :partner_program %>
     <%= form.text_field :partner_program %>
   </div>
+<% end %>
 
   <div class="actions">
     <%= form.submit %>

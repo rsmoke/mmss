@@ -13,6 +13,7 @@
     <%= render 'layouts/nav_links_for_auth' %>
     <div class="container mx-auto px-4">
       <%= render 'layouts/notifications' %>
+      <%= render 'layouts/sidebox' %>
       <%= yield %>
     </div>
     <%= debug(params) if Rails.env.development? %>

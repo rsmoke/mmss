@@ -11,28 +11,42 @@
     </div>
   <% end %>
 
+<p>
+  Please ask one of your most recent high school science or math teachers to
+  submit a Letter of Recommendation. This is a required part of your
+  application.
+
+Your recommender will be sent an email giving them directions on how to submit a
+ recommendation for you, so please be certain that you enter their correct email
+  address.
+</p>
+<p>
+  <strong>Below you will enter the details of the person who will be providing a
+   letter of recommendation for you:</strong>
+</p>
+
   <div class="field">
-    <%= form.label :enrollment_id %>
-    <%= form.text_field :enrollment_id %>
+
+    <%= form.text_field :enrollment_id, hidden: true %>
   </div>
 
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.label :email, "Recommenders email", class: 'important'  %>
+    <%= form.text_field :email, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :lastname %>
-    <%= form.text_field :lastname %>
+    <%= form.label :firstname, class: 'important'  %>
+    <%= form.text_field :firstname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :firstname %>
-    <%= form.text_field :firstname %>
+    <%= form.label :lastname, class: 'important'  %>
+    <%= form.text_field :lastname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :organization %>
+    <%= form.label :organization, "High School/Organization" %>
     <%= form.text_field :organization %>
   </div>
 
@@ -68,7 +82,8 @@
 
   <div class="field">
     <%= form.label :country %>
-    <%= form.text_field :country %>
+    <%= form.country_select :country, priority_countries: ["US"],
+                            include_blank: true %>
   </div>
 
   <div class="field">
@@ -79,16 +94,6 @@
   <div class="field">
     <%= form.label :best_contact_time %>
     <%= form.text_field :best_contact_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :submitted_recommendation %>
-    <%= form.text_field :submitted_recommendation %>
-  </div>
-
-  <div class="field">
-    <%= form.label :date_submitted %>
-    <%= form.datetime_select :date_submitted %>
   </div>
 
   <div class="actions">

@@ -44,6 +44,7 @@
       # cost_lodging = Lodging.find(current_user.application.lodging_selection).cost.to_f
       # cost_partner = PartnerRegistration.find(current_user.application.partner_registration_selection).cost.to_f
       # @total_cost = cost_lodging + cost_partner
+      @total_cost = 10000
       @balance_due = @total_cost - @ttl_paid
     end
 

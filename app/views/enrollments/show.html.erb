@@ -1,8 +1,14 @@
 
 
 <p>
-  <strong>User:</strong>
+  <small>User_id:
   <%= @enrollment.user_id %>
+  </small>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @enrollment.applicant_detail.full_name %>
 </p>
 
 <p>
@@ -70,11 +76,6 @@
   <%= @enrollment.personal_statement %>
 </p>
 
-<p>
-  <strong>Shirt size:</strong>
-  <%= @enrollment.shirt_size %>
-</p>
-
 <% if @enrollment.transcript.attached? %>
   <p>
     <strong>Transcript:</strong> <%= link_to @enrollment.transcript.filename, url_for(@enrollment.transcript) %>
@@ -84,39 +85,56 @@
   Use the <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> button to add a transcript!
 </p>
 <% end %>
-<br><hr>
-<p>
-  <strong>Notes:</strong>
-  <%= @enrollment.notes %>
-</p>
-
-<p>
-  <strong>Application status:</strong>
-  <%= @enrollment.application_status %>
-</p>
-
-<p>
-  <strong>Offer status:</strong>
-  <%= @enrollment.offer_status %>
-</p>
-
-<p>
-  <strong>Partner program:</strong>
-  <%= @enrollment.partner_program %>
-</p>
-
-<%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
-<%= link_to 'Back', enrollments_path %>
 
 <div class="bg-blue-200 border border-blue-500 ">
-<h2>Activities connected to this enrollment</h2>
-<% @activities.each do |activity| %>
-  <li>
-    <%= " #{ activity.description } ( #{activity.camp_occurrence.camp_configuration.camp_year } #{ activity.camp_occurrence.description } ) --  #{ humanized_money_with_symbol(activity.cost) }" %>
-  </li>
-<% end %>
-<%= link_to "Add an Activity", root_path %>
+    <% if @session_registrations.present? %>
+    <h4>Sessions</h4>
+      <ul>
+        <% @session_registrations.each do |s| %>
+          <li>
+            <%= s.description_with_date %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
 </div>
+
+<div class="bg-blue-200 border border-blue-500 ">
+    <% if @registration_activities.present? %>
+    <h4>Activities</h4>
+      <ul>
+        <% @registration_activities.each do |r| %>
+          <li>
+            <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+</div>
+
+<% if admin_signed_in? %>
+  <h4>Administrative area</h4>
+    <strong>Notes:</strong>
+    <%= @enrollment.notes %>
+
+
+    <p>
+      <strong>Application status:</strong>
+      <%= @enrollment.application_status %>
+    </p>
+
+    <p>
+      <strong>Offer status:</strong>
+      <%= @enrollment.offer_status %>
+    </p>
+
+    <p>
+      <strong>Partner program:</strong>
+      <%= @enrollment.partner_program %>
+    </p>
+<% end %>
+
+<%= link_to 'Edit', edit_enrollment_path(@enrollment) %>
 
 
 

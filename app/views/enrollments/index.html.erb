@@ -19,7 +19,6 @@
       <th>Anticipated graduation year</th>
       <th>Room mate request</th>
       <th>Personal statement</th>
-      <th>Shirt size</th>
       <th>Notes</th>
       <th>Application status</th>
       <th>Offer status</th>
@@ -45,11 +44,12 @@
         <td><%= enrollment.anticipated_graduation_year %></td>
         <td><%= enrollment.room_mate_request %></td>
         <td><%= enrollment.personal_statement %></td>
-        <td><%= enrollment.shirt_size %></td>
-        <td><%= enrollment.notes %></td>
-        <td><%= enrollment.application_status %></td>
-        <td><%= enrollment.offer_status %></td>
-        <td><%= enrollment.partner_program %></td>
+        <% if admin_signed_in? %>
+          <td><%= enrollment.notes %></td>
+          <td><%= enrollment.application_status %></td>
+          <td><%= enrollment.offer_status %></td>
+          <td><%= enrollment.partner_program %></td>
+        <% end %>
         <td><%= link_to 'Show', enrollment %></td>
         <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %></td>
         <td><%= link_to 'Destroy', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

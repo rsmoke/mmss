@@ -10,10 +10,11 @@
       </ul>
     </div>
   <% end %>
+<h4>Applicant Information</h4>
 
   <div class="field">
-    <%= form.label :firstname %>
-    <%= form.text_field :firstname %>
+    <%= form.label :firstname, class: 'important' %>
+    <%= form.text_field :firstname, required: true %>
   </div>
 
   <div class="field">
@@ -22,44 +23,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :lastname %>
-    <%= form.text_field :lastname %>
+    <%= form.label :lastname, class: 'important' %>
+    <%= form.text_field :lastname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :gender %>
-    <%= form.collection_select(:gender, Gender.all, :name, :name, :include_blank => "-- Please Select --") %>
-
-  </div>
-
-  <div class="field">
-    <%= form.label :us_citizen %>
-    <%= form.check_box :us_citizen %>
-  </div>
-
-  <div class="field">
-    <%= form.label :demographic %>
-    <%= form.collection_select(:demographic, Demographic.all, :id, :name, :include_blank => "-- Please Select --") %>
-  </div>
-
-  <div class="field">
-    <%= form.label :birthdate %>
-    <%= form.date_select :birthdate %>
-  </div>
-
-  <div class="field">
-    <%= form.label :diet_restrictions %>
-    <%= form.text_area :diet_restrictions %>
-  </div>
-
-  <div class="field">
-    <%= form.label :shirt_size %>
-    <%= form.text_field :shirt_size %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address1 %>
-    <%= form.text_field :address1 %>
+    <%= form.label :address1, class: 'important' %>
+    <%= form.text_field :address1, required: true %>
   </div>
 
   <div class="field">
@@ -68,13 +38,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city %>
+    <%= form.label :city, class: 'important' %>
+    <%= form.text_field :city, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
+    <%= form.label :state, class: 'important' %>
+    <%= form.text_field :state, required: true %>
   </div>
 
   <div class="field">
@@ -83,23 +53,40 @@
   </div>
 
   <div class="field">
-    <%= form.label :postalcode %>
-    <%= form.text_field :postalcode %>
+    <%= form.label :country, class: 'important' %>
+    <%= form.country_select :country, priority_countries: ["US"], include_blank: true, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :country %>
-    <%= form.country_select :country, priority_countries: ["US"], include_blank: true %>
+    <%= form.label :postalcode, class: 'important' %>
+    <%= form.text_field :postalcode, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
+    <%= form.label :phone, class: 'important' %>
+    <%= form.text_field :phone, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :parentname %>
-    <%= form.text_field :parentname %>
+    <%= form.label :birthdate, class: 'important' %>
+    <%= form.date_select :birthdate, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shirt_size, class: 'important' %>
+    <%= form.text_field :shirt_size, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :diet_restrictions %>
+    <%= form.text_area :diet_restrictions %>
+  </div>
+
+<h4>Parent/Guardian Information</h4>
+
+  <div class="field">
+    <%= form.label :parentname, class: 'important' %>
+    <%= form.text_field :parentname, required: true %>
   </div>
 
   <div class="field">
@@ -138,8 +125,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :parentphone %>
-    <%= form.text_field :parentphone %>
+    <%= form.label :parentphone, class: 'important' %>
+    <%= form.text_field :parentphone, required: true %>
   </div>
 
   <div class="field">
@@ -148,11 +135,33 @@
   </div>
 
   <div class="field">
-    <%= form.label :parentemail %>
-    <%= form.text_field :parentemail %>
+    <%= form.label :parentemail, class: 'important' %>
+    <%= form.text_field :parentemail, required: true %>
   </div>
 
+  <h4>Applicant Demographics</h4>
+
+  <div class="field">
+    <%= form.label :gender %>
+    <%= form.collection_select(:gender, Gender.all, :name, :name, :include_blank => "-- Please Select --") %>
+  </div>
+
+  <div class="field">
+    <%= form.label :us_citizen %>
+    <%= form.check_box :us_citizen %>
+  </div>
+
+  <div class="field">
+    <%= form.label :demographic %>
+    <%= form.collection_select(:demographic, Demographic.all, :id, :name, :include_blank => "-- Please Select --") %>
+  </div>
+
+
   <div class="actions">
-    <%= form.submit %>
+    <% if applicant_detail.new_record? %>
+      <%= form.submit "Register" %>
+    <% else %>
+      <%= form.submit "Update" %>
+    <% end %>
   </div>
 <% end %>

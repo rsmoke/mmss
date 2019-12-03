@@ -1,0 +1,39 @@
+<h4>The course that are available for the different sessions:</h4>
+<p>
+  Be sure to select a session(s) that offers the course(s) you are interested
+  in.
+</p>
+<% if @courses_session1.present? %>
+<h5>Session 1</h5>
+<ul class="px-4">
+  <% @courses_session1.each do |c| %>
+    <li class="text-xs">
+      <%= "#{ c.title } -- #{c.camp_occurrence.description}" %>
+    </li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if @courses_session2.present? %>
+<h5>Session 2</h5>
+<ul class="px-4">
+  <% @courses_session2.each do |c| %>
+    <li class="text-xs">
+      <%= "#{ c.title } -- #{c.camp_occurrence.description}" %>
+    </li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if @courses_session3.present? %>
+<h5>Session 3</h5>
+
+<ul class="px-4">
+  <% @courses_session3.each do |c| %>
+    <li class="text-xs">
+      <%= "#{ c.title } -- #{c.camp_occurrence.description}" %>
+    </li>
+  <% end %>
+</ul>
+
+<% end %>
