@@ -31,6 +31,9 @@ yarn-debug.log*
 .yarn-integrity
 .vscode
 .notes 
+myname@gmail.com
 
-
+*.bup
 *.OLD
+/shared/log
+/shared/pids
