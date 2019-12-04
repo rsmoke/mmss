@@ -53,7 +53,7 @@
         user_account = current_user.email.partition('@').first + '-' + current_user.id.to_s
         redirect_url = 'https://lsa-math-mmss.miserver.it.umich.edu/payment_receipt'
         amount_to_be_payed = amount.to_i
-        if Rails.env.development? || Rails.application.credentials.NELNET_SERVICE[:DEVELOPMENT_KEY] == "QA"
+        if Rails.env.development? || Rails.application.credentials.NELNET_SERVICE[:SERVICE_SELECTOR] == "QA"
            key_to_use = 'test_key'
            url_to_use = 'test_URL'
          else
