@@ -31,7 +31,7 @@
       <% if current_user.payments.present? %>
         <div class="sidebox_element">
           <%= link_to "Application Fee",
-                      enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
+                      all_payments_path %>
              - Paid
         </div>
       <% end %>
