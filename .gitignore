@@ -38,4 +38,6 @@ myname@gmail.com
 /shared/log
 /shared/pids
 /config/puma.rb
+puma-prod.rb
+
 
