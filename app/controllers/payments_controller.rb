@@ -39,6 +39,7 @@
 
     def payment_show
       redirect_to root_url unless user_has_payments?(current_user)
+      @finaids = FinancialAid.where(enrollment_id: current_user.enrollments.last.id)
       @users_current_payments = Payment.where(user_id: current_user )
       @ttl_paid = Payment.where(user_id: current_user, transaction_status: '1').pluck(:total_amount).map(&:to_f).sum / 100
       # cost_lodging = Lodging.find(current_user.application.lodging_selection).cost.to_f

@@ -37,8 +37,10 @@ Rails.application.routes.draw do
   end
 
   resources :enrollments do
-    resources :financial_aids
+      resources :financial_aids
   end
+
+  resources :financial_aids
 
   resources :enrollments do
     resources :recommendations

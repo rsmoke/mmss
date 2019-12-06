@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Enrollment:</strong>
   <%= @financial_aid.enrollment_id %>
@@ -7,7 +5,7 @@
 
 <p>
   <strong>Amount cents:</strong>
-  <%= @financial_aid.amount_cents %>
+  <%= humanized_money_with_symbol(@financial_aid.amount_cents) %>
 </p>
 
 <p>

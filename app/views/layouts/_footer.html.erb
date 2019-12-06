@@ -2,6 +2,15 @@
   <div class='footer-links copyright'>
     Copyright <%= Time.now.year %> | <%= link_to 'The Regents of the University of Michigan', 'https://regents.umich.edu' %>
   </div>
+  <div>
+    <address>
+      Michigan Math and Science Scholars
+    <br>  Department of Mathematics
+    <br>   530 Church Street
+    <br>   2074 East Hall
+    <br>   Ann Arbor, MI 48109-1043
+    </address>
+  </div>
 
     <% if admin_signed_in? %>
       <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"><%= link_to 'Admin Sign out', destroy_admin_session_path, method: :delete %></li>

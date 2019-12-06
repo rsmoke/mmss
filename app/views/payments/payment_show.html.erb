@@ -7,12 +7,15 @@
     Thank you for your Michigan Math and Science Scholars Registration. You will
     be emailed with your placement. You will also
     be sent a prompt to continue paying your camp fees at that time.
-    Registrants have until <<Closing-Date>> to pay your balance
+    Registrants have until "Closing-Date" to pay your balance
     in full.</h6>
 
-    <h6>If you are applying for need-based financial support. Please fill out
-      the <%= link_to "Financial Aid Application", root_path,
+    <% if current_user.enrollments.last.financial_aid.blank? %>
+    <p>If you are applying for need-based financial support. Please fill out
+      the <br><%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
               class: "btn-sm btn-green" %>
+    </p>
+    <% end %>
     <p>You may email any questions to <%= mail_to "mmss@umich.edu" %>
     </p>
 
@@ -56,7 +59,7 @@
     </div>
   </div>
   <hr class="w-75"/>
-  <h6>Your transactions:</h6>
+  <h5>Your transactions:</h5>
   <div class="card-deck">
     <% @users_current_payments.each do |payment| %>
       <div class="col-auto mb-3">
@@ -88,6 +91,54 @@
     You will receive an email confirmation from
     'MerchantCreditCard&#64;umich.edu' for each transaction.
   </div>
+  <% if @finaids.present? %>
+  <hr>
+  <h5>Financial Aid</h5>
+  <div class="card-deck">
+    <% @finaids.each do |aid| %>
+      <div class="col-auto mb-3">
+        <div class="<%= ('border-danger' unless aid.status?) %> transaction-receipt card">
+          <h6 class="card-header">
+            Financial Aid Request
+          </h6>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= "Note: #{aid.note}" %>
+            </li>
+            <% if aid.taxform.attached? %>
+              <div class='current-uploaded-docs'>
+                <p>
+                  <strong>Tax Form currently uploaded:</strong>
+                  <%= link_to aid.taxform.filename, url_for(aid.taxform) %>
+                </p>
+              </div>
+            <% end %>
+            <% if aid.awarded %>
+              <li class="text-green-600 list-group-item">
+                Status: Awarded
+              </li>
+              <li list-group-item">
+                <%= "Financial source: #{aid.source}" %>
+              </li>
+              </li>
+              <li class="list-group-item">
+                <%= "Amount: #{humanized_money_with_symbol(aid.amount_cents )}" %>
+              </li>
+            <% else %>
+              <li class="text-yellow-600 list-group-item">
+                Status: Pending
+              </li>
+            <% end %>
+            <li class="list-group-item">
+              <%= "Date: #{aid.updated_at}" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+
   <h6>
     You may email any questions to
     <%= mail_to "mmss@umich.edu" %>
