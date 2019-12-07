@@ -11,136 +11,117 @@
     in full.</h6>
 
     <% if current_user.enrollments.last.financial_aid.blank? %>
-    <p>If you are applying for need-based financial support. Please fill out
-      the <br><%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
-              class: "btn-sm btn-green" %>
-    </p>
+      <p>If you are applying for need-based financial support. Please fill out
+        the <br><%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
+                class: "btn-sm btn-green" %>
+      </p>
     <% end %>
-    <p>You may email any questions to <%= mail_to "mmss@umich.edu" %>
-    </p>
+    <div class="direction_notes">You may email any questions to <%= mail_to "mmss@umich.edu" %>
+    </div>
 
   <hr class="w-75"/>
-  <div class="border-success mb-2 card" style="width: 18rem;">
-    <h6 class="card-header bg-success text-white">
+
+  <div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <h6 class="bg-green-700 px-4 text-white">
       Account Summary
     </h6>
-    <div class="card-body">
-      <div class="h6" style="font-family: Lucida Console;">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">
         <%= "#{'total_cost'.humanize.ljust(24, '.')} #{number_to_currency(@total_cost).rjust(12,'.')}" %>
       </div>
-      <div class="h6" style="font-family: Lucida Console;">
+      <div class="text-gray-700 text-base">
         <%= "#{'amount_paid'.humanize.ljust(20, '.')} #{number_to_currency(@ttl_paid).rjust(12,'.')}" %>
       </div>
       <hr/>
-      <div class="h6" style="font-family: Lucida Console;">
-        <div class="text-danger">
-          <%= "#{'balance_due'.humanize.ljust(22, '.')} #{number_to_currency(@balance_due).rjust(12,'.')}" %>
-        </div>
+      <div class="text-gray-700 text-base">
+        <%= "#{'balance_due'.humanize.ljust(22, '.')} #{number_to_currency(@balance_due).rjust(12,'.')}" %>
       </div>
     </div>
-    <div class="card-footer">
+    <div class="w-2/3">
       <% if payments_open? && @balance_due > 0 %>
         <%= form_with url: make_payment_path, local: true do |f| %>
-          <div class="row">
-            <div class="form-group align-items-around ml-4">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    $
-                  </div>
-                </div>
-                <%= f.number_field :amount, value: "#{@balance_due.to_i}", within: 1..2000, required: true %>
-                <%= f.submit "Pay Now", class: 'btn btn-sm btn-success ml-2' %>
-              </div>
-            </div>
-          </div>
+          <%= f.number_field :amount, value: "#{@balance_due.to_i}", within: 1..2000, required: true %>
+          <%= f.submit "Pay Now", class: 'btn-sm btn-green' %>
         <% end %>
       <% end %>
     </div>
   </div>
+
   <hr class="w-75"/>
+
   <h5>Your transactions:</h5>
   <div class="card-deck">
     <% @users_current_payments.each do |payment| %>
-      <div class="col-auto mb-3">
-        <div class="<%= ('border-danger' unless payment.transaction_status === "1") %> transaction-receipt card">
-          <h6 class="card-header">
+        <div class="max-w-sm rounded overflow-hidden shadow-lg">
+          <h6 class="bg-green-500 px-4 text-white">
             <%= "Transaction ID: #{payment.transaction_id}" %>
           </h6>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <%= "Credit Card: #{payment.account_type}" %>
-            </li>
-            <li class="<%= ('text-danger' unless payment.transaction_status === "1") %> list-group-item">
-              Message:
-              <br/>
-              <%= payment.result_message %>
-            </li>
-            <li class="list-group-item">
-              <%= "Amount: #{number_to_currency(payment.total_amount.to_f / 100 )}" %>
-            </li>
-            <li class="list-group-item">
-              <%= "Date: #{Time.parse(payment.transaction_date).strftime("%b %e, %Y at %l:%M %p")}" %>
-            </li>
-          </ul>
+
+          <div class="text-gray-700 text-sm">
+            <%= "Credit Card: #{payment.account_type}" %>
+          </div>
+          <div class="text-gray-700 text-sm">
+            <%= "Message: #{payment.result_message}" %>
+          </div>
+          <div class="text-gray-700 text-sm">
+            <%= "Amount: #{number_to_currency(payment.total_amount.to_f / 100 )}" %>
+          </div>
+          <div class="text-gray-700 text-sm">
+            <%= "Date: #{Time.parse(payment.transaction_date).strftime("%b %e, %Y at %l:%M %p")}" %>
+          </div>
         </div>
-      </div>
     <% end %>
   </div>
-  <div class="h6 text-muted">
+
+  <div class="direction_notes">
     You will receive an email confirmation from
     'MerchantCreditCard&#64;umich.edu' for each transaction.
   </div>
+
   <% if @finaids.present? %>
-  <hr>
-  <h5>Financial Aid</h5>
-  <div class="card-deck">
+    <hr>
+    <h5>Financial Aid</h5>
     <% @finaids.each do |aid| %>
-      <div class="col-auto mb-3">
-        <div class="<%= ('border-danger' unless aid.status?) %> transaction-receipt card">
-          <h6 class="card-header">
+      <div class="card-deck">
+
+        <div class="max-w-sm rounded overflow-hidden shadow-lg">
+          <div class="bg-blue-500 px-4 text-white">
             Financial Aid Request
-          </h6>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <%= "Note: #{aid.note}" %>
-            </li>
-            <% if aid.taxform.attached? %>
-              <div class='current-uploaded-docs'>
-                <p>
-                  <strong>Tax Form currently uploaded:</strong>
-                  <%= link_to aid.taxform.filename, url_for(aid.taxform) %>
-                </p>
-              </div>
-            <% end %>
-            <% if aid.awarded %>
-              <li class="text-green-600 list-group-item">
-                Status: Awarded
-              </li>
-              <li list-group-item">
-                <%= "Financial source: #{aid.source}" %>
-              </li>
-              </li>
-              <li class="list-group-item">
-                <%= "Amount: #{humanized_money_with_symbol(aid.amount_cents )}" %>
-              </li>
-            <% else %>
-              <li class="text-yellow-600 list-group-item">
-                Status: Pending
-              </li>
-            <% end %>
-            <li class="list-group-item">
-              <%= "Date: #{aid.updated_at}" %>
-            </li>
-          </ul>
+          </div>
+          <div class="text-gray-700 text-sm">
+            <%= "Note: #{aid.note}" %>
+          </div>
+          <% if aid.taxform.attached? %>
+            <div class="text-gray-700 text-sm">
+              Tax Form uploaded:
+              <%= link_to aid.taxform.filename, url_for(aid.taxform) %>
+            </div>
+          <% end %>
+          <% if aid.awarded %>
+            <div class="text-gray-700 text-sm">
+              Status: Awarded
+            </div>
+            <div class="text-gray-700 text-sm">
+              <%= "Financial source: #{aid.source}" %>
+            </div>
+            <div class="text-gray-700 text-sm">
+              <%= "Amount: #{humanized_money_with_symbol(aid.amount_cents )}" %>
+            </div>
+          <% else %>
+            <div class="text-gray-700 text-sm">
+              Status: Pending
+            </div>
+          <% end %>
+          <div class="text-gray-700 text-sm">
+            <%= "Date: #{aid.updated_at}" %>
+          </div>
         </div>
       </div>
     <% end %>
-  </div>
   <% end %>
 
-  <h6>
+  <div class="direction_notes">
     You may email any questions to
     <%= mail_to "mmss@umich.edu" %>
-  </h6>
+  </div>
 <% end %>

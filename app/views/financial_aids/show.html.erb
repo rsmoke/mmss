@@ -1,22 +1,27 @@
-<p>
-  <strong>Enrollment:</strong>
-  <%= @financial_aid.enrollment_id %>
-</p>
+<% if admin_signed_in? %>
+  <p>
+    <strong>Enrollment:</strong>
+    <%= @financial_aid.enrollment_id %>
+  </p>
 
-<p>
-  <strong>Amount cents:</strong>
-  <%= humanized_money_with_symbol(@financial_aid.amount_cents) %>
-</p>
+<% end %>
 
-<p>
-  <strong>Source:</strong>
-  <%= @financial_aid.source %>
-</p>
+<% if @financial_aid.awarded %>
+  <p>
+    <strong>Awarded:</strong>
+    <%= @financial_aid.awarded %>
+  </p>
 
-<p>
-  <strong>Awarded:</strong>
-  <%= @financial_aid.awarded %>
-</p>
+  <p>
+    <strong>Amount cents:</strong>
+    <%= humanized_money_with_symbol(@financial_aid.amount_cents) %>
+  </p>
+
+  <p>
+    <strong>Source:</strong>
+    <%= @financial_aid.source %>
+  </p>
+ <% end %>
 
 <p>
   <strong>Note:</strong>
@@ -25,7 +30,11 @@
 
 <p>
   <strong>Status:</strong>
-  <%= @financial_aid.status %>
+  <% if @financial_aid.status %>
+    <%= @financial_aid.status %>
+  <% else %>
+    Pending
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_financial_aid_path(@financial_aid) %> |
