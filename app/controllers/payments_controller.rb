@@ -45,7 +45,9 @@
       # cost_lodging = Lodging.find(current_user.application.lodging_selection).cost.to_f
       # cost_partner = PartnerRegistration.find(current_user.application.partner_registration_selection).cost.to_f
       # @total_cost = cost_lodging + cost_partner
-      @total_cost = 10000
+      cost_sessions = 1300 * current_user.enrollments.last.session_registrations.size
+      cost_activities = current_user.enrollments.last.registration_activities.pluck(:cost_cents).map(&:to_f).sum / 100
+      @total_cost = cost_sessions + cost_activities
       @balance_due = @total_cost - @ttl_paid
     end
 

@@ -27,14 +27,14 @@
     </h6>
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">
-        <%= "#{'total_cost'.humanize.ljust(24, '.')} #{number_to_currency(@total_cost).rjust(12,'.')}" %>
+        <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost).rjust(12,'.')}" %>
       </div>
       <div class="text-gray-700 text-base">
-        <%= "#{'amount_paid'.humanize.ljust(20, '.')} #{number_to_currency(@ttl_paid).rjust(12,'.')}" %>
+        <%= "#{'amount_paid'.humanize.ljust(20, '.')} #{humanized_money_with_symbol(@ttl_paid).rjust(12,'.')}" %>
       </div>
       <hr/>
       <div class="text-gray-700 text-base">
-        <%= "#{'balance_due'.humanize.ljust(22, '.')} #{number_to_currency(@balance_due).rjust(12,'.')}" %>
+        <%= "#{'balance_due'.humanize.ljust(22, '.')} #{humanized_money_with_symbol(@balance_due).rjust(12,'.')}" %>
       </div>
     </div>
     <div class="w-2/3">
@@ -64,7 +64,7 @@
             <%= "Message: #{payment.result_message}" %>
           </div>
           <div class="text-gray-700 text-sm">
-            <%= "Amount: #{number_to_currency(payment.total_amount.to_f / 100 )}" %>
+            <%= "Amount: #{humanized_money_with_symbol(payment.total_amount.to_f / 100 )}" %>
           </div>
           <div class="text-gray-700 text-sm">
             <%= "Date: #{Time.parse(payment.transaction_date).strftime("%b %e, %Y at %l:%M %p")}" %>

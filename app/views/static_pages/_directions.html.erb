@@ -47,7 +47,7 @@
       <% elsif current_user.payments.empty? %>
         <li>Now that you've submitted your application, the next step is to make
          sure you
-         <%= link_to "pay the $100 non-refundable application fee",
+         <%= button_to "pay the $100 non-refundable application fee",
                       make_payment_path(amount: 100), class: 'btn-sm btn-green' %>
         </li>
         <p>You will receive an email from UM MerchantServices confirming the
