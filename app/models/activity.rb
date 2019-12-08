@@ -11,7 +11,7 @@ class Activity < ApplicationRecord
   validates :cost_cents, presence: true, numericality: { only_integer: true }
 
   def description_with_cost
-    "#{description} -- #{humanized_money_with_symbol(cost_cents)}"
+    "#{description} -- $#{humanized_money(cost_cents[0...-2])}"
   end
 
   scope :active, -> { where(active: true).order(description: :asc) }
