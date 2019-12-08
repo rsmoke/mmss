@@ -46,6 +46,8 @@ Rails.application.routes.draw do
     resources :recommendations
   end
 
+resources :recommendations
+
   get 'static_pages/index'
   get 'static_pages/contact'
   get 'static_pages/privacy'

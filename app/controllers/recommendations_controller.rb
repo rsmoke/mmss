@@ -1,6 +1,7 @@
 class RecommendationsController < ApplicationController
   before_action :set_recommendation, only: [:show, :edit, :update, :destroy]
-
+  devise_group :logged_in, contains: [:user, :admin]
+  before_action :authenticate_logged_in!
   # GET /recommendations
   # GET /recommendations.json
   def index
@@ -11,7 +12,7 @@ class RecommendationsController < ApplicationController
   # GET /recommendations/1
   # GET /recommendations/1.json
   def show
-    @enrollment = Enrollment.find(params[:enrollment_id])
+    # @enrollment = Enrollment.find(params[:enrollment_id])
   end
 
   # GET /recommendations/new
@@ -22,6 +23,7 @@ class RecommendationsController < ApplicationController
 
   # GET /recommendations/1/edit
   def edit
+
   end
 
   # POST /recommendations
