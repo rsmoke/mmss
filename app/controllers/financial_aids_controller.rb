@@ -16,6 +16,7 @@ class FinancialAidsController < ApplicationController
   # GET /financial_aids/1
   # GET /financial_aids/1.json
   def show
+      # redirect_to root_path, alert: "Unauthorized access" unless @financial_aid.enrollment_id == current_user.enrollments.last.id
   end
 
   # GET /financial_aids/new
@@ -70,7 +71,11 @@ class FinancialAidsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_financial_aid
-      @financial_aid = FinancialAid.find(params[:id])
+      if admin_signed_in?
+        @financial_aid = FinancialAid.find(params[:id])
+      else
+        @financial_aid = current_user.enrollments.last.financial_aid
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

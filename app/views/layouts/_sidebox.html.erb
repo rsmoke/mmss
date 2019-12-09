@@ -28,7 +28,7 @@
              - submitted
         </div>
       <% end %>
-      <% if current_user.payments.present? %>
+      <% if current_user.enrollments.last.financial_aid.present? %>
         <div class="sidebox_element">
           <%= link_to "Financial Aid",
                       enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aid) %>
