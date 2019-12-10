@@ -1,0 +1,69 @@
+<h1>Course Preferences</h1>
+<% if admin_signed_in? %>
+  <%= "id: #{@current_enrollment.id}" %>
+  <%= "User_id: #{@current_enrollment.user_id}" %>
+  <%= @current_user_sessions %>
+<% end %>
+
+<% if @current_user_sessions.include?("Session 1") %>
+  <% if @courses_session1.present? %>
+    <h5>Session 1</h5>
+    <ul class="px-4">
+      <p class= "text-xs"> Ranking => Course Title</p>
+      <% @courses_session1.each do |c| %>
+        <% if @current_user_course_ids.include?(c.id) %>
+          <li class="text-xs">
+            <%= "#{ @current_user_course_preferences.find_by(course_id: c.id).ranking} => #{ c.title } -- #{ c.title } -- #{c.camp_occurrence.description}" %>
+          </li>
+        <% else %>
+          <li class="text-xs">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= "#{ c.title } -- #{c.camp_occurrence.description}" %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= link_to "Add / Update a Course Preference in Session 1", new_course_preference_path(course_session: "session1"), class: "btn-sm btn-green" %>
+<% end %>
+
+<% if @current_user_sessions.include?("Session 2") %>
+  <% if @courses_session1.present? %>
+    <h5>Session 2</h5>
+    <ul class="px-4">
+      <p class= "text-xs"> Ranking => Course Title</p>
+      <% @courses_session2.each do |c| %>
+        <% if @current_user_course_ids.include?(c.id) %>
+          <li class="text-xs">
+            <%= "#{ @current_user_course_preferences.find_by(course_id: c.id).ranking} => #{ c.title } -- #{ c.title } -- #{c.camp_occurrence.description}" %>
+          </li>
+        <% else %>
+          <li class="text-xs">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= "#{ c.title } -- #{c.camp_occurrence.description}" %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= link_to "Add / Update a Course Preference in Session 2", new_course_preference_path(course_session: "session2"), class: "btn-sm btn-green" %>
+<% end %>
+
+<% if @current_user_sessions.include?("Session 3") %>
+  <% if @courses_session1.present? %>
+    <h5>Session 3</h5>
+    <ul class="px-4">
+      <p class= "text-xs"> Ranking => Course Title</p>
+      <% @courses_session3.each do |c| %>
+        <% if @current_user_course_ids.include?(c.id) %>
+          <li class="text-xs">
+            <%= "#{ @current_user_course_preferences.find_by(course_id: c.id).ranking} => #{ c.title } -- #{ c.title } -- #{c.camp_occurrence.description}" %>
+          </li>
+        <% else %>
+          <li class="text-xs">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= "#{ c.title } -- #{c.camp_occurrence.description}" %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= link_to "Add / Update a Course Preference in Session 3", new_course_preference_path(course_session: "session3"), class: "btn-sm btn-green" %>
+<% end %>

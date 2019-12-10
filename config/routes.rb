@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   end
 
 resources :recommendations
+resources :course_preferences
 
   get 'static_pages/index'
   get 'static_pages/contact'

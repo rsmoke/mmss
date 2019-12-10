@@ -30,7 +30,7 @@
           </p>
       <% elsif current_user.enrollments.empty? || current_user.enrollments.last.course_preferences.blank? %>
         <li>The next step is to rank your
-          <%= link_to "Course Preferences", root_path, class: 'btn-sm btn-green' %>
+          <%= link_to "Course Preferences", course_preferences_path, class: 'btn-sm btn-green' %>
           for the sessions you selected to attend.</li>
       <% elsif current_user.enrollments.empty? || current_user.enrollments.last.recommendation.blank? %>
         <li>The next step is requesting a
