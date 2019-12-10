@@ -44,11 +44,11 @@
 
   <div class="field">
     <%= form.label :state, class: 'important' %>
-    <%= form.text_field :state, required: true %>
+    <%= select_tag :state, options_for_select(us_states), include_blank: true, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :state_non_us %>
+    <%= form.label :state_non_us, "State (Non-US)" %>
     <%= form.text_field :state_non_us %>
   </div>
 
@@ -69,12 +69,12 @@
 
   <div class="field">
     <%= form.label :birthdate, class: 'important' %>
-    <%= form.date_select :birthdate, required: true %>
+    <%= form.date_select :birthdate, start_year: 1995, include_blank: true, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :shirt_size, class: 'important' %>
-    <%= form.text_field :shirt_size, required: true %>
+    <%= form.select :shirt_size, ([["small","small"],["medium","medium"],["large","large"],["xlarge","xlarge"],["2xlarge","2xlarge"]]), include_blank: true, reauired: true %>
   </div>
 
   <div class="field">
@@ -142,8 +142,8 @@
   <h4>Applicant Demographics</h4>
 
   <div class="field">
-    <%= form.label :gender %>
-    <%= form.collection_select(:gender, Gender.all, :name, :name, :include_blank => "-- Please Select --") %>
+    <%= form.label :gender, class: 'important' %>
+    <%= form.collection_select(:gender, Gender.all, :name, :name, include_blank: true, required: true) %>
   </div>
 
   <div class="field">
