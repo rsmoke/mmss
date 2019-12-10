@@ -2,7 +2,6 @@
 <% if user_signed_in? %>
 
   <% if current_user.applicant_detail.present? && current_user.applicant_detail.persisted? %>
-  <%= console %>
     <div id="sidebox">
       <p><strong>Progress Window</strong><p>
       <% if current_user.enrollments.present? && current_user.enrollments.last.course_preferences.exists? && current_user.enrollments.last.recommendation.present? && current_user.payments.present? %>
