@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :feedbacks
   # resources :payments
   root to: 'static_pages#index'
 
