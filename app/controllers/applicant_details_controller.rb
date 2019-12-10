@@ -44,7 +44,7 @@ class ApplicantDetailsController < ApplicationController
   def update
     respond_to do |format|
       if @applicant_detail.update(applicant_detail_params)
-        format.html { redirect_to @applicant_detail, notice: 'Applicant detail was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Applicant detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @applicant_detail }
       else
         format.html { render :edit }

@@ -5,7 +5,7 @@ class ApplicantDetail < ApplicationRecord
   validates :firstname, presence: true
   validates :lastname, presence: true
   # validates :us_citizen, presence: true
-  # validates :gender, presence: true
+  validates :gender, presence: true
   # validates :demographic, presence: true
   validates :birthdate, presence: true
   # validates :diet_restrictions, presence: true

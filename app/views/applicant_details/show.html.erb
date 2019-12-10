@@ -21,21 +21,6 @@
 </p>
 
 <p>
-  <strong>Gender:</strong>
-  <%= @applicant_detail.gender %>
-</p>
-
-<p>
-  <strong>Us citizen:</strong>
-  <%= @applicant_detail.us_citizen %>
-</p>
-
-<p>
-  <strong>Demographic:</strong>
-  <%= @applicant_detail.demographic %>
-</p>
-
-<p>
   <strong>Birthdate:</strong>
   <%= @applicant_detail.birthdate %>
 </p>
@@ -143,6 +128,20 @@
 <p>
   <strong>Parentemail:</strong>
   <%= @applicant_detail.parentemail %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @applicant_detail.gender %>
+</p>
+
+<p>
+  <strong>US citizen:</strong>
+  <%= @applicant_detail.us_citizen %>
+</p>
+<p>
+  <strong>Demographic:</strong>
+  <%= @applicant_detail.demographic %>
 </p>
 
 <%= link_to 'Edit', edit_applicant_detail_path(@applicant_detail) %> |
