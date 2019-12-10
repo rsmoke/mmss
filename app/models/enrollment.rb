@@ -26,7 +26,7 @@ class Enrollment < ApplicationRecord
   validates :year_in_school, presence: true
   validates :anticipated_graduation_year, presence: true
   validates :personal_statement, presence: true
-  validates :personal_statement, length: { minimum: 10 }
+  validates :personal_statement, length: { minimum: 100 }
 
   scope :current_user_enrollments, ->(user=@current_user) { where(user_id: user) }
 end

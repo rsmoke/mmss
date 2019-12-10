@@ -44,7 +44,7 @@
 
   <div class="field">
     <%= form.label :state, class: 'important' %>
-    <%= select_tag :state, options_for_select(us_states), include_blank: true, required: true %>
+    <%= form.select :state, options_for_select(us_states), include_blank: true, required: true %>
   </div>
 
   <div class="field">
@@ -74,7 +74,7 @@
 
   <div class="field">
     <%= form.label :shirt_size, class: 'important' %>
-    <%= form.select :shirt_size, ([["small","small"],["medium","medium"],["large","large"],["xlarge","xlarge"],["2xlarge","2xlarge"]]), include_blank: true, reauired: true %>
+    <%= form.select :shirt_size, ([["small","small"],["medium","medium"],["large","large"],["xlarge","xlarge"],["2xlarge","2xlarge"]]), include_blank: true, required: true %>
   </div>
 
   <div class="field">

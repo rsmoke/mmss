@@ -61,7 +61,7 @@
 
   <div class="field">
     <%= form.label :high_school_state, class: 'important'  %>
-    <%= form.text_field :high_school_state, required: true %>
+    <%= form.select :high_school_state, options_for_select(us_states), include_blank: true, required: true %>
   </div>
 
   <div class="field">

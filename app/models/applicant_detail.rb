@@ -15,14 +15,16 @@ class ApplicantDetail < ApplicationRecord
   validates :state, presence: true
   validates :postalcode, presence: true
   validates :country, presence: true
-  validates :phone, presence: true
+  validates :phone, presence: true, format: { with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/, message: "number format should be xxx-xxx-xxxx"}
+
   validates :parentname, presence: true
   # validates :parentaddress1, presence: true
   # validates :parentcity, presence: true
   # validates :parentzip, presence: true
   # validates :parentcountry, presence: true
-  validates :parentphone, presence: true
-  validates :parentemail, presence: true
+  validates :parentphone, presence: true, format: { with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/, message: "number format should be xxx-xxx-xxxx"}
+  validates :parentemail, presence: true, length: {maximum: 255},
+                    format: {with: URI::MailTo::EMAIL_REGEXP, message: "only allows valid emails"}
 
 
 def full_name
