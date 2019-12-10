@@ -44,11 +44,11 @@
 
   <div class="field">
     <%= form.label :state, class: 'important' %>
-    <%= form.text_field :state, required: true %>
+    <%= select_tag :state, options_for_select(us_states), include_blank: true, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :state_non_us %>
+    <%= form.label :state_non_us, "State (Non-US)" %>
     <%= form.text_field :state_non_us %>
   </div>
 
