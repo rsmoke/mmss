@@ -32,9 +32,11 @@
       <div class="text-gray-700 text-base">
         <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid).rjust(12,'.')}" %>
       </div>
-      <div class="text-gray-700 text-base">
-        <%= "#{'financial_aid_awarded'.humanize.ljust(31, '.')} #{humanized_money_with_symbol(@finaids_ttl).rjust(12,'.')}" %>
-      </div>
+      <% if @finaids.present? %>
+        <div class="text-gray-700 text-base">
+          <%= "#{'financial_aid_awarded'.humanize.ljust(31, '.')} #{humanized_money_with_symbol(@finaids_ttl).rjust(12,'.')}" %>
+        </div>
+      <% end %>
       <hr/>
       <div class="text-gray-700 text-base">
         <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due).rjust(12,'.')}" %>
