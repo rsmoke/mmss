@@ -1,9 +1,6 @@
 <footer>
-  <div class='footer-links copyright'>
-    Copyright <%= Time.now.year %> | <%= link_to 'The Regents of the University of Michigan', 'https://regents.umich.edu' %>
-  </div>
   <div>
-    <address>
+    <address class="text-xs">
       Michigan Math and Science Scholars
     <br>  Department of Mathematics
     <br>   530 Church Street
@@ -11,11 +8,15 @@
     <br>   Ann Arbor, MI 48109-1043
     </address>
   </div>
-
+  <div>
+    <li class="block mt-4 sm:inline-block sm:mt-0 text-yellow-700 hover:text-white mr-4"><%= link_to 'Feedback', new_feedback_path %></li>
     <% if admin_signed_in? %>
-      <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"><%= link_to 'Admin Sign out', destroy_admin_session_path, method: :delete %></li>
+      <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-400 hover:text-white mr-4"><%= link_to 'Admin Sign out', destroy_admin_session_path, method: :delete %></li>
     <% else %>
-      <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-200 hover:text-white mr-4"><%= link_to 'Admin Sign in', new_admin_session_path %></li>
+      <li class="block mt-4 sm:inline-block sm:mt-0 text-blue-600 hover:text-white mr-4"><%= link_to 'Admin Sign in', new_admin_session_path %></li>
     <% end %>
-
+  </div>
+  <div class='footer-links copyright'>
+    Copyright <%= Time.now.year %> | <%= link_to 'The Regents of the University of Michigan', 'https://regents.umich.edu' %>
+  </div>
 </footer>

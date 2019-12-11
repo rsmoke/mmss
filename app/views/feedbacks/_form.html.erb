@@ -11,6 +11,17 @@
     </div>
   <% end %>
 
+   <div class="field">
+    <%= form.label :genre %>
+    <%= form.select :genre, ([["Error on Page","page_error"],["Layout Issue","layout_issue"],["Suggestion","suggestion"]]), include_blank: true, required: true %>
+
+  </div>
+
+  <div class="field">
+    <%= form.label :message %>
+    <%= form.text_area :message, size: "24x6" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

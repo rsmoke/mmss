@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_01_222306) do
+ActiveRecord::Schema.define(version: 2019_12_11_002821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,6 +212,15 @@ ActiveRecord::Schema.define(version: 2019_12_01_222306) do
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
+  create_table "feedbacks", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.string "genre", null: false
+    t.string "message", null: false
+    t.index ["user_id"], name: "index_feedbacks_on_user_id"
+  end
+
   create_table "financial_aids", force: :cascade do |t|
     t.bigint "enrollment_id", null: false
     t.integer "amount_cents"
@@ -322,6 +331,7 @@ ActiveRecord::Schema.define(version: 2019_12_01_222306) do
   add_foreign_key "enrollment_activities", "activities"
   add_foreign_key "enrollment_activities", "enrollments"
   add_foreign_key "enrollments", "users"
+  add_foreign_key "feedbacks", "users"
   add_foreign_key "financial_aids", "enrollments"
   add_foreign_key "payments", "users"
   add_foreign_key "recommendations", "enrollments"

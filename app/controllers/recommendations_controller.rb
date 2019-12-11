@@ -34,9 +34,9 @@ class RecommendationsController < ApplicationController
 
     respond_to do |format|
       if @recommendation.save
-        RecommendationMailer.with(recommendation: @recommendation).welcome_email.deliver_now
         format.html { redirect_to root_path, notice: 'Recommendation was successfully created and the email was sent.' }
         format.json { render :show, status: :created, location: @recommendation }
+        RecommendationMailer.with(recommendation: @recommendation).welcome_email.deliver_now
       else
         format.html { render :new }
         format.json { render json: @recommendation.errors, status: :unprocessable_entity }
