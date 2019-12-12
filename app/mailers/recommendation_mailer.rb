@@ -1,8 +1,8 @@
 class RecommendationMailer < ApplicationMailer
 
-  default from: 'University of Michigan MMSS High School Summer Program <mmss-recommend@umich.edu >'
+  default cc: 'MMSS Admin <mmss@umich.edu>' ,from: 'University of Michigan MMSS High School Summer Program <mmss-recommend@umich.edu >'
 
-  def welcome_email
+  def request_email
     @recommendation = params[:recommendation]
     @enrollment = Enrollment.find(@recommendation.enrollment_id)
     @student = ApplicantDetail.find_by(user_id: @enrollment.user_id)
