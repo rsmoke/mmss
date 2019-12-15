@@ -25,7 +25,7 @@
         <div class="sidebox_element">
           <%= link_to "Letter of Recommendation",
                       enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
-             - submitted
+             - requested
         </div>
       <% end %>
       <% if current_user.enrollments.last.financial_aid.present? %>
@@ -39,7 +39,7 @@
         <div class="sidebox_element">
           <%= link_to "Application Fee",
                       all_payments_path %>
-             - Paid
+             - paid
         </div>
       <% end %>
     <% end %>

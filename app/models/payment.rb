@@ -3,4 +3,6 @@ class Payment < ApplicationRecord
   validates :total_amount, presence: true
 
   belongs_to :user
+
+
 end
