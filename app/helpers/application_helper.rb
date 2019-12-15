@@ -1,5 +1,15 @@
 module ApplicationHelper
 
+
+  def payments_open?
+    false
+  end
+
+  def current_camp_year
+      CampConfiguration.active_camp_year
+  end
+
+
   def us_states
     [
       ['Alabama', 'AL'],

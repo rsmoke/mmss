@@ -2,8 +2,9 @@
   require 'time'
 
   class PaymentsController < ApplicationController
+    # devise_group :logged_in, contains: [:user, :admin]
+    # before_action :authenticate_logged_in!
     before_action :authenticate_user!
-    before_action :current_user,   only: %i[payment_receipt make_payment payment_show]
 
     def index
       redirect_to root_url
@@ -23,37 +24,40 @@
           result_code: params['transactionResultCode'],
           result_message: params['transactionResultMessage'],
           user_account: params['orderNumber'],
-          payer_identity: @current_user.email,
+          payer_identity: current_user.email,
           timestamp: params['timestamp'],
           transaction_hash: params['hash'],
           user_id: current_user.id
         )
+
         redirect_to all_payments_path, notice: "Your Payment Was Successfully Recorded"
+        if current_user.payments.count == 1
+          RegistrationMailer.app_complete_email(current_user).deliver_now
+        end
       end
     end
 
     def make_payment
-      processed_url = generate_hash(@current_user, params['amount'])
+      processed_url = generate_hash(params['amount'])
       redirect_to processed_url
     end
 
     def payment_show
-      redirect_to root_url unless user_has_payments?(current_user)
-      @finaids = FinancialAid.where(enrollment_id: current_user.enrollments.last.id)
+      redirect_to root_url unless current_user.payments
+      @user_current_enrollment = current_user.enrollments.last
+      @current_application_status = @user_current_enrollment.application_status
+      @finaids = FinancialAid.where(enrollment_id: @user_current_enrollment.id)
       @finaids_ttl = @finaids.pluck(:amount_cents).map(&:to_f).sum / 100
       @users_current_payments = Payment.where(user_id: current_user )
       @ttl_paid = Payment.where(user_id: current_user, transaction_status: '1').pluck(:total_amount).map(&:to_f).sum / 100
-      # cost_lodging = Lodging.find(current_user.application.lodging_selection).cost.to_f
-      # cost_partner = PartnerRegistration.find(current_user.application.partner_registration_selection).cost.to_f
-      # @total_cost = cost_lodging + cost_partner
-      cost_sessions = 1300 * current_user.enrollments.last.session_registrations.size
-      cost_activities = current_user.enrollments.last.registration_activities.pluck(:cost_cents).map(&:to_f).sum / 100
+      cost_sessions = 1300 * @user_current_enrollment.session_registrations.size
+      cost_activities = @user_current_enrollment.registration_activities.pluck(:cost_cents).map(&:to_f).sum / 100
       @total_cost = cost_sessions + cost_activities
       @balance_due = @total_cost - @finaids_ttl - @ttl_paid
     end
 
     private
-      def generate_hash(current_user, amount=100)
+      def generate_hash(amount=100)
         user_account = current_user.email.partition('@').first + '-' + current_user.id.to_s
         redirect_url = 'https://lsa-math-mmss.miserver.it.umich.edu/payment_receipt'
         amount_to_be_payed = amount.to_i

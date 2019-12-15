@@ -1,5 +1,5 @@
 class Enrollment < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   has_one :applicant_detail, through: :user
 
   has_many :enrollment_activities
@@ -28,5 +28,5 @@ class Enrollment < ApplicationRecord
   validates :personal_statement, presence: true
   validates :personal_statement, length: { minimum: 100 }
 
-  scope :current_user_enrollments, ->(user=@current_user) { where(user_id: user) }
+  # scope :current_enrollment, ->(user=@current_user) { where(user_id: user) }
 end

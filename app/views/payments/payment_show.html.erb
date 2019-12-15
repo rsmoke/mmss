@@ -1,14 +1,36 @@
 <% provide(:title, 'Payment Receipts') %>
 <h2>Your Payment Receipts</h2>
 <% if @users_current_payments.count < 1 %>
-  <h6>You have not made a payment yet</h6>
+  <h6>You have not made a payment yet. Payment can be made via check or money
+  order from a U.S. based bank, or via credit card. International students may
+  pay via wire transfer (contact our office for more information regarding wire
+  transfers for international students.)
+  <%= button_to "pay the $100 non-refundable application fee",
+                make_payment_path(amount: 100), class: 'btn-sm btn-green' %></h6>
 <% else %>
-  <h6 class="mt-4">
-    Thank you for your Michigan Math and Science Scholars Registration. You will
-    be emailed with your placement. You will also
-    be sent a prompt to continue paying your camp fees at that time.
-    Registrants have until "Closing-Date" to pay your balance
-    in full.</h6>
+<%# "User_id: #{@user_current_enrollment.user_id} Status: #{@current_application_status} Camp Year: #{current_camp_year}" %>
+    <% if @user_current_enrollment.application_status.equal? "enrolled" %>
+      <h6>
+        Your application materials have been received and processed, and we are
+        pleased to offer you a spot for MMSS <%= current_camp_year %>.
+        Your official notification and course assignment are found in your
+        notification email.
+        <br>
+        Paying the tuition and service fees is a requirement of participation.
+        Please continue paying your camp fees at this time.
+      </h6>
+    <% else %>
+      <h6 class="mt-4">
+        Thank you for your Michigan Math and Science Scholars Application. When we
+        have received all your application components your file will be reviewed.
+        <br>
+        The process may take up to 6 weeks as we conduct our admissions on a
+        rolling basis.
+        <br>
+        Please continue to check your email, and the Progress Window, for
+         updates on your application.
+      </h6>
+    <% end %>
 
     <% if current_user.enrollments.last.financial_aid.blank? %>
       <p>If you are applying for need-based financial support. Please fill out
@@ -42,15 +64,16 @@
         <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due).rjust(12,'.')}" %>
       </div>
     </div>
-    <div class="w-2/3">
-      <p>Enter a payment up to the balance due amount:</p>
-      <% if payments_open? && @balance_due > 0 %>
-        <%= form_with url: make_payment_path, local: true do |f| %>
-          <%= f.number_field :amount, value: "#{@balance_due.to_i}", within: 1..2000, required: true %>
-          <%= f.submit "Pay Now", class: 'btn-sm btn-green' %>
-        <% end %>
-      <% end %>
-    </div>
+
+    <% if payments_open? && @balance_due > 0 %>
+      <div class="w-2/3">
+        <p>Enter a payment up to the balance due amount:</p>
+          <%= form_with url: make_payment_path, local: true do |f| %>
+            <%= f.number_field :amount, value: "#{@balance_due.to_i}", within: 1..5000, required: true %>
+            <%= f.submit "Pay Now", class: 'btn-sm btn-green' %>
+          <% end %>
+      </div>
+    <% end %>
   </div>
 
   <hr class="w-75"/>
