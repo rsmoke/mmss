@@ -28,5 +28,15 @@ class Enrollment < ApplicationRecord
   validates :personal_statement, presence: true
   validates :personal_statement, length: { minimum: 100 }
 
+  validate :at_least_one_is_checked
+
+  private
+
+  def at_least_one_is_checked
+    if session_registration_ids.empty?
+      errors.add(:base, "Select at least one session")
+    end
+  end
+
   # scope :current_enrollment, ->(user=@current_user) { where(user_id: user) }
 end

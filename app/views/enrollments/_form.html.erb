@@ -13,7 +13,8 @@
 
 <h4>Sessions</h4>
   <div class="checkboxes">
-    <%= form.collection_check_boxes(:session_registration_ids, CampOccurrence.active, :id, :description_with_date) %>
+    <%= form.label :session_registration_ids, class: 'important' %>
+    <%= form.collection_check_boxes(:session_registration_ids, CampOccurrence.active, :id, :description_with_date, required: true) %>
 
   </div>
 
