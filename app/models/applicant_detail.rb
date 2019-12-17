@@ -12,7 +12,8 @@ class ApplicantDetail < ApplicationRecord
   validates :shirt_size, presence: true
   validates :address1, presence: true
   validates :city, presence: true
-  validates :state, presence: true
+  validates :state, presence: { message: "needs to be selected or if you are
+                                          outside of the US select *Non-US*" }
   validates :postalcode, presence: true
   validates :country, presence: true
   validates :phone, presence: true, format: { with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/, message: "number format should be xxx-xxx-xxxx"}
