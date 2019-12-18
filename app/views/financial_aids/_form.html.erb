@@ -89,7 +89,13 @@
 
   <% end %>
 
-  <div class="actions">
+<!--   <div class="actions">
     <%= form.submit %>
-  </div>
+  </div> -->
+
+  <% if financial_aid.new_record? %>
+    <%= form.submit "Request Financial Aid" %>
+  <% else %>
+    <%= form.submit "Update Financial Aid Request" %>
+  <% end %>
 <% end %>

@@ -7,7 +7,7 @@
       <% if current_user.enrollments.present? && current_user.enrollments.last.course_preferences.exists? && current_user.enrollments.last.recommendation.present? && current_user.payments.present? %>
         <span class="text-green-700 font-semibold">Application Complete</span>
       <% else %>
-        <span class="text-red-500 font-semibold">Application InComplete</span>
+        <span class="text-red-500 font-semibold">Application incomplete</span>
       <% end %>
       <div class="sidebox_element"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> - submitted </div>
     <% if current_user.enrollments.present? %>
@@ -32,7 +32,7 @@
         <div class="sidebox_element">
           <%= link_to "Financial Aid",
                       enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aid) %>
-             - Pending
+             - pending
         </div>
       <% end %>
       <% if current_user.payments.present? %>

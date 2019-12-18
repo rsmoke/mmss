@@ -2,66 +2,100 @@
 @import "tailwindcss/components"
 @import "tailwindcss/utilities"
 
+.section-header
+  @apply bg-blue-800 text-yellow-500 mt-2 p-2 w-2/3 text-lg tracking-wide
+
+  .btn
+    @apply font-bold py-2 px-4 rounded
+
+  .btn-blue
+    @apply bg-blue-500 text-white
+
+  .btn-blue:hover
+    @apply bg-blue-700
+
+
+// Forms styles
+form
+  field
+    @apply block
+
+  label
+    @apply text-gray-700
+
+  input
+    @apply form-input mt-1 block w-full
+
+  textarea
+    @apply form-textarea mt-1 block w-full
+
+
+hr
+    @apply w-2/3 border-blue-900 border-2 mt-2
+
+.important
+  @apply text-red-500
+
 #sidebox
-  @apply mt-4 flex flex-col border-2 w-2/6 border-yellow-600 bg-yellow-200 float-right
+  @apply mt-4 p-2 flex flex-col border-2 border-yellow-400 bg-yellow-200
   .sidebox_element
-    @apply block inline-block mx-4 text-blue-800 text-xs
+    @apply block inline-block ml-2 text-blue-800
     a
       &:hover
         @apply text-blue-400
-h1
-  @apply text-2xl mb-2
+// h1
+//   @apply text-2xl mb-2
 
-h2
-  @apply text-xl mb-2
+// h2
+//   @apply text-xl mb-2
 
-h3
-  @apply text-lg mb-2
+// h3
+//   @apply text-lg mb-2
 
-h4
-  @apply text-base mt-4 p-2 font-bold bg-blue-900 border-t-2 text-white
+// h4
+//   @apply text-base mt-4 p-2 font-bold bg-blue-900 border-t-2 text-white
 
-h5
-  @apply w-1/4 text-xs mt-4 p-2 bg-blue-700 border-t-2 text-white
+// h5
+//   @apply w-1/4 text-xs mt-4 p-2 bg-blue-700 border-t-2 text-white
 
-.btn
-  @apply font-bold py-2 px-4 rounded
+// .btn
+//   @apply font-bold py-2 px-4 rounded
 
-.btn-sm
-  @apply font-medium py-1 px-2 rounded
+// .btn-sm
+//   @apply font-medium py-1 px-2 rounded
 
-.btn-blue
-  @apply bg-blue-500 text-white
+// .btn-blue
+//   @apply bg-blue-500 text-white
 
-.btn-blue:hover
-  @apply bg-blue-700
+// .btn-blue:hover
+//   @apply bg-blue-700
 
-.btn-green
-  @apply bg-green-500 text-white
+// .btn-green
+//   @apply bg-green-500 text-white
 
-.btn-green:hover
-  @apply bg-green-700
+// .btn-green:hover
+//   @apply bg-green-700
 
-.btn-teal
-  @apply bg-teal-500 text-white
+// .btn-teal
+//   @apply bg-teal-500 text-white
 
-.btn-teal:hover
-  @apply bg-teal-700
+// .btn-teal:hover
+//   @apply bg-teal-700
 
-form
-  @apply w-3/4
-  input, textarea, select
-    @apply shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight
-    &[type="submit"]
-      @apply btn btn-green w-1/2
-  .checkboxes
-    @apply flex flex-col
-    label
+// form
+//   @apply w-3/4
+//   input, textarea, select
+//     @apply shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight
+//     &[type="submit"]
+//       @apply btn btn-green w-1/2
+//   .checkboxes
+//     @apply flex flex-col
+//     label
 
-    input[type="checkbox"]
-      @apply shadow-none
-      text-align: center
-      width: 5%
+//     input[type="checkbox"]
+//       @apply shadow-none
+//       text-align: center
+//       width: 5%
 
 .debug_dump
   @apply bg-blue-100 border-4 border-red-800 rounded-lg p-4 text-sm font-mono
@@ -70,17 +104,17 @@ form
 .direction_notes
   @apply bg-yellow-100 text-gray-700 p-4 text-sm
 
-label.important
-  @apply text-red-700
+// label.important
+//   @apply text-red-700
 
-.current-uploaded-docs
-  @apply bg-yellow-100 border-2 border-yellow-600 rounded-lg p-2 text-sm
-  font-mono text-yellow-600 mx-1 my-1 max-w-xl w-auto
+// .current-uploaded-docs
+//   @apply bg-yellow-100 border-2 border-yellow-600 rounded-lg p-2 text-sm
+//   font-mono text-yellow-600 mx-1 my-1 max-w-xl w-auto
 
-.form-divider
-  @apply m-4
+// .form-divider
+//   @apply m-4
 
-address
-  @apply mx-8 my-4
+// address
+//   @apply mx-8 my-4
 
 

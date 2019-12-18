@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-<h4>Applicant Information</h4>
+<h4 class="section-header">Applicant Information</h4>
 
   <div class="field">
     <%= form.label :firstname, class: 'important' %>
@@ -82,7 +82,7 @@
     <%= form.text_area :diet_restrictions %>
   </div>
 
-<h4>Parent/Guardian Information</h4>
+<h4 class="section-header">Parent/Guardian Information</h4>
 
   <div class="field">
     <%= form.label :parentname, class: 'important' %>
@@ -140,20 +140,22 @@
     <%= form.text_field :parentemail, required: true %>
   </div>
 
-  <h4>Applicant Demographics</h4>
+  <h4 class= "section-header">Applicant Demographics</h4>
 
   <div class="field">
-    <%= form.label :gender, class: 'important' %>
-    <%= form.collection_select(:gender, Gender.all, :id, :name, include_blank: true, required: true) %>
+      <%= form.label :gender, "Biological Sex", class: 'important' %>
+      <%= form.collection_select(:gender, Gender.all, :id, :name, {include_blank: true}) %>
   </div>
 
   <div class="field">
-    <%= form.label :us_citizen %>
-    <%= form.check_box :us_citizen %>
+    <div class="mt-2">
+      <%= form.label :us_citizen, "US Citizen", class: "inline-flex items-center" %>
+      <%= form.check_box :us_citizen, class: "form-checkbox mr-2" %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :demographic %>
+    <%= form.label :demographic, "Race/Ethnicity" %>
     <%= form.collection_select(:demographic, Demographic.all, :id, :name, include_blank: "-- Please Select --") %>
   </div>
 
