@@ -1,4 +1,4 @@
-ActiveAdmin.register Travel do
+ActiveAdmin.register Payment do
   menu parent: 'Applicant Info', priority: 3
 
   # See permitted parameters documentation:
@@ -6,12 +6,12 @@ ActiveAdmin.register Travel do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :enrollment_id, :direction, :transport_needed, :date, :mode, :carrier, :route_num, :note
+   permit_params :amount, :transactionType, :transactionStatus, :transactionId, :transactionTotalAmount, :transactionDate, :transactionAcountType, :transactionResultCode, :transactionResultMessage, :orderNumber, :timestamp, :hash
   #
   # or
   #
   # permit_params do
-  #   permitted = [:enrollment_id, :direction, :transport_needed, :date, :mode, :carrier, :route_num, :note]
+  #   permitted = [:enrollment_id, :amount_cents, :source, :awarded, :note, :status]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end

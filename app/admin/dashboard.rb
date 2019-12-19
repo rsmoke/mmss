@@ -15,8 +15,16 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent Enrollments" do
           ul do
-            Enrollment.limit(5).map do |enroll|
+            Enrollment.limit(10).map do |enroll|
               li link_to(enroll.user.email, admin_applicant_detail_path(enroll.user.applicant_detail))
+            end
+          end
+        end
+
+        panel "Recent Payments" do
+          ul do
+            Payment.limit(10).map do |payment|
+              li link_to("#{payment.user.email} - #{ humanized_money_with_symbol(payment.total_amount.to_f / 100)}", admin_payment_path(payment.id))
             end
           end
         end

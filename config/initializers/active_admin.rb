@@ -16,7 +16,7 @@ ActiveAdmin.setup do |config|
   #
   # Note: Aim for an image that's 21px high so it fits in the header.
   #
-   config.site_title_image = "LSA_wordmark_white.png"
+   config.site_title_image = "MMSS_Logo.png"
 
   # == Default Namespace
   #
@@ -138,6 +138,7 @@ ActiveAdmin.setup do |config|
   #
   # You can customize the comment menu:
   # config.comments_menu = { parent: 'Admin', priority: 1 }
+   config.comments_menu = { priority: 11 }
 
   # == Batch Actions
   #

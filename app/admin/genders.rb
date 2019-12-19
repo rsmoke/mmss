@@ -1,4 +1,5 @@
-ActiveAdmin.register Gender do
+ActiveAdmin.register Gender, as: "Gender Types" do
+  menu parent: 'Camp Setup'
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
