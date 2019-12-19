@@ -48,7 +48,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :state_non_us, "State (Non-US)" %>
+    <%= form.label :state_non_us, "State if (Non-US)" %>
     <%= form.text_field :state_non_us %>
   </div>
 
@@ -111,7 +111,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :parentstate_non_us, "Parent State (Non-US)" %>
+    <%= form.label :parentstate_non_us, "Parent State if (Non-US)" %>
     <%= form.text_field :parentstate_non_us %>
   </div>
 
@@ -143,14 +143,18 @@
   <h4 class= "section-header">Applicant Demographics</h4>
 
   <div class="field">
-      <%= form.label :gender, "Biological Sex", class: 'important' %>
+    <p class="direction_notes">
+      Please contact mmss@umich.edu if you need special rooming arrangements
+      based on your gender identity?
+    </p>
+      <%= form.label :gender, class: 'important' %>
       <%= form.collection_select(:gender, Gender.all, :id, :name, {include_blank: true}) %>
   </div>
 
   <div class="field">
     <div class="mt-2">
-      <%= form.label :us_citizen, "US Citizen", class: "inline-flex items-center" %>
-      <%= form.check_box :us_citizen, class: "form-checkbox mr-2" %>
+      <%= form.check_box :us_citizen, class: "form-checkbox" %>
+      <%= form.label :us_citizen, "US Citizen", class: "inline-flex items-center ml-1" %>
     </div>
   </div>
 
