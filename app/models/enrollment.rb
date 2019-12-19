@@ -30,6 +30,10 @@ class Enrollment < ApplicationRecord
 
   validate :at_least_one_is_checked
 
+  def display_name
+    self.user.email # or whatever column you want
+  end
+
   private
 
   def at_least_one_is_checked

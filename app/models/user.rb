@@ -13,4 +13,8 @@ class User < ApplicationRecord
   def total_paid
     payments.pluck(:total_amount).map{ |v| v.to_f }.sum / 100
   end
+
+  def display_name
+    self.email # or whatever column you want
+  end
 end

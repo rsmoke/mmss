@@ -18,4 +18,8 @@ class CampOccurrence < ApplicationRecord
   def description_with_date
     "#{description} -- #{begin_date} until #{end_date} -- $1300"
   end
+
+  def display_name
+    "#{self.description} - #{self.begin_date} to #{self.end_date}" # or whatever column you want
+  end
 end
