@@ -8,7 +8,7 @@ class EnrollmentsController < ApplicationController
     if admin_signed_in?
       @enrollments = Enrollment.all
     else
-      @enrollments = Enrollment.current_user_enrollments(current_user)
+      redirect_to root_path
     end
   end
 
@@ -78,7 +78,7 @@ class EnrollmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_enrollment
-      @enrollment = Enrollment.find(params[:id])
+      @enrollment = Enrollment.find_by(user_id: current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

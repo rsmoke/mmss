@@ -66,7 +66,7 @@ class ApplicantDetailsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_applicant_detail
-      @applicant_detail = ApplicantDetail.find(params[:id])
+      @applicant_detail = current_user.applicant_detail
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
