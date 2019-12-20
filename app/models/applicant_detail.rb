@@ -1,5 +1,5 @@
 class ApplicantDetail < ApplicationRecord
-  belongs_to :user, required: true, inverse_of: :applicant_detail, dependent: :destroy
+  belongs_to :user, required: true, inverse_of: :applicant_detail
 
   # validates :user_id, presence: true, uniqueness: { case_sensitive: false }
   validates :firstname, presence: true

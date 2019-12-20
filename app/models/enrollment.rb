@@ -1,19 +1,19 @@
 class Enrollment < ApplicationRecord
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   has_one :applicant_detail, through: :user
 
-  has_many :enrollment_activities
+  has_many :enrollment_activities, dependent: :destroy
   has_many :registration_activities, through: :enrollment_activities, source: :activity
 
-  has_many :session_activities
+  has_many :session_activities, dependent: :destroy
   has_many :session_registrations, through: :session_activities, source: :camp_occurrence
 
-  has_many :course_preferences
+  has_many :course_preferences, dependent: :destroy
   has_many :courses, through: :course_preferences
 
-  has_one :financial_aid
-  has_many :travels
-  has_one :recommendation
+  has_one :financial_aid, dependent: :destroy
+  has_many :travels, dependent: :destroy
+  has_one :recommendation, dependent: :destroy
 
   # accepts_nested_attributes_for :enrollment_activities, :allow_destroy => true
   has_one_attached :transcript
