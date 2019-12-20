@@ -15,9 +15,9 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/1
   # GET /enrollments/1.json
   def show
-    @registration_activities = @enrollment.registration_activities
+    @registration_activities = @enrollment.registration_activities.order(camp_occurrence_id: :asc)
     @session_registrations = @enrollment.session_registrations
-    @courses = @enrollment.courses
+    @course_registrations = @enrollment.course_registrations.order(camp_occurrence_id: :asc)
   end
 
   # GET /enrollments/new
@@ -26,6 +26,10 @@ class EnrollmentsController < ApplicationController
     @courses_session1 = CampOccurrence.session_description("Session 1").courses
     @courses_session2 = CampOccurrence.session_description("Session 2").courses
     @courses_session3 = CampOccurrence.session_description("Session 3").courses
+
+    @activities_session1 = CampOccurrence.session_description("Session 1").activities
+    @activities_session2 = CampOccurrence.session_description("Session 2").activities
+    @activities_session3 = CampOccurrence.session_description("Session 3").activities
   end
 
   # GET /enrollments/1/edit
@@ -33,6 +37,10 @@ class EnrollmentsController < ApplicationController
     @courses_session1 = CampOccurrence.session_description("Session 1").courses
     @courses_session2 = CampOccurrence.session_description("Session 2").courses
     @courses_session3 = CampOccurrence.session_description("Session 3").courses
+
+    @activities_session1 = CampOccurrence.session_description("Session 1").activities
+    @activities_session2 = CampOccurrence.session_description("Session 2").activities
+    @activities_session3 = CampOccurrence.session_description("Session 3").activities
   end
 
   # POST /enrollments
@@ -42,7 +50,7 @@ class EnrollmentsController < ApplicationController
 
     respond_to do |format|
       if @enrollment.save
-        format.html { redirect_to root_path, notice: 'Enrollment was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Application was successfully created.' }
         format.json { render :show, status: :created, location: @enrollment }
       else
         format.html { render :new }
@@ -56,7 +64,7 @@ class EnrollmentsController < ApplicationController
   def update
     respond_to do |format|
       if @enrollment.update(enrollment_params)
-        format.html { redirect_to root_path, notice: 'Enrollment was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Application was successfully updated.' }
         format.json { render :show, status: :ok, location: @enrollment }
       else
         format.html { render :edit }
@@ -94,6 +102,7 @@ class EnrollmentsController < ApplicationController
                           :application_status, :offer_status,
                           :partner_program, :transcript,
                           registration_activity_ids: [],
-                          session_registration_ids: [])
+                          session_registration_ids: [],
+                          course_registration_ids: [])
     end
 end

@@ -5,5 +5,4 @@ class EnrollmentActivity < ApplicationRecord
   validates_presence_of :enrollment
   validates_presence_of :activity
 
-  # accepts_nested_attributes_for :enrollment
 end

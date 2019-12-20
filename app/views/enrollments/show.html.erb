@@ -105,7 +105,20 @@
       <ul>
         <% @registration_activities.each do |r| %>
           <li>
-            <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
+            <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %> <%= r.camp_occurrence.description %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+</div>
+
+<div class="bg-blue-200 border border-blue-500 ">
+    <% if @course_registrations.present? %>
+    <h4>Course Preferences</h4>
+      <ul>
+        <% @course_registrations.each do |c| %>
+          <li>
+            <%= c.title %> -- <%= c.camp_occurrence.description %>
           </li>
         <% end %>
       </ul>
