@@ -33,9 +33,9 @@
     <% end %>
 
     <% if current_user.enrollments.last.financial_aid.blank? %>
-      <p>If you are applying for need-based financial support. Please fill out
-        the <br><%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
-                class: "btn-sm btn-green" %>
+      <p class="mb-2">If you are applying for need-based financial support. Please fill out
+        the <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
+                class: "btn btn-green" %>
       </p>
     <% end %>
     <div class="direction_notes">You may email any questions to <%= mail_to "mmss@umich.edu" %>
