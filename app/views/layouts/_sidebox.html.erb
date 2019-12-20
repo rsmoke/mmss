@@ -16,11 +16,6 @@
                       enrollment_path(current_user.enrollments.last) %> - submitted
       </div>
 
-      <% if current_user.enrollments.last.course_preferences.exists? %>
-          <div class="sidebox_element">
-            <%= link_to "Course Preferences", course_preferences_path %> - submitted
-          </div>
-      <% end %>
       <% if current_user.enrollments.last.recommendation.present? %>
         <div class="sidebox_element">
           <%= link_to "Letter of Recommendation",
