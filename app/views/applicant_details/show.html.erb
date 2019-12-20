@@ -22,7 +22,7 @@
 
 <p>
   <strong>Birthdate:</strong>
-  <%= @applicant_detail.birthdate %>
+  <%= @applicant_detail.birthdate.strftime("%B %d, %Y") %>
 </p>
 
 <p>
@@ -132,7 +132,7 @@
 
 <p>
   <strong>Gender:</strong>
-  <%= @applicant_detail.gender %>
+  <%= gender_description(@applicant_detail.gender) %>
 </p>
 
 <p>

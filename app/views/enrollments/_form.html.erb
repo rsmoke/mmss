@@ -199,6 +199,10 @@
 <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <% if enrollment.new_record? %>
+      <%= form.submit "Submit Application" %>
+    <% else %>
+      <%= form.submit "Update Application" %>
+    <% end %>
   </div>
 <% end %>

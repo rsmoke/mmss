@@ -3,7 +3,7 @@
       <% if current_user.applicant_detail.blank? %>
         <li>The first step is to
           <%= link_to 'Register', new_applicant_detail_path,
-                      class: 'btn-sm btn-green' %>,
+                      class: 'btn btn-blue' %>,
           so that we know who you are.
           <br>
           As you advance through the online application process, these directions
@@ -16,8 +16,8 @@
         </p>
       <% elsif current_user.enrollments.empty? %>
         <li>The second step is to submit your application for
-          <%= link_to 'Camp Enrollment', new_enrollment_path,
-                      class: 'btn-sm btn-green' %>
+          <%= link_to 'Camp Application', new_enrollment_path,
+                      class: 'btn btn-blue' %>
         </li>
           <p class='direction_notes'>Make sure that you have gathered all the
             required information, then work your way through the sections.
@@ -32,13 +32,13 @@
           </p>
       <% elsif current_user.enrollments.empty? || current_user.enrollments.last.course_preferences.blank? %>
         <li>The next step is to rank your
-          <%= link_to "Course Preferences", course_preferences_path, class: 'btn-sm btn-green' %>
+          <%= link_to "Course Preferences", course_preferences_path, class: 'btn btn-blue' %>
           for the sessions you selected to attend.</li>
       <% elsif current_user.enrollments.empty? || current_user.enrollments.last.recommendation.blank? %>
         <li>The next step is requesting a
           <%= link_to "Letter of Recommendation",
                       new_enrollment_recommendation_path(current_user.enrollments.last),
-                      class: 'btn-sm btn-green'  %>
+                      class: 'btn btn-blue'  %>
         </li>
         <p class='direction_notes'>Please ask one of your most recent high school science or math
           teachers to submit a Letter of Recommendation. This is a required part
@@ -50,7 +50,7 @@
         <li>Now that you've submitted your application, the next step is to make
          sure you
          <%= button_to "pay the $100 non-refundable application fee",
-                      make_payment_path(amount: 100), class: 'btn-sm btn-green' %>
+                      make_payment_path(amount: 100), class: 'btn btn-blue' %>
         </li>
         <p class="font-semibold text-red-900">
           Payment of your application fee must be completed before you will be
@@ -83,7 +83,7 @@
     <% else %>
       Please
       <%= link_to 'Sign in', new_user_session_path,
-                  class: "btn btn-sm btn-blue" %> or
+                  class: "btn btn btn-blue" %> or
       <%= link_to 'Sign up', new_user_registration_path,
-                  class: "btn btn-sm btn-blue"  %>
+                  class: "btn btn btn-blue"  %>
     <% end %>

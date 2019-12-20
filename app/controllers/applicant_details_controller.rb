@@ -11,6 +11,7 @@ class ApplicantDetailsController < ApplicationController
   # GET /applicant_details/1
   # GET /applicant_details/1.json
   def show
+
   end
 
   # GET /applicant_details/new
