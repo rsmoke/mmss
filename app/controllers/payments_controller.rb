@@ -49,10 +49,9 @@
       @finaids = FinancialAid.where(enrollment_id: @user_current_enrollment.id)
       @finaids_ttl = @finaids.pluck(:amount_cents).map(&:to_f).sum / 100
       @users_current_payments = Payment.where(user_id: current_user )
-      @ttl_paid = Payment.where(user_id: current_user, transaction_status: '1').pluck(:total_amount).map(&:to_f).sum / 100
-      cost_sessions = 1300 * @user_current_enrollment.session_registrations.size
+      @ttl_paid = Payment.where(user_id: current_user, transaction_status: '1').pluck(:total_amount).map(&:to_f).sum / 100      # cost_sessions = 1300 * @user_current_enrollment.session_registrations.size
       cost_activities = @user_current_enrollment.registration_activities.pluck(:cost_cents).map(&:to_f).sum / 100
-      @total_cost = cost_sessions + cost_activities
+      @total_cost = cost_sessions_ttl + cost_activities
       @balance_due = @total_cost - @finaids_ttl - @ttl_paid
     end
 
@@ -95,6 +94,14 @@
         # Final URL
         url_for_payment = initial_hash.map{|k,v| "#{k}=#{v}&" unless k == 'key'}.join('')
         final_url = connection_hash[url_to_use] + url_for_payment + 'hash=' + encoded_hash
+      end
+
+      def cost_sessions_ttl
+        if @user_current_enrollment.session_registrations.pluck(:description).include?("Any Session")
+          1300
+        else
+          1300 * @user_current_enrollment.session_registrations.size
+        end
       end
 
       def url_params

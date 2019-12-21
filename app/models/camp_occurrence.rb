@@ -22,4 +22,5 @@ class CampOccurrence < ApplicationRecord
   def display_name
     "#{self.description} - #{self.begin_date} to #{self.end_date}" # or whatever column you want
   end
+
 end

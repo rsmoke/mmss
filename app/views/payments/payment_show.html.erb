@@ -34,7 +34,9 @@
 
     <% if current_user.enrollments.last.financial_aid.blank? %>
       <p class="mb-2">If you are applying for need-based financial support. Please fill out
-        the <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
+        the
+        <br>
+        <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
                 class: "btn btn-green" %>
       </p>
     <% end %>
