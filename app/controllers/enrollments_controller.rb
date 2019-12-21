@@ -16,7 +16,7 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/1.json
   def show
     @registration_activities = @enrollment.registration_activities.order(camp_occurrence_id: :asc)
-    @session_registrations = @enrollment.session_registrations
+    @session_registrations = @enrollment.session_registrations.order(description: :asc)
     @course_registrations = @enrollment.course_registrations.order(camp_occurrence_id: :asc)
   end
 

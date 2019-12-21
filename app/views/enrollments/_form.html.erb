@@ -73,8 +73,8 @@
 
 <div class="field">
   <h4 class= "section-header">Courses</h4>
-  <div>Session 1</div>
-  <div class="mt-2">
+  <div class="display-box">
+    <div class= "text-sm bg-yellow-500 -mx-2">Session 1</div>
       <%= form.collection_check_boxes(:course_registration_ids, @courses_session1, :id, :title) do |b| %>
         <div>
           <%= b.label(class: "inline-flex items-center") do %>
@@ -85,8 +85,8 @@
       <% end %>
   </div>
 
-  <div>Session 2</div>
-  <div class="mt-2">
+  <div class="display-box">
+    <div class= "text-sm bg-yellow-500 -mx-2">Session 2</div>
       <%= form.collection_check_boxes(:course_registration_ids, @courses_session2, :id, :title) do |b| %>
         <div>
           <%= b.label(class: "inline-flex items-center") do %>
@@ -97,8 +97,8 @@
       <% end %>
   </div>
 
-  <div>Session 3</div>
-  <div class="mt-2">
+  <div class="display-box">
+    <div class= "text-sm bg-yellow-500 -mx-2">Session 3</div>
       <%= form.collection_check_boxes(:course_registration_ids, @courses_session3, :id, :title) do |b| %>
         <div>
           <%= b.label(class: "inline-flex items-center") do %>

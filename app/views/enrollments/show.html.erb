@@ -71,59 +71,63 @@
   <%= @enrollment.room_mate_request %>
 </p>
 
-<p>
+<p class="current-uploaded-docs h-40 overflow-auto">
   <strong>Personal statement:</strong>
   <%= @enrollment.personal_statement %>
 </p>
 
 <% if @enrollment.transcript.attached? %>
-  <p>
+  <p class="current-uploaded-docs">
     <strong>Transcript:</strong> <%= link_to @enrollment.transcript.filename, url_for(@enrollment.transcript) %>
   </p>
 <% else %>
-<p class="text-lg text-orange-500">
-  Use the <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> button to add a transcript!
-</p>
+  <p class="text-lg text-orange-500">
+    Use the <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> button to add a transcript!
+  </p>
 <% end %>
 
-<div class="bg-blue-200 border border-blue-500 ">
-    <% if @session_registrations.present? %>
-    <h4>Sessions</h4>
-      <ul>
-        <% @session_registrations.each do |s| %>
-          <li>
-            <%= s.description_with_date %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-</div>
+<% if @session_registrations.present? %>
+  <div class="display-box mt-2">
+  <div class="section-header">Sessions</div>
+    <ul>
+      <% @session_registrations.each do |s| %>
+        <li>
+          <%= s.description_with_date %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
-<div class="bg-blue-200 border border-blue-500 ">
-    <% if @registration_activities.present? %>
-    <h4>Activities</h4>
-      <ul>
-        <% @registration_activities.each do |r| %>
-          <li>
-            <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %> <%= r.camp_occurrence.description %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-</div>
 
-<div class="bg-blue-200 border border-blue-500 ">
-    <% if @course_registrations.present? %>
-    <h4>Course Preferences</h4>
-      <ul>
-        <% @course_registrations.each do |c| %>
-          <li>
-            <%= c.title %> -- <%= c.camp_occurrence.description %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-</div>
+<% if @registration_activities.present? %>
+  <div class="display-box mt-2">
+  <div class="section-header">Activities</div>
+    <ul>
+      <% @registration_activities.each do |r| %>
+        <li>
+          <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %> <%= r.camp_occurrence.description %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+
+<% if @course_registrations.present? %>
+  <div class="display-box mt-2">
+  <div class="section-header">Course Preferences</div>
+    <ul>
+      <% @course_registrations.each do |c| %>
+        <li>
+          <%= c.title %> -- <%= c.camp_occurrence.description %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 
 <% if admin_signed_in? %>
   <h4>Administrative area</h4>
