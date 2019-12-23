@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :recuploads
   resources :feedbacks
   # resources :payments
   root to: 'static_pages#index'
@@ -60,5 +61,8 @@ resources :course_preferences
   get 'payment_show', to: 'payments#payment_show', as: 'all_payments'
   get 'make_payment', to: 'payments#make_payment'
   post 'make_payment', to: 'payments#make_payment'
+
+  get 'recupload_error', to: 'recuploads#error'
+  get 'recupload_success', to: 'recuploads#success'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

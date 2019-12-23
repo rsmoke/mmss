@@ -1,0 +1,71 @@
+<%= form_with(model: recupload, local: true) do |form| %>
+  <% if recupload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recupload.errors.count, "error") %> prohibited this recupload from being saved:</h2>
+
+      <ul>
+        <% recupload.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :authorname, "Enter your name" %>
+    <%= form.text_field :authorname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :studentname, "Enter the name of the student you are recommending" %>
+    <%= form.text_field :studentname %>
+  </div>
+
+  <div class="field">
+    <%= form.hidden_field :recommendation_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :letter %>
+    <%= form.text_area :letter %>
+  </div>
+
+  <div class="display-box mt-4">
+    <p class="direction_notes">
+      If you prefer to upload a recommendation letter in PDF format you may do
+      so here:
+    </p>
+    <% if @recupload.recletter.attached? %>
+      <div class='current-uploaded-docs'>
+        <p>
+          <strong>Recommendation currently uploaded:</strong>
+          <%= link_to @recupload.recletter.filename, url_for(@recupload.recletter) %>
+        </p>
+      </div>
+      <div class="field">
+        <%= form.label :recletter, 'Update Recommendation Letter' %>
+        <%= form.file_field :recletter %>
+      </div>
+    <% else %>
+      <div class="field">
+        <%= form.label :recletter, "Upload Recommendation Letter" %>
+        <%= form.file_field :recletter %>
+      </div>
+    <% end %>
+    <p>
+      The recommendation can also be faxed to 734.763.0937,
+      e-mailed as a scanned attachment to mmss@umich.edu or mailed to:
+    </p>
+    <address class="px-4 pt-2">
+      Michigan Math and Science Scholars<br>
+      Department of Mathematics<br>
+      530 Church Street<br>
+      2074 East Hall<br>
+      Ann Arbor, MI 48109-1043
+    </address>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,10 +1,11 @@
 
-
-<p>
-  <small>User_id:
-  <%= @enrollment.user_id %>
-  </small>
-</p>
+<% if admin_signed_in? %>
+  <p>
+    <small>User_id:
+    <%= @enrollment.user_id %>
+    </small>
+  </p>
+  <% end %>
 
 <p>
   <strong>User:</strong>

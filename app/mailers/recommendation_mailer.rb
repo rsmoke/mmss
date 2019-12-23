@@ -6,8 +6,8 @@ class RecommendationMailer < ApplicationMailer
     @recommendation = params[:recommendation]
     @enrollment = Enrollment.find(@recommendation.enrollment_id)
     @student = ApplicantDetail.find_by(user_id: @enrollment.user_id)
-    @hashval = "thisisasha256hash" # sha256_hash
-    @url  = "https://lsa-math-mmss.miserver.it.umich.edu/recommendation?id=#{ @student.id }&yr=#{CampConfiguration.active_camp_year}&email=#{ @recommendation.email }&hash=#{ @hashval }"
+    @hashval = "nGklDoc2egIkzFxr0U#{@recommendation.id}" # sha256_hash
+    @url  = "https://lsa-math-mmss.miserver.it.umich.edu/recuploads/new?=#{ @student.id }&yr=#{CampConfiguration.active_camp_year}&email=#{ @recommendation.email }&hash=#{ @hashval }"
     mail(to: @recommendation.email, subject: "Recommendation for #{@student.firstname} #{@student.lastname}")
   end
 
