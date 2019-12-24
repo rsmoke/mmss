@@ -44,7 +44,7 @@
 
   <div class="field">
     <%= form.label :state, class: 'important' %>
-    <%= form.select :state, us_states, {}, include_blank: true, required: true %>
+    <%= form.select :state, us_states, {}, include_blank: "-- Please Select --", required: true %>
   </div>
 
   <div class="field">
@@ -54,7 +54,7 @@
 
   <div class="field">
     <%= form.label :country, class: 'important' %>
-    <%= form.country_select :country, priority_countries: ["US"], include_blank: true, required: true %>
+    <%= form.country_select :country, priority_countries: ["US"], include_blank: "-- Please Select --", required: true %>
   </div>
 
   <div class="field">
@@ -106,7 +106,7 @@
 
   <div class="field">
     <%= form.label :parentstate %>
-    <%= form.select :parentstate, us_states, {} %>
+    <%= form.select :parentstate, us_states, {}, include_blank: "-- Please Select --" %>
 
   </div>
 
@@ -122,7 +122,7 @@
 
   <div class="field">
     <%= form.label :parentcountry %>
-    <%= form.country_select  :parentcountry, priority_countries: ["US"], include_blank: true %>
+    <%= form.country_select  :parentcountry, priority_countries: ["US"], include_blank: "-- Please Select --" %>
   </div>
 
   <div class="field">
@@ -145,7 +145,7 @@
   <div class="field">
     <p class="direction_notes">
       Please contact mmss@umich.edu if you need special rooming arrangements
-      based on your gender identity?
+      based on your gender identity.
     </p>
       <%= form.label :gender, class: 'important' %>
       <%= form.collection_select(:gender, Gender.all, :id, :name, {include_blank: true}) %>
