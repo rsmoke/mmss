@@ -10,34 +10,46 @@
         <span class="text-red-500 font-semibold">Application incomplete</span>
       <% end %>
       <div class="sidebox_element"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> - submitted </div>
-    <% if current_user.enrollments.present? %>
-      <div class="sidebox_element">
-        <%= link_to 'Session Selection',
-                      enrollment_path(current_user.enrollments.last) %> - submitted
-      </div>
+      <% if current_user.enrollments.present? && current_user.enrollments.last.persisted? %>
+        <div class="sidebox_element">
+          <%= link_to 'Session Selection',
+                        enrollment_path(current_user.enrollments.last) %> - submitted
+        </div>
 
-      <% if current_user.enrollments.last.recommendation.present? %>
-        <div class="sidebox_element">
-          <%= link_to "Letter of Recommendation",
-                      enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
-             - requested
-        </div>
+        <% if current_user.enrollments.last.recommendation.present? && current_user.enrollments.last.recommendation.persisted? %>
+          <div class="sidebox_element">
+            <%= link_to "Letter of Recommendation",
+                        enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
+
+            <% if current_user.enrollments.last.recommendation.recupload.present? %>
+              - letter received
+            <% else %>
+              - requested
+            <% end %>
+
+          </div>
+        <% end %>
+        <% if current_user.enrollments.last.financial_aid.present? %>
+          <div class="sidebox_element">
+            <%= link_to "Financial Aid",
+                        enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aid) %>
+
+            <% if current_user.enrollments.last.financial_aid.awarded %>
+              - awarded
+            <% else %>
+              - pending
+            <% end %>
+
+          </div>
+        <% end %>
+        <% if current_user.payments.present? %>
+          <div class="sidebox_element">
+            <%= link_to "Application Fee",
+                        all_payments_path %>
+               - paid
+          </div>
+        <% end %>
       <% end %>
-      <% if current_user.enrollments.last.financial_aid.present? %>
-        <div class="sidebox_element">
-          <%= link_to "Financial Aid",
-                      enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aid) %>
-             - pending
-        </div>
-      <% end %>
-      <% if current_user.payments.present? %>
-        <div class="sidebox_element">
-          <%= link_to "Application Fee",
-                      all_payments_path %>
-             - paid
-        </div>
-      <% end %>
-    <% end %>
     </div>
   <% end %>
 

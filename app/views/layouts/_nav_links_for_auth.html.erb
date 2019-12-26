@@ -20,14 +20,6 @@
         <div>
           <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-700 hover:text-blue-900 mr-4" %>
         </div>
-
-      <% else %>
-        <div>
-          <%= link_to 'Sign in', new_user_session_path, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-700 hover:text-blue-900 mr-4" %>
-        </div>
-        <div>
-          <%= link_to 'Sign up', new_user_registration_path, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-700 hover:text-blue-900 mr-4" %>
-        </div>
       <% end %>
     </div>
 <!--     <div>

@@ -1,7 +1,9 @@
-<p>
-  <strong>Enrollment:</strong>
-  <%= @recommendation.enrollment_id %>
-</p>
+<% if admin_signed_in? %>
+  <p>
+    <strong>Enrollment:</strong>
+    <%= @recommendation.enrollment_id %>
+  </p>
+<% end %>
 
 <p>
   <strong>Email:</strong>
@@ -69,13 +71,16 @@
 </p>
 
 <p>
-  <strong>Recommendation received :</strong>
-  <%= @recommendation.submitted_recommendation %>
-</p>
-
-<p>
-  <strong>Date submitted:</strong>
-  <%= @recommendation.date_submitted %>
+  <strong>Recommendation Letter status :</strong>
+  <%# @recommendation.submitted_recommendation %>
+  <% if current_user.enrollments.last.recommendation.recupload.present? %>
+    - letter received
+    <br>
+      <strong>Date received:</strong>
+      <%= current_user.enrollments.last.recommendation.recupload.created_at.strftime("%B %d, %Y") %>
+  <% else %>
+    - requested
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_recommendation_path(@recommendation) %>

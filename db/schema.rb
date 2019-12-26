@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_22_145657) do
+ActiveRecord::Schema.define(version: 2019_12_26_205800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -225,7 +225,7 @@ ActiveRecord::Schema.define(version: 2019_12_22_145657) do
     t.bigint "enrollment_id", null: false
     t.integer "amount_cents"
     t.string "source"
-    t.boolean "awarded"
+    t.boolean "awarded", default: false
     t.text "note"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
@@ -282,7 +282,7 @@ ActiveRecord::Schema.define(version: 2019_12_22_145657) do
   end
 
   create_table "recuploads", force: :cascade do |t|
-    t.text "letter", null: false
+    t.text "letter"
     t.string "authorname", null: false
     t.string "studentname", null: false
     t.bigint "recommendation_id", null: false
