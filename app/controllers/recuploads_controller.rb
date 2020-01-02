@@ -72,7 +72,7 @@ class RecuploadsController < InheritedResources::Base
     end
 
     def recupload_params
-      params.require(:recupload).permit(:letter, :authorname, :studentname, :recommendation_id, :rechash)
+      params.require(:recupload).permit(:letter, :authorname, :studentname, :recommendation_id, :rechash, :recletter)
     end
 
 end

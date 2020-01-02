@@ -280,12 +280,12 @@
 
   <div class="field">
     <%= form.label :application_status %>
-    <%= form.text_field :application_status %>
+    <%= form.select :application_status, applicant_status, {}, include_blank: "-- Please Select --" %>
   </div>
 
   <div class="field">
     <%= form.label :offer_status %>
-    <%= form.text_field :offer_status %>
+    <%= form.select :offer_status, offer_status, {}, include_blank: "-- Please Select --" %>
   </div>
 
   <div class="field">

@@ -1,14 +1,29 @@
 module ApplicationHelper
 
-
-  def payments_open?
-    false
-  end
-
   def current_camp_year
       CampConfiguration.active_camp_year
   end
 
+  def applicant_status
+    [
+      ['Select', ''],
+      ['enrolled', 'enrolled'],
+      ['new', 'new'],
+      ['none', 'none'],
+      ['registered', 'registered'],
+      ['submitted', 'submitted']
+    ]
+  end
+
+  def offer_status
+    [
+      ['Select', ''],
+      ['accepted', 'accepted'],
+      ['declined', 'declined'],
+      ['offered', 'offered'],
+      ['none', 'none']
+    ]
+  end
 
   def us_states
     [
