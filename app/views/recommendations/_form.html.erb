@@ -67,7 +67,7 @@ Your recommender will be sent an email giving them directions on how to submit a
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.text_field :state %>
+    <%= form.select :state, us_states, {}, include_blank: "-- Please Select --" %>
   </div>
 
   <div class="field">

@@ -1,9 +1,9 @@
-
-
-<p>
-  <strong>User:</strong>
-  <%= @applicant_detail.user_id %>
-</p>
+<% if admin_signed_in? %>
+  <p>
+    <strong>User:</strong>
+    <%= @applicant_detail.user_id %>
+  </p>
+<% end %>
 
 <p>
   <strong>Firstname:</strong>
@@ -141,7 +141,7 @@
 </p>
 <p>
   <strong>Demographic:</strong>
-  <%= @applicant_detail.demographic %>
+  <%= demographic_description(@applicant_detail.demographic) %>
 </p>
 
 <%= link_to 'Edit', edit_applicant_detail_path(@applicant_detail) %> |
