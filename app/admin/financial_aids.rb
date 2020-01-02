@@ -16,4 +16,35 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   #   permitted
   # end
 
+  form do |f| # This is a formtastic form builder
+    f.semantic_errors # shows errors on :base
+    f.inputs           # builds an input field for every attribute
+    f.inputs do
+      f.input :taxform, as: :file
+    end
+    f.actions         # adds the 'Submit' and 'Cancel' button
+  end
+
+  index do
+    selectable_column
+    column :id, sortable: :id do |f|
+      link_to f.id, admin_financial_aid_request_path(f)
+    end
+    column 'Enrollment' do |e|
+      link_to e.enrollment.display_name, admin_enrollment_path(e.enrollment_id)
+    end
+    column "Taxform" do |t|
+      if t.taxform.attached?
+        link_to t.taxform.filename, url_for(t.taxform)
+      end
+    end
+    column :amount_cents
+    column :source
+    column :awarded
+    column :note
+    column :status
+
+    actions
+  end
+
 end
