@@ -18,10 +18,28 @@ ActiveAdmin.register Enrollment do
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
-    f.inputs           # builds an input field for every attribute
+    # f.inputs           # builds an input field for every attribute
     f.inputs do
-      f.input :transcript, as: :file
-    end
+     f.input :user_id, as: :select, collection: User.all
+     f.input :international
+     f.input :high_school_name
+     f.input :high_school_address1
+     f.input :high_school_address2
+     f.input :high_school_city
+     f.input :high_school_state, as: :select, collection: us_states
+     f.input :high_school_non_us
+     f.input :high_school_postalcode
+     f.input :high_school_country
+     f.input :year_in_school
+     f.input :anticipated_graduation_year
+     f.input :room_mate_request
+     f.input :personal_statement
+     f.input :transcript, as: :file
+     f.input :notes
+     f.input :application_status, as: :select, collection: ['enrolled', 'new', 'none', 'registered', 'submitted']
+     f.input :offer_status, as: :select, collection: ['accepted','declined','offered','none']
+     f.input :partner_program
+   end
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
 
@@ -50,7 +68,7 @@ ActiveAdmin.register Enrollment do
     column :year_in_school
     column :anticipated_graduation_year
     column :room_mate_request
-    column :personal_statement
+    column :personal_statement, sortable: false
     # column :shirt_size
     column :notes
     column :application_status
@@ -58,6 +76,36 @@ ActiveAdmin.register Enrollment do
     column :partner_program
 
     actions
+  end
+
+  show do
+    attributes_table do
+      row :id
+      row :user_id do |user| user.display_name end
+      row :transcript do |tr|
+        if tr.transcript.attached?
+          link_to tr.transcript.filename, url_for(tr.transcript)
+        end
+      end
+      row :international
+      row :high_school_name
+      row :high_school_address1
+      row :high_school_address2
+      row :high_school_city
+      row :high_school_state
+      row :high_school_non_us
+      row :high_school_postalcode
+      row :high_school_country
+      row :year_in_school
+      row :anticipated_graduation_year
+      row :room_mate_request
+      row :personal_statement
+      row :notes
+      row :application_status
+      row :offer_status
+      row :partner_program
+    end
+    active_admin_comments
   end
 
 end

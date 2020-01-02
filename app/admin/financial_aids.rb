@@ -18,8 +18,14 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
-    f.inputs           # builds an input field for every attribute
+    # f.inputs           # builds an input field for every attribute
     f.inputs do
+      f.input :enrollment_id, as: :select, collection: Enrollment.all
+      f.input :amount_cents
+      f.input :source
+      f.input :awarded
+      f.input :note
+      f.input :status
       f.input :taxform, as: :file
     end
     f.actions         # adds the 'Submit' and 'Cancel' button
@@ -45,6 +51,24 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
     column :status
 
     actions
+  end
+
+  show do
+    attributes_table do
+      row :id
+      row :enrollment_id
+      row :taxform do |tf|
+        if tf.taxform.attached?
+          link_to tf.taxform.filename, url_for(tf.taxform)
+        end
+      end
+      row :amount_cents
+      row :source
+      row :awarded
+      row :note
+      row :status
+    end
+    active_admin_comments
   end
 
 end
