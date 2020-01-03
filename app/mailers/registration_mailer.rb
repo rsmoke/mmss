@@ -4,7 +4,7 @@ class RegistrationMailer < ApplicationMailer
   def app_complete_email(user)
     @user_detail = user
     @application = ApplicantDetail.find_by(user_id: user)
-    @url = "https://lsa-miserver.mmss.miserver.it.umich.edu"
+    @url = "https://lsa-math-mmss.miserver.it.umich.edu"
     @camp_config = CampConfiguration.find_by(active: true)
     mail(to: user.email, subject: "UM MMSS: Confirmation of application")
   end

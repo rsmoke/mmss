@@ -46,7 +46,7 @@
         <div class="mb-2">Now that you've submitted your application, the next step is to make
          sure you pay the $100 non-refundable application fee
          <%= button_to "pay application fee",
-                      make_payment_path(amount: 100), class: 'btn btn-blue' %>
+                      make_payment_path(amount: 100), class: 'bg-blue-700 hover:bg-blue-900 text-gray-100 font-normal py-1 px-2 rounded' %>
         </div>
         <p class="direction_notes font-semibold text-red-900">
           Payment of your application fee must be completed before you will be
@@ -79,7 +79,7 @@
     <% else %>
       Please
       <%= link_to 'Sign in', new_user_session_path,
-                  class: "btn btn btn-blue" %> or
+                  class: "btn btn-blue" %> or
       <%= link_to 'Sign up', new_user_registration_path,
-                  class: "btn btn btn-blue"  %>
+                  class: "btn btn-blue"  %>
     <% end %>
