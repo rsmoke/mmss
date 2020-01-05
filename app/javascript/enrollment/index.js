@@ -34,4 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
       courseSession3.style.display = "none";
     }
   }
+
+window.myFunction;
+
 })

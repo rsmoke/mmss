@@ -40,7 +40,7 @@
      only select services in one session.
   </p>
   <% if @activities_session1.present? %>
-    <div id="sessionActivity1" class="hidden">
+    <div id="sessionActivity1">
       <div class= "text-sm bg-yellow-500">Session 1</div>
       <div class="mt-2">
           <%= form.collection_check_boxes(:registration_activity_ids, @activities_session1, :id, :description_with_cost) do |b| %>
@@ -56,7 +56,7 @@
   <% end %>
 
   <% if @activities_session2.present? %>
-    <div id="sessionActivity2" class="hidden">
+    <div id="sessionActivity2">
       <div class= "text-sm bg-yellow-500">Session 2</div>
       <div class="mt-2">
           <%= form.collection_check_boxes(:registration_activity_ids, @activities_session2, :id, :description_with_cost) do |b| %>
@@ -72,7 +72,7 @@
   <% end %>
 
   <% if @activities_session3.present? %>
-    <div id="sessionActivity3" class="hidden">
+    <div id="sessionActivity3">
       <div class= "text-sm bg-yellow-500">Session 3</div>
       <div class="mt-2">
           <%= form.collection_check_boxes(:registration_activity_ids, @activities_session3, :id, :description_with_cost) do |b| %>
@@ -95,7 +95,7 @@
     you selected.
   </p>
   <% if @courses_session1.present? %>
-    <div id="sessionCourses1" class="hidden">
+    <div id="sessionCourses1">
       <div class="display-box">
         <div class= "text-sm bg-yellow-500 -mx-2">Session 1</div>
           <%= form.collection_check_boxes(:course_registration_ids, @courses_session1, :id, :title) do |b| %>
@@ -121,7 +121,7 @@
   <% end %>
 
   <% if @courses_session2.present? %>
-    <div id="sessionCourses2" class="hidden">
+    <div id="sessionCourses2">
     <div class="display-box">
       <div class= "text-sm bg-yellow-500 -mx-2">Session 2</div>
         <%= form.collection_check_boxes(:course_registration_ids, @courses_session2, :id, :title) do |b| %>
@@ -139,7 +139,7 @@
   <% end %>
 
   <% if @courses_session3.present? %>
-    <div id="sessionCourses3" class="hidden">
+    <div id="sessionCourses3">
     <div class="display-box">
       <div class= "text-sm bg-yellow-500 -mx-2">Session 3</div>
         <%= form.collection_check_boxes(:course_registration_ids, @courses_session3, :id, :title) do |b| %>
