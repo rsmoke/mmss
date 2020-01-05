@@ -24,7 +24,7 @@
       <%= form.collection_check_boxes(:session_registration_ids, CampOccurrence.active, :id, :description_with_date, required: true) do |b| %>
         <div>
           <%= b.label(class: "inline-flex items-center") do %>
-            <%= b.check_box(class: "form-checkbox mr-2") %>
+            <%= b.check_box(class: "form-checkbox mr-2", onclick: "myFunction()") %>
             <%= b.text %>
           <% end %>
         </div>
@@ -36,47 +36,54 @@
   <h4 class= "section-header">Services</h4>
   <p class="direction_notes">
     Check the box corresponding to each of the services you want to add for the
-     session(s) you selected.
+     session(s) you selected. If you selected the <i>"any session"</i> box,
+     only select services in one session.
   </p>
   <% if @activities_session1.present? %>
-    <div class= "text-sm bg-yellow-500">Session 1</div>
-    <div class="mt-2">
-        <%= form.collection_check_boxes(:registration_activity_ids, @activities_session1, :id, :description_with_cost) do |b| %>
-          <div>
-            <%= b.label(class: "inline-flex items-center") do %>
-              <%= b.check_box(class: "form-checkbox mr-2") %>
-              <%= b.text %>
-            <% end %>
-          </div>
-        <% end %>
+    <div id="sessionActivity1" class="hidden">
+      <div class= "text-sm bg-yellow-500">Session 1</div>
+      <div class="mt-2">
+          <%= form.collection_check_boxes(:registration_activity_ids, @activities_session1, :id, :description_with_cost) do |b| %>
+            <div>
+              <%= b.label(class: "inline-flex items-center") do %>
+                <%= b.check_box(class: "form-checkbox mr-2") %>
+                <%= b.text %>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
     </div>
   <% end %>
 
   <% if @activities_session2.present? %>
-    <div class= "text-sm bg-yellow-500">Session 2</div>
-    <div class="mt-2">
-        <%= form.collection_check_boxes(:registration_activity_ids, @activities_session2, :id, :description_with_cost) do |b| %>
-          <div>
-            <%= b.label(class: "inline-flex items-center") do %>
-              <%= b.check_box(class: "form-checkbox mr-2") %>
-              <%= b.text %>
-            <% end %>
-          </div>
-        <% end %>
+    <div id="sessionActivity2" class="hidden">
+      <div class= "text-sm bg-yellow-500">Session 2</div>
+      <div class="mt-2">
+          <%= form.collection_check_boxes(:registration_activity_ids, @activities_session2, :id, :description_with_cost) do |b| %>
+            <div>
+              <%= b.label(class: "inline-flex items-center") do %>
+                <%= b.check_box(class: "form-checkbox mr-2") %>
+                <%= b.text %>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
     </div>
   <% end %>
 
   <% if @activities_session3.present? %>
-    <div class= "text-sm bg-yellow-500">Session 3</div>
-    <div class="mt-2">
-        <%= form.collection_check_boxes(:registration_activity_ids, @activities_session3, :id, :description_with_cost) do |b| %>
-          <div>
-            <%= b.label(class: "inline-flex items-center") do %>
-              <%= b.check_box(class: "form-checkbox mr-2") %>
-              <%= b.text %>
-            <% end %>
-          </div>
-        <% end %>
+    <div id="sessionActivity3" class="hidden">
+      <div class= "text-sm bg-yellow-500">Session 3</div>
+      <div class="mt-2">
+          <%= form.collection_check_boxes(:registration_activity_ids, @activities_session3, :id, :description_with_cost) do |b| %>
+            <div>
+              <%= b.label(class: "inline-flex items-center") do %>
+                <%= b.check_box(class: "form-checkbox mr-2") %>
+                <%= b.text %>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
     </div>
   <% end %>
 </div>
@@ -88,30 +95,33 @@
     you selected.
   </p>
   <% if @courses_session1.present? %>
-    <div class="display-box">
-      <div class= "text-sm bg-yellow-500 -mx-2">Session 1</div>
-        <%= form.collection_check_boxes(:course_registration_ids, @courses_session1, :id, :title) do |b| %>
-          <div>
-            <%= b.label(class: "inline-flex items-center") do %>
-              <%= b.check_box(class: "form-checkbox mr-2") %>
-              <%= b.text %>
-              <%# form.select :course_registration_ids, ((1..10).map {|i| [i,i] }), include_blank: true, class: "inline-flex items-center" %>
-            <% end %>
-          </div>
-        <% end %>
+    <div id="sessionCourses1" class="hidden">
+      <div class="display-box">
+        <div class= "text-sm bg-yellow-500 -mx-2">Session 1</div>
+          <%= form.collection_check_boxes(:course_registration_ids, @courses_session1, :id, :title) do |b| %>
+            <div>
+              <%= b.label(class: "inline-flex items-center") do %>
+                <%= b.check_box(class: "form-checkbox mr-2") %>
+                <%= b.text %>
+                <%# form.select :course_registration_ids, ((1..10).map {|i| [i,i] }), include_blank: true, class: "inline-flex items-center" %>
+              <% end %>
+            </div>
+          <% end %>
 
-  <!-- <%# enrollment.course_preferences.new(course_id:2, ranking: 5) %>
-      <% #@courses_session1.each do |c| %>
-        <%# form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
-        <%# c.title %>
-      <br>
-      <% # end %>
-  !-->
+    <!-- <%# enrollment.course_preferences.new(course_id:2, ranking: 5) %>
+        <% #@courses_session1.each do |c| %>
+          <%# form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
+          <%# c.title %>
+        <br>
+        <% # end %>
+    !-->
 
+      </div>
     </div>
   <% end %>
 
   <% if @courses_session2.present? %>
+    <div id="sessionCourses2" class="hidden">
     <div class="display-box">
       <div class= "text-sm bg-yellow-500 -mx-2">Session 2</div>
         <%= form.collection_check_boxes(:course_registration_ids, @courses_session2, :id, :title) do |b| %>
@@ -124,10 +134,12 @@
 
           </div>
         <% end %>
+      </div>
     </div>
   <% end %>
 
   <% if @courses_session3.present? %>
+    <div id="sessionCourses3" class="hidden">
     <div class="display-box">
       <div class= "text-sm bg-yellow-500 -mx-2">Session 3</div>
         <%= form.collection_check_boxes(:course_registration_ids, @courses_session3, :id, :title) do |b| %>
@@ -138,6 +150,7 @@
             <% end %>
           </div>
         <% end %>
+      </div>
     </div>
   <% end %>
 </div>

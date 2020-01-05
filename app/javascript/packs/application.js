@@ -7,9 +7,10 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require ("css/application.sass")
-require ("css/_footer.sass")
+require("css/application.sass")
+require("css/_footer.sass")
 
+require("enrollment")
 // import "../css/application.sass"
 // import "../css/_footer.sass"
 // Uncomment to copy all static images under ../images to the output folder and reference
