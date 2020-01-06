@@ -51,6 +51,9 @@ Rails.application.routes.draw do
 resources :recommendations
 resources :course_preferences
 
+  post 'accept_offer', to: 'enrollments#accept_offer'
+  post 'decline_offer', to: 'enrollments#decline_offer'
+
   get 'static_pages/index'
   get 'static_pages/contact'
   get 'static_pages/privacy'

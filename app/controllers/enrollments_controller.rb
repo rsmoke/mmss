@@ -1,5 +1,5 @@
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
+  before_action :set_enrollment, only: [:show, :edit, :update, :destroy, :accept_offer, :decline_offer]
   devise_group :logged_in, contains: [:user, :admin]
   before_action :authenticate_logged_in!
   # GET /enrollments
@@ -80,6 +80,30 @@ class EnrollmentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to enrollments_url, notice: 'Enrollment was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def accept_offer
+    respond_to do |format|
+      if @enrollment.update(offer_status: "accepted", application_status: "enrolled")
+        format.html { redirect_to all_payments_path, notice: 'Offer was successfully accepted.' }
+        format.json { render :show, status: :ok, location: @enrollment }
+      else
+        format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
+        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def  decline_offer
+    respond_to do |format|
+      if @enrollment.update(offer_status: "declined")
+        format.html { redirect_to root_path, notice: 'Offer was successfully declined.' }
+        format.json { render :show, status: :ok, location: @enrollment }
+      else
+        format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
+        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+      end
     end
   end
 

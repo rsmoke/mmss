@@ -82,6 +82,7 @@
     - requested
   <% end %>
 </p>
-
-<%= link_to 'Edit', edit_recommendation_path(@recommendation) %> |
+<% if current_user.enrollments.last.recommendation.recupload.blank? %>
+  <%= link_to 'Edit', edit_recommendation_path(@recommendation) %> |
+<% end %>
 <%= link_to 'Home', root_path %>

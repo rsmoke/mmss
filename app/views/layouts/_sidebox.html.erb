@@ -4,12 +4,15 @@
   <% if current_user.applicant_detail.present? && current_user.applicant_detail.persisted? %>
     <div id="sidebox">
       <p><strong>Progress Window</strong><p>
-      <% if current_user.enrollments.present? && current_user.enrollments.last.recommendation.present? && current_user.payments.present? %>
+
+      <% if current_user.enrollments.present? && current_user.enrollments.last.recommendation.recupload.present? && current_user.payments.present? %>
         <span class="text-green-700 font-semibold">Application Complete</span>
       <% else %>
         <span class="text-red-500 font-semibold">Application incomplete</span>
       <% end %>
+
       <div class="sidebox_element"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> - submitted </div>
+
       <% if current_user.enrollments.present? && current_user.enrollments.last.persisted? %>
         <div class="sidebox_element">
           <%= link_to 'Session Selection',
@@ -47,6 +50,30 @@
             <%= link_to "Application Fee",
                         all_payments_path %>
                - paid
+          </div>
+        <% end %>
+        <% if current_user.enrollments.last.offer_status == "offered" %>
+          <hr>
+          <div>
+            <%= button_to "Accept", accept_offer_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded w-1/3" %>
+            ||
+            <%= button_to "Decline", decline_offer_path, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded w-1/3" %>
+          </div>
+        <% elsif current_user.enrollments.last.offer_status == "accepted" %>
+          <hr>
+          <div>
+            <span class="text-green-700 font-semibold">You have accepted the application</span>
+          </div>
+        <% elsif current_user.enrollments.last.offer_status == "declined" %>
+          <hr>
+          <div>
+            <span class="text-red-700 font-semibold">You have declined the application</span>
+          </div>
+        <% else %>
+          <hr>
+          <div class=" text-xs">
+            Questions?
+            <span class="text-blue-700"><%= mail_to "mmss@umich.edu" %></span>
           </div>
         <% end %>
       <% end %>

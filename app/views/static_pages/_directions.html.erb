@@ -61,14 +61,25 @@
           MerchantServices confirming your credit card transactions.
         </p>
       <% else %>
-        <p class="direction_notes">
-          At this point, you have submitted all of the information needed from
-          YOU. However, <strong>please note that your application will not be
-          considered "complete", and will not be reviewed until we receive the
-          letter of recommendation from your teacher. Please check with your
-          teacher to make sure they know you have applied, and they have
-          received an email from us!</strong>
-        </p>
+        <% if current_user.enrollments.last.offer_status == "offered" %>
+          <p class="direction_notes">
+            Please respond to our acceptance offer by making the appropriate
+            selection in the Progress Window.
+        <% elsif current_user.enrollments.last.application_status == "enrolled" %>
+          <p class="direction_notes">
+            Payment of the balance of program tuition and fees is due by
+            <%= @application_materials_due_date.strftime("%B %e, %Y") %>.
+          </p>
+        <% else %>
+          <p class="direction_notes">
+            At this point, you have submitted all of the information needed from
+            YOU. However, <strong>please note that your application will not be
+            considered "complete", and will not be reviewed until we receive the
+            letter of recommendation from your teacher. Please check with your
+            teacher to make sure they know you have applied, and they have
+            received an email from us!</strong>
+          </p>
+        <% end %>
 
         <p class="direction_notes"> Watch the progress window at the right
           to track the status of your application materials. You will receive an

@@ -31,8 +31,9 @@
         )
 
         redirect_to all_payments_path, notice: "Your Payment Was Successfully Recorded"
-        if current_user.payments.count == 1
+        if current_user.payments.where(transaction_status: 1).count == 1
           RegistrationMailer.app_complete_email(current_user).deliver_now
+          current_user.enrollments.last.update!(application_status: "submitted")
         end
       end
     end

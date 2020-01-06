@@ -11,6 +11,7 @@ class CampConfiguration < ApplicationRecord
   scope :active, -> { where(active: true) }
 
   scope :active_camp_year, -> { where(active: true).pick(:camp_year) }
+  scope :active_camp_materials_due_date, -> { where(active: true).pick(:application_materials_due) }
 
   def display_name
     self.camp_year # or whatever column you want
