@@ -44,7 +44,11 @@
     end
 
     def payment_show
+
       redirect_to root_url unless current_user.payments
+      @registration_activities = current_user.enrollments.last.registration_activities.order(camp_occurrence_id: :asc)
+      @session_registrations = current_user.enrollments.last.session_registrations.order(description: :asc)
+      @has_any_session = @session_registrations.pluck(:description).include?("Any Session")
       @user_current_enrollment = current_user.enrollments.last
       @current_application_status = @user_current_enrollment.application_status
       @finaids = FinancialAid.where(enrollment_id: @user_current_enrollment.id)
