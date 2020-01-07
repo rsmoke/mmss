@@ -41,7 +41,7 @@
   </p>
   <% if @activities_session1.present? %>
     <div id="sessionActivity1">
-      <div class= "text-sm bg-yellow-500">Session 1</div>
+      <div class= "text-sm bg-yellow-500">Session 1 (or Any Session)</div>
       <div class="mt-2">
           <%= form.collection_check_boxes(:registration_activity_ids, @activities_session1, :id, :description_with_cost) do |b| %>
             <div>
@@ -315,3 +315,7 @@
     <% end %>
   </div>
 <% end %>
+
+<script>
+  <%= "myFunction()" %>
+</script>
