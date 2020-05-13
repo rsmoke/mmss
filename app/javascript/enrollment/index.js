@@ -2,18 +2,18 @@ document.addEventListener('turbolinks:load', () => {
 // document.addEventListener('DOMContentLoaded', () => {
 
   window.myFunction = function() {
-    var checkBoxSessionAny = document.getElementById("enrollment_session_registration_ids_4");
+    var checkBoxSessionAny = document.getElementById("enrollment_session_registration_ids_9"); //4
 
-    var checkBoxSession1 = document.getElementById("enrollment_session_registration_ids_2");
+    var checkBoxSession1 = document.getElementById("enrollment_session_registration_ids_5"); //2
     var activitySession1 = document.getElementById("sessionActivity1");
     var courseSession1 = document.getElementById("sessionCourses1");
 
-    var checkBoxSession2 = document.getElementById("enrollment_session_registration_ids_1");
+    var checkBoxSession2 = document.getElementById("enrollment_session_registration_ids_7"); //1
     var activitySession2 = document.getElementById("sessionActivity2");
     var courseSession2 = document.getElementById("sessionCourses2");
 
 
-    var checkBoxSession3 = document.getElementById("enrollment_session_registration_ids_3");
+    var checkBoxSession3 = document.getElementById("enrollment_session_registration_ids_8"); //3
     var activitySession3 = document.getElementById("sessionActivity3");
     var courseSession3 = document.getElementById("sessionCourses3");
 
