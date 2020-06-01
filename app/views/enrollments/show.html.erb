@@ -122,7 +122,7 @@
     <ul>
       <% @course_registrations.each do |c| %>
         <li>
-          <%= c.title %> -- <%= c.camp_occurrence.description %>
+          <%= c.title %> [ <%= @enrollment.course_preferences.find_by(course_id: c.id).ranking %> ] -- <%= c.camp_occurrence.description %>
         </li>
       <% end %>
     </ul>
