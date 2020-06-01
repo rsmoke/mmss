@@ -102,26 +102,27 @@
             <div>
               <%= b.label(class: "inline-flex items-center") do %>
                 <%= b.check_box(class: "form-checkbox mr-2") %>
+                
                 <%= b.text %>
              
                 <%# form.text_field :ranking %>
                 <%# form.text_field :course_registration_ids %>
                 <%# form.select :course_registration_ids, ((1..10).map {|i| [i,i] }), include_blank: true, class: "inline-flex items-center" %>
               <% end %>
+              <%#= form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
             </div>
           <% end %>
 
-          <%# form.collection_select(:course_registration_ids, @courses_session1, :id, :title) %>
+          <%#= form.collection_select(:course_registration_ids, @courses_session1, :id, :title) %>
           
 
     <!-- <%# enrollment.course_preferences.new(course_id:2, ranking: 5) %> !-->
-        <% @courses_session1.each do |c| %>
-          <%= form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
-          <%= c.title %>
-        <br>
-        <%  end %>
-    
-
+        <%# @courses_session1.each do |c| %>
+          <%#= form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
+          <%#= c.title %>
+        <!-- <br> -->
+        <%#  end %>
+  
       </div>
     </div>
   <% end %>
