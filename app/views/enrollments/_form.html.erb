@@ -100,11 +100,12 @@
         <div class= "text-sm bg-yellow-500 -mx-2">Session 1</div>
 
           <%= form.fields_for :course_preferences, @enrollment.course_preferences do |cp| %>
+
             <%= cp.label :course_id %>
             <%= cp.number_field :course_id %>
 
-            <%= cp.label :enrollment_id %>
-            <%= cp.number_field :enrollment_id %>
+            <%#= cp.label :enrollment_id %>
+            <%= cp.hidden_field :enrollment_id %>
            
             <%= cp.label :ranking %>
             <%= cp.number_field :ranking %>
