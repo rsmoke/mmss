@@ -127,7 +127,6 @@ class EnrollmentsController < ApplicationController
                           :partner_program, :transcript,
                           registration_activity_ids: [],
                           session_registration_ids: [],
-                          course_registration_ids: [],
-                          course_preferences_attributes: [:course_id, :enrollment_id, :ranking])
+                          course_registration_ids: [])
     end
 end
