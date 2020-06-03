@@ -98,18 +98,16 @@
     <div id="sessionCourses1">
       <div class="display-box">
         <div class= "text-sm bg-yellow-500 -mx-2">Session 1</div>
+        <%= form.collection_check_boxes(:course_registration_ids, @courses_session1, :id, :title) do |b| %>
+          <div>
+            <%= b.label(class: "inline-flex items-center") do %>
+              <%= b.check_box(class: "form-checkbox mr-2") %>
+              <%= b.text %>
+              <%# form.select :course_registration_ids, ((1..10).map {|i| [i,i] }), include_blank: true, class: "inline-flex items-center" %>
+            <% end %>
 
-          <%= form.fields_for :course_preferences, @enrollment.course_preferences do |cp| %>
-
-            <%= cp.label :course_id %>
-            <%= cp.number_field :course_id %>
-
-            <%#= cp.label :enrollment_id %>
-            <%= cp.hidden_field :enrollment_id %>
-           
-            <%= cp.label :ranking %>
-            <%= cp.number_field :ranking %>
-          <% end %>
+          </div>
+        <% end %>
 
       </div>
     </div>
@@ -124,7 +122,6 @@
             <%= b.label(class: "inline-flex items-center") do %>
               <%= b.check_box(class: "form-checkbox mr-2") %>
               <%= b.text %>
-              <%# form.select :course_registration_ids, ((1..10).map {|i| [i,i] }), include_blank: true, class: "inline-flex items-center" %>
             <% end %>
 
           </div>

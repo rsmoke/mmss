@@ -1,0 +1,24 @@
+<h1>Course Rankings</h1>
+ <% @current_user_course_preferences.each do |cp| %>
+ Course ID: <%= cp.course_id %>
+ Course Title: <%= Course.find(cp.course_id).title %>
+ Ranking: <%= cp.ranking %>
+ <br>
+ <% end %>
+<hr><hr>
+<h2>Session 1</h2>
+
+<hr>
+ <h2>Session 2</h2>
+ <ul>
+  <% @current_enrollment_session2_courses.each do |sc| %>
+    <li>-<%= sc.title %></li>
+  <% end %>
+ </ul>
+<hr>
+ <h2>Session 3</h2>
+ <ul>
+  <% @current_enrollment_session3_courses.each do |sc| %>
+    <li>-<%= sc.title %></li>
+  <% end %>
+ </ul>

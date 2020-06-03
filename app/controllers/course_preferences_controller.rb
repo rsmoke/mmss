@@ -11,6 +11,27 @@ class CoursePreferencesController < ApplicationController
     @courses_session3 = CampOccurrence.session_description("Session 3").courses
   end
 
+  def show
+    @current_enrollment = current_user.enrollments.last
+    @current_user_sessions = @current_enrollment.session_registrations.pluck(:description)
+
+    @current_enrollment_session1 = @current_enrollment.session_registrations.find_by(description: "Session 1")
+    @current_enrollment_session2 = @current_enrollment.session_registrations.find_by(description: "Session 2")
+    @current_enrollment_session3 = @current_enrollment.session_registrations.find_by(description: "Session 3")
+ 
+    @current_enrollment_session1_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session3)
+    @current_enrollment_session2_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session2)
+    @current_enrollment_session3_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session3)
+
+    @current_user_course_preferences = @current_enrollment.course_preferences
+    @courses_session1 = CampOccurrence.session_description("Session 1").courses
+    @courses_session2 = CampOccurrence.session_description("Session 2").courses
+    @courses_session3 = CampOccurrence.session_description("Session 3").courses
+    @current_user_course_preferences1 = @current_enrollment.course_preferences.pluck(:course_id)
+    @current_user_course_preferences2 = @current_enrollment.course_preferences
+    @current_user_course_preferences3 = @current_enrollment.course_preferences
+  end
+
   def new
     @courses_session1 = CampOccurrence.session_description("Session 1").courses
     @courses_session2 = CampOccurrence.session_description("Session 2").courses

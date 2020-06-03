@@ -22,6 +22,10 @@
           <%= link_to 'Session Selection',
                         enrollment_path(current_user.enrollments.last) %> - submitted
         </div>
+        <div class="sidebox_sub_element">
+          <%= link_to 'Course Rankings',
+                        course_preference_path(current_user.enrollments.last) %> - submitted
+        </div>
 
         <% if current_user.enrollments.last.recommendation.present? && current_user.enrollments.last.recommendation.persisted? %>
           <div class="sidebox_element">
