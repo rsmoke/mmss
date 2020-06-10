@@ -48,9 +48,14 @@ Rails.application.routes.draw do
     resources :recommendations
   end
 
-resources :recommendations
-resources :course_preferences
+  resources :recommendations
 
+  resources :enrollments do
+    resources :course_preferences
+  end
+
+  resources :course_preferences
+  
   post 'accept_offer', to: 'enrollments#accept_offer'
   post 'decline_offer', to: 'enrollments#decline_offer'
 

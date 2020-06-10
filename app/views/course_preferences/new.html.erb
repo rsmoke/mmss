@@ -1,23 +1,11 @@
-<% if params[:course_session] == "session1" %>
-  <%= form_with(model: @course_preference, local: true) do |cp_form| %>
-    <%= cp_form.collection_select(:course_id, @courses_session1, :id, :title) %>
-    <%= cp_form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
-    <%= cp_form.submit "Update Course Preferences - Session 1" %>
-   <% end %>
-<% elsif params[:course_session] == "session2" %>
-  <%= form_with(model: @course_preference, local: true) do |cp_form| %>
-    <%= cp_form.collection_select(:course_id, @courses_session2, :id, :title) %>
-    <%= cp_form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
-
-    <%= cp_form.submit "Update Course Preferences - Session 2" %>
-  <% end %>
-<% elsif params[:course_session] == "session3" %>
-  <%= form_with(model: @course_preference, local: true) do |cp_form| %>
-    <%= cp_form.collection_select(:course_id, @courses_session3, :id, :title) %>
-    <%= cp_form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
-
-    <%= cp_form.submit "Update Course Preferences - Session 3" %>
-  <% end %>
-<% else %>
-  <%= redirect_to course_preferences_path %>
+<% if @current_enrollment_session2_courses %>
+  <%# @current_enrollment_session2_courses.each do |cp| %>
+    <%= form_with(model: @course_preference, local: true) do |cp_form| %>
+      <% @current_enrollment_session2_courses.each do |cp| %>
+        <%= cp_form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
+        <%= cp.title %>
+        <br>
+      <% end %>
+      <%= cp_form.submit "Update Course Rankings - Session 2" %>
+    <% end %>
 <% end %>
