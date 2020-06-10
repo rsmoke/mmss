@@ -6,19 +6,30 @@
  <br>
  <% end %>
 <hr><hr>
+<% if @current_enrollment_session1.present? %>
 <h2>Session 1</h2>
-
+<%= @current_enrollment_session1_courses.size %>
 <hr>
+<% end %>
+
+<% if @current_enrollment_session2.present? %>
  <h2>Session 2</h2>
+  <%= @current_enrollment_session2_courses.size %>
  <ul>
   <% @current_enrollment_session2_courses.each do |sc| %>
     <li>-<%= sc.title %></li>
   <% end %>
  </ul>
 <hr>
+<% end %>
+
+<% if @current_enrollment_session3.present? %>
  <h2>Session 3</h2>
+  <%= @current_enrollment_session3_courses.size %>
  <ul>
   <% @current_enrollment_session3_courses.each do |sc| %>
     <li>-<%= sc.title %></li>
   <% end %>
  </ul>
+
+ <% end %>
