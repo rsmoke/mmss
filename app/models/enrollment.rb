@@ -5,13 +5,13 @@ class Enrollment < ApplicationRecord
   has_many :enrollment_activities, dependent: :destroy
   has_many :registration_activities, through: :enrollment_activities, source: :activity
 
-  has_many :session_activities, dependent: :destroy
+  has_many :session_activities, dependent: :destroy 
   has_many :session_registrations, through: :session_activities, source: :camp_occurrence
 
   has_many :course_preferences, dependent: :destroy
   has_many :course_registrations, through: :course_preferences, source: :course
 
-  accepts_nested_attributes_for :course_preferences, :allow_destroy => true
+  accepts_nested_attributes_for :course_preferences, allow_destroy: true
 
   has_one :financial_aid, dependent: :destroy
   has_many :travels, dependent: :destroy
