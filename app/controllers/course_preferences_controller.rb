@@ -6,7 +6,7 @@ class CoursePreferencesController < ApplicationController
     # @course_preferences = CoursePreference.all
     # @current_enrollment = current_user.enrollments.last
     # @current_user_sessions = @current_enrollment.session_registrations.pluck(:description)
-    @current_user_course_preferences_all = @current_enrollment.course_preferences
+    @current_enrollment_course_preferences_all = @current_enrollment.course_preferences
 
     @current_enrollment_session1 = @current_enrollment.session_registrations.find_by(description: "Session 1")
     @current_enrollment_session2 = @current_enrollment.session_registrations.find_by(description: "Session 2")
@@ -15,7 +15,6 @@ class CoursePreferencesController < ApplicationController
     @current_enrollment_session1_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session1)
     @current_enrollment_session2_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session2)
     @current_enrollment_session3_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session3)
-
   end
 
   def show
@@ -47,7 +46,19 @@ class CoursePreferencesController < ApplicationController
   end
 
   def create
-    redirect_to enrollment_course_preferences_path(@current_enrollment), notice: 'Course Preference was successfully edited.' 
+    @course_preference = CoursePreference.new(cp_params)
+
+    respond_to do |format|
+      if @course_preference.save
+        format.html { redirect_to enrollment_course_preferences_path(@current_enrollment), notice: 'Course Preference was successfully edited.' }
+        format.json { render :show, status: :created, location: @course_preference }
+      else
+        format.html { render :new }
+        format.json { render json: @course_preference.errors, status: :unprocessable_entity }
+      end
+    end
+
+    # redirect_to enrollment_course_preferences_path(@current_enrollment), notice: 'Course Preference was successfully edited.' 
     # respond_to do |format|
     #   if @current_course_pref.update(ranking: params[:course_preference][:ranking])
     #     format.html { redirect_to course_preferences_path, notice: 'Course Preference was successfully edited.' }
