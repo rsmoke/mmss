@@ -1,13 +1,10 @@
 class CoursePreferencesController < ApplicationController
 
   before_action :current_enrollment
+  before_action :course_preference, only: [ :edit, :create, :update, :new, :destroy ]
 
   def index
-    # @course_preferences = CoursePreference.all
-    # @current_enrollment = current_user.enrollments.last
-    # @current_user_sessions = @current_enrollment.session_registrations.pluck(:description)
     @current_enrollment_course_preferences_all = @current_enrollment.course_preferences
-
     @current_enrollment_session1 = @current_enrollment.session_registrations.find_by(description: "Session 1")
     @current_enrollment_session2 = @current_enrollment.session_registrations.find_by(description: "Session 2")
     @current_enrollment_session3 = @current_enrollment.session_registrations.find_by(description: "Session 3")
@@ -18,22 +15,11 @@ class CoursePreferencesController < ApplicationController
   end
 
   def show
-    # @current_enrollment = current_user.enrollments.last
- 
-    @current_enrollment_session1 = @current_enrollment.session_registrations.find_by(description: "Session 1")
-    @current_enrollment_session2 = @current_enrollment.session_registrations.find_by(description: "Session 2")
-    @current_enrollment_session3 = @current_enrollment.session_registrations.find_by(description: "Session 3")
- 
-    @current_enrollment_session1_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session1)
-    @current_enrollment_session2_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session2)
-    @current_enrollment_session3_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session3)
-
-    @current_user_course_preferences_all = @current_enrollment.course_preferences
-
+    @course_pref = CoursePreference.find(params[:id])
+    @course_info = Course.find_by(id: @course_pref.course_id )
   end
 
   def new
-    # @current_enrollment = current_user.enrollments.last
     @course_preference = CoursePreference.new
     @current_enrollment_session1 = @current_enrollment.session_registrations.find_by(description: "Session 1")
     @current_enrollment_session1_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session1)
@@ -41,8 +27,6 @@ class CoursePreferencesController < ApplicationController
     @current_enrollment_session2_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session2)
     @current_enrollment_session3 = @current_enrollment.session_registrations.find_by(description: "Session 3")
     @current_enrollment_session3_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session3)
-
-
   end
 
   def create
@@ -58,25 +42,16 @@ class CoursePreferencesController < ApplicationController
       end
     end
 
-    # redirect_to enrollment_course_preferences_path(@current_enrollment), notice: 'Course Preference was successfully edited.' 
-    # respond_to do |format|
-    #   if @current_course_pref.update(ranking: params[:course_preference][:ranking])
-    #     format.html { redirect_to course_preferences_path, notice: 'Course Preference was successfully edited.' }
-    #     format.json { render :show, status: :ok, location: @course_preference }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @course_preference.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   def edit
-    @current_enrollment_session2_courses
+    @course_preference = @current_enrollment.course_preferences.find(params[:id])
   end
 
   def update
+    @course_preference = @current_enrollment.course_preferences.find(params[:id])
     respond_to do |format|
-      if @current_enrollment.course_preferences.update(enrollment_params)
+      if  @course_preference.update(cp_params)
         format.html { redirect_to course_preferences_path, notice: 'Course Preference was successfully updated.' }
         format.json { render :show, status: :ok, location: course_preferences_path }
       else
@@ -90,6 +65,10 @@ class CoursePreferencesController < ApplicationController
 
     def current_enrollment
       @current_enrollment = current_user.enrollments.last
+    end
+
+    def course_preference
+      @course_preference = @current_enrollment.course_preferences.find(params[:id])
     end
 
     def cp_params
