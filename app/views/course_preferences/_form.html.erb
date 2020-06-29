@@ -1,5 +1,5 @@
 <%= form_with(model: course_preference, local: true) do |form| %>
-<h1><%= @course_preference.course_title %></h1>
+<h2 class="font-bold"><%= @course_preference.course.title %></h2>
 
   <div class="field">
     <%= form.label :ranking %>
