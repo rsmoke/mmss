@@ -1,5 +1,5 @@
 <h1>Editing Course Preferences</h1>
-<%= @current_enrollment %>
+
 <%= render 'form', course_preference: @course_preference %>
 
-<%= link_to 'Show_List', enrollment_course_preferences_path(@current_enrollment) %>
+<%= link_to 'Back', enrollment_course_preferences_path(@current_enrollment) %>

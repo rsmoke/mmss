@@ -1,17 +1,7 @@
 <%= form_with(model: course_preference, local: true) do |form| %>
-<h1><%= @course_preference.id %></h1>
+<h1><%= @course_preference.course_title %></h1>
 
   <div class="field">
-    <%= form.label :enrollment_id %>
-    <%= form.text_field :enrollment_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :course_id %>
-    <%= form.text_field :course_id %>
-  </div>
-
-    <div class="field">
     <%= form.label :ranking %>
     <%= form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
   </div>
