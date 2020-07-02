@@ -28,7 +28,7 @@ Rails.application.configure do
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
 
-  config.serve_static_assets = true
+  # config.serve_static_assets = true
   # config.assets.compile = true
 
 
@@ -64,11 +64,26 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "mmss_production"
 
+ # configure mailer to user Postfix
+  # https://stackoverflow.com/questions/24443920/how-to-setup-postfix-for-ruby-on-rails-to-send-email
+  config.action_mailer.delivery_method = :sendmail
+  # Defaults to:
+  # config.action_mailer.sendmail_settings = {
+  #   location: '/usr/sbin/sendmail',
+  #   arguments: '-i -t'
+  # }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_options = {from: 'mmss-support@umich.edu'}
+
+
+  # Devise setting - Ensure you have defined default url options
+  config.action_mailer.default_url_options = { host: 'lsa-math-mmss.miserver.it.umich.edu' }
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
