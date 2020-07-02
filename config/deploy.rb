@@ -1,6 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.14.1"
 
+set :rbenv_type, :user
+set :rbenv_ruby, '2.7.1'
 set :application, "mmss"
 set :repo_url, "git@github.com:rsmoke/mmss.git"
 

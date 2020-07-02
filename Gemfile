@@ -39,21 +39,16 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'country_select', '~> 4.0'
 gem 'money-rails', '~>1.12'
 
-gem 'capistrano', '~> 3.14', '>= 3.14.1'
-gem 'capistrano-rails', '~> 1.5'
-# gem 'capistrano-passenger', '~> 0.2.0'
-gem 'capistrano-puma', '~> 0.2.3'
-gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.6'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 4.0.0.beta2'
-  gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
-  gem 'shoulda-matchers', '~> 4.1'
+  gem 'pry-rails', '~> 0.3.9'
+  gem 'pry-byebug', '~> 3.9'
+  gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
+  gem 'factory_bot_rails', '~> 6.0'
+  gem 'shoulda-matchers', '~> 4.3'
   gem 'capybara'
   gem 'webdrivers'
-  gem 'letter_opener'
+
 end
 
 group :development do
@@ -63,7 +58,20 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'pry-rails', '~> 0.3.9'
+
+  gem "better_errors"
+  gem 'binding_of_caller', '~> 0.8.0'
+  gem 'meta_request', '~> 0.7.2'
+  
+  gem 'letter_opener'
+
+  gem 'capistrano', '~> 3.14', '>= 3.14.1', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.6', require: false
+  gem 'capistrano-postgresql'
+  gem 'capistrano-rails', '~> 1.5', require: false
+  # gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano3-puma', '~> 1.2', '>= 1.2.1', require: false
 end
 
 
