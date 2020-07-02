@@ -62,16 +62,17 @@ group :development do
   gem "better_errors"
   gem 'binding_of_caller', '~> 0.8.0'
   gem 'meta_request', '~> 0.7.2'
-  
+
   gem 'letter_opener'
 
-  gem 'capistrano', '~> 3.14', '>= 3.14.1', require: false
+  gem 'capistrano', require: false
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.6', require: false
+  gem 'capistrano-rbenv', require: false
   gem 'capistrano-postgresql'
-  gem 'capistrano-rails', '~> 1.5', require: false
   # gem 'capistrano-passenger', '~> 0.2.0'
-  gem 'capistrano3-puma', '~> 1.2', '>= 1.2.1', require: false
+
 end
 
 
