@@ -97,6 +97,22 @@ namespace :deploy do
   after  :finishing,    :restart
 end
 
+namespace :maintenance do
+  desc "Maintenance start (edit config/maintenance_template.yml to provide parameters)"
+  task :start do
+    on roles(:web) do
+      upload! "config/maintenance_template.yml", "#{current_path}/tmp/maintenance.yml"
+    end
+  end
+
+  desc "Maintenance stop"
+  task :stop do
+    on roles(:web) do
+      execute "rm #{current_path}/tmp/maintenance.yml"
+    end
+  end
+end
+
 # Default value for :linked_files and linked_dirs is []
 set :linked_files, %w{config/puma.rb config/nginx.conf config/master.key}
 set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle .bundle public/system public/uploads}

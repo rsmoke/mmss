@@ -12,7 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-!/tmp/maintenance.yml
+!/tmp/maintenance_template.yml
 
 # Ignore uploaded files in development.
 /storage/*
