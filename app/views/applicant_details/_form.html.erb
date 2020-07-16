@@ -69,12 +69,12 @@
 
   <div class="field">
     <%= form.label :birthdate, class: 'important' %>
-    <%= form.date_select :birthdate, start_year: 1995, include_blank: true, required: true %>
+    <%= form.date_select :birthdate, start_year: 2002, include_blank: true, required: true %>
   </div>
 
   <div class="field">
     <%= form.label :shirt_size, class: 'important' %>
-    <%= form.select :shirt_size, ["small","medium","large","xlarge","2xlarge"], {}, include_blank: true, required: true %>
+    <%= form.select :shirt_size, ["small","medium","large","xlarge","2xlarge","No Shirt"], {}, include_blank: true, required: true %>
   </div>
 
   <div class="field">
