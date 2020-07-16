@@ -23,24 +23,24 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
-    @courses_session1 = CampOccurrence.session_description("Session 1").courses
-    @courses_session2 = CampOccurrence.session_description("Session 2").courses
-    @courses_session3 = CampOccurrence.session_description("Session 3").courses
+    @courses_session1 = CampOccurrence.session_description("Session 1").courses.order(title: :asc)
+    @courses_session2 = CampOccurrence.session_description("Session 2").courses.order(title: :asc)
+    @courses_session3 = CampOccurrence.session_description("Session 3").courses.order(title: :asc)
 
-    @activities_session1 = CampOccurrence.session_description("Session 1").activities
-    @activities_session2 = CampOccurrence.session_description("Session 2").activities
-    @activities_session3 = CampOccurrence.session_description("Session 3").activities
+    @activities_session1 = CampOccurrence.session_description("Session 1").activities.order(description: :asc)
+    @activities_session2 = CampOccurrence.session_description("Session 2").activities.order(description: :asc)
+    @activities_session3 = CampOccurrence.session_description("Session 3").activities.order(description: :asc)
   end
 
   # GET /enrollments/1/edit
   def edit
-    @courses_session1 = CampOccurrence.session_description("Session 1").courses
-    @courses_session2 = CampOccurrence.session_description("Session 2").courses
-    @courses_session3 = CampOccurrence.session_description("Session 3").courses
+    @courses_session1 = CampOccurrence.session_description("Session 1").courses.order(title: :asc)
+    @courses_session2 = CampOccurrence.session_description("Session 2").courses.order(title: :asc)
+    @courses_session3 = CampOccurrence.session_description("Session 3").courses.order(title: :asc)
 
-    @activities_session1 = CampOccurrence.session_description("Session 1").activities
-    @activities_session2 = CampOccurrence.session_description("Session 2").activities
-    @activities_session3 = CampOccurrence.session_description("Session 3").activities
+    @activities_session1 = CampOccurrence.session_description("Session 1").activities.order(description: :asc)
+    @activities_session2 = CampOccurrence.session_description("Session 2").activities.order(description: :asc)
+    @activities_session3 = CampOccurrence.session_description("Session 3").activities.order(description: :asc)
   end
 
   # POST /enrollments
