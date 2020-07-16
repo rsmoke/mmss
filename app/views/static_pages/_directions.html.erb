@@ -32,8 +32,7 @@
               related to your interest.</div>
             </ul>
             <br>
-            Check your work before submitting! Once you click the SUBMIT button,
-            you will not be able to make changes to your application.
+            Check your work before submitting. Once review of your application begins, you will not be able to make changes.
           </p>
       <% elsif current_user.enrollments.last.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
         <div class="mb-2">The next step is to rank the courses you selected in the priority of interest.
