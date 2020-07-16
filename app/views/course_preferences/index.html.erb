@@ -27,4 +27,12 @@
  <% end %>
 <hr>
 <%# link_to 'Edit', new_enrollment_course_preference_path(@current_enrollment) %>
-<%= link_to 'Home', root_path %>
+<%= link_to 'Home', root_path %> |
+<% if current_user.enrollments.last.recommendation.blank? %>
+  <%= link_to "Letter of Recommendation",
+                        new_enrollment_recommendation_path(current_user.enrollments.last),
+                        class: 'btn btn-blue'  %>
+<% else %>
+  <%= link_to "Letter of Recommendation",
+                        enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
+<% end %>
