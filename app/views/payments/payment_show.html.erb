@@ -52,6 +52,9 @@
       Account Summary
     </h6>
     <div class="p-4">
+      <div class="font-bold text-xs mb-2">
+        <%= "#{'application_fee_(non-refundable)'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(100).rjust(12,'.')}" %>
+      </div>
       <div class="font-bold text-base mb-2">
         <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost).rjust(12,'.')}" %>
       </div>
