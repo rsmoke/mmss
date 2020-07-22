@@ -1,5 +1,15 @@
 <h1>Course Rankings</h1>
 <hr>
+<% if @current_enrollment_session_any.present? %>
+<h2>Session 1</h2>
+<%# @current_enrollment_session1_courses.size %>
+  <% @current_enrollment_session_any_courses.each do |sc| %>
+    <div>-<%= sc.title %> Rank: [ <%= @current_enrollment_course_preferences_all.find_by(course_id: sc.id).ranking %> ] -- <%= link_to "edit", edit_enrollment_course_preference_path(@current_enrollment, @current_enrollment_course_preferences_all.find_by(course_id: sc.id)), class: 'btn btn-sm btn-blue' %> </div>
+  <% end %>
+ </ul>
+<hr>
+<% end %>
+
 <% if @current_enrollment_session1.present? %>
 <h2>Session 1</h2>
 <%# @current_enrollment_session1_courses.size %>

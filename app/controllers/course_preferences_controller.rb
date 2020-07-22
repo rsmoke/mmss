@@ -5,10 +5,12 @@ class CoursePreferencesController < ApplicationController
 
   def index
     @current_enrollment_course_preferences_all = @current_enrollment.course_preferences
+    @current_enrollment_session_any = @current_enrollment.session_registrations.find_by(description: "Any Session")
     @current_enrollment_session1 = @current_enrollment.session_registrations.find_by(description: "Session 1")
     @current_enrollment_session2 = @current_enrollment.session_registrations.find_by(description: "Session 2")
     @current_enrollment_session3 = @current_enrollment.session_registrations.find_by(description: "Session 3")
  
+    @current_enrollment_session_any_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session_any)
     @current_enrollment_session1_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session1)
     @current_enrollment_session2_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session2)
     @current_enrollment_session3_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session3)
@@ -21,6 +23,8 @@ class CoursePreferencesController < ApplicationController
 
   def new
     @course_preference = CoursePreference.new
+    @current_enrollment_session_any = @current_enrollment.session_registrations.find_by(description: "Any Session")
+    @current_enrollment_session_any_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session_any)
     @current_enrollment_session1 = @current_enrollment.session_registrations.find_by(description: "Session 1")
     @current_enrollment_session1_courses = @current_enrollment.course_registrations.where(camp_occurrence: @current_enrollment_session1)
     @current_enrollment_session2 = @current_enrollment.session_registrations.find_by(description: "Session 2")

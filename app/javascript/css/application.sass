@@ -28,6 +28,24 @@ a
     &:hover
       @apply bg-green-900
 
+button
+  &.btn
+    @apply font-normal py-1 px-2 rounded no-underline
+
+  &.btn-sm 
+    @apply text-xs py-1 px-1 
+
+  &.btn-blue
+    @apply bg-blue-700 text-gray-100
+
+    &:hover
+      @apply bg-blue-900
+
+  &.btn-green
+    @apply bg-green-700 text-gray-100
+
+    &:hover
+      @apply bg-green-900
 
 // Forms styles
 form
@@ -106,3 +124,8 @@ hr
 select
   @apply appearance-none w-1/4 bg-gray-200 border border-gray-400 text-gray-700 py-2 px-4 pr-8 rounded leading-tight m-2
 
+.session--display 
+  @apply block
+  
+.session--hide
+  @apply hidden  
