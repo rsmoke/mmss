@@ -69,7 +69,7 @@
 
   <div class="field">
     <%= form.label :birthdate, class: 'important' %>
-    <%= form.date_select :birthdate, start_year: 2002, include_blank: true, required: true %>
+    <%= form.date_select :birthdate, start_year: Date.today.year - 18, end_year: Date.today.year, include_blank: true, required: true %>
   </div>
 
   <div class="field">
