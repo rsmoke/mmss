@@ -30,6 +30,7 @@ class Enrollment < ApplicationRecord
   validates :personal_statement, length: { minimum: 100 }
 
   validate :at_least_one_is_checked
+  validate :acceptable_transcript
 
   def display_name
     self.user.email # or whatever column you want
@@ -40,6 +41,19 @@ class Enrollment < ApplicationRecord
   def at_least_one_is_checked
     if session_registration_ids.empty?
       errors.add(:base, "Select at least one session")
+    end
+  end
+
+  def acceptable_transcript
+    return unless transcript.attached?
+
+    unless transcript.blob.byte_size <= 20.megabyte
+      errors.add(:transcript, "is too big - file size cannot exceed 20Mbyte")
+    end
+
+    acceptable_types = ["image/png", "image/jpeg", "application/pdf"]
+    unless acceptable_types.include?(transcript.content_type)
+      errors.add(:transcript, "must be file type PDF, JPEG or PNG")
     end
   end
 
