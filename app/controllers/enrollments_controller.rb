@@ -23,11 +23,12 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
-    @courses_session_any = CampOccurrence.session_description("Any Session").courses.order(title: :asc)
     @courses_session1 = CampOccurrence.session_description("Session 1").courses.order(title: :asc)
     @courses_session2 = CampOccurrence.session_description("Session 2").courses.order(title: :asc)
     @courses_session3 = CampOccurrence.session_description("Session 3").courses.order(title: :asc)
-
+    @courses_session_any = (@courses_session1 + @courses_session2 + @courses_session3).uniq(&:title).sort_by(&:title)
+    # @courses_session_any = CampOccurrence.session_description("Any Session").courses.order(title: :asc)
+ 
     @activities_session_any = CampOccurrence.session_description("Any Session").activities.order(description: :asc)
     @activities_session1 = CampOccurrence.session_description("Session 1").activities.order(description: :asc)
     @activities_session2 = CampOccurrence.session_description("Session 2").activities.order(description: :asc)
@@ -36,10 +37,11 @@ class EnrollmentsController < ApplicationController
 
   # GET /enrollments/1/edit
   def edit
-    @courses_session_any = CampOccurrence.session_description("Any Session").courses.order(title: :asc)
+    @courses_session_any 
     @courses_session1 = CampOccurrence.session_description("Session 1").courses.order(title: :asc)
     @courses_session2 = CampOccurrence.session_description("Session 2").courses.order(title: :asc)
     @courses_session3 = CampOccurrence.session_description("Session 3").courses.order(title: :asc)
+    @courses_session_any = (@courses_session1 + @courses_session2 + @courses_session3).uniq(&:title).sort_by(&:title)
 
     @activities_session_any = CampOccurrence.session_description("Any Session").activities.order(description: :asc)
     @activities_session1 = CampOccurrence.session_description("Session 1").activities.order(description: :asc)
