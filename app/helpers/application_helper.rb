@@ -6,7 +6,7 @@ module ApplicationHelper
 
   def applicant_status
     [
-      ['Select', ''],
+      ['*Select*', ''],
       ['enrolled', 'enrolled'],
       ['new', 'new'],
       ['none', 'none'],
@@ -17,7 +17,7 @@ module ApplicationHelper
 
   def offer_status
     [
-      ['Select', ''],
+      ['*Select*', ''],
       ['accepted', 'accepted'],
       ['declined', 'declined'],
       ['offered', 'offered'],
@@ -27,7 +27,7 @@ module ApplicationHelper
 
   def us_states
     [
-      ['Select', ''],
+      ['*Select*', ''],
       ['Alabama', 'AL'],
       ['Alaska', 'AK'],
       ['Arizona', 'AZ'],
