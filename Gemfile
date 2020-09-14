@@ -39,6 +39,14 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'country_select', '~> 4.0'
 gem 'money-rails', '~>1.12'
 
+# Phone number validation (yet to be implemented in this app)
+# https://github.com/mobi/telephone_number
+# gem 'telephone_number'
+
+# FriendlyID slugs (yet to be implemented in this app)
+# https://github.com/norman/friendly_id
+# gem 'friendly_id', '~> 5.4.0'
+
 gem 'newrelic_rpm'
 # gem 'newrelic-infinite_tracing'
 
