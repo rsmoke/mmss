@@ -83,8 +83,10 @@ module.exports = {
         500: '#4299e1',
         600: '#3182ce',
         700: '#2b6cb0',
+        laitan_blue: '#2b73b6',
         800: '#2c5282',
         900: '#2a4365',
+        um_blue: '#00274c',
       },
       indigo: {
         100: '#ebf4ff',
