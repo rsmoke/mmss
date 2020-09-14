@@ -1,5 +1,8 @@
 <h1>New Applicant Detail</h1>
-<small class='text-red-700'>Note: Items in Red are required</small>
+
 <%= render 'form', applicant_detail: @applicant_detail %>
 
-<%= link_to 'Home', root_path %>
+<%= link_to root_path do  %>
+  <%= render :partial => 'svg/home_icon' %>
+  <span>Home</span>
+<% end %>

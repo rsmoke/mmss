@@ -10,41 +10,42 @@
       </ul>
     </div>
   <% end %>
-<h4 class="section-header">Applicant Information</h4>
+<h2 class="section-header">Applicant Information</h2>
+<p>All fields are required unless marked <span class="text-gray-700">(optional)</span></p>
 
   <div class="field">
-    <%= form.label :firstname, class: 'important' %>
+    <%= form.label :firstname %>
     <%= form.text_field :firstname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :middlename %>
+    <%= form.label :middlename, class: 'form-optional' %>
     <%= form.text_field :middlename %>
   </div>
 
   <div class="field">
-    <%= form.label :lastname, class: 'important' %>
+    <%= form.label :lastname%>
     <%= form.text_field :lastname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :address1, class: 'important' %>
+    <%= form.label :address1%>
     <%= form.text_field :address1, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :address2 %>
+    <%= form.label :address2, class: 'form-optional'  %>
     <%= form.text_field :address2 %>
   </div>
 
   <div class="field">
-    <%= form.label :city, class: 'important' %>
+    <%= form.label :city%>
     <%= form.text_field :city, required: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :state, class: 'important' %>
-    <%= form.select :state, us_states, {}, include_blank: "-- Please Select --", required: true %>
+  <div class="field state-select">
+    <%= form.label :state%>
+    <%= form.select :state, us_states, include_blank: "*Select*", required: true %>
   </div>
 
   <div class="field">
@@ -52,115 +53,120 @@
     <%= form.text_field :state_non_us %>
   </div>
 
-  <div class="field">
-    <%= form.label :country, class: 'important' %>
-    <%= form.country_select :country, priority_countries: ["US"], include_blank: "-- Please Select --", required: true %>
+  <div class="field country-select">
+    <%= form.label :country%>
+    <%= form.country_select :country, priority_countries: ["US"], include_blank: "*Select*", required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :postalcode, class: 'important' %>
+    <%= form.label :postalcode%>
     <%= form.text_field :postalcode, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :phone, class: 'important' %>
+    <%= form.label :phone%>
     <%= form.text_field :phone, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :birthdate, class: 'important' %>
-    <%= form.date_select :birthdate, start_year: Date.today.year - 18, end_year: Date.today.year, include_blank: true, required: true %>
+    Birthdate:<br>
+    <div class="date_select">
+      <%= form.date_select :birthdate, start_year: Date.today.year - 18, end_year: Date.today.year, include_blank: true, required: true %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :shirt_size, class: 'important' %>
-    <%= form.select :shirt_size, ["small","medium","large","xlarge","2xlarge","No Shirt"], {}, include_blank: true, required: true %>
+    <%= form.label :shirt_size%>
+    <%= form.select :shirt_size, ["small","medium","large","xlarge","2xlarge","No Shirt"], include_blank: "*Select*", required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :diet_restrictions %>
+    <%= form.label :diet_restrictions, class: 'form-optional'  %>
     <%= form.text_area :diet_restrictions %>
   </div>
 
-<h4 class="section-header">Parent/Guardian Information</h4>
+<h2 class="section-header">Parent/Guardian Information</h2>
 
   <div class="field">
-    <%= form.label :parentname, class: 'important' %>
+    <%= form.label :parentname%>
     <%= form.text_field :parentname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :parentaddress1 %>
+    <%= form.label :parentaddress1, class: 'form-optional'  %>
     <%= form.text_field :parentaddress1 %>
   </div>
 
   <div class="field">
-    <%= form.label :parentaddress2 %>
+    <%= form.label :parentaddress2, class: 'form-optional'  %>
     <%= form.text_field :parentaddress2 %>
   </div>
 
   <div class="field">
-    <%= form.label :parentcity %>
+    <%= form.label :parentcity, class: 'form-optional'  %>
     <%= form.text_field :parentcity %>
   </div>
 
-  <div class="field">
-    <%= form.label :parentstate %>
-    <%= form.select :parentstate, us_states, {}, include_blank: "-- Please Select --" %>
+  <div class="field state-select">
+    <%= form.label :parentstate, class: 'form-optional'  %>
+    <%= form.select :parentstate, us_states, {}, include_blank: "*Select*" %>
 
   </div>
 
   <div class="field">
-    <%= form.label :parentstate_non_us, "Parent State if (Non-US)" %>
+    <%= form.label :parentstate_non_us, "Parent State if (Non-US)", class: 'form-optional' %>
     <%= form.text_field :parentstate_non_us %>
   </div>
 
   <div class="field">
-    <%= form.label :parentzip %>
+    <%= form.label :parentzip, class: 'form-optional'  %>
     <%= form.text_field :parentzip %>
   </div>
 
-  <div class="field">
-    <%= form.label :parentcountry %>
-    <%= form.country_select  :parentcountry, priority_countries: ["US"], include_blank: "-- Please Select --" %>
+  <div class="field country-select">
+    <%= form.label :parentcountry, class: 'form-optional'  %>
+    <%= form.country_select  :parentcountry, priority_countries: ["US"], include_blank: "*Select*" %>
   </div>
 
   <div class="field">
-    <%= form.label :parentphone, class: 'important' %>
+    <%= form.label :parentphone%>
     <%= form.text_field :parentphone, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :parentworkphone %>
+    <%= form.label :parentworkphone, class: 'form-optional'  %>
     <%= form.text_field :parentworkphone %>
   </div>
 
   <div class="field">
-    <%= form.label :parentemail, class: 'important' %>
+    <%= form.label :parentemail%>
     <%= form.text_field :parentemail, required: true %>
   </div>
 
-  <h4 class= "section-header">Applicant Demographics</h4>
+  <h2 class= "section-header">Applicant Demographics</h2>
 
   <div class="field">
     <p class="direction_notes">
-      Please contact mmss@umich.edu if you need special rooming arrangements
+      Please contact 
+      <%= mail_to "mmss@umich.edu", subject: "I need special rooming arrangements based on my gender identity"  do %>
+        <strong>mmss@umich.edu</strong>
+      <% end %> if you need special rooming arrangements
       based on your gender identity.
     </p>
-      <%= form.label :gender, class: 'important' %>
-      <%= form.collection_select(:gender, Gender.all, :id, :name, {include_blank: true}) %>
+      <%= form.label :gender%>
+      <%= form.collection_select(:gender, Gender.all, :id, :name, {include_blank: "*Select*"}) %>
   </div>
 
   <div class="field">
     <div class="mt-2">
-      <%= form.check_box :us_citizen, class: "form-checkbox" %>
+      <%= form.check_box :us_citizen, class: "form-checkbox"  %>
       <%= form.label :us_citizen, "US Citizen", class: "inline-flex items-center ml-1" %>
     </div>
   </div>
 
   <div class="field">
-    <%= form.label :demographic, "Race/Ethnicity" %>
-    <%= form.collection_select(:demographic, Demographic.all, :id, :name, include_blank: "-- Please Select --") %>
+    <%= form.label :demographic, "Race/Ethnicity", class: 'form-optional'  %>
+    <%= form.collection_select(:demographic, Demographic.all, :id, :name, include_blank: "*Select*") %>
   </div>
 
 
