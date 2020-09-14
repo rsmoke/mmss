@@ -37,8 +37,24 @@ en:
       delimiter: ","
       separator: "."
 
-# falling back to
-number:
-  format:
-    delimiter: ","
-    separator: "."
+  # falling back to
+  number:
+    format:
+      delimiter: ","
+      separator: "."
+
+  helpers:
+    label:
+      applicant_detail:
+        firstname: "First Name"
+        middlename: "Middle Name"
+        lastname: "Last Name"
+        parentname: "Parent Full Name"
+        parentaddress1: "Parent Address"
+        parentaddress2: "Parent Address2"
+        parentcity: "Parent City"
+        parentstate: "Parent State"
+        parentcountry: "Parent Country"
+        parentphone: "Parent Phone"
+        parentworkphone: "Parent Work Phone"
+        parentemail: "Parent eMail"
