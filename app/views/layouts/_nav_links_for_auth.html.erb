@@ -1,6 +1,6 @@
 
 
-<nav class="flex items-center justify-between flex-wrap bg-yellow-100 border-blue-900 border-b-2 p-6">
+<nav class="flex items-center justify-between flex-wrap border-blue-900 border-b-2 p-6">
   <div class="flex items-center flex-shrink-0 text-blue-900 mr-6">
     <%= link_to root_path do %>
       <%= image_pack_tag "MMSS_Logo.png", alt:"MMSS Logo", size: "250x36"  %>
@@ -15,10 +15,10 @@
     <div class= "flex justify-end">
       <% if user_signed_in? %>
         <div>
-          <%= link_to current_user.email, edit_user_registration_path, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-700 hover:text-blue-900 mr-4" %>
+          <%= link_to current_user.email, edit_user_registration_path, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-um_blue hover:text-blue-900 mr-4" %>
         </div>
         <div>
-          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-700 hover:text-blue-900 mr-4" %>
+          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-um_blue hover:text-blue-900 mr-4" %>
         </div>
       <% end %>
     </div>
