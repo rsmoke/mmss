@@ -51,6 +51,7 @@ module.exports = {
         600: '#d69e2e',
         700: '#b7791f',
         800: '#975a16',
+        um_yellow: '#ffcf01',
         900: '#744210',
       },
       green: {
