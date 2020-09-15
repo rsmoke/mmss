@@ -35,8 +35,8 @@
             Check your work before submitting. Once review of your application begins, you will not be able to make changes.
           </p>
       <% elsif current_user.enrollments.last.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
-        <div class="mb-2">The next step is to rank the courses you selected in the priority of interest.
-          <%= link_to 'Course Rankings',
+        <div class="mb-2">The next step is to rank the courses you selected in the priority of interest.<br>
+          <%= link_to 'Course-Rankings',
                         enrollment_course_preferences_path(current_user.enrollments.last.id),
                         class: 'btn btn-blue' %>
         </div>
