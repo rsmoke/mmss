@@ -54,7 +54,11 @@
     <% end %>
     <p>
       The recommendation can also be faxed to 734.763.0937,
-      e-mailed as a scanned attachment to mmss@umich.edu or mailed to:
+      e-mailed as a scanned attachment to 
+      <%= mail_to "mmss@umich.edu", subject: "Recommendation Letter for MMSS"  do %>
+        <strong>mmss@umich.edu</strong>
+      <% end %>
+       or mailed to:
     </p>
     <address class="px-4 pt-2">
       Michigan Math and Science Scholars<br>

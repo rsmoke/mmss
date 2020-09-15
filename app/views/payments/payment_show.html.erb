@@ -42,7 +42,10 @@
                 class: "btn btn-green" %>
       </p>
     <% end %>
-    <div class="direction_notes">You may email any questions to <%= mail_to "mmss@umich.edu" %>
+    <div class="direction_notes">You may email any questions to 
+    <%= mail_to "mmss@umich.edu", subject: "Question about MMSS"  do %>
+        <strong>mmss@umich.edu</strong>
+      <% end %>
     </div>
 
   <hr class="w-75"/>
