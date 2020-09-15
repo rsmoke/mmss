@@ -1,4 +1,4 @@
-ActiveAdmin.register Enrollment do
+ActiveAdmin.register Enrollment, as: "Application" do
   menu parent: 'Applicant Info', priority: 1
 
   # See permitted parameters documentation:
@@ -46,7 +46,7 @@ ActiveAdmin.register Enrollment do
   index do
     selectable_column
     column :id, sortable: :id do |e|
-      link_to e.id, admin_enrollment_path(e)
+      link_to e.id, admin_application_path(e)
     end
     column :user_id, sortable: :user_id do |user|
       link_to user.display_name, admin_user_path(user.user_id)

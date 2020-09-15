@@ -13,7 +13,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
-        panel "Recent Enrollments" do
+        panel "Recent Applications" do
           ul do
             Enrollment.limit(10).map do |enroll|
               li link_to(enroll.user.email, admin_applicant_detail_path(enroll.user.applicant_detail))
