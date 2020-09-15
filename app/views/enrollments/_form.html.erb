@@ -1,3 +1,4 @@
+<p>All fields are required unless marked <span class="text-gray-700">(optional)</span></p>
 <%= form_with(model: enrollment, local: true) do |form| %>
   <% if enrollment.errors.any? %>
     <div id="error_explanation">
@@ -14,7 +15,7 @@
   <%= content_tag :div, nil, data: {controller: "enrollment"} do %>
 
     <div class="field">
-      <h4 class= "section-header">Sessions</h4>
+      <h2 class= "section-header">Sessions</h2>
       <p class="direction_notes">
         If you want to attend multiple sessions, please check the box corresponding
         to each of the sessions you wish to attend. If you would like to attend only
@@ -37,7 +38,7 @@
     </div>
 
     <div class="field">
-      <h4 class= "section-header">Services</h4>
+      <h2 class= "section-header">Services</h2>
       <p class="direction_notes">
         Check the box corresponding to each of the services you want to add for the
         session(s) you selected. If you selected the <i>"any session"</i> box,
@@ -109,7 +110,7 @@
     </div>
 
     <div class="field">
-      <h4 class= "section-header">Courses</h4>
+      <h2 class= "section-header">Courses</h2>
       <p class="direction_notes">
         Check the box next to each course in which you are interested. You will be able to rank your choices in order of preference in a later step.
       </p>
@@ -184,69 +185,69 @@
 
   <% end %>
 
-  <h4 class= "section-header">Applicant School History</h4>
+  <h2 class= "section-header">Applicant School History</h2>
   <div class="field">
 
     <%= form.text_field :user_id, hidden: true %>
   </div>
 
   <div class="field">
-    <%= form.label :year_in_school, "Current Grade", class: 'important' %>
+    <%= form.label :year_in_school, "Current Grade" %>
     <%= form.text_field :year_in_school, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :anticipated_graduation_year, class: 'important' %>
+    <%= form.label :anticipated_graduation_year %>
     <%= form.text_field :anticipated_graduation_year, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_name, class: 'important'  %>
+    <%= form.label :high_school_name  %>
     <%= form.text_field :high_school_name, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_address1, class: 'important'  %>
+    <%= form.label :high_school_address1  %>
     <%= form.text_field :high_school_address1, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_address2 %>
+    <%= form.label :high_school_address2, class: 'form-optional' %>
     <%= form.text_field :high_school_address2 %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_city, class: 'important'  %>
+    <%= form.label :high_school_city  %>
     <%= form.text_field :high_school_city, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_state, class: 'important'  %>
-    <%= form.select :high_school_state, us_states, {}, include_blank: "-- Please Select --", required: true %>
+    <%= form.label :high_school_state  %>
+    <%= form.select :high_school_state, us_states, include_blank: "*Select*", required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_non_us, "High School if Non-US was selected for state" %>
+    <%= form.label :high_school_non_us, "High School if Non-US was selected for state", class: 'form-optional' %>
     <%= form.text_field :high_school_non_us %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_postalcode, class: 'important' %>
+    <%= form.label :high_school_postalcode %>
     <%= form.text_field :high_school_postalcode, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :high_school_country, class: 'important' %>
-    <%= form.country_select :high_school_country, priority_countries: ["US"], include_blank: true, required: true %>
+    <%= form.label :high_school_country %>
+    <%= form.country_select :high_school_country, priority_countries: ["US"], include_blank: "*Select*", required: true %>
   </div>
 
   <hr>
   <div class="field">
-    <%= form.label :room_mate_request, "Name of preferred roommate (optional, and for residential program only): " %>
+    <%= form.label :room_mate_request, "Name of preferred roommate (optional, and for residential program only): ", class: 'form-optional' %>
     <%= form.text_field :room_mate_request %>
   </div>
 
-  <h4 class= "section-header">Student Personal Statement</h4>
+  <h2 class= "section-header">Student Personal Statement</h2>
   <p class="direction_notes">
     Please complete the Student Personal Statement by either typing or pasting it
     into the field below. This <strong>required</strong> part of your application
@@ -256,11 +257,11 @@
     information to help us evaluate your application material.
   </p>
     <div class="field">
-      <%= form.label :personal_statement, class: 'important' %>
+      <%= form.label :personal_statement %>
       <%= form.text_area :personal_statement, size: "30x10", minlength: 100, required: true %>
     </div>
 
-  <h4 class= "section-header">Transcripts</h4>
+  <h2 class= "section-header">Transcripts</h2>
   <% if @enrollment.transcript.attached? %>
     <div class='current-uploaded-docs'>
       <p>
@@ -274,7 +275,7 @@
     </div>
   <% else %>
     <div class="field">
-      <%= form.label :transcript, class: 'important' %>
+      <%= form.label :transcript %>
       <%= form.file_field :transcript, required: true %>
     </div>
   <% end %>
@@ -311,7 +312,7 @@
   </p>
 
   <% if admin_signed_in? %>
-  <h4 class= "section-header">Administrative area</h4>
+  <h2 class= "section-header">Administrative area</h2>
 
     <div class="field">
       <%= form.label :notes %>

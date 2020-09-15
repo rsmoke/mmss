@@ -1,3 +1,4 @@
+<p class="mb-2">All fields are required unless marked <span class="text-gray-700">(optional)</span></p>
 <%= form_with(model: [ @enrollment, recommendation ], local: true) do |form| %>
   <% if recommendation.errors.any? %>
     <div id="error_explanation">
@@ -31,68 +32,68 @@ Your recommender will be sent an email giving them directions on how to submit a
   </div>
 
   <div class="field">
-    <%= form.label :email, "Recommenders email", class: 'important' %>
+    <%= form.label :email, "Recommenders email" %>
     <%= form.text_field :email, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :firstname, class: 'important'  %>
+    <%= form.label :firstname  %>
     <%= form.text_field :firstname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :lastname, class: 'important'  %>
+    <%= form.label :lastname  %>
     <%= form.text_field :lastname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :organization, "High School/Organization", class: 'important' %>
+    <%= form.label :organization, "High School/Organization" %>
     <%= form.text_field :organization, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :address1 %>
+    <%= form.label :address1, class: 'form-optional' %>
     <%= form.text_field :address1 %>
   </div>
 
   <div class="field">
-    <%= form.label :address2 %>
+    <%= form.label :address2, class: 'form-optional' %>
     <%= form.text_field :address2 %>
   </div>
 
   <div class="field">
-    <%= form.label :city %>
+    <%= form.label :city, class: 'form-optional' %>
     <%= form.text_field :city %>
   </div>
 
   <div class="field">
-    <%= form.label :state %>
-    <%= form.select :state, us_states, {}, include_blank: "-- Please Select --" %>
+    <%= form.label :state, class: 'form-optional' %>
+    <%= form.select :state, us_states, {}, include_blank: "*Please Select*" %>
   </div>
 
   <div class="field">
-    <%= form.label :state_non_us %>
+    <%= form.label :state_non_us, class: 'form-optional' %>
     <%= form.text_field :state_non_us %>
   </div>
 
   <div class="field">
-    <%= form.label :postalcode %>
+    <%= form.label :postalcode, class: 'form-optional' %>
     <%= form.text_field :postalcode %>
   </div>
 
   <div class="field">
-    <%= form.label :country %>
+    <%= form.label :country, class: 'form-optional' %>
     <%= form.country_select :country, priority_countries: ["US"],
-                            include_blank: true %>
+                            include_blank: "*Select*" %>
   </div>
 
   <div class="field">
-    <%= form.label :phone_number %>
+    <%= form.label :phone_number, class: 'form-optional' %>
     <%= form.text_field :phone_number %>
   </div>
 
   <div class="field">
-    <%= form.label :best_contact_time %>
+    <%= form.label :best_contact_time, class: 'form-optional' %>
     <%= form.text_field :best_contact_time %>
   </div>
 

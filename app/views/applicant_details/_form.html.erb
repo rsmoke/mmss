@@ -1,3 +1,4 @@
+<p>All fields are required unless marked <span class="text-gray-700">(optional)</span></p>
 <%= form_with(model: applicant_detail, local: true) do |form| %>
   <% if applicant_detail.errors.any? %>
     <div id="error_explanation">
@@ -11,7 +12,6 @@
     </div>
   <% end %>
 <h2 class="section-header">Applicant Information</h2>
-<p>All fields are required unless marked <span class="text-gray-700">(optional)</span></p>
 
   <div class="field">
     <%= form.label :firstname %>
