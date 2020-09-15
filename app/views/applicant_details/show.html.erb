@@ -141,11 +141,7 @@
 </p>
 <p>
   <strong>Demographic:</strong>
-  <% if @applicant_detail.demographic.empty? %>
-    <%= "None Selected" %>
-  <% else %>
-    <%= demographic_description(@applicant_detail.demographic) %>
-  <% end %>
+    <%= demographic_description(@applicant_detail) %>
 </p>
 
 <%= link_to 'Edit', edit_applicant_detail_path(@applicant_detail) %> |
