@@ -68,8 +68,9 @@ ActiveAdmin.register Enrollment, as: "Application" do
     column :year_in_school
     column :anticipated_graduation_year
     column :room_mate_request
-    column :personal_statement, sortable: false
-    # column :shirt_size
+    column :personal_statement do |ps|
+      truncate(ps.personal_statement, omision: "...", length: 50)
+    end
     column :notes
     column :application_status
     column :offer_status
