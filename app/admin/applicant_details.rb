@@ -15,5 +15,44 @@ ActiveAdmin.register ApplicantDetail do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-
+  index do 
+    selectable_column
+    column :user_id
+    column :firstname
+    column :middlename
+    column :lastname
+    column :gender do |g|
+      g.gender_name
+    end
+    column :us_citizen
+    column :demographic do |d| 
+      d.demographic_name
+    end
+    column :birthdate
+    column :diet_restrictions
+    column :shirt_size
+    column :address1
+    column :address2
+    column :address2
+    column :city
+    column :state
+    column :state_non_us
+    column :postalcode
+    column :country
+    column :phone
+    column :parentname
+    column :parentaddress1
+    column :parentaddress2
+    column :parentcity
+    column :parentstate
+    column :parentstate_non_us
+    column :parentzip
+    column :parentcountry
+    column :parentphone
+    column :parentworkphone
+    column :parentemail
+    column :created_at
+    column :updated_at
+    actions
+  end
 end

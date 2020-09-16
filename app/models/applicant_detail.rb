@@ -32,6 +32,18 @@ def full_name
   "#{firstname} #{lastname}"
 end
 
+def gender_name
+  Gender.find(self.gender).name
+end
+
+def demographic_name
+  if self.demographic.empty?
+    "None Selected"
+  else
+    Demographic.find(self.demographic).name
+  end
+end
+
 
   # def applicant_profile_link
   #   if self.find(current_user)
