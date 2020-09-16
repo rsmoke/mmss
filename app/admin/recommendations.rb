@@ -44,7 +44,7 @@ ActiveAdmin.register Recommendation do
       link_to e.id, admin_recommendation_path(e)
     end
     column :enrollment_id, sortable: :enrollment_id do |ei|
-      link_to ei.enrollment.display_name, admin_enrollment_path(ei.enrollment_id)
+      link_to ei.enrollment.display_name, admin_application_path(ei.enrollment_id)
     end
     column :email
     column :lastname
