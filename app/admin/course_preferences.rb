@@ -16,4 +16,18 @@ ActiveAdmin.register CoursePreference do
   #   permitted
   # end
 
+  index do 
+    selectable_column
+    column :id
+    column :enrollment
+    column "Session" do |cp|
+      cp.course.camp_occurrence.description
+    end
+    column :course
+    column :ranking
+    column :created_at
+    column :updated_at
+    actions
+  end
+
 end
