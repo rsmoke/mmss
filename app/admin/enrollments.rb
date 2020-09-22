@@ -49,7 +49,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       link_to e.id, admin_application_path(e)
     end
     column :user_id, sortable: :user_id do |user|
-      link_to user.display_name, admin_user_path(user.user_id)
+      link_to user.display_name, admin_applicant_details_path(user.user_id)
     end
     column "Transcript" do |enroll|
       if enroll.transcript.attached?

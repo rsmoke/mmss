@@ -17,7 +17,12 @@ ActiveAdmin.register ApplicantDetail do
   # end
   index do 
     selectable_column
-    column :user_id
+    column :id, sortable: :id do |e|
+      link_to "Full #{e.id}", admin_applicant_detail_path(e)
+    end
+    column :user_id, sortable: :user_id do |user|
+      link_to user.applicant_email, admin_user_path(user.user_id)
+    end
     column :firstname
     column :middlename
     column :lastname
@@ -33,7 +38,6 @@ ActiveAdmin.register ApplicantDetail do
     column :shirt_size
     column :address1
     column :address2
-    column :address2
     column :city
     column :state
     column :state_non_us
@@ -41,13 +45,13 @@ ActiveAdmin.register ApplicantDetail do
     column :country
     column :phone
     column :parentname
-    column :parentaddress1
-    column :parentaddress2
-    column :parentcity
-    column :parentstate
-    column :parentstate_non_us
-    column :parentzip
-    column :parentcountry
+    # column :parentaddress1
+    # column :parentaddress2
+    # column :parentcity
+    # column :parentstate
+    # column :parentstate_non_us
+    # column :parentzip
+    # column :parentcountry
     column :parentphone
     column :parentworkphone
     column :parentemail
