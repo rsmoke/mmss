@@ -32,6 +32,10 @@ def full_name
   "#{firstname} #{lastname}"
 end
 
+def applicant_email
+  User.find(self.user_id).email 
+end# or whatever column you wantend
+
 def gender_name
   Gender.find(self.gender).name
 end
