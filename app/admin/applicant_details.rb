@@ -17,15 +17,15 @@ ActiveAdmin.register ApplicantDetail do
   # end
   index do 
     selectable_column
-    column :id, sortable: :id do |e|
-      link_to "Full #{e.id}", admin_applicant_detail_path(e)
-    end
-    column :user_id, sortable: :user_id do |user|
-      link_to user.applicant_email, admin_user_path(user.user_id)
-    end
+    actions
+    # column :id
+    # column :user_id, sortable: :user_id do |user|
+    #   link_to user.applicant_email, admin_user_path(user.user_id)
+    # end
     column :firstname
     column :middlename
     column :lastname
+    column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
     column :gender do |g|
       g.gender_name
     end
@@ -44,7 +44,7 @@ ActiveAdmin.register ApplicantDetail do
     column :postalcode
     column :country
     column :phone
-    column :parentname
+    # column :parentname
     # column :parentaddress1
     # column :parentaddress2
     # column :parentcity
@@ -52,11 +52,76 @@ ActiveAdmin.register ApplicantDetail do
     # column :parentstate_non_us
     # column :parentzip
     # column :parentcountry
-    column :parentphone
-    column :parentworkphone
-    column :parentemail
+    # column :parentphone
+    # column :parentworkphone
+    # column :parentemail
     column :created_at
     column :updated_at
-    actions
+    # actions
+  end
+
+  # show do
+  #   attributes_table do
+  #     row :id
+  #     row :email
+  #     row :firstname
+  #     row :middlename
+  #     row :lastname
+  #     row :gender do |g|
+  #       g.gender_name
+  #     end
+
+  #     row :created_at
+  #     row :updated_at
+  #   end
+  #   active_admin_comments
+  # end
+  show do
+    panel "Applications" do
+      table_for applicant_detail do
+        column :firstname
+        column :lastname
+        column :gender do |g|
+          g.gender_name
+        end
+        # column :user_id do |user|
+        #   link_to user.applicant_email, admin_user_path(user.user_id)
+        # end
+        column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
+      end
+    end
+    active_admin_comments
+  end
+
+  sidebar "Details", only: :show do
+    attributes_table_for applicant_detail do
+      row :id
+      row :gender do |g|
+        g.gender_name
+      end
+      row :birthdate
+      row :diet_restrictions
+      row :shirt_size
+      row :address1
+      row :address2
+      row :city
+      row :state
+      row :state_non_us
+      row :postalcode
+      row :country
+      row :phone
+      row :parentname
+      # column :parentaddress1
+      # column :parentaddress2
+      # column :parentcity
+      # column :parentstate
+      # column :parentstate_non_us
+      # column :parentzip
+      # column :parentcountry
+      row :parentphone
+      row :parentworkphone
+      row :parentemail
+      # row('Published?') { |b| status_tag b.published? }
+    end
   end
 end
