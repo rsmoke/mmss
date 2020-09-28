@@ -45,12 +45,11 @@ ActiveAdmin.register Enrollment, as: "Application" do
 
   index do
     selectable_column
-    column :id, sortable: :id do |e|
-      link_to e.id, admin_application_path(e)
-    end
-    column :user_id, sortable: :user_id do |user|
-      link_to user.display_name, admin_applicant_details_path(user.user_id)
-    end
+    actions
+    column('eMail') { |application| link_to application.user.email, admin_user_path(application.user_id) }
+    # column :user_id, sortable: :user_id do |user|
+    #   link_to user.display_name, admin_applicant_details_path(:user_id)
+    # end
     column "Transcript" do |enroll|
       if enroll.transcript.attached?
         link_to enroll.transcript.filename, url_for(enroll.transcript)
@@ -75,8 +74,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
     column :application_status
     column :offer_status
     column :partner_program
-
-    actions
   end
 
   show do
