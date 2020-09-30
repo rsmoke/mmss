@@ -1,4 +1,8 @@
 ActiveAdmin.setup do |config|
+  config.use_webpacker = true
+  # rails g active_admin:webpacker
+
+  
   # == Site Title
   #
   # Set the title that is displayed on the main layout
