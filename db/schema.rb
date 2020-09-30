@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_26_205800) do
+ActiveRecord::Schema.define(version: 2020_09_30_133237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,15 @@ ActiveRecord::Schema.define(version: 2019_12_26_205800) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["camp_configuration_id"], name: "index_camp_occurrences_on_camp_configuration_id"
+  end
+
+  create_table "course_assignments", force: :cascade do |t|
+    t.bigint "enrollment_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_assignments_on_course_id"
+    t.index ["enrollment_id"], name: "index_course_assignments_on_enrollment_id"
   end
 
   create_table "course_preferences", force: :cascade do |t|
@@ -335,6 +344,8 @@ ActiveRecord::Schema.define(version: 2019_12_26_205800) do
   add_foreign_key "activities", "camp_occurrences"
   add_foreign_key "applicant_details", "users"
   add_foreign_key "camp_occurrences", "camp_configurations"
+  add_foreign_key "course_assignments", "courses"
+  add_foreign_key "course_assignments", "enrollments"
   add_foreign_key "course_preferences", "courses"
   add_foreign_key "course_preferences", "enrollments"
   add_foreign_key "courses", "camp_occurrences"

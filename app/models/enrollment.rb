@@ -10,8 +10,9 @@ class Enrollment < ApplicationRecord
 
   has_many :course_preferences, dependent: :destroy
   has_many :course_registrations, through: :course_preferences, source: :course
-
   accepts_nested_attributes_for :course_preferences, allow_destroy: true
+
+  has_many :course_assignments, dependent: :destroy
 
   has_one :financial_aid, dependent: :destroy
   has_many :travels, dependent: :destroy
