@@ -41,6 +41,7 @@ myname@gmail.com
 puma-prod.rb
 *.sublime-project
 *.sublime-workspace
+/working_documents/*
 
 
 
