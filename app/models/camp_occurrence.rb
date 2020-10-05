@@ -16,7 +16,11 @@ class CampOccurrence < ApplicationRecord
   scope :session_description, ->(description="") { where(description: description).active.first}
 
   def description_with_date
-    "#{description} -- #{begin_date} until #{end_date} -- $1300"
+    if description == "Any Session"
+      "#{description}"
+    else
+      "#{description} -- #{begin_date} until #{end_date}"
+    end
   end
 
   def display_name
