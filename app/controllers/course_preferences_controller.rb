@@ -4,6 +4,7 @@ class CoursePreferencesController < ApplicationController
   before_action :course_preference, only: [ :edit, :create, :update, :new, :destroy ]
 
   def index
+    @current_enrollment_course_preferences_all = @current_enrollment.course_preferences
     @current_enrollment_session1 = @current_enrollment.session_registrations.find_by(description: "Session 1")
     @current_enrollment_session2 = @current_enrollment.session_registrations.find_by(description: "Session 2")
     @current_enrollment_session3 = @current_enrollment.session_registrations.find_by(description: "Session 3")
