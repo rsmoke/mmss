@@ -55,15 +55,17 @@ ActiveAdmin.register Enrollment, as: "Application" do
         link_to enroll.transcript.filename, url_for(enroll.transcript)
       end
     end
+    column :application_status
+    column :offer_status
     column :international
-    column :high_school_name
-    column :high_school_address1
-    column :high_school_address2
-    column :high_school_city
-    column :high_school_state
-    column :high_school_non_us
-    column :high_school_postalcode
-    column :high_school_country
+    # column :high_school_name
+    # column :high_school_address1
+    # column :high_school_address2
+    # column :high_school_city
+    # column :high_school_state
+    # column :high_school_non_us
+    # column :high_school_postalcode
+    # column :high_school_country
     column :year_in_school
     column :anticipated_graduation_year
     column :room_mate_request
@@ -71,8 +73,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
       truncate(ps.personal_statement, omision: "...", length: 25)
     end
     column :notes
-    column :application_status
-    column :offer_status
     column :partner_program
   end
 
