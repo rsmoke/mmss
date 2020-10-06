@@ -6,7 +6,7 @@ ActiveAdmin.register CampOccurrence, as: "Session Configurations" do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :camp_configuration_id, :description, :begin_date, :end_date, :active
+   permit_params :camp_configuration_id, :description, :cost_cents, :begin_date, :end_date, :active
   #
   # or
   #
