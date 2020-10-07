@@ -1,0 +1,7 @@
+<h3>Number of applicants who are enrolled to each session</h3>
+
+<% CampOccurrence.active.each do |co| %>
+  <% unless co.description == "Any Session" %>
+    <li><%= co.description %> has <%= Enrollment.enrolled.map { |enroll| enroll.session_registrations.where(description: co.description).exists?}.count(true) %> enrolled applicants.
+  <% end %>
+<% end %>

@@ -12,6 +12,14 @@ ActiveAdmin.register_page "Dashboard" do
     # Here is an example of a simple dashboard with columns and panels.
 
     columns do
+      panel "Partial display Demo" do
+        div do
+          render("/admin/testing_partial_display", model: "dashboard")
+        end
+      end
+    end
+
+    columns do
       column do
         panel "Recent Applications" do
           ul do
@@ -31,8 +39,20 @@ ActiveAdmin.register_page "Dashboard" do
       end
 
       column do
-        panel "Info" do
-          para "Welcome to MMSS Admin."
+        panel "Session Stats" do
+          div do
+            render("/admin/session_enrolled", model: "dashboard")
+          end
+
+          div do
+            render("/admin/session_applied", model: "dashboard")
+          end
+        end
+
+        panel "Financial Aid Requests" do
+          div do
+            render("/admin/finaid_requests", model: "dashboard")
+          end
         end
       end
     end

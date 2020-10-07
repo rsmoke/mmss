@@ -1,0 +1,9 @@
+<hr>
+<h3>Number of applicants who applied to each session</h3>
+
+<% CampOccurrence.active.each do |co| %>
+<li><%= co.description %> has <%= SessionActivity.all.where(camp_occurrence_id: co.id).count %> applicants.
+
+
+
+<% end %>
