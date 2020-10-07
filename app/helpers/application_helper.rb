@@ -4,6 +4,10 @@ module ApplicationHelper
       CampConfiguration.active_camp_year
   end
 
+  def current_enrolled_applicants
+      Enrollment.enrolled
+  end
+
   def applicant_status
     [
       ['*Select*', ''],
