@@ -16,6 +16,10 @@ ActiveAdmin.register Enrollment, as: "Application" do
   #   permitted
   # end
 
+  scope :all, :default => true
+  scope :offered
+  scope :accepted
+
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
     # f.inputs           # builds an input field for every attribute

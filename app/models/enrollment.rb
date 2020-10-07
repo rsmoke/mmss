@@ -33,6 +33,10 @@ class Enrollment < ApplicationRecord
   validate :at_least_one_is_checked
   validate :acceptable_transcript
 
+  scope :offered, ->{where("offer_status = 'offered'")}
+  scope :accepted, -> {where("offer_status = 'accepted'")}
+  scope :enrolled, -> {where("application_status = 'enrolled'")}
+
   def display_name
     self.user.email # or whatever column you want
   end
