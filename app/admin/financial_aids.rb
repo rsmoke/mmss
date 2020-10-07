@@ -37,7 +37,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       link_to f.id, admin_financial_aid_request_path(f)
     end
     column 'Enrollment' do |e|
-      link_to e.enrollment.display_name, admin_enrollment_path(e.enrollment_id)
+      link_to e.enrollment.display_name, admin_application_path(e.enrollment_id)
     end
     column "Taxform" do |t|
       if t.taxform.attached?
