@@ -1,7 +1,12 @@
 <h3>Financial Aid Requests</h3>
-<% current_enrolled_applicants.each do |ca| %>
-  <% if ca.financial_aid.present? %>
-    <li><%= link_to ca.display_name, admin_financial_aid_request_path(ca.financial_aid) %> has been awarded <%= ca.financial_aid.awarded %>
+<% SessionActivity.all.each do |fa| %>
+  <% if fa.enrollment.financial_aid.present? %>
+    <li><%= link_to fa.enrollment.display_name, admin_financial_aid_request_path(fa.enrollment.financial_aid) %>
+    <% if fa.enrollment.financial_aid.awarded %> 
+      -- awarded 
+    <% else %>
+      -- pending
+    <% end %>
   <% end %>
 
 <% end %>
