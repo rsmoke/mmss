@@ -82,6 +82,68 @@ ActiveAdmin.register Enrollment, as: "Application" do
 
   show do
     attributes_table do
+      row :user_id do |user| link_to(user.applicant_detail.full_name.titleize, admin_applicant_detail_path(user.applicant_detail)) end
+      # row link_to application.user.email, admin_user_path(application.user_id) 
+      # link_to(enroll.user.email, admin_applicant_detail_path(enroll.user.applicant_detail))
+      # row :id
+      # row :user_id do |user| user.display_name end
+      # row :transcript do |tr|
+      #   if tr.transcript.attached?
+      #     link_to tr.transcript.filename, url_for(tr.transcript)
+      #   end
+      # end
+      # row :international
+      # row :high_school_name
+      # row :high_school_address1
+      # row :high_school_address2
+      # row :high_school_city
+      # row :high_school_state
+      # row :high_school_non_us
+      # row :high_school_postalcode
+      # row :high_school_country
+      # row :year_in_school
+      # row :anticipated_graduation_year
+      # row :room_mate_request
+      row :personal_statement
+      row :notes
+      row :application_status
+      row :offer_status
+      row :partner_program
+    end
+    panel "Sessions" do
+      panel "activities/services" do
+
+      end
+      panel "course assignment" do
+        panel "course preferences" do
+  
+        end
+      end
+    end
+
+    panel "Payment Activity" do
+      table_for application.user.payments do
+        column(:account_type) { |atype| atype.account_type.titleize }
+        column(:transaction_date) {|td| Date.parse(td.transaction_date) }
+        column(:total_amount) { |ta|  humanized_money_with_symbol(ta.total_amount.to_f / 100) }
+        column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
+      end
+    end
+
+    panel "Recommendation" do
+      
+
+    end
+
+    panel "fin aid requests" do
+
+    end
+
+    active_admin_comments
+  end
+
+  sidebar "Details", only: :show do
+    attributes_table_for application do
       row :id
       row :user_id do |user| user.display_name end
       row :transcript do |tr|
@@ -101,13 +163,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
       row :year_in_school
       row :anticipated_graduation_year
       row :room_mate_request
-      row :personal_statement
-      row :notes
-      row :application_status
-      row :offer_status
-      row :partner_program
+  
     end
-    active_admin_comments
   end
 
 end
