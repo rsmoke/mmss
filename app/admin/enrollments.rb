@@ -111,32 +111,78 @@ ActiveAdmin.register Enrollment, as: "Application" do
       row :partner_program
     end
     panel "Sessions" do
-      panel "activities/services" do
-
+      panel "Activities/Services" do
+        table_for application.enrollment_activities do
+          column(:activity_id) { |item| item.activity.description }
+          column "Session" do |item| 
+            item.activity.camp_occurrence.description 
+          end
+        end
       end
-      panel "course assignment" do
-        panel "course preferences" do
-  
+      panel "Course Assignment" do
+        table_for application.course_assignments do
+          column(:id) { |item| link_to(item.id, admin_course_assignment_path(item)) }
+          column(:course_id) { |item| item.course.title }
+          column "Session" do |item| 
+            item.course.camp_occurrence.description 
+          end
+        end
+      end
+      panel "Course Preferences" do
+        table_for application.course_preferences do
+          column(:course_id) { |item| item.course.title }
+          column "Rank" do |item| 
+            item.ranking 
+          end
+          column "Session" do |item| 
+            item.course.camp_occurrence.description 
+          end
         end
       end
     end
 
     panel "Payment Activity" do
       table_for application.user.payments do
+        column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
         column(:account_type) { |atype| atype.account_type.titleize }
         column(:transaction_date) {|td| Date.parse(td.transaction_date) }
         column(:total_amount) { |ta|  humanized_money_with_symbol(ta.total_amount.to_f / 100) }
-        column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
       end
     end
 
     panel "Recommendation" do
-      
+      table_for application.recommendation do
+        column(:id)  { |recc| link_to(recc.id, admin_recommendation_path(recc.id)) }
+        column :firstname 
+        column :lastname
+        column :organization
+        column "Letter" do |item|
+          if item.recupload.present?
+           link_to("view", admin_recupload_path(item.recupload))
+          else
+            "- waiting for response"
+          end
+        end
+      end
 
     end
 
-    panel "fin aid requests" do
+    if application.financial_aid.present?
+      panel "Financial Aid Request" do
+        table_for application.financial_aid do
+          column "Request" do |item|
+            if item.present?
+            link_to("view", admin_financial_aid_request_path(item))
+            end
+          end
+          column "Awarded" do |item|
+            if item.present?
+            item.awarded
+            end
+          end
 
+        end
+      end
     end
 
     active_admin_comments
@@ -145,7 +191,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
   sidebar "Details", only: :show do
     attributes_table_for application do
       row :id
-      row :user_id do |user| user.display_name end
+      # row :user_id do |user| user.display_name end
       row :transcript do |tr|
         if tr.transcript.attached?
           link_to tr.transcript.filename, url_for(tr.transcript)
