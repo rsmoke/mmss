@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_212908) do
+ActiveRecord::Schema.define(version: 2020_10_19_204019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -310,6 +310,15 @@ ActiveRecord::Schema.define(version: 2020_10_06_212908) do
     t.index ["enrollment_id"], name: "index_session_activities_on_enrollment_id"
   end
 
+  create_table "session_assignments", force: :cascade do |t|
+    t.bigint "enrollment_id", null: false
+    t.bigint "camp_occurrence_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_occurrence_id"], name: "index_session_assignments_on_camp_occurrence_id"
+    t.index ["enrollment_id"], name: "index_session_assignments_on_enrollment_id"
+  end
+
   create_table "travels", force: :cascade do |t|
     t.bigint "enrollment_id", null: false
     t.string "direction"
@@ -360,5 +369,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_212908) do
   add_foreign_key "recuploads", "recommendations"
   add_foreign_key "session_activities", "camp_occurrences"
   add_foreign_key "session_activities", "enrollments"
+  add_foreign_key "session_assignments", "camp_occurrences"
+  add_foreign_key "session_assignments", "enrollments"
   add_foreign_key "travels", "enrollments"
 end
