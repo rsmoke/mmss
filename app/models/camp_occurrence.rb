@@ -6,6 +6,8 @@ class CampOccurrence < ApplicationRecord
   has_many :session_activities
   has_many :enrollments, through: :session_activities
 
+  has_many :session_assignments, dependent: :destroy
+
   validates :description, presence: true
   validates :begin_date, presence: true, format: { with: ConstantData::VALID_DATE_REGEX }
   validates :end_date, presence: true, format: { with: ConstantData::VALID_DATE_REGEX }

@@ -115,10 +115,12 @@ ActiveAdmin.register Enrollment, as: "Application" do
     # panel "Sessions" do
 
       panel "Session Assignment" do
-        table_for application.session_registrations do
-          column "Assigned Sessions" do |item| 
-            item.description 
-          end
+        table_for application.session_assignments do
+          column(:id) { |item| link_to(item.id, admin_session_assignment_path(item)) }
+          column(:camp_occurrence_id) { |item| item.camp_occurrence.description }
+          # column "Assigned Sessions" do |item| 
+          #   item.description 
+          # end
         end
 
         table_for application.session_registrations do
