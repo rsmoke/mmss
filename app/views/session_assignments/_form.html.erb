@@ -1,0 +1,27 @@
+<%= form_with(model: session_assignment, local: true) do |form| %>
+  <% if session_assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(session_assignment.errors.count, "error") %> prohibited this session_assignment from being saved:</h2>
+
+      <ul>
+        <% session_assignment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :enrollment_id %>
+    <%= form.text_field :enrollment_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :camp_occurrence_id %>
+    <%= form.text_field :camp_occurrence_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
