@@ -43,6 +43,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
      f.input :application_status, as: :select, collection: ['enrolled', 'new', 'none', 'registered', 'submitted']
      f.input :offer_status, as: :select, collection: ['accepted','declined','offered','none']
      f.input :partner_program
+     render('/admin/application_session_assignment_form', model: "enrollments")
+     render('/admin/application_course_assignment_form', model: "enrollments")
    end
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
@@ -110,7 +112,22 @@ ActiveAdmin.register Enrollment, as: "Application" do
       row :offer_status
       row :partner_program
     end
-    panel "Sessions" do
+    # panel "Sessions" do
+
+      panel "Session Assignment" do
+        table_for application.session_registrations do
+          column "Assigned Sessions" do |item| 
+            item.description 
+          end
+        end
+
+        table_for application.session_registrations do
+          column "User Selected Sessions" do |item| 
+            item.description 
+          end
+        end
+      end
+
       panel "Activities/Services" do
         table_for application.enrollment_activities do
           column(:activity_id) { |item| item.activity.description }
@@ -127,10 +144,13 @@ ActiveAdmin.register Enrollment, as: "Application" do
             item.course.camp_occurrence.description 
           end
         end
-      end
-      panel "Course Preferences" do
+
+      # panel "Course Preferences" do
         table_for application.course_preferences do
-          column(:course_id) { |item| item.course.title }
+          # column(:course_id) { |item| item.course.title }
+          column "User Course Preference" do |item| 
+            item.course.title 
+          end
           column "Rank" do |item| 
             item.ranking 
           end
@@ -139,7 +159,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
           end
         end
       end
-    end
+    # end
 
     panel "Payment Activity" do
       table_for application.user.payments do
