@@ -6,7 +6,16 @@ ActiveAdmin.register Enrollment, as: "Application" do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :user_id, :international, :high_school_name, :high_school_address1, :high_school_address2, :high_school_city, :high_school_state, :high_school_non_us, :high_school_postalcode, :high_school_country, :year_in_school, :anticipated_graduation_year, :room_mate_request, :personal_statement, :shirt_size, :notes, :application_status, :offer_status, :partner_program, :transcript
+   permit_params  :user_id, :international, 
+                  :high_school_name, :high_school_address1, 
+                  :high_school_address2, :high_school_city, 
+                  :high_school_state, :high_school_non_us, 
+                  :high_school_postalcode, :high_school_country, 
+                  :year_in_school, :anticipated_graduation_year, 
+                  :room_mate_request, :personal_statement, 
+                  :shirt_size, :notes, :application_status, 
+                  :offer_status, :partner_program, :transcript,
+                  session_assignment_ids: []
   #
   # or
   #
@@ -43,11 +52,40 @@ ActiveAdmin.register Enrollment, as: "Application" do
      f.input :application_status, as: :select, collection: ['enrolled', 'new', 'none', 'registered', 'submitted']
      f.input :offer_status, as: :select, collection: ['accepted','declined','offered','none']
      f.input :partner_program
-     render('/admin/application_session_assignment_form', model: "enrollments")
+
+
+    #  render('/admin/application_session_assignment_form', model: "enrollments")
+  
+        # f.has_many :session_assignments, heading: 'Session Assignments',
+        #                         allow_destroy: false,
+        #                         new_record: false do |a|
+                          
+        #                             a.check_box :id 
+                            
+        #                             # a.label  :description_name
+        #                         end
+
+
+        f.collection_check_boxes( :session_assignment_ids, application.session_registrations, :id, :description) do |b| 
+          b.label(class: "inline-flex items-center") do
+            b.check_box(class: "form-checkbox mr-2") + b.text
+          end
+        end
+
+
      render('/admin/application_course_assignment_form', model: "enrollments")
-   end
+    end
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
+
+  # panel "Session Assignment" do
+  #   table_for application.session_assignments do
+  #     column(:id) { |item| link_to(item.id, admin_session_assignment_path(item)) }
+  #     column(:camp_occurrence_id) { |item| item.camp_occurrence.description }
+  #     # column "Assigned Sessions" do |item| 
+  #     #   item.description 
+  #     # end
+  #   end
 
   index do
     selectable_column
