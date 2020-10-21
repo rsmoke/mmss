@@ -15,7 +15,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   :room_mate_request, :personal_statement, 
                   :shirt_size, :notes, :application_status, 
                   :offer_status, :partner_program, :transcript,
-                  session_assignment_ids: []
+                  session_assignments_attributes: [:id, :camp_occurrence_id, :_destroy ],
+                  course_assignments_attributes: [:id, :course_id, :_destroy ]
   #
   # or
   #
@@ -49,31 +50,38 @@ ActiveAdmin.register Enrollment, as: "Application" do
      f.input :personal_statement
      f.input :transcript, as: :file
      f.input :notes
-     f.input :application_status, as: :select, collection: ['enrolled', 'new', 'none', 'registered', 'submitted']
-     f.input :offer_status, as: :select, collection: ['accepted','declined','offered','none']
      f.input :partner_program
 
 
     #  render('/admin/application_session_assignment_form', model: "enrollments")
   
-        # f.has_many :session_assignments, heading: 'Session Assignments',
-        #                         allow_destroy: false,
-        #                         new_record: false do |a|
-                          
-        #                             a.check_box :id 
-                            
-        #                             # a.label  :description_name
-        #                         end
+        f.has_many :session_assignments, heading: 'Session Assignments',
+                    allow_destroy: true,
+                    new_record: false do |a|
+                      
+                      a.input :id
+
+                    end
 
 
-        f.collection_check_boxes( :session_assignment_ids, application.session_registrations, :id, :description) do |b| 
-          b.label(class: "inline-flex items-center") do
-            b.check_box(class: "form-checkbox mr-2") + b.text
-          end
-        end
+        # f.collection_check_boxes( :session_assignment_ids, application.session_registrations, :id, :description) do |b| 
+        #   b.label(class: "inline-flex items-center") do
+        #     b.check_box(class: "form-checkbox mr-2") + b.text
+        #   end
+        # end
 
 
-     render('/admin/application_course_assignment_form', model: "enrollments")
+        # render('/admin/application_course_assignment_form', model: "enrollments")
+        f.has_many :course_assignments, heading: 'Course Assignments',
+                    allow_destroy: true,
+                    new_record: false do |a|
+
+                      a.input :id 
+
+                    end
+
+        f.input :offer_status, as: :select, collection: ['accepted','declined','offered','none']
+        f.input :application_status, as: :select, collection: ['enrolled', 'new', 'none', 'registered', 'submitted']
     end
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
@@ -146,8 +154,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
       # row :room_mate_request
       row :personal_statement
       row :notes
-      row :application_status
       row :offer_status
+      row :application_status
       row :partner_program
     end
     # panel "Sessions" do
