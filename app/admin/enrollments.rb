@@ -107,8 +107,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
         link_to enroll.transcript.filename, url_for(enroll.transcript)
       end
     end
-    column :application_status
     column :offer_status
+    column :application_status
     column :international
     # column :high_school_name
     # column :high_school_address1

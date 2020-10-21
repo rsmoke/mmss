@@ -1,7 +1,7 @@
-<h3>Number of applicants who are enrolled to each session</h3>
+<h4>Number of applicants who are enrolled to each session</h4>
 
 <% CampOccurrence.active.each do |co| %>
   <% unless co.description == "Any Session" %>
-    <li><%= co.description %> has <%= Enrollment.enrolled.map { |enroll| enroll.session_registrations.where(description: co.description).exists?}.count(true) %> enrolled applicants.
+    <li><%= co.description %> has <%= pluralize(Enrollment.enrolled.map { |enroll| enroll.session_assignments.where(camp_occurrence: co).exists?}.count(true), 'enrolled applicant' ) %>.
   <% end %>
 <% end %>
