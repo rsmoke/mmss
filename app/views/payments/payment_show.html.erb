@@ -108,7 +108,7 @@
       </div>
       <% if @finaids.present? %>
         <div class="text-gray-700">
-          <%= "#{'financial_aid_awarded'.humanize.ljust(31, '.')} #{humanized_money_with_symbol(@finaids_ttl).rjust(12,'.')}" %>
+          <%= "#{'Ttl financial_aid_requested'.humanize.ljust(34, '.')} #{humanized_money_with_symbol(@finaids_ttl).rjust(12,'.')}" %>
         </div>
       <% end %>
       <hr/>
