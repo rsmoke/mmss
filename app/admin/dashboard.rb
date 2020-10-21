@@ -44,6 +44,8 @@ ActiveAdmin.register_page "Dashboard" do
             render("/admin/session_enrolled", model: "dashboard")
           end
 
+          hr
+
           div do
             render("/admin/session_applied", model: "dashboard")
           end
