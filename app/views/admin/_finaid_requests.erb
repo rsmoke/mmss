@@ -1,12 +1,14 @@
 <h3>Financial Aid Requests</h3>
-<% SessionActivity.all.each do |fa| %>
-  <% if fa.enrollment.financial_aid.present? %>
-    <li><%= link_to fa.enrollment.display_name, admin_financial_aid_request_path(fa.enrollment.financial_aid) %>
+
+<% if FinancialAid.present? %>
+  <% FinancialAid.all.each do |fa| %>
+    <li><%= link_to fa.enrollment.applicant_detail.full_name, admin_financial_aid_request_path(fa.enrollment.financial_aid) %>
     <% if fa.enrollment.financial_aid.awarded %> 
       -- awarded 
     <% else %>
       -- pending
     <% end %>
   <% end %>
-
+<% else %>
+  There are no requests in the system
 <% end %>
