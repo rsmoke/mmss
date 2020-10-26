@@ -74,9 +74,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       f.has_many :course_assignments, heading: 'Course Assignments',
                   allow_destroy: true,
                   new_record: true do |a|
-
                     a.input :course_id, as: :select, collection: application.course_preferences.pluck(:course_id)
-
                   end
     end
         
