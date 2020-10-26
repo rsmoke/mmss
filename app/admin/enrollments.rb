@@ -15,7 +15,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   :room_mate_request, :personal_statement, 
                   :shirt_size, :notes, :application_status, 
                   :offer_status, :partner_program, :transcript,
-                  session_assignments_attributes: [:id, :enrollment_id, :camp_occurrence_id, :_destroy ],
+                  session_assignments_attributes: [:id, :camp_occurrence_id, :_destroy ],
                   course_assignments_attributes: [:id, :course_id, :_destroy ]
   #
   # or
@@ -60,12 +60,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       f.has_many :session_assignments, heading: 'Session Assignments',
                   allow_destroy: true,
                   new_record: true do |a|
-
-                    # #works with input_text box
-                    # a.input :camp_occurrence_id
-
                     a.input :camp_occurrence_id, as: :select, collection: application.session_registrations
-
                   end
     end
 
@@ -74,7 +69,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       f.has_many :course_assignments, heading: 'Course Assignments',
                   allow_destroy: true,
                   new_record: true do |a|
-                    a.input :course_id, as: :select, collection: application.course_preferences.pluck(:course_id)
+                    a.input :course_id, as: :select, collection: application.course_registrations
                   end
     end
         
