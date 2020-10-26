@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: camp_configurations
+#
+#  id                        :bigint           not null, primary key
+#  camp_year                 :integer          not null
+#  application_open          :date             not null
+#  application_close         :date             not null
+#  priority                  :date             not null
+#  application_materials_due :date             not null
+#  camper_acceptance_due     :date             not null
+#  active                    :boolean          default(FALSE), not null
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#
 FactoryBot.define do
   factory :camp_configuration do
     camp_year { 2019 }
