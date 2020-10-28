@@ -12,6 +12,7 @@
 #  active                    :boolean          default(FALSE), not null
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  offer_letter              :text
 #
 class CampConfiguration < ApplicationRecord
   has_many :camp_occurrences, dependent: :destroy

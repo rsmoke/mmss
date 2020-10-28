@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+      <h3><%= "Hello #{@application.firstname}," %></h3>
+    <p><%= @offer_letter_text %>
+      <br>
+      You have been assigned to:
+      <ul>
+        <% @assigned_sessions.each do |as| %>
+          <li><%= as.camp_occurrence.display_name %></li>
+        <% end %>
+      </ul>
+      <br>
+      To participate in:
+      <ul>
+        <% @assigned_courses.each do |ac| %>
+          <li><%= ac.course.display_name %></li>
+        <% end %>
+      </ul>
+      <br>
+
+      Please visit your application at <%= @url %>, and accept of decline this offer.
+    </p>
+
+  </body>
+</html>

@@ -12,6 +12,7 @@
 #  active                    :boolean          default(FALSE), not null
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  offer_letter              :text
 #
 FactoryBot.define do
   factory :camp_configuration do

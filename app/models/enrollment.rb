@@ -25,6 +25,8 @@
 #  updated_at                  :datetime         not null
 #
 class Enrollment < ApplicationRecord
+  after_update :send_offer_letter
+
   belongs_to :user
   has_one :applicant_detail, through: :user
 
@@ -92,5 +94,10 @@ class Enrollment < ApplicationRecord
     end
   end
 
+  def send_offer_letter
+    if self.offer_status == "offered"
+      OfferMailer.offer_email(self.user_id).deliver_now
+    end
+  end
   # scope :current_enrollment, ->(user=@current_user) { where(user_id: user) }
 end
