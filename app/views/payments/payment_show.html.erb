@@ -21,6 +21,12 @@
         Paying the tuition and service fees is a requirement of participation.
         Please continue paying your camp fees at this time.
       </h6>
+      <hr class="w-75" />
+      <h4>Download and return the 
+      <%= link_to "/Student_Information_Packet.pdf",target: "_blank" do %>
+        Student Information Packet
+      <% end %>
+       as soon as possible.</h4>
     <% else %>
       <h6 class="mt-4">
         Thank you for your Michigan Math and Science Scholars Application. When we
@@ -108,7 +114,7 @@
       </div>
       <% if @finaids.present? %>
         <div class="text-gray-700">
-          <%= "#{'Ttl financial_aid_requested'.humanize.ljust(34, '.')} #{humanized_money_with_symbol(@finaids_ttl).rjust(12,'.')}" %>
+          <%= "#{'financial_aid_awarded'.humanize.ljust(31, '.')} #{humanized_money_with_symbol(@finaids_ttl).rjust(12,'.')}" %>
         </div>
       <% end %>
       <hr/>
