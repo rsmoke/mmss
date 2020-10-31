@@ -69,7 +69,9 @@ ActiveAdmin.register Enrollment, as: "Application" do
       f.has_many :course_assignments, heading: 'Course Assignments',
                   allow_destroy: true,
                   new_record: true do |a|
-                    a.input :course_id, as: :select, collection: application.course_registrations
+                    # a.input :course_id, as: :select, collection: application.course_registrations
+                    a.input :course_id, as: :select, :collection =>
+                    application.course_registrations.map{|u| ["#{u.title}, #{u.camp_occurrence.description}, #{application.course_preferences.find_by(course_id: u.id).ranking}"]}
                   end
     end
         
