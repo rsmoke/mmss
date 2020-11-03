@@ -6,7 +6,7 @@ ActiveAdmin.register CampConfiguration do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :camp_year, :application_open, :application_close, :priority, :application_materials_due, :camper_acceptance_due, :active, :offer_letter
+   permit_params :camp_year, :application_open, :application_close, :priority, :application_materials_due, :camper_acceptance_due, :active, :offer_letter, :student_packet_url
   #
   # or
   #

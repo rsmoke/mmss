@@ -44,7 +44,7 @@
     end
 
     def payment_show
-
+      @student_packet_url = CampConfiguration.active.pick(:student_packet_url)
       redirect_to root_url unless current_user.payments
       @registration_activities = current_user.enrollments.last.registration_activities.order(camp_occurrence_id: :asc)
       @session_registrations = current_user.enrollments.last.session_registrations.order(description: :asc)
