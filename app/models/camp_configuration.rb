@@ -13,6 +13,7 @@
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  offer_letter              :text
+#  student_packet_url        :string
 #
 class CampConfiguration < ApplicationRecord
   has_many :camp_occurrences, dependent: :destroy

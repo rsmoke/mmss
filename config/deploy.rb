@@ -95,7 +95,7 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
-  after  :updated,      "newrelic:notice_deployment"
+  # after  :updated,      "newrelic:notice_deployment"
 end
 
 namespace :maintenance do

@@ -132,6 +132,7 @@ class EnrollmentsController < ApplicationController
                           :personal_statement, :shirt_size, :notes,
                           :application_status, :offer_status,
                           :partner_program, :transcript,
+                          :student_packet,
                           registration_activity_ids: [],
                           session_registration_ids: [],
                           course_registration_ids: [])
