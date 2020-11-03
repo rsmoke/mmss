@@ -70,6 +70,9 @@ Rails.application.routes.draw do
   post 'accept_offer', to: 'enrollments#accept_offer'
   post 'decline_offer', to: 'enrollments#decline_offer'
 
+  post 'accept_session_offer/:id', to: 'session_assignments#accept_session_offer', as: :accept_session_offer
+  post 'decline_session_offer/:id', to: 'session_assignments#decline_session_offer', as: :decline_session_offer
+
   get 'static_pages/index'
   get 'static_pages/contact'
   get 'static_pages/privacy'

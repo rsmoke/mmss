@@ -76,6 +76,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       f.has_many :session_assignments, heading: 'Session Assignments',
                   allow_destroy: true,
                   new_record: true do |a|
+                    a.input :offer_status, input_html: { disabled: true }
                     a.input :camp_occurrence_id, as: :select, collection: application.session_registrations
                   end
     end
@@ -86,8 +87,9 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   allow_destroy: true,
                   new_record: true do |a|
                     # a.input :course_id, as: :select, collection: application.course_registrations
-                    a.input :course_id, as: :select, :collection =>
-                    application.course_registrations.map{|u| ["#{u.title}, #{u.camp_occurrence.description}, #{application.course_preferences.find_by(course_id: u.id).ranking}"]}
+                    a.input :course_id, as: :select, collection:
+                    application.course_registrations.order(:camp_occurrence_id).map{|u| ["#{u.title}, #{u.camp_occurrence.description}, 
+                    rank - #{application.course_preferences.find_by(course_id: u.id).ranking}", u.id]}
                   end
     end
         
@@ -172,6 +174,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
         table_for application.session_assignments do
           column(:id) { |item| link_to(item.id, admin_session_assignment_path(item)) }
           column(:camp_occurrence_id) { |item| item.camp_occurrence.description }
+          column(:offer_status)
           # column "Assigned Sessions" do |item| 
           #   item.description 
           # end

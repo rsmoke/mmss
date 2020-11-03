@@ -6,7 +6,7 @@ ActiveAdmin.register SessionAssignment do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
- permit_params :enrollment_id, :camp_occurrence_id
+ permit_params :enrollment_id, :camp_occurrence_id, :offer_status
   #
   # or
   #
@@ -15,5 +15,14 @@ ActiveAdmin.register SessionAssignment do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
+  form do |f|
+    f.inputs do
+      f.input :enrollment_id, as: :select, collection: Enrollment.all
+      f.input :camp_occurrence_id, as: :select, collection: CampOccurrence.active
+      f.input :offer_status, as: :select, collection: ['accepted','declined', 'none']
+    end
+    f.actions
+  end
 end
+
