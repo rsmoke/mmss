@@ -56,7 +56,6 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.9'
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
   gem 'factory_bot_rails', '~> 6.0'
-  gem 'shoulda-matchers', '~> 4.3'
   gem 'capybara'
   gem 'webdrivers'
 
