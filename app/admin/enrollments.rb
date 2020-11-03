@@ -14,7 +14,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   :year_in_school, :anticipated_graduation_year, 
                   :room_mate_request, :personal_statement, 
                   :shirt_size, :notes, :application_status, 
-                  :offer_status, :partner_program, :transcript,
+                  :offer_status, :partner_program, :transcript, :student_packet,
                   session_assignments_attributes: [:id, :camp_occurrence_id, :_destroy ],
                   course_assignments_attributes: [:id, :course_id, :_destroy ]
   #
@@ -48,13 +48,29 @@ ActiveAdmin.register Enrollment, as: "Application" do
      f.input :anticipated_graduation_year
      f.input :room_mate_request
      f.input :personal_statement
+    #  panel "Upload Details" do
+    #   render("/admin/testing_partial_display")
+    #   end
+
+      table_for application do
+        column "Current Transcript" do |item| 
+          if item.transcript.attached?
+            link_to item.transcript.filename, url_for(item.transcript)
+          end
+        end
+        column "Current Student Packet" do |item| 
+          if item.student_packet.attached?
+            link_to item.student_packet.filename, url_for(item.student_packet)
+          end
+        end
+      end
      f.input :transcript, as: :file, label: "Update transcript"
+     f.input :student_packet, as: :file, label: "Update student_packet"
+      hr
      f.input :notes
      f.input :partner_program
     end
-
-    #  render('/admin/application_session_assignment_form', model: "enrollments")
-  
+ 
     f.inputs do
       f.semantic_errors
       f.has_many :session_assignments, heading: 'Session Assignments',
@@ -90,6 +106,11 @@ ActiveAdmin.register Enrollment, as: "Application" do
     column "Transcript" do |enroll|
       if enroll.transcript.attached?
         link_to enroll.transcript.filename, url_for(enroll.transcript)
+      end
+    end
+    column "Student Packet" do |sp|
+      if sp.student_packet.attached?
+        link_to sp.student_packet.filename, url_for(sp.student_packet)
       end
     end
     column :offer_status
@@ -204,16 +225,18 @@ ActiveAdmin.register Enrollment, as: "Application" do
     end
 
     panel "Recommendation" do
-      table_for application.recommendation do
-        column(:id)  { |recc| link_to(recc.id, admin_recommendation_path(recc.id)) }
-        column :firstname 
-        column :lastname
-        column :organization
-        column "Letter" do |item|
-          if item.recupload.present?
-           link_to("view", admin_recupload_path(item.recupload))
-          else
-            "- waiting for response"
+      if application.recommendation.present?
+        table_for application.recommendation do
+          column(:id)  { |recc| link_to(recc.id, admin_recommendation_path(recc.id)) }
+          column :firstname 
+          column :lastname
+          column :organization
+          column "Letter" do |item|
+            if item.recupload.present?
+            link_to("view", admin_recupload_path(item.recupload))
+            else
+              "- waiting for response"
+            end
           end
         end
       end
@@ -248,6 +271,11 @@ ActiveAdmin.register Enrollment, as: "Application" do
       row :transcript do |tr|
         if tr.transcript.attached?
           link_to tr.transcript.filename, url_for(tr.transcript)
+        end
+      end
+      row :student_packet do |sp|
+        if sp.student_packet.attached?
+          link_to sp.student_packet.filename, url_for(sp.student_packet)
         end
       end
       row :international

@@ -35,23 +35,23 @@
       If you prefer to upload a recommendation letter in PDF format you may do
       so here:
     </p>
-    <% if @recupload.recletter.attached? %>
-      <div class='current-uploaded-docs'>
-        <p>
-          <strong>Recommendation currently uploaded:</strong>
-          <%= link_to @recupload.recletter.filename, url_for(@recupload.recletter) %>
-        </p>
-      </div>
-      <div class="field">
-        <%= form.label :recletter, 'Update Recommendation Letter' %>
-        <%= form.file_field :recletter %>
-      </div>
-    <% else %>
+    <%# if @recupload.recletter.attached? %>
+      <%# <div class='current-uploaded-docs'> %>
+        <%# <p>
+          <strong>Recommendation currently uploaded:</strong> %>
+          <%#= link_to @recupload.recletter.filename, url_for(@recupload.recletter) %>
+        <%# </p>
+      </div> %>
+      <%# <div class="field"> %>
+        <%#= form.label :recletter, 'Update Recommendation Letter' %>
+        <%#= form.file_field :recletter %>
+      <%# </div> %>
+    <%# else %>
       <div class="field">
         <%= form.label :recletter, "Upload Recommendation Letter" %>
         <%= form.file_field :recletter %>
       </div>
-    <% end %>
+    <%# end %>
     <p>
       The recommendation can also be faxed to 734.763.0937,
       e-mailed as a scanned attachment to 
@@ -73,3 +73,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<%= javascript_pack_tag 'rec_file_select' %>

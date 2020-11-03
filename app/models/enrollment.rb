@@ -51,6 +51,7 @@ class Enrollment < ApplicationRecord
   has_one :recommendation, dependent: :destroy
 
   has_one_attached :transcript
+  has_one_attached :student_packet
 
 
   validates :high_school_name, presence: true

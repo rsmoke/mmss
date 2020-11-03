@@ -8,6 +8,14 @@ module ApplicationHelper
       Enrollment.enrolled
   end
 
+  def current_enrollment
+    current_user.enrollments.last
+  end
+  
+  def student_packet_url 
+    CampConfiguration.active.pick(:student_packet_url)
+  end
+
   def applicant_status
     [
       ['*Select*', ''],
