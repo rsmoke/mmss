@@ -11,4 +11,8 @@
 class CourseAssignment < ApplicationRecord
   belongs_to :enrollment
   belongs_to :course
+
+
+  scope :number_of_assignments, ->(course_id="") {where(course_id: course_id).size}
+
 end

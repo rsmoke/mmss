@@ -89,7 +89,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
                     # a.input :course_id, as: :select, collection: application.course_registrations
                     a.input :course_id, as: :select, collection:
                     application.course_registrations.order(:camp_occurrence_id).map{|u| ["#{u.title}, #{u.camp_occurrence.description}, 
-                    rank - #{application.course_preferences.find_by(course_id: u.id).ranking}", u.id]}
+                    rank - #{application.course_preferences.find_by(course_id: u.id).ranking}, available - #{u.available_spaces - CourseAssignment.number_of_assignments(u.id)}", u.id]}
                   end
     end
         

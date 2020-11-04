@@ -31,7 +31,9 @@ ActiveAdmin.register ApplicantDetail do
     end
     column :us_citizen
     column :demographic do |d| 
-      d.demographic_name
+     # if d.exists?
+        d.demographic_name
+     # end
     end
     column :birthdate
     column :diet_restrictions
