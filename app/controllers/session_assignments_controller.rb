@@ -17,6 +17,11 @@ class SessionAssignmentsController < InheritedResources::Base
     @session_assignment = SessionAssignment.find(params[:id])
     respond_to do |format|
       if @session_assignment.update(offer_status: "declined")
+        session_id = @session_assignment.camp_occurrence_id
+        session_courses_ids = CampOccurrence.find(session_id).courses.pluck(:id)
+        if CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids).exists?
+          CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids).destroy_all
+        end
         format.html { redirect_to all_payments_path, notice: 'Session assignment was successfully accepted.' }
         format.json { render :show, status: :ok, location: @session_assignment }
       else
@@ -32,8 +37,12 @@ class SessionAssignmentsController < InheritedResources::Base
       params.require(:session_assignment).permit(:enrollment_id, :camp_occurrence_id)
     end
 
-    def set_session_assignment
-      @session_assignment = SessionAssignment.where(enrollment_id: current_enrollment)
+    # def set_session_assignment
+    #   @session_assignment = SessionAssignment.where(enrollment_id: current_enrollment)
+    # end
+
+    def current_enrollment
+      @current_enrollment = current_user.enrollments.last
     end
 
 end
