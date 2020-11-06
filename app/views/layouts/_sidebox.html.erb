@@ -87,6 +87,19 @@
           <hr>
           <div>
             <span class="text-green-700 font-semibold">You have accepted admission</span>
+            <% current_enrollment.session_assignments.each do |sa| %>
+              <% if sa.offer_status == "accepted" %>
+              <div>
+                <%= sa.camp_occurrence.display_name %>
+                <div>
+                <% course_ids = CourseAssignment.where(enrollment_id: current_enrollment).pluck(:course_id) %>
+                Course:
+                <%= Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id).title %>
+                </div>
+              </div>
+              <% end %>
+            <% end %>
+            <hr>
             <h4>Download and return the 
               <%= link_to student_packet_url, target: "_blank" do %>
                 Student Information Packet
