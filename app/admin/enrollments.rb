@@ -94,8 +94,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
     end
         
     f.inputs do
-      f.input :offer_status, as: :select, collection: ['accepted','declined','offered','none']
-      f.input :application_status, as: :select, collection: ['enrolled', 'new', 'none', 'registered', 'submitted']
+      f.input :offer_status, as: :select, collection: ['accepted','declined','offered']
+      f.input :application_status, as: :select, collection: ['enrolled', 'application complete', 'offer accepted', 'offer declined','submitted']
     end
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
