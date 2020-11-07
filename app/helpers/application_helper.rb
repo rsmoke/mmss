@@ -20,9 +20,7 @@ module ApplicationHelper
     [
       ['*Select*', ''],
       ['enrolled', 'enrolled'],
-      ['new', 'new'],
-      ['none', 'none'],
-      ['registered', 'registered'],
+      ['application complete', 'application complete'],
       ['submitted', 'submitted']
     ]
   end
