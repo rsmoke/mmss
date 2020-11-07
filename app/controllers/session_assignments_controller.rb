@@ -4,6 +4,8 @@ class SessionAssignmentsController < InheritedResources::Base
     @session_assignment = SessionAssignment.find(params[:id])
     respond_to do |format|
       if @session_assignment.update(offer_status: "accepted")
+        enroll_id = @session_assignment.enrollment_id
+        Enrollment.find(enroll_id).update(offer_status: "accepted", application_status: "offer accepted")
         format.html { redirect_to all_payments_path, notice: 'Session assignment was successfully accepted.' }
         format.json { render :show, status: :ok, location: @session_assignment }
       else
