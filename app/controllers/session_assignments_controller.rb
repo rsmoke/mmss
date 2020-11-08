@@ -24,7 +24,12 @@ class SessionAssignmentsController < InheritedResources::Base
         if CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids).exists?
           CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids).destroy_all
         end
-        format.html { redirect_to all_payments_path, notice: 'Session assignment was successfully accepted.' }
+        status_array = SessionAssignment.where(enrollment_id: current_enrollment).pluck(:offer_status)
+        if status_array.count("declined") == status_array.size
+          enroll_id = @session_assignment.enrollment_id
+          Enrollment.find(enroll_id).update(offer_status: "declined", application_status: "offer declined")
+        end
+        format.html { redirect_to all_payments_path, notice: 'Session assignment was declined.' }
         format.json { render :show, status: :ok, location: @session_assignment }
       else
         format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
