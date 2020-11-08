@@ -34,6 +34,11 @@
         if current_user.payments.where(transaction_status: 1).count == 1
           RegistrationMailer.app_complete_email(current_user).deliver_now
           current_user.enrollments.last.update!(application_status: "submitted")
+          enroll_id = Enrollment.find_by(user_id: current_user.id).id
+          recom_id = Recommendation.find_by(enrollment_id: enroll_id).id
+          if Recupload.find_by(recommendation_id: recom_id).present?
+            current_user.enrollments.last.update!(application_status: "application complete")
+          end
         else
           @user_current_enrollment = current_user.enrollments.last
           @finaids = FinancialAid.where(enrollment_id: @user_current_enrollment.id)
