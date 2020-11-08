@@ -34,6 +34,17 @@
         if current_user.payments.where(transaction_status: 1).count == 1
           RegistrationMailer.app_complete_email(current_user).deliver_now
           current_user.enrollments.last.update!(application_status: "submitted")
+        else
+          @user_current_enrollment = current_user.enrollments.last
+          @finaids = FinancialAid.where(enrollment_id: @user_current_enrollment.id)
+          @finaids_ttl = @finaids.pluck(:amount_cents).map(&:to_f).sum / 100
+          @ttl_paid = Payment.where(user_id: current_user, transaction_status: '1').pluck(:total_amount).map(&:to_f).sum / 100      # cost_sessions = 1300 * @user_current_enrollment.session_registrations.size
+          cost_activities = @user_current_enrollment.registration_activities.pluck(:cost_cents).map(&:to_f).sum / 100
+          @total_cost = cost_sessions_ttl + cost_activities + 100
+          @balance_due = @total_cost - @finaids_ttl - @ttl_paid
+          if @balance_due == 0
+            current_user.enrollments.last.update!(application_status: "enrolled")
+          end
         end
       end
     end
