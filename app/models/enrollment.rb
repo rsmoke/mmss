@@ -68,6 +68,7 @@ class Enrollment < ApplicationRecord
 
   scope :offered, ->{where("offer_status = 'offered'")}
   scope :accepted, -> {where("offer_status = 'accepted'")}
+  scope :enrolled, -> {where("application_status = 'enrolled'")}
   scope :application_complete, -> {where("application_status = 'application complete'")}
 
   def display_name
