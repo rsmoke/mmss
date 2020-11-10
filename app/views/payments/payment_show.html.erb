@@ -8,7 +8,7 @@
   order from a U.S. based bank, or via credit card. International students may
   pay via wire transfer (contact our office for more information regarding wire
   transfers for international students.)
-  <%= button_to "pay the $100 non-refundable application fee",
+  <%= button_to "pay the #{humanized_money_with_symbol(CampConfiguration.active.last.application_fee)} non-refundable application fee",
                 make_payment_path(amount: 100), class: 'btn btn-green' %></h6>
 <% else %>
     <% if @current_application_status == "offer accepted" %>
@@ -61,7 +61,7 @@
     </h6>
     <div class="p-4">
       <div class="font-bold text-xs mb-2">
-        <%= "#{'application_fee_(non-refundable)'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(100).rjust(12,'.')}" %>
+        <%= "#{'application_fee_(non-refundable)'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(CampConfiguration.active.last.application_fee).rjust(12,'.')}" %>
       </div>
       <div class="font-bold text-base mb-2">
         <% if @current_application_status == "enrolled" %>
@@ -73,7 +73,7 @@
           <% if sa.offer_status == "accepted" %>
             <div>
               <%= sa.camp_occurrence.display_name %>
-                -- <%= humanized_money_with_symbol(Enrollment.find(sa.enrollment_id).session_registrations.find(sa.camp_occurrence_id).cost_cents) %>
+                -- <%= humanized_money_with_symbol(Enrollment.find(sa.enrollment_id).session_registrations.find(sa.camp_occurrence_id).cost) %>
               <div class="flex justify-start bg-gray-200 text-xs">
                 <ul class="m-auto">
                   Services & Activities
@@ -96,7 +96,7 @@
               <% else %>
                 <% @session_registrations.each do |s| %>
                   <li class="text-right">
-                    <%= s.description_with_date %> -- <%= humanized_money_with_symbol(s.cost_cents) %>
+                    <%= s.description_with_date %> -- <%= humanized_money_with_symbol(s.cost) %>
                   </li>
                 <% end %>
               <% end %>
@@ -128,17 +128,17 @@
       <% end %>
 
       <div class="text-gray-700">
-        <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid).rjust(12,'.')}" %>
+        <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid.to_i / 100 ).rjust(12,'.')}" %>
       </div>
       <% if @finaids.present? %>
         <div class="text-gray-700">
-          <%= "#{'financial_aid_awarded'.humanize.ljust(31, '.')} #{humanized_money_with_symbol(@finaids_ttl).rjust(12,'.')}" %>
+          <%= "#{'financial_aid_awarded'.humanize.ljust(31, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
         </div>
       <% end %>
       <hr/>
       <div class="text-gray-700">
         <% if @current_application_status == "offer accepted" %>
-          <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due).rjust(12,'.')}" %>
+          <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due.to_i / 100 ).rjust(12,'.')}" %>
         <% end %>
       </div>
     </div>
@@ -147,7 +147,7 @@
       <div class="w-2/3">
         <p>Enter a payment up to the balance due amount:</p>
           <%= form_with url: make_payment_path, local: true do |f| %>
-            <%= f.number_field :amount, value: "#{@balance_due.to_i}", within: 1..10000, required: true %>
+            <%= f.number_field :amount, value: "#{@balance_due.to_i / 100 }", within: 1..10000, required: true %>
             <div class="actions">
               <%= f.submit "Pay Now"%>
             </div>

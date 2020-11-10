@@ -26,6 +26,7 @@ class CampOccurrence < ApplicationRecord
   validates :begin_date, presence: true, format: { with: ConstantData::VALID_DATE_REGEX }
   validates :end_date, presence: true, format: { with: ConstantData::VALID_DATE_REGEX }
 
+  monetize :cost_cents
 
   scope :active, -> { where(active: true).order(description: :asc) }
 

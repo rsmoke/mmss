@@ -16,4 +16,6 @@ class FinancialAid < ApplicationRecord
   belongs_to :enrollment
 
   has_one_attached :taxform
+
+  monetize :amount_cents
 end
