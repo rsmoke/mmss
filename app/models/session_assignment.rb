@@ -7,6 +7,7 @@
 #  camp_occurrence_id :bigint           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  offer_status       :string
 #
 class SessionAssignment < ApplicationRecord
   belongs_to :enrollment
