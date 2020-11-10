@@ -76,10 +76,23 @@
           <p class="direction_notes">
             Please respond to our acceptance offer by making the appropriate
             selection in the Progress Window.
-        <% elsif current_user.enrollments.last.application_status == "enrolled" %>
+        <% elsif current_user.enrollments.last.application_status == "offer accepted" %>
           <p class="direction_notes">
             Payment of the balance of program tuition and fees is due by
             <%= @application_materials_due_date.strftime("%B %e, %Y") %>.
+          </p>
+          <h4>Download and Return the 
+            <%= link_to student_packet_url, target: "_blank" do %>
+                Student Information Packet
+              <% end %> 
+            as soon as possible!</h4>
+        <% elsif current_user.enrollments.last.application_status == "offer declined" %>
+          <p class="direction_notes">
+            Thanks for your interest.
+          </p>
+        <% elsif current_user.enrollments.last.application_status == "enrolled" %>
+          <p class="direction_notes">
+            We look forward to seeing you at the <%= current_camp %> University of Michigan MMSS High School Summer Program.
           </p>
         <% else %>
           <p class="direction_notes">

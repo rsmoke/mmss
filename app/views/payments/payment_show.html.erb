@@ -11,7 +11,7 @@
   <%= button_to "pay the $100 non-refundable application fee",
                 make_payment_path(amount: 100), class: 'btn btn-green' %></h6>
 <% else %>
-    <% if @current_application_status == "enrolled" %>
+    <% if @current_application_status == "offer accepted" %>
       <h6>
         Your application materials have been received and processed, and we are
         pleased to offer you a spot for MMSS <%= current_camp_year %>.
@@ -22,7 +22,10 @@
         Please continue paying your camp fees at this time.
       </h6>
       <hr class="w-75" />
-
+    <% elsif  @current_application_status == "offer declined" %>
+    <p> Thanks for your interest.</p>
+    <% elsif  @current_application_status == "enrolled" %>
+    <p> Thank you for paying all your fees. We look forward to seeing you at MMSS <%= current_camp_year %>.</p>
     <% else %>
       <h6 class="mt-4">
         Thank you for your Michigan Math and Science Scholars Application. When we
@@ -36,12 +39,12 @@
       </h6>
     <% end %>
 
-    <% if current_user.enrollments.last.financial_aid.blank? %>
+    <% if current_user.enrollments.last.financial_aid.blank? && (@current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
       <p class="mb-2">If you are applying for need-based financial support. Please fill out
         the
         <br>
         <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
-                class: "btn btn-green" %>
+                class: "btn btn-green pt-8" %>
       </p>
     <% end %>
     <div class="direction_notes">You may email any questions to 
