@@ -41,6 +41,9 @@ class RecuploadsController < InheritedResources::Base
         format.json { render :show, status: :created, location: @recupload }
         RecuploadMailer.with(recupload: @recupload).received_email.deliver_now
         RecuploadMailer.with(recupload: @recupload).applicant_received_email.deliver_now
+        recom_id = @recupload.recommendation_id
+        user_id = Recommendation.find(recom_id).enrollment_id
+        Enrollment.find(user_id).update!(application_status: "application complete")
       else
         format.html { render :new }
         format.json { render json: @recupload.errors, status: :unprocessable_entity }

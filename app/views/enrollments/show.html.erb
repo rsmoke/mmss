@@ -151,8 +151,9 @@
       <%= @enrollment.partner_program %>
     </p>
 <% end %>
-
-<%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
+<% if @enrollment.application_status == "" %>
+  <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
+<% end %>
 <%= link_to 'Home', root_path %>
 
 

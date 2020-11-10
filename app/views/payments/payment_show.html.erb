@@ -65,45 +65,64 @@
           <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost).rjust(12,'.')}" %>
         <% end %>
       </div>
-
-      <div class="flex justify-start bg-gray-200 text-xs">
-        <ul class="m-auto">
-        <% if @session_registrations.present? %>
-          <% if @has_any_session %>
-            <li class="text-right"><%= "Any Session -- #{humanized_money_with_symbol(@any_session_cost)}" %></li>
-          <% else %>
-            <% @session_registrations.each do |s| %>
-              <li class="text-right">
-                <%= s.description_with_date %> -- <%= humanized_money_with_symbol(s.cost_cents) %>
-              </li>
-            <% end %>
+      <% if @current_application_status == "offer accepted" %>
+        <% current_enrollment.session_assignments.each do |sa| %>
+          <% if sa.offer_status == "accepted" %>
+            <div>
+              <%= sa.camp_occurrence.display_name %>
+                -- <%= humanized_money_with_symbol(Enrollment.find(sa.enrollment_id).session_registrations.find(sa.camp_occurrence_id).cost_cents) %>
+              <div class="flex justify-start bg-gray-200 text-xs">
+                <ul class="m-auto">
+                  Services & Activities
+                  <% current_user.enrollments.find(sa.enrollment_id).registration_activities.where(camp_occurrence_id: sa.camp_occurrence_id).each do |ca| %>
+                    <li class="text-right">
+                      <%= ca.description %> -- <%= humanized_money_with_symbol(ca.cost) %>
+                     </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
           <% end %>
         <% end %>
-<hr class="hr-thin">
-        <% if @registration_activities.present? %>
-          <% @session_registrations.each do |sr| %>
-            <% unless sr.description == "Any Session"%>
-              <ul>
-                <li>
-                  <%= "#{sr.description} services & activities" %>
+      <% else %>
+        <div class="flex justify-start bg-gray-200 text-xs">
+          <ul class="m-auto">
+            <% if @session_registrations.present? %>
+              <% if @has_any_session %>
+                <li class="text-right"><%= "Any Session -- #{humanized_money_with_symbol(@any_session_cost)}" %></li>
+              <% else %>
+                <% @session_registrations.each do |s| %>
+                  <li class="text-right">
+                    <%= s.description_with_date %> -- <%= humanized_money_with_symbol(s.cost_cents) %>
+                  </li>
+                <% end %>
+              <% end %>
+            <% end %>
+            <hr class="hr-thin">
+            <% if @registration_activities.present? %>
+              <% @session_registrations.each do |sr| %>
+                <% unless sr.description == "Any Session"%>
                   <ul>
-                    <% @registration_activities.each do |r| %>
-                      <% if r.camp_occurrence == sr %>
-                        <li class="text-right">
-                          <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
-                        </li>
-                      <% end %>
-                    <% end %>
+                    <li>
+                      <%= "#{sr.description} services & activities" %>
+                      <ul>
+                        <% @registration_activities.each do |r| %>
+                          <% if r.camp_occurrence == sr %>
+                            <li class="text-right">
+                              <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
+                            </li>
+                          <% end %>
+                        <% end %>
+                      </ul>
+                    </li>
+                    <hr class="hr-thin border-dotted">
                   </ul>
-                </li>
-                <hr class="hr-thin border-dotted">
-              </ul>
+                <% end %>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
-
-        </ul>
-      </div>
+          </ul>
+        </div>
+      <% end %>
 
       <div class="text-gray-700">
         <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid).rjust(12,'.')}" %>
@@ -115,13 +134,13 @@
       <% end %>
       <hr/>
       <div class="text-gray-700">
-        <% if @current_application_status == "enrolled" %>
+        <% if @current_application_status == "offer accepted" %>
           <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due).rjust(12,'.')}" %>
         <% end %>
       </div>
     </div>
 
-    <% if @current_application_status == "enrolled" && @balance_due > 0 %>
+    <% if @current_application_status == "offer accepted" && @balance_due > 0 %>
       <div class="w-2/3">
         <p>Enter a payment up to the balance due amount:</p>
           <%= form_with url: make_payment_path, local: true do |f| %>
