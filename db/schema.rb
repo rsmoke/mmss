@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_03_203308) do
+ActiveRecord::Schema.define(version: 2020_11_10_200649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_203308) do
   create_table "activities", force: :cascade do |t|
     t.bigint "camp_occurrence_id", null: false
     t.string "description", null: false
-    t.string "cost_cents", null: false
+    t.integer "cost_cents", null: false
     t.date "date_occurs", null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_203308) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "offer_letter"
     t.string "student_packet_url"
+    t.integer "application_fee_cents"
     t.index ["camp_year"], name: "index_camp_configurations_on_camp_year", unique: true
   end
 
