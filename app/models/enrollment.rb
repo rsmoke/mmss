@@ -36,7 +36,7 @@ class Enrollment < ApplicationRecord
   has_many :session_activities, dependent: :destroy 
   has_many :session_registrations, through: :session_activities, source: :camp_occurrence
 
-  has_many :session_assignments
+  has_many :session_assignments, dependent: :destroy
   accepts_nested_attributes_for :session_assignments, allow_destroy: true
 
   has_many :course_preferences, dependent: :destroy
