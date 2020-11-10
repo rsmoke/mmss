@@ -11,28 +11,32 @@ ActiveAdmin.register_page "Dashboard" do
 
     # Here is an example of a simple dashboard with columns and panels.
 
-    columns do
-      panel "Partial display Demo" do
-        div do
-          render("/admin/testing_partial_display", model: "dashboard")
-        end
-      end
-    end
+    # columns do
+    #   panel "Partial display Demo" do
+    #     div do
+    #       render("/admin/testing_partial_display", model: "dashboard")
+    #     end
+    #   end
+    # end
 
     columns do
       column do
         panel "Recent Applications" do
-          ul do
-            Enrollment.limit(10).map do |enroll|
-              li link_to(enroll.user.email, admin_applicant_detail_path(enroll.user.applicant_detail))
+          if Enrollment.any?
+            ul do
+              Enrollment.limit(10).map do |enroll|
+                li link_to(enroll.user.email, admin_applicant_detail_path(enroll.user.applicant_detail))
+              end
             end
           end
         end
 
         panel "Recent Payments" do
-          ul do
-            Payment.limit(10).map do |payment|
-              li link_to("#{payment.user.email} - #{ humanized_money_with_symbol(payment.total_amount.to_f / 100)}", admin_payment_path(payment.id))
+          if Payment.any?
+            ul do
+              Payment.limit(10).map do |payment|
+                li link_to("#{payment.user.email} - #{ humanized_money_with_symbol(payment.total_amount.to_f / 100)}", admin_payment_path(payment.id))
+              end
             end
           end
         end
