@@ -15,6 +15,75 @@ ActiveAdmin.register ApplicantDetail do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  form do |f| # This is a formtastic form builder
+    f.semantic_errors # shows errors on :base
+    # f.inputs           # builds an input field for every attribute
+    f.actions 
+    f.inputs do
+      f.input :user_id, as: :select, collection: User.all
+      f.input :firstname
+      f.input :middlename
+      f.input :lastname
+      f.input :gender, as: :select, collection: Gender.all
+      f.input :us_citizen
+      f.input :demographic, as: :select, collection: Demographic.all
+      f.input :birthdate
+      f.input :diet_restrictions
+      f.input :shirt_size
+      f.input :address1
+      f.input :address2
+      f.input :city
+      f.input :state, as: :select, collection: us_states
+      f.input :state_non_us
+      f.input :postalcode
+      f.input :country
+      f.input :phone
+      f.input :parentname
+      f.input :parentaddress1
+      f.input :parentaddress2
+      f.input :parentcity
+      f.input :parentstate, as: :select, collection: us_states
+      f.input :parentstate_non_us
+      f.input :parentzip
+      f.input :parentcountry
+      f.input :parentphone
+      f.input :parentworkphone
+      f.input :parentemail
+    end
+  end
+
+  filter :gender, as: :select, collection: Gender.all.map{|a| [a.name, a.id]}
+  filter :demographic, as: :select, collection: Demographic.all.map{|a| [a.name, a.id]}
+  filter :state, as: :select
+  filter :firstname, as: :select
+  filter :middlename
+  filter :lastname, as: :select
+
+  filter :us_citizen
+
+  filter :birthdate
+  filter :diet_restrictions
+  filter :shirt_size, as: :select
+  filter :address1
+  filter :address2
+  filter :city
+
+  filter :state_non_us
+  filter :postalcode
+  filter :country, as: :select
+  filter :phone
+  filter :parentname
+  filter :parentaddress1
+  filter :parentaddress2
+  filter :parentcity
+  filter :parentstate
+  filter :parentstate_non_us
+  filter :parentzip
+  filter :parentcountry
+  filter :parentphone
+  filter :parentworkphone
+  filter :parentemail
+
   index do 
     selectable_column
     actions

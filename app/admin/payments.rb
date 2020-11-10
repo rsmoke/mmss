@@ -16,4 +16,29 @@ ActiveAdmin.register Payment do
   #   permitted
   # end
 
+  index do
+    column "User" do |p|
+      p.user
+    end
+    column "Type" do |tt|
+      tt.transaction_type
+    end
+    column "Status" do |ts|
+      ts.transaction_status
+    end
+    column :transaction_id  
+    column "Total Amount" do |p|
+      humanized_money_with_symbol(p.total_amount.to_i / 100)
+    end  
+    column :transaction_date
+    column :account_type    
+    column :result_code     
+    column :result_message  
+    column :user_account    
+    column :payer_identity  
+    column :timestamp       
+    column :transaction_hash 
+ 
+  end
+
 end
