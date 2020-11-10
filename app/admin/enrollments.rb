@@ -75,10 +75,12 @@ ActiveAdmin.register Enrollment, as: "Application" do
       f.semantic_errors
       f.has_many :session_assignments, heading: 'Session Assignments',
                   allow_destroy: true,
+                  # allow_destroy:  -> (s) { s.destroy_course_assignment? },
                   new_record: true do |a|
                     a.input :offer_status, input_html: { disabled: true }
                     a.input :camp_occurrence_id, as: :select, collection: application.session_registrations
                   end
+                  text_node "&nbsp;&nbsp;&nbsp;&nbsp; * if you delete a session assignment be certain to delete any corresponding course assignment".html_safe
     end
 
     f.inputs do
@@ -92,10 +94,11 @@ ActiveAdmin.register Enrollment, as: "Application" do
                     rank - #{application.course_preferences.find_by(course_id: u.id).ranking}, available - #{u.available_spaces - CourseAssignment.number_of_assignments(u.id)}", u.id]}
                   end
     end
-        
-    f.inputs do
-      f.input :offer_status, as: :select, collection: ['accepted','declined','offered']
-      f.input :application_status, as: :select, collection: ['enrolled', 'application complete', 'offer accepted', 'offer declined','submitted']
+    if application.session_assignments.any? and application.course_assignments.any?
+      f.inputs do
+        f.input :offer_status, as: :select, collection: ['accepted','declined','offered']
+        f.input :application_status, as: :select, collection: ['enrolled', 'application complete', 'offer accepted', 'offer declined','submitted']
+      end
     end
     f.actions         # adds the 'Submit' and 'Cancel' button
   end

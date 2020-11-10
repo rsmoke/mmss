@@ -20,7 +20,7 @@ ActiveAdmin.register SessionAssignment do
     f.inputs do
       f.input :enrollment_id, as: :select, collection: Enrollment.all
       f.input :camp_occurrence_id, as: :select, collection: CampOccurrence.active
-      f.input :offer_status, as: :select, collection: ['accepted','declined', 'none']
+      f.input :offer_status, as: :select, collection: ['accepted','declined']
     end
     f.actions
   end
