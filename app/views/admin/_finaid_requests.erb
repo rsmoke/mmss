@@ -1,5 +1,3 @@
-<h3>Financial Aid Requests</h3>
-
 <% if FinancialAid.present? %>
   <% FinancialAid.all.each do |fa| %>
     <li><%= link_to fa.enrollment.applicant_detail.full_name, admin_financial_aid_request_path(fa.enrollment.financial_aid) %>
