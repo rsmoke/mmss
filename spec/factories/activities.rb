@@ -5,7 +5,7 @@
 #  id                 :bigint           not null, primary key
 #  camp_occurrence_id :bigint           not null
 #  description        :string           not null
-#  cost_cents         :string           not null
+#  cost_cents         :integer          not null
 #  date_occurs        :date             not null
 #  active             :boolean          default(FALSE), not null
 #  created_at         :datetime         not null

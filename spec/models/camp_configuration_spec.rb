@@ -14,6 +14,7 @@
 #  updated_at                :datetime         not null
 #  offer_letter              :text
 #  student_packet_url        :string
+#  application_fee_cents     :integer
 #
 require 'rails_helper'
 
