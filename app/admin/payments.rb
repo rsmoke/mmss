@@ -26,6 +26,7 @@ ActiveAdmin.register Payment do
       f.input :transaction_status, input_html: {value: "1"}
       f.input :transaction_id
       f.input :account_type
+      f.input :result_message
       f.input :transaction_date, input_html: {value: "#{DateTime.now.strftime('%Y%m%d%H%M')}"}
       # f.object.transaction_date = DateTime.now.strftime('%Y%m%d%H%M') unless f.object.persisted?
       # f.object.transaction_date ||= unless f.object.new_record?
