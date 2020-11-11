@@ -13,7 +13,7 @@
 
   <p>
     <strong>Amount:</strong>
-    <%= humanized_money_with_symbol(@financial_aid.amount_cents) %>
+    <%= humanized_money_with_symbol(@financial_aid.amount) %>
   </p>
 
   <p>
@@ -27,14 +27,6 @@
   <%= @financial_aid.note %>
 </p>
 
-<p>
-  <strong>Status:</strong>
-  <% if @financial_aid.status %>
-    <%= @financial_aid.status %>
-  <% else %>
-    Pending
-  <% end %>
-</p>
 
 <%= link_to 'Edit |', edit_financial_aid_path(@financial_aid) unless @financial_aid.awarded %>
 <%= link_to 'Home', root_path %>
