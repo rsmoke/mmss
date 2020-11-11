@@ -6,7 +6,7 @@ ActiveAdmin.register Payment do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :user_id, :total_amount, :transaction_type, :transaction_status, :transaction_id, :transaction_date, :acount_type, :result_code, :result_message, :user_account, :timestamp, :transaction_hash
+   permit_params :user_id, :total_amount, :transaction_type, :transaction_status, :transaction_id, :transaction_date, :account_type, :result_code, :result_message, :user_account, :timestamp, :transaction_hash
   #
   # or
   #
