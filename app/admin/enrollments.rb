@@ -29,6 +29,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
   scope :all, :default => true
   scope :offered
   scope :accepted
+  scope :application_complete
+  scope :enrolled
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
