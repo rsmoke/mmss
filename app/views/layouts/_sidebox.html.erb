@@ -51,8 +51,10 @@
             <%= link_to "Financial Aid",
                         enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aid) %>
 
-            <% if current_user.enrollments.last.financial_aid.awarded %>
+            <% if FinancialAid.where(enrollment_id: current_user.enrollments.last).pluck(:status).include? 'awarded' %>
               - awarded
+            <% elsif FinancialAid.where(enrollment_id: current_user.enrollments.last).pluck(:status).all? 'rejected' %>
+              - rejected
             <% else %>
               - pending
             <% end %>

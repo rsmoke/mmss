@@ -5,22 +5,23 @@
   </p>
 <% end %>
 
-<% if @financial_aid.awarded %>
-  <p>
-    <strong>Awarded:</strong>
-    <%= @financial_aid.awarded %>
+<% enroll_id = @financial_aid.enrollment_id %>
+  <% FinancialAid.where(enrollment_id: enroll_id).each do |fa| %>
+    <p>
+      <strong>Amount:</strong>
+      <%= humanized_money_with_symbol(fa.amount) %>
+    </p>
+    <p>
+      <strong>Source:</strong>
+      <%= fa.source %>
   </p>
-
   <p>
-    <strong>Amount:</strong>
-    <%= humanized_money_with_symbol(@financial_aid.amount) %>
-  </p>
-
-  <p>
-    <strong>Source:</strong>
-    <%= @financial_aid.source %>
+    <strong>Status:</strong>
+    <%= fa.status %>
   </p>
 <% end %>
+
+
 
 <p>
   <strong>Note:</strong>
@@ -28,5 +29,5 @@
 </p>
 
 
-<%= link_to 'Edit |', edit_financial_aid_path(@financial_aid) unless @financial_aid.awarded %>
+<%#= link_to 'Edit |', edit_financial_aid_path(@financial_aid) unless @financial_aid.awarded %>
 <%= link_to 'Home', root_path %>

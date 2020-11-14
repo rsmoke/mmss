@@ -72,7 +72,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       row :source
       row :awarded
       row :note
-      # row :status
+      row :status
     end
     active_admin_comments
   end
