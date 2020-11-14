@@ -25,7 +25,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       f.input :source
       f.input :awarded
       f.input :note
-      # f.input :status
+      f.input :status, as: :select, collection: financial_aid_status
       f.input :taxform, as: :file
     end
     f.actions         # adds the 'Submit' and 'Cancel' button
@@ -50,7 +50,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
     column :source
     column :awarded
     column :note
-    # column :status
+    column :status
 
     actions
   end
@@ -72,7 +72,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       row :source
       row :awarded
       row :note
-      # row :status
+      row :status
     end
     active_admin_comments
   end
