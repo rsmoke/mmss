@@ -54,9 +54,9 @@ ActiveAdmin.register ApplicantDetail do
 
   filter :gender, as: :select, collection: Gender.all.map{|a| [a.name, a.id]}
   filter :demographic, as: :select, collection: Demographic.all.map{|a| [a.name, a.id]}
-  filter :state, as: :select
-  filter :firstname, as: :select
-  filter :middlename
+  # filter :state, as: :select
+  # filter :firstname, as: :select
+  # filter :middlename
   filter :lastname, as: :select
 
   filter :us_citizen
@@ -64,25 +64,25 @@ ActiveAdmin.register ApplicantDetail do
   filter :birthdate
   filter :diet_restrictions
   filter :shirt_size, as: :select
-  filter :address1
-  filter :address2
-  filter :city
+  # filter :address1
+  # filter :address2
+  # filter :city
 
-  filter :state_non_us
-  filter :postalcode
-  filter :country, as: :select
-  filter :phone
+  # filter :state_non_us
+  # filter :postalcode
+  # filter :country, as: :select
+  # filter :phone
   filter :parentname
-  filter :parentaddress1
-  filter :parentaddress2
-  filter :parentcity
-  filter :parentstate
-  filter :parentstate_non_us
-  filter :parentzip
-  filter :parentcountry
-  filter :parentphone
-  filter :parentworkphone
-  filter :parentemail
+  # filter :parentaddress1
+  # filter :parentaddress2
+  # filter :parentcity
+  # filter :parentstate
+  # filter :parentstate_non_us
+  # filter :parentzip
+  # filter :parentcountry
+  # filter :parentphone
+  # filter :parentworkphone
+  # filter :parentemail
 
   index do 
     selectable_column

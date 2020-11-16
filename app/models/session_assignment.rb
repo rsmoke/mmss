@@ -16,4 +16,8 @@ class SessionAssignment < ApplicationRecord
   def description_name
     self.camp_occurrence.description
   end
+
+  def display_name
+    self.camp_occurrence
+  end
 end
