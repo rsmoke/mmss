@@ -255,15 +255,20 @@ ActiveAdmin.register Enrollment, as: "Application" do
 
     if application.financial_aid.present?
       panel "Financial Aid Request" do
-        table_for application.financial_aid do
+        table_for FinancialAid.where(enrollment_id: application) do
           column "Request" do |item|
             if item.present?
-            link_to("view", admin_financial_aid_request_path(item))
+              link_to("view", admin_financial_aid_request_path(item))
             end
           end
-          column "Awarded" do |item|
+          column "Amount" do |item|
             if item.present?
-            item.awarded
+              humanized_money_with_symbol(item.amount)
+            end
+          end
+          column "Status" do |item|
+            if item.present?
+              item.status
             end
           end
 
