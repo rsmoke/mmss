@@ -92,9 +92,13 @@
               <div>
                 <%= sa.camp_occurrence.display_name %>
                 <div>
-                <% course_ids = CourseAssignment.where(enrollment_id: current_enrollment).pluck(:course_id) %>
-                Course:
-                <%= Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id).title %>
+                  <% course_ids = CourseAssignment.where(enrollment_id: current_enrollment).pluck(:course_id) %>
+                  Course:
+                  <% if Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id) %>
+                    <%= Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id).title %>
+                  <% else %>
+                  <%= "Contact MMSS admin"%>
+                  <% end %>
                 </div>
               </div>
               <% end %>
