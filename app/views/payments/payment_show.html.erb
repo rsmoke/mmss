@@ -65,7 +65,7 @@
       </div>
       <div class="font-bold text-base mb-2">
         <% if @current_application_status == "enrolled" %>
-          <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost).rjust(12,'.')}" %>
+          <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost / 100).rjust(12,'.')}" %>
         <% end %>
       </div>
       <% if @current_application_status == "offer accepted" %>
