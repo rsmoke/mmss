@@ -39,7 +39,7 @@
       </h6>
     <% end %>
 
-    <% if current_user.enrollments.last.financial_aid.blank? && (@current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
+    <% if current_user.enrollments.last.financial_aid.blank? && (@current_application_status == nil || @current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
       <p class="mb-2">If you are applying for need-based financial support. Please fill out
         the
         <br>
@@ -65,7 +65,7 @@
       </div>
       <div class="font-bold text-base mb-2">
         <% if @current_application_status == "enrolled" %>
-          <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost).rjust(12,'.')}" %>
+          <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost / 100).rjust(12,'.')}" %>
         <% end %>
       </div>
       <% if @current_application_status == "offer accepted" %>

@@ -79,13 +79,16 @@
         <% elsif current_user.enrollments.last.application_status == "offer accepted" %>
           <p class="direction_notes">
             Payment of the balance of program tuition and fees is due by
-            <%= @application_materials_due_date.strftime("%B %e, %Y") %>.
+            <%= @application_materials_due_date.strftime("%B %e, %Y") %>. Use the
+            payment form in your <%= link_to "Account Summary", all_payments_path %>.
           </p>
-          <h4>Download and Return the 
-            <%= link_to student_packet_url, target: "_blank" do %>
-                Student Information Packet
-              <% end %> 
-            as soon as possible!</h4>
+          <% unless current_enrollment.student_packet.attached? %>
+            <h4>Download and Return the 
+              <%= link_to student_packet_url, target: "_blank" do %>
+                  Student Information Packet
+                <% end %> 
+              as soon as possible!</h4>
+            <% end %>
         <% elsif current_user.enrollments.last.application_status == "offer declined" %>
           <p class="direction_notes">
             Thanks for your interest.

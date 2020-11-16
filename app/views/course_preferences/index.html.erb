@@ -6,7 +6,7 @@
 <%# @current_enrollment_session1_courses.size %>
   <% @current_enrollment_session1_courses.each do |sc| %>
     <div>-<%= sc.title %> Rank: [ <%= @current_enrollment_course_preferences_all.find_by(course_id: sc.id).ranking %> ]
-    <% if @current_enrollment.application_status == "" %>
+    <% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>
       -- <%= link_to "edit", edit_enrollment_course_preference_path(@current_enrollment, @current_enrollment_course_preferences_all.find_by(course_id: sc.id)), class: 'btn btn-sm btn-blue' %>
     <% end %>
     </div>
@@ -19,7 +19,7 @@
  <h2>Session 2</h2>
   <% @current_enrollment_session2_courses.each do |sc| %>
     <div>-<%= sc.title %> Rank: [ <%= @current_enrollment_course_preferences_all.find_by(course_id: sc.id).ranking %> ]
-    <% if @current_enrollment.application_status == "" %>
+    <% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>
       -- <%= link_to "edit", edit_enrollment_course_preference_path(@current_enrollment, @current_enrollment_course_preferences_all.find_by(course_id: sc.id)), class: 'btn btn-sm btn-blue' %>
     <% end %>
     </div>
@@ -31,7 +31,7 @@
  <h2>Session 3</h2>
   <% @current_enrollment_session3_courses.each do |sc| %>
     <div>-<%= sc.title %> Rank: [ <%= @current_enrollment_course_preferences_all.find_by(course_id: sc.id).ranking %> ]
-    <% if @current_enrollment.application_status == "" %>
+    <% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>
       -- <%= link_to "edit", edit_enrollment_course_preference_path(@current_enrollment, @current_enrollment_course_preferences_all.find_by(course_id: sc.id)), class: 'btn btn-sm btn-blue' %>
     <% end %>
     </div>

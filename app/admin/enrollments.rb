@@ -192,14 +192,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
         end
       end
 
-      panel "Activities/Services" do
-        table_for application.enrollment_activities do
-          column(:activity_id) { |item| item.activity.description }
-          column "Session" do |item| 
-            item.activity.camp_occurrence.description 
-          end
-        end
-      end
       panel "Course Assignment" do
         table_for application.course_assignments do
           column(:id) { |item| link_to(item.id, admin_course_assignment_path(item)) }
@@ -224,7 +216,15 @@ ActiveAdmin.register Enrollment, as: "Application" do
         end
       end
     # end
-
+    panel "Activities/Services" do
+      table_for application.enrollment_activities do
+        column(:activity_id) { |item| item.activity.description }
+        column "Session" do |item| 
+          item.activity.camp_occurrence.description 
+        end
+      end
+    end
+    
     panel "Payment Activity" do
       table_for application.user.payments do
         column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
