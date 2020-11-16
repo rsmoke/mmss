@@ -132,7 +132,7 @@
       </div>
       <% if @finaids.present? %>
         <div class="text-gray-700">
-          <%= "#{'financial_aid_awarded'.humanize.ljust(31, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
+          <%= "#{'financial_aid_request'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
         </div>
       <% end %>
       <hr/>
@@ -206,21 +206,15 @@
               <%= link_to aid.taxform.filename, url_for(aid.taxform) %>
             </div>
           <% end %>
-          <% if aid.awarded %>
-            <div class="text-gray-700 text-sm">
-              Status: Awarded
-            </div>
-            <div class="text-gray-700 text-sm">
-              <%= "Financial source: #{aid.source}" %>
-            </div>
-            <div class="text-gray-700 text-sm">
-              <%= "Amount: #{humanized_money_with_symbol(aid.amount )}" %>
-            </div>
-          <% else %>
-            <div class="text-gray-700 text-sm">
-              Status: Pending
-            </div>
-          <% end %>
+          <div class="text-gray-700 text-sm">
+            <%= "Status: #{aid.status}" %>
+          </div>
+          <div class="text-gray-700 text-sm">
+            <%= "Financial source: #{aid.source}" %>
+          </div>
+          <div class="text-gray-700 text-sm">
+            <%= "Amount: #{humanized_money_with_symbol(aid.amount )}" %>
+          </div>
           <div class="text-gray-700 text-sm">
             <%= "Date: #{aid.updated_at}" %>
           </div>
