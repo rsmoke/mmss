@@ -143,7 +143,9 @@
   <strong>Demographic:</strong>
     <%= demographic_description(@applicant_detail) %>
 </p>
+
 <%# if Enrollment.find_by(user_id: @applicant_detail.user_id).application_status == nil || Enrollment.find_by(user_id: @applicant_detail.user_id).application_status == "" %>
+
   <%= link_to 'Edit', edit_applicant_detail_path(@applicant_detail) %> |
 <%# end %>
 <%= link_to 'Home', root_path %>
