@@ -69,10 +69,11 @@
       @current_application_status = @user_current_enrollment.application_status
       @finaids = FinancialAid.where(enrollment_id: @user_current_enrollment.id) #need loop
       @finaids_ttl = @finaids.pluck(:amount_cents).sum
+      @finaids_awarded_ttl = @finaids.where(status: "awarded").pluck(:amount_cents).sum
       @users_current_payments = Payment.where(user_id: current_user )
       @ttl_paid = Payment.where(user_id: current_user, transaction_status: '1').pluck(:total_amount).map(&:to_i).sum     # cost_sessions = 1300 * @user_current_enrollment.session_registrations.size
       @total_cost = cost_sessions_ttl + cost_activities_ttl + CampConfiguration.active_camp_fee_cents
-      @balance_due = @total_cost.to_i - @finaids_ttl.to_i - @ttl_paid.to_i
+      @balance_due = @total_cost.to_i - @finaids_awarded_ttl.to_i - @ttl_paid.to_i
     end
 
     private
