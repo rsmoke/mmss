@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_200649) do
+ActiveRecord::Schema.define(version: 2020_11_16_172916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,9 +238,8 @@ ActiveRecord::Schema.define(version: 2020_11_10_200649) do
     t.bigint "enrollment_id", null: false
     t.integer "amount_cents"
     t.string "source"
-    t.boolean "awarded", default: false
     t.text "note"
-    t.string "status"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["enrollment_id"], name: "index_financial_aids_on_enrollment_id"
