@@ -6,9 +6,8 @@
 #  enrollment_id :bigint           not null
 #  amount_cents  :integer
 #  source        :string
-#  awarded       :boolean          default(FALSE)
 #  note          :text
-#  status        :string
+#  status        :string           default("pending")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

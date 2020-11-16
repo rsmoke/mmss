@@ -6,7 +6,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :enrollment_id, :amount_cents, :source, :awarded, :note, :status
+   permit_params :enrollment_id, :amount_cents, :source, :note, :status
   #
   # or
   #
@@ -23,7 +23,6 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       f.input :enrollment_id, as: :select, collection: Enrollment.all
       f.input :amount_cents
       f.input :source
-      f.input :awarded
       f.input :note
       f.input :status, as: :select, collection: financial_aid_status
       f.input :taxform, as: :file
@@ -48,7 +47,6 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       humanized_money_with_symbol(co.amount)
     end
     column :source
-    column :awarded
     column :note
     column :status
 
@@ -70,7 +68,6 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
         humanized_money_with_symbol(co.amount)
       end
       row :source
-      row :awarded
       row :note
       row :status
     end
