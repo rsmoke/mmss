@@ -6,15 +6,12 @@
       <p><strong>Progress Window</strong><p>
 
       <% if current_user.enrollments.present? && current_user.enrollments.last.persisted? %>
-        <% if current_user.enrollments.last.recommendation.present? %>
-          <% if current_user.enrollments.last.recommendation.recupload.present? && current_user.payments.present? %>
-            <span class="text-green-700 font-semibold">Application Complete</span>
-          <% else %>
-            <span class="text-red-500 font-semibold">Application incomplete</span>
-          <% end %>
+        <% if current_user.enrollments.last.application_status.present? %>
+          <span class="text-green-700 font-semibold"><%= current_user.enrollments.last.application_status.titleize %></span>
+        <% else %>
+          <span class="text-red-500 font-semibold">Application incomplete</span>
         <% end %>
       <% end %>
-
       <div class="sidebox_element"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> - submitted </div>
 
       <% if current_user.enrollments.present? && current_user.enrollments.last.persisted? %>
