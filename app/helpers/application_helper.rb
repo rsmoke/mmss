@@ -38,6 +38,7 @@ module ApplicationHelper
 
   def us_states
     [
+      ['*Non-US*', 'non-us'],
       ['Alabama', 'AL'],
       ['Alaska', 'AK'],
       ['Arizona', 'AZ'],
@@ -89,8 +90,7 @@ module ApplicationHelper
       ['Washington', 'WA'],
       ['West Virginia', 'WV'],
       ['Wisconsin', 'WI'],
-      ['Wyoming', 'WY'],
-      ['*Non-US*', 'non-us']
+      ['Wyoming', 'WY']
     ]
   end
 end
