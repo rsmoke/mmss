@@ -105,6 +105,31 @@ ActiveAdmin.register Enrollment, as: "Application" do
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
 
+  # filter :user_id
+  # filter :enrollment_activities
+  # filter :registration_activities
+  # filter :session_activities
+  # filter :session_assignments, as: :select, collection: SessionAssignment.where(enrollment_id: Enrollment.all).pluck(:camp_occurrence_id).uniq
+  # filter :session_registrations
+  # filter :international
+  # filter :high_school_name
+  # filter :high_school_address1
+  # filter :high_school_address2
+  # filter :high_school_city
+  # filter :high_school_state
+  # filter :high_school_non_us
+  # filter :high_school_postalcode
+  # filter :high_school_country
+  filter :year_in_school, as: :select
+  filter :anticipated_graduation_year, as: :select
+  # filter :room_mate_request
+  # filter :personal_statement
+  # filter :shirt_size
+  # filter :notes
+  filter :application_status, as: :select
+  filter :offer_status, as: :select
+  # filter :partner_program
+
   index do
     selectable_column
     actions
@@ -136,9 +161,9 @@ ActiveAdmin.register Enrollment, as: "Application" do
     column :year_in_school
     column :anticipated_graduation_year
     column :room_mate_request
-    column :personal_statement, sortable: false do |ps|
-      truncate(ps.personal_statement, omision: "...", length: 25)
-    end
+    # column :personal_statement, sortable: false do |ps|
+    #   truncate(ps.personal_statement, omision: "...", length: 25)
+    # end
     column :notes
     column :partner_program
   end
@@ -217,6 +242,16 @@ ActiveAdmin.register Enrollment, as: "Application" do
       end
     # end
     panel "Activities/Services" do
+      table_for Activity.where(camp_occurrence_id: application.session_assignments.accepted.pluck(:camp_occurrence_id)).order(:camp_occurrence_id) do
+        column "Assigned Activities" do |item|
+          # (:activity_id) { |item| item.description }
+          item.description
+        end
+        column "Session" do |item| 
+          item.camp_occurrence.description 
+        end
+      end
+
       table_for application.enrollment_activities do
         column(:activity_id) { |item| item.activity.description }
         column "Session" do |item| 

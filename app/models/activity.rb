@@ -28,4 +28,8 @@ class Activity < ApplicationRecord
   end
 
   scope :active, -> { where(active: true).order(description: :asc) }
+
+  def display_name
+    "#{self.description} - #{self.camp_occurrence.description}" # or whatever column you want
+  end
 end
