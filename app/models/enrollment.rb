@@ -75,6 +75,10 @@ class Enrollment < ApplicationRecord
     self.user.email # or whatever column you want
   end
 
+  def campyear
+    self.session_registrations.last.camp_configuration.camp_year
+  end
+
   private
 
   def at_least_one_is_checked
@@ -101,5 +105,6 @@ class Enrollment < ApplicationRecord
       OfferMailer.offer_email(self.user_id).deliver_now
     end
   end
+
   # scope :current_enrollment, ->(user=@current_user) { where(user_id: user) }
 end
