@@ -107,9 +107,9 @@ ActiveAdmin.register Enrollment, as: "Application" do
 
   # filter :user_id
   # filter :enrollment_activities
-  filter :registration_activities
+  # filter :registration_activities
   # filter :session_activities
-  filter :session_assignments
+  # filter :session_assignments, as: :select, collection: SessionAssignment.where(enrollment_id: Enrollment.all).pluck(:camp_occurrence_id).uniq
   # filter :session_registrations
   # filter :international
   # filter :high_school_name
@@ -242,6 +242,16 @@ ActiveAdmin.register Enrollment, as: "Application" do
       end
     # end
     panel "Activities/Services" do
+      table_for Activity.where(camp_occurrence_id: application.session_assignments.accepted.pluck(:camp_occurrence_id)).order(:camp_occurrence_id) do
+        column "Assigned Activities" do |item|
+          # (:activity_id) { |item| item.description }
+          item.description
+        end
+        column "Session" do |item| 
+          item.camp_occurrence.description 
+        end
+      end
+
       table_for application.enrollment_activities do
         column(:activity_id) { |item| item.activity.description }
         column "Session" do |item| 
