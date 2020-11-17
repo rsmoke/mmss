@@ -79,6 +79,10 @@ class Enrollment < ApplicationRecord
     self.session_registrations.last.camp_configuration.camp_year
   end
 
+  # def self.ransackable_scopes(_auth_object = nil)
+  #   %i(campyear)
+  # end
+
   private
 
   def at_least_one_is_checked
