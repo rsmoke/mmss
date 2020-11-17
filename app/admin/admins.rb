@@ -1,4 +1,5 @@
 ActiveAdmin.register Admin do
+  config.filters = false
   menu parent: 'Logins Info', priority: 1
   permit_params :email, :password, :password_confirmation
 
@@ -12,10 +13,10 @@ ActiveAdmin.register Admin do
     actions
   end
 
-  filter :email
-  filter :current_sign_in_at
-  filter :sign_in_count
-  filter :created_at
+  # filter :email
+  # filter :current_sign_in_at
+  # filter :sign_in_count
+  # filter :created_at
 
   form do |f|
     f.inputs do

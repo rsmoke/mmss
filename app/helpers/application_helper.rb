@@ -27,6 +27,13 @@ module ApplicationHelper
     ]
   end
 
+  def course_status
+    [
+      ['open','open'],
+      ['closed','closed']
+    ]
+  end
+
   def offer_status
     [
       ['*Select*', ''],

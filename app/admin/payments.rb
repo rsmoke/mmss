@@ -16,6 +16,11 @@ ActiveAdmin.register Payment do
   #   permitted
   # end
   actions :index, :show, :new, :create, :update, :edit
+
+  filter :user_id, as: :select, collection: User.all
+  filter :account_type, as: :select
+
+
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
     # f.inputs           # builds an input field for every attribute
