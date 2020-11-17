@@ -14,12 +14,12 @@ class SessionAssignment < ApplicationRecord
   belongs_to :camp_occurrence
 
   scope :accepted, -> {where("offer_status = 'accepted'")}
-  
-  def description_name
-    self.camp_occurrence.description
-  end
 
-  def display_name
-    self.camp_occurrence_id
-  end
+  # def description_name
+  #   self.camp_occurrence.description
+  # end
+
+  # def display_name
+  #   self.camp_occurrence_id
+  # end
 end
