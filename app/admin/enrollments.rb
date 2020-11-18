@@ -128,10 +128,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
   # filter :notes
   filter :application_status, as: :select
   filter :offer_status, as: :select
-  filter :campyear, as: :select, collection: CampConfiguration.all.camp_year
-  # as: :select,
-  # label: 'Camp Year',
-  # filters: [:eq]
+
   # filter :partner_program
 
   index do
