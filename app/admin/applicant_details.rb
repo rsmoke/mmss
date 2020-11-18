@@ -91,10 +91,17 @@ ActiveAdmin.register ApplicantDetail do
     # column :user_id, sortable: :user_id do |user|
     #   link_to user.applicant_email, admin_user_path(user.user_id)
     # end
-    column :firstname
-    column :middlename
-    column :lastname
-    column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
+    # column :firstname
+    # column :middlename
+    # column :lastname
+    column "Fullname" do |appdetail|
+      appdetail.full_name
+    end
+    column('eMail') do |app| 
+      div(title: 'Link to Application') do
+        link_to app.applicant_email, admin_application_path(app.user.enrollments.last) 
+      end
+    end
     column :gender do |g|
       g.gender_name
     end
@@ -158,7 +165,12 @@ ActiveAdmin.register ApplicantDetail do
         # column :user_id do |user|
         #   link_to user.applicant_email, admin_user_path(user.user_id)
         # end
-        column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
+        # column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
+        column('eMail') do |app| 
+          div(title: 'Link to Application') do
+            link_to app.applicant_email, admin_application_path(app.user.enrollments.last) 
+          end
+        end
       end
     end
     active_admin_comments
