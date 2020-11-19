@@ -161,6 +161,10 @@
 
     <%= form.text_field :user_id, hidden: true %>
   </div>
+  <div class="field">
+
+    <%= form.hidden_field :campyear, value: current_camp_year %>
+  </div>
 
   <div class="field">
     <%= form.label :year_in_school, "Current Grade" %>

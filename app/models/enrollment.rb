@@ -23,6 +23,7 @@
 #  partner_program             :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  campyear                    :integer
 #
 class Enrollment < ApplicationRecord
   after_update :send_offer_letter
@@ -75,9 +76,9 @@ class Enrollment < ApplicationRecord
     self.user.email # or whatever column you want
   end
 
-  def campyear
-    self.session_registrations.last.camp_configuration.camp_year
-  end
+  # def campyear
+  #   self.session_registrations.last.camp_configuration.camp_year
+  # end
 
   private
 
