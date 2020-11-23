@@ -6,9 +6,33 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 users = User.create([
-  {email: 'chesttest@tester.com', password:'secret', password_confirmation: 'secret'},
-  {email: "moe@tester.com", password: "secret", password_confirmation: "secret"}
+  {email: 'chesttest@tester.com', password:'secretsecret', password_confirmation: 'secretsecret'},
+  {email: "moe@tester.com", password: "secretsecret", password_confirmation: "secretsecret"},
+  {email: 'bear@tester.com', password:'secretsecret', password_confirmation: 'secretsecret'},
+  {email: "rick@tester.com", password: "secretsecret", password_confirmation: "secretsecret"},
+  {email: 'tom@tester.com', password:'secretsecret', password_confirmation: 'secretsecret'},
+  {email: "nick@tester.com", password: "secretsecret", password_confirmation: "secretsecret"},
+  {email: 'homer@tester.com', password:'secretsecret', password_confirmation: 'secretsecret'},
+  {email: "marge@tester.com", password: "secretsecret", password_confirmation: "secretsecret"}
   ])
+
+applicant_detail = ApplicantDetail.create([
+  {user_id: 3, firstname: "Lena", gender: "2", lastname: "Pet", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"},
+  {user_id: 4, firstname: "Ches", gender: "1", lastname: "Test", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"},
+  {user_id: 5, firstname: "Moe", gender: "1", lastname: "Person", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"},
+  {user_id: 6, firstname: "Bear", gender: "1", lastname: "Forest", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"},
+  {user_id: 7, firstname: "Rick", gender: "1", lastname: "Smoke", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"},
+  {user_id: 8, firstname: "Tom", gender: "1", lastname: "Smith", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"},
+  {user_id: 9, firstname: "Nick", gender: "1", lastname: "Barvinok", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"},
+  {user_id: 10, firstname: "Homer", gender: "1", lastname: "Simpson", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"},
+  {user_id: 11, firstname: "Marge", gender: "2", lastname: "Simpson", us_citizen: true, birthdate: "2008-01-02", shirt_size: "medium", address1: "123 Main St", city: "Ann Arbor", state: "MI", postalcode: "48103", country: "US", phone: "555-123-4567", parentname: "My Mom", parentphone: "555-098-8765", parentemail: "parent@test.com"}
+])
+
+# enrollment_detail = Enrollment.create([
+#   {user_id: 2, international: false, high_school_name: "Pioneer", high_school_address1: "123 Main St", high_school_address2: "", high_school_city: "Ann Arbor", high_school_state: "MI", high_school_non_us: "", high_school_postalcode: "48103", high_school_country: "US", year_in_school: "12", anticipated_graduation_year: "2021", room_mate_request: "", personal_statement: "Hello!\r\nPlease complete the Student Personal Statement by either typing or pasting it into the field below. This required part of your application MUST be at least 100 characters or more. You should include courses you have taken, external influences, computer experience, and research interests that draw you to this program, or other relevant information to help us evaluate your application material."},
+# ])
+
+
 
 admins = Admin.create([
   {email: 'rsmoke@umich.edu', password:'secret', password_confirmation: 'secret'}

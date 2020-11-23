@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_212908) do
+ActiveRecord::Schema.define(version: 2020_11_19_220935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_212908) do
   create_table "activities", force: :cascade do |t|
     t.bigint "camp_occurrence_id", null: false
     t.string "description", null: false
-    t.string "cost_cents", null: false
+    t.integer "cost_cents", null: false
     t.date "date_occurs", null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -138,6 +138,9 @@ ActiveRecord::Schema.define(version: 2020_10_06_212908) do
     t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "offer_letter"
+    t.string "student_packet_url"
+    t.integer "application_fee_cents"
     t.index ["camp_year"], name: "index_camp_configurations_on_camp_year", unique: true
   end
 
@@ -219,6 +222,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_212908) do
     t.string "partner_program"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "campyear"
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
@@ -235,9 +239,8 @@ ActiveRecord::Schema.define(version: 2020_10_06_212908) do
     t.bigint "enrollment_id", null: false
     t.integer "amount_cents"
     t.string "source"
-    t.boolean "awarded", default: false
     t.text "note"
-    t.string "status"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["enrollment_id"], name: "index_financial_aids_on_enrollment_id"
@@ -310,6 +313,16 @@ ActiveRecord::Schema.define(version: 2020_10_06_212908) do
     t.index ["enrollment_id"], name: "index_session_activities_on_enrollment_id"
   end
 
+  create_table "session_assignments", force: :cascade do |t|
+    t.bigint "enrollment_id", null: false
+    t.bigint "camp_occurrence_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "offer_status"
+    t.index ["camp_occurrence_id"], name: "index_session_assignments_on_camp_occurrence_id"
+    t.index ["enrollment_id"], name: "index_session_assignments_on_enrollment_id"
+  end
+
   create_table "travels", force: :cascade do |t|
     t.bigint "enrollment_id", null: false
     t.string "direction"
@@ -360,5 +373,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_212908) do
   add_foreign_key "recuploads", "recommendations"
   add_foreign_key "session_activities", "camp_occurrences"
   add_foreign_key "session_activities", "enrollments"
+  add_foreign_key "session_assignments", "camp_occurrences"
+  add_foreign_key "session_assignments", "enrollments"
   add_foreign_key "travels", "enrollments"
 end

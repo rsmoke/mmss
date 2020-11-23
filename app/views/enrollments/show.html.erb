@@ -13,6 +13,11 @@
 </p>
 
 <p>
+  <strong>Campyear:</strong>
+  <%= @enrollment.campyear %>
+</p>
+
+<p>
   <strong>International:</strong>
   <%= @enrollment.international %>
 </p>
@@ -103,7 +108,7 @@
 
 <% if @registration_activities.present? %>
   <div class="display-box mt-2">
-  <div class="section-header">Activities</div>
+  <div class="section-header">Activities & Services</div>
     <ul>
       <% @registration_activities.each do |r| %>
         <li>
@@ -151,8 +156,9 @@
       <%= @enrollment.partner_program %>
     </p>
 <% end %>
-
-<%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
+<% if @enrollment.application_status == "" || @enrollment.application_status == nil %>
+  <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
+<% end %>
 <%= link_to 'Home', root_path %>
 
 

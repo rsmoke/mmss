@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id                 :bigint           not null, primary key
+#  camp_occurrence_id :bigint           not null
+#  title              :string
+#  available_spaces   :integer
+#  status             :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
 class Course < ApplicationRecord
   belongs_to :camp_occurrence
   has_many :course_preferences
@@ -6,4 +18,8 @@ class Course < ApplicationRecord
 
 
   scope :is_open, -> { where(status: "open") }
+
+  def display_name
+    "#{self.title} - #{self.camp_occurrence.description}" # or whatever column you want
+  end
 end

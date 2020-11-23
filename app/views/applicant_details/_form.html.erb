@@ -45,21 +45,21 @@
 
   <div class="field state-select">
     <%= form.label :state%>
-    <%= form.select :state, us_states, include_blank: "*Select*", required: true %>
+    <%= form.select :state, us_states, include_blank: "Select", required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :state_non_us, "State if (Non-US)" %>
+    <%= form.label :state_non_us, class: 'form-optional'%>
     <%= form.text_field :state_non_us %>
   </div>
 
   <div class="field country-select">
     <%= form.label :country%>
-    <%= form.country_select :country, priority_countries: ["US"], include_blank: "*Select*", required: true %>
+    <%= form.country_select :country, priority_countries: ["US"], include_blank: "Select", required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :postalcode%>
+    <%= form.label :postalcode %>
     <%= form.text_field :postalcode, required: true %>
   </div>
 
@@ -71,13 +71,13 @@
   <div class="field">
     Birthdate:<br>
     <div class="date_select">
-      <%= form.date_select :birthdate, start_year: Date.today.year - 18, end_year: Date.today.year, include_blank: true, required: true %>
+      <%= form.date_select :birthdate, start_year: Date.today.year - 19, end_year: Date.today.year - 12, prompt: "Select",required: true %>
     </div>
   </div>
 
   <div class="field">
     <%= form.label :shirt_size%>
-    <%= form.select :shirt_size, ["small","medium","large","xlarge","2xlarge","No Shirt"], include_blank: "*Select*", required: true %>
+    <%= form.select :shirt_size, ["small","medium","large","xlarge","2xlarge","No Shirt"], include_blank: "Select", required: true %>
   </div>
 
   <div class="field">
@@ -88,58 +88,58 @@
 <h2 class="section-header">Parent/Guardian Information</h2>
 
   <div class="field">
-    <%= form.label :parentname%>
+    <%= form.label :parentname %>
     <%= form.text_field :parentname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :parentaddress1, class: 'form-optional'  %>
+    <%= form.label :parentaddress1, class: 'form-optional' %>
     <%= form.text_field :parentaddress1 %>
   </div>
 
   <div class="field">
-    <%= form.label :parentaddress2, class: 'form-optional'  %>
+    <%= form.label :parentaddress2, class: 'form-optional' %>
     <%= form.text_field :parentaddress2 %>
   </div>
 
   <div class="field">
-    <%= form.label :parentcity, class: 'form-optional'  %>
+    <%= form.label :parentcity, class: 'form-optional' %>
     <%= form.text_field :parentcity %>
   </div>
 
   <div class="field state-select">
-    <%= form.label :parentstate, class: 'form-optional'  %>
-    <%= form.select :parentstate, us_states, {}, include_blank: "*Select*" %>
+    <%= form.label :parentstate, class: 'form-optional' %>
+    <%= form.select :parentstate, us_states, include_blank: "Select" %>
 
   </div>
 
   <div class="field">
-    <%= form.label :parentstate_non_us, "Parent State if (Non-US)", class: 'form-optional' %>
+    <%= form.label :parentstate_non_us, class: 'form-optional' %>
     <%= form.text_field :parentstate_non_us %>
   </div>
 
   <div class="field">
-    <%= form.label :parentzip, class: 'form-optional'  %>
+    <%= form.label :parentzip, class: 'form-optional' %>
     <%= form.text_field :parentzip %>
   </div>
 
   <div class="field country-select">
-    <%= form.label :parentcountry, class: 'form-optional'  %>
-    <%= form.country_select  :parentcountry, priority_countries: ["US"], include_blank: "*Select*" %>
+    <%= form.label :parentcountry, class: 'form-optional' %>
+    <%= form.country_select  :parentcountry, priority_countries: ["US"], include_blank: "Select" %>
   </div>
 
   <div class="field">
-    <%= form.label :parentphone%>
+    <%= form.label :parentphone %>
     <%= form.text_field :parentphone, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :parentworkphone, class: 'form-optional'  %>
+    <%= form.label :parentworkphone, class: 'form-optional' %>
     <%= form.text_field :parentworkphone %>
   </div>
 
   <div class="field">
-    <%= form.label :parentemail%>
+    <%= form.label :parentemail %>
     <%= form.text_field :parentemail, required: true %>
   </div>
 
@@ -154,7 +154,7 @@
       based on your gender identity.
     </p>
       <%= form.label :gender%>
-      <%= form.collection_select(:gender, Gender.all, :id, :name, {include_blank: "*Select*"}) %>
+      <%= form.collection_select(:gender, Gender.all, :id, :name, {include_blank: "Select"}) %>
   </div>
 
   <div class="field">
@@ -166,7 +166,7 @@
 
   <div class="field">
     <%= form.label :demographic, "Race/Ethnicity", class: 'form-optional'  %>
-    <%= form.collection_select(:demographic, Demographic.all, :id, :name, include_blank: "*Select*") %>
+    <%= form.collection_select(:demographic, Demographic.all, :id, :name, include_blank: "Select") %>
   </div>
 
 

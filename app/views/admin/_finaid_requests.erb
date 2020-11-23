@@ -1,7 +1,8 @@
-<h3>Financial Aid Requests</h3>
-<% current_enrolled_applicants.each do |ca| %>
-  <% if ca.financial_aid.present? %>
-    <li><%= link_to ca.display_name, admin_financial_aid_request_path(ca.financial_aid) %> has been awarded <%= ca.financial_aid.awarded %>
+<% if FinancialAid.present? %>
+  <% FinancialAid.all.each do |fa| %>
+    <li><%= link_to fa.enrollment.applicant_detail.user.email, admin_financial_aid_request_path(fa.enrollment.financial_aid) %>
+    <%= "#{humanized_money_with_symbol(fa.amount)} -- #{fa.status}" %>
   <% end %>
-
+<% else %>
+  There are no requests in the system
 <% end %>

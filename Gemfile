@@ -47,7 +47,6 @@ gem 'money-rails', '~>1.12'
 # https://github.com/norman/friendly_id
 # gem 'friendly_id', '~> 5.4.0'
 
-gem 'newrelic_rpm'
 # gem 'newrelic-infinite_tracing'
 
 group :development, :test do
@@ -56,13 +55,14 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.9'
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
   gem 'factory_bot_rails', '~> 6.0'
-  gem 'shoulda-matchers', '~> 4.3'
   gem 'capybara'
   gem 'webdrivers'
+  gem 'faker'
 
 end
 
 group :development do
+  gem 'annotate'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'

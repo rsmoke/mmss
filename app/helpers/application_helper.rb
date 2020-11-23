@@ -8,14 +8,29 @@ module ApplicationHelper
       Enrollment.enrolled
   end
 
+  def current_enrollment
+    current_user.enrollments.last
+  end
+  
+  def student_packet_url 
+    CampConfiguration.active.pick(:student_packet_url)
+  end
+
   def applicant_status
     [
       ['*Select*', ''],
       ['enrolled', 'enrolled'],
-      ['new', 'new'],
-      ['none', 'none'],
-      ['registered', 'registered'],
+      ['application complete', 'application complete'],
+      ['offer accepted', 'offer accepted'],
+      ['offer declined', 'offer declined'],
       ['submitted', 'submitted']
+    ]
+  end
+
+  def course_status
+    [
+      ['open','open'],
+      ['closed','closed']
     ]
   end
 
@@ -24,14 +39,13 @@ module ApplicationHelper
       ['*Select*', ''],
       ['accepted', 'accepted'],
       ['declined', 'declined'],
-      ['offered', 'offered'],
-      ['none', 'none']
+      ['offered', 'offered']
     ]
   end
 
   def us_states
     [
-      ['*Select*', ''],
+      ['*Non-US*', 'non-us'],
       ['Alabama', 'AL'],
       ['Alaska', 'AK'],
       ['Arizona', 'AZ'],
@@ -83,8 +97,7 @@ module ApplicationHelper
       ['Washington', 'WA'],
       ['West Virginia', 'WV'],
       ['Wisconsin', 'WI'],
-      ['Wyoming', 'WY'],
-      ['*Non-US*', 'non-us']
+      ['Wyoming', 'WY']
     ]
   end
 end

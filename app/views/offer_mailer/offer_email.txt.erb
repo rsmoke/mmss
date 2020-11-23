@@ -1,0 +1,21 @@
+<%= "Hello #{@application.firstname}," %>
+<%= "\r\n" %>
+<%= @offer_letter_text %>
+<%= "\r\n" %>
+=======================================
+You have been assigned to:
+<%= "\r\n" %>
+<% @assigned_sessions.each do |as| %>
+  <%= as.camp_occurrence.display_name %>
+  <%= "\r\n" %>
+<% end %>
+<%= "\r\n" %>
+To participate in:
+<%= "\r\n" %>
+<% @assigned_courses.each do |ac| %>
+  <%= ac.course.display_name %>
+  <%= "\r\n" %>
+<% end %>
+=======================================
+<%= "\r\n" %>
+Please visit your application at <%= @url %>, and accept of decline this offer.

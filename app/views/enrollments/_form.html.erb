@@ -40,11 +40,10 @@
     </div>
 
     <div class="field">
-      <h2 class= "section-header">Services</h2>
+      <h2 class= "section-header">Activities & Services</h2>
       <p class="direction_notes">
         Check the box corresponding to each of the services you want to add for the
-        session(s) you selected. If you selected the <i>"any session"</i> box,
-        only select services in one session.
+        session(s) you selected.
       </p>
 
 
@@ -162,6 +161,10 @@
 
     <%= form.text_field :user_id, hidden: true %>
   </div>
+  <div class="field">
+
+    <%= form.hidden_field :campyear, value: current_camp_year %>
+  </div>
 
   <div class="field">
     <%= form.label :year_in_school, "Current Grade" %>
@@ -199,7 +202,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :high_school_non_us, "High School if Non-US was selected for state", class: 'form-optional' %>
+    <%= form.label :high_school_non_us, "High School State if Non-US", class: 'form-optional' %>
     <%= form.text_field :high_school_non_us %>
   </div>
 

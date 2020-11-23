@@ -6,7 +6,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :enrollment_id, :amount_cents, :source, :awarded, :note, :status
+   permit_params :enrollment_id, :amount_cents, :source, :note, :status
   #
   # or
   #
@@ -15,6 +15,9 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  filter :enrollment_id, as: :select, collection: Enrollment.all
+  filter :status, as: :select 
+  filter :source, as: :select
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
@@ -23,9 +26,8 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       f.input :enrollment_id, as: :select, collection: Enrollment.all
       f.input :amount_cents
       f.input :source
-      f.input :awarded
       f.input :note
-      f.input :status
+      f.input :status, as: :select, collection: financial_aid_status
       f.input :taxform, as: :file
     end
     f.actions         # adds the 'Submit' and 'Cancel' button
@@ -37,16 +39,17 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       link_to f.id, admin_financial_aid_request_path(f)
     end
     column 'Enrollment' do |e|
-      link_to e.enrollment.display_name, admin_application_path(e.enrollment_id)
+      e.enrollment
     end
     column "Taxform" do |t|
       if t.taxform.attached?
         link_to t.taxform.filename, url_for(t.taxform)
       end
     end
-    column :amount_cents
+    column "Amount" do |co|
+      humanized_money_with_symbol(co.amount)
+    end
     column :source
-    column :awarded
     column :note
     column :status
 
@@ -56,15 +59,18 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   show do
     attributes_table do
       row :id
-      row :enrollment_id
+      row "Application" do |ap|
+        ap.enrollment
+      end
       row :taxform do |tf|
         if tf.taxform.attached?
           link_to tf.taxform.filename, url_for(tf.taxform)
         end
       end
-      row :amount_cents
+      row "Amount" do |co|
+        humanized_money_with_symbol(co.amount)
+      end
       row :source
-      row :awarded
       row :note
       row :status
     end

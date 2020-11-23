@@ -1,3 +1,40 @@
+# == Schema Information
+#
+# Table name: applicant_details
+#
+#  id                 :bigint           not null, primary key
+#  user_id            :bigint           not null
+#  firstname          :string           not null
+#  middlename         :string
+#  lastname           :string           not null
+#  gender             :string
+#  us_citizen         :boolean          default(FALSE), not null
+#  demographic        :string
+#  birthdate          :date             not null
+#  diet_restrictions  :string
+#  shirt_size         :string           not null
+#  address1           :string           not null
+#  address2           :string
+#  city               :string           not null
+#  state              :string           not null
+#  state_non_us       :string
+#  postalcode         :string           not null
+#  country            :string           not null
+#  phone              :string           not null
+#  parentname         :string           not null
+#  parentaddress1     :string
+#  parentaddress2     :string
+#  parentcity         :string
+#  parentstate        :string
+#  parentstate_non_us :string
+#  parentzip          :string
+#  parentcountry      :string
+#  parentphone        :string           not null
+#  parentworkphone    :string
+#  parentemail        :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
 class ApplicantDetail < ApplicationRecord
   belongs_to :user, required: true, inverse_of: :applicant_detail
 
@@ -16,14 +53,14 @@ class ApplicantDetail < ApplicationRecord
                                           outside of the US select *Non-US*" }
   validates :postalcode, presence: true
   validates :country, presence: true
-  validates :phone, presence: true, format: { with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/, message: "number format should be xxx-xxx-xxxx"}
+  validates :phone, presence: true, format: { with: /\A(\+|00)?[1-9][0-9 \-?\(\)\.]{7,}\z/, message: "number format should be xxx-xxx-xxxx"}
 
   validates :parentname, presence: true
   # validates :parentaddress1, presence: true
   # validates :parentcity, presence: true
   # validates :parentzip, presence: true
   # validates :parentcountry, presence: true
-  validates :parentphone, presence: true, format: { with: /\A(?:\+?\d{1,3}\s*-?)?\(?(?:\d{3})?\)?[- ]?\d{3}[- ]?\d{4}\z/, message: "number format should be xxx-xxx-xxxx"}
+  validates :parentphone, presence: true, format: { with: /\A(\+|00)?[1-9][0-9 \-?\(\)\.]{7,}\z/, message: "number format should be xxx-xxx-xxxx"}
   validates :parentemail, presence: true, length: {maximum: 255},
                     format: {with: URI::MailTo::EMAIL_REGEXP, message: "only allows valid emails"}
 

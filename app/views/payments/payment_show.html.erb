@@ -8,10 +8,10 @@
   order from a U.S. based bank, or via credit card. International students may
   pay via wire transfer (contact our office for more information regarding wire
   transfers for international students.)
-  <%= button_to "pay the $100 non-refundable application fee",
+  <%= button_to "pay the #{humanized_money_with_symbol(CampConfiguration.active.last.application_fee)} non-refundable application fee",
                 make_payment_path(amount: 100), class: 'btn btn-green' %></h6>
 <% else %>
-    <% if @current_application_status == "enrolled" %>
+    <% if @current_application_status == "offer accepted" %>
       <h6>
         Your application materials have been received and processed, and we are
         pleased to offer you a spot for MMSS <%= current_camp_year %>.
@@ -21,6 +21,11 @@
         Paying the tuition and service fees is a requirement of participation.
         Please continue paying your camp fees at this time.
       </h6>
+      <hr class="w-75" />
+    <% elsif  @current_application_status == "offer declined" %>
+    <p> Thanks for your interest.</p>
+    <% elsif  @current_application_status == "enrolled" %>
+    <p> Thank you for paying all your fees. We look forward to seeing you at MMSS <%= current_camp_year %>.</p>
     <% else %>
       <h6 class="mt-4">
         Thank you for your Michigan Math and Science Scholars Application. When we
@@ -34,12 +39,12 @@
       </h6>
     <% end %>
 
-    <% if current_user.enrollments.last.financial_aid.blank? %>
+    <% if current_user.enrollments.last.financial_aid.blank? && (@current_application_status == nil || @current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
       <p class="mb-2">If you are applying for need-based financial support. Please fill out
         the
         <br>
         <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
-                class: "btn btn-green" %>
+                class: "btn btn-green pt-8" %>
       </p>
     <% end %>
     <div class="direction_notes">You may email any questions to 
@@ -56,74 +61,93 @@
     </h6>
     <div class="p-4">
       <div class="font-bold text-xs mb-2">
-        <%= "#{'application_fee_(non-refundable)'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(100).rjust(12,'.')}" %>
+        <%= "#{'application_fee_(non-refundable)'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(CampConfiguration.active.last.application_fee).rjust(12,'.')}" %>
       </div>
       <div class="font-bold text-base mb-2">
         <% if @current_application_status == "enrolled" %>
-          <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost).rjust(12,'.')}" %>
+          <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost / 100).rjust(12,'.')}" %>
         <% end %>
       </div>
-
-      <div class="flex justify-start bg-gray-200 text-xs">
-        <ul class="m-auto">
-        <% if @session_registrations.present? %>
-          <% if @has_any_session %>
-            <li class="text-right"><%= "Any Session -- #{humanized_money_with_symbol(@any_session_cost)}" %></li>
-          <% else %>
-            <% @session_registrations.each do |s| %>
-              <li class="text-right">
-                <%= s.description_with_date %> -- <%= humanized_money_with_symbol(s.cost_cents) %>
-              </li>
-            <% end %>
+      <% if @current_application_status == "offer accepted" %>
+        <% current_enrollment.session_assignments.each do |sa| %>
+          <% if sa.offer_status == "accepted" %>
+            <div>
+              <%= sa.camp_occurrence.display_name %>
+                -- <%= humanized_money_with_symbol(Enrollment.find(sa.enrollment_id).session_registrations.find(sa.camp_occurrence_id).cost) %>
+              <div class="flex justify-start bg-gray-200 text-xs">
+                <ul class="m-auto">
+                  Services & Activities
+                  <% current_user.enrollments.find(sa.enrollment_id).registration_activities.where(camp_occurrence_id: sa.camp_occurrence_id).each do |ca| %>
+                    <li class="text-right">
+                      <%= ca.description %> -- <%= humanized_money_with_symbol(ca.cost) %>
+                     </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
           <% end %>
         <% end %>
-<hr class="hr-thin">
-        <% if @registration_activities.present? %>
-          <% @session_registrations.each do |sr| %>
-            <% unless sr.description == "Any Session"%>
-              <ul>
-                <li>
-                  <%= "#{sr.description} services & activities" %>
+      <% else %>
+        <div class="flex justify-start bg-gray-200 text-xs">
+          <ul class="m-auto">
+            <% if @session_registrations.present? %>
+              <% if @has_any_session %>
+                <li class="text-right"><%= "Any Session -- #{humanized_money_with_symbol(@any_session_cost)}" %></li>
+              <% else %>
+                <% @session_registrations.each do |s| %>
+                  <li class="text-right">
+                    <%= s.description_with_date %> -- <%= humanized_money_with_symbol(s.cost) %>
+                  </li>
+                <% end %>
+              <% end %>
+            <% end %>
+            <hr class="hr-thin">
+            <% if @registration_activities.present? %>
+              <% @session_registrations.each do |sr| %>
+                <% unless sr.description == "Any Session"%>
                   <ul>
-                    <% @registration_activities.each do |r| %>
-                      <% if r.camp_occurrence == sr %>
-                        <li class="text-right">
-                          <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
-                        </li>
-                      <% end %>
-                    <% end %>
+                    <li>
+                      <%= "#{sr.description} services & activities" %>
+                      <ul>
+                        <% @registration_activities.each do |r| %>
+                          <% if r.camp_occurrence == sr %>
+                            <li class="text-right">
+                              <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
+                            </li>
+                          <% end %>
+                        <% end %>
+                      </ul>
+                    </li>
+                    <hr class="hr-thin border-dotted">
                   </ul>
-                </li>
-                <hr class="hr-thin border-dotted">
-              </ul>
+                <% end %>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
-
-        </ul>
-      </div>
+          </ul>
+        </div>
+      <% end %>
 
       <div class="text-gray-700">
-        <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid).rjust(12,'.')}" %>
+        <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid.to_i / 100 ).rjust(12,'.')}" %>
       </div>
       <% if @finaids.present? %>
         <div class="text-gray-700">
-          <%= "#{'financial_aid_awarded'.humanize.ljust(31, '.')} #{humanized_money_with_symbol(@finaids_ttl).rjust(12,'.')}" %>
+          <%= "#{'financial_aid_request'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
         </div>
       <% end %>
       <hr/>
       <div class="text-gray-700">
-        <% if @current_application_status == "enrolled" %>
-          <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due).rjust(12,'.')}" %>
+        <% if @current_application_status == "offer accepted" %>
+          <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due.to_i / 100 ).rjust(12,'.')}" %>
         <% end %>
       </div>
     </div>
 
-    <% if @current_application_status == "enrolled" && @balance_due > 0 %>
+    <% if @current_application_status == "offer accepted" && @balance_due > 0 %>
       <div class="w-2/3">
         <p>Enter a payment up to the balance due amount:</p>
           <%= form_with url: make_payment_path, local: true do |f| %>
-            <%= f.number_field :amount, value: "#{@balance_due.to_i}", within: 1..10000, required: true %>
+            <%= f.number_field :amount, value: "#{@balance_due.to_i / 100 }", within: 1..10000, required: true %>
             <div class="actions">
               <%= f.submit "Pay Now"%>
             </div>
@@ -182,21 +206,15 @@
               <%= link_to aid.taxform.filename, url_for(aid.taxform) %>
             </div>
           <% end %>
-          <% if aid.awarded %>
-            <div class="text-gray-700 text-sm">
-              Status: Awarded
-            </div>
-            <div class="text-gray-700 text-sm">
-              <%= "Financial source: #{aid.source}" %>
-            </div>
-            <div class="text-gray-700 text-sm">
-              <%= "Amount: #{humanized_money_with_symbol(aid.amount_cents )}" %>
-            </div>
-          <% else %>
-            <div class="text-gray-700 text-sm">
-              Status: Pending
-            </div>
-          <% end %>
+          <div class="text-gray-700 text-sm">
+            <%= "Status: #{aid.status}" %>
+          </div>
+          <div class="text-gray-700 text-sm">
+            <%= "Financial source: #{aid.source}" %>
+          </div>
+          <div class="text-gray-700 text-sm">
+            <%= "Amount: #{humanized_money_with_symbol(aid.amount )}" %>
+          </div>
           <div class="text-gray-700 text-sm">
             <%= "Date: #{aid.updated_at}" %>
           </div>

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: activities
+#
+#  id                 :bigint           not null, primary key
+#  camp_occurrence_id :bigint           not null
+#  description        :string           not null
+#  cost_cents         :integer          not null
+#  date_occurs        :date             not null
+#  active             :boolean          default(FALSE), not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
 class Activity < ApplicationRecord
   include MoneyRails::ActionViewExtension
   belongs_to :camp_occurrence
@@ -15,4 +28,8 @@ class Activity < ApplicationRecord
   end
 
   scope :active, -> { where(active: true).order(description: :asc) }
+
+  def display_name
+    "#{self.description} - #{self.camp_occurrence.description}" # or whatever column you want
+  end
 end

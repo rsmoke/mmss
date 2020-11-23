@@ -16,6 +16,7 @@ class FinancialAidsController < ApplicationController
   # GET /financial_aids/1
   # GET /financial_aids/1.json
   def show
+    @financial_aids = FinancialAid.where(enrollment_id: current_user.enrollments.last)
       # redirect_to root_path, alert: "Unauthorized access" unless @financial_aid.enrollment_id == current_user.enrollments.last.id
   end
 
@@ -80,6 +81,6 @@ class FinancialAidsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def financial_aid_params
-      params.require(:financial_aid).permit(:enrollment_id, :amount_cents, :source, :awarded, :note, :status, :taxform)
+      params.require(:financial_aid).permit(:enrollment_id, :amount_cents, :source, :note, :status, :taxform)
     end
 end

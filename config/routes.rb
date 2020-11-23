@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :recuploads
   resources :feedbacks
   # resources :payments
@@ -58,11 +59,19 @@ Rails.application.routes.draw do
     resources :course_assignments
   end
 
+  resources :enrollments do
+    resources :session_assignments
+  end
+
   resources :course_preferences
   resources :course_assignments
+  resources :session_assignments
   
   post 'accept_offer', to: 'enrollments#accept_offer'
   post 'decline_offer', to: 'enrollments#decline_offer'
+
+  post 'accept_session_offer/:id', to: 'session_assignments#accept_session_offer', as: :accept_session_offer
+  post 'decline_session_offer/:id', to: 'session_assignments#decline_session_offer', as: :decline_session_offer
 
   get 'static_pages/index'
   get 'static_pages/contact'

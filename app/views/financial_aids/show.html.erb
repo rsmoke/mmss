@@ -5,36 +5,26 @@
   </p>
 <% end %>
 
-<% if @financial_aid.awarded %>
-  <p>
-    <strong>Awarded:</strong>
-    <%= @financial_aid.awarded %>
-  </p>
-
+<% @financial_aids.each do |fa| %>
   <p>
     <strong>Amount:</strong>
-    <%= humanized_money_with_symbol(@financial_aid.amount_cents) %>
+    <%= humanized_money_with_symbol(fa.amount) %>
   </p>
-
   <p>
     <strong>Source:</strong>
-    <%= @financial_aid.source %>
+    <%= fa.source %>
   </p>
+  <p>
+    <strong>Status:</strong>
+    <%= fa.status %>
+  </p>
+  <p>
+    <strong>Note:</strong>
+    <%= fa.note %>
+  </p>
+  <hr>
 <% end %>
 
-<p>
-  <strong>Note:</strong>
-  <%= @financial_aid.note %>
-</p>
 
-<p>
-  <strong>Status:</strong>
-  <% if @financial_aid.status %>
-    <%= @financial_aid.status %>
-  <% else %>
-    Pending
-  <% end %>
-</p>
-
-<%= link_to 'Edit', edit_financial_aid_path(@financial_aid) %> |
+<%#= link_to 'Edit |', edit_financial_aid_path(@financial_aid) unless @financial_aid.awarded %>
 <%= link_to 'Home', root_path %>

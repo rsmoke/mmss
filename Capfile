@@ -23,7 +23,7 @@ require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/rbenv'
 require 'capistrano/puma'
-require 'new_relic/recipes'
+# require 'new_relic/recipes'
 
 # require "capistrano/chruby"
 # require "capistrano/bundler"
