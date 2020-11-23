@@ -23,6 +23,7 @@
 #  partner_program             :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  campyear                    :integer
 #
 class Enrollment < ApplicationRecord
   after_update :send_offer_letter
@@ -70,14 +71,15 @@ class Enrollment < ApplicationRecord
   scope :accepted, -> {where("offer_status = 'accepted'")}
   scope :enrolled, -> {where("application_status = 'enrolled'")}
   scope :application_complete, -> {where("application_status = 'application complete'")}
+  scope :current_camp_year_applications, -> { where('campyear = ? ', CampConfiguration.active_camp_year) }
 
   def display_name
     self.user.email # or whatever column you want
   end
 
-  def campyear
-    self.session_registrations.last.camp_configuration.camp_year
-  end
+  # def campyear
+  #   self.session_registrations.last.camp_configuration.camp_year
+  # end
 
   private
 

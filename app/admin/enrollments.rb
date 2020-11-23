@@ -13,7 +13,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   :high_school_postalcode, :high_school_country, 
                   :year_in_school, :anticipated_graduation_year, 
                   :room_mate_request, :personal_statement, 
-                  :shirt_size, :notes, :application_status, 
+                  :shirt_size, :notes, :application_status, :campyear,
                   :offer_status, :partner_program, :transcript, :student_packet,
                   session_assignments_attributes: [:id, :camp_occurrence_id, :_destroy ],
                   course_assignments_attributes: [:id, :course_id, :_destroy ]
@@ -25,12 +25,13 @@ ActiveAdmin.register Enrollment, as: "Application" do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-
-  scope :all, :default => true
+  scope :current_camp_year_applications, :default => true, label: "Current years Applications"
+  scope :all
   scope :offered
   scope :accepted
   scope :application_complete
   scope :enrolled
+
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
@@ -38,6 +39,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
     f.inputs do
      f.input :user_id, as: :select, collection: User.all
      f.input :international
+     f.input :campyear
      f.input :high_school_name
      f.input :high_school_address1
      f.input :high_school_address2
@@ -128,6 +130,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
   # filter :notes
   filter :application_status, as: :select
   filter :offer_status, as: :select
+  filter :campyear, as: :select
 
   # filter :partner_program
 
@@ -202,9 +205,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       row :offer_status
       row :application_status
       row :partner_program
-      row "Camp Year" do |app|
-        app.campyear
-      end
+      row :campyear
     end
     # panel "Sessions" do
 
