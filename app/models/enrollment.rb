@@ -71,6 +71,7 @@ class Enrollment < ApplicationRecord
   scope :accepted, -> {where("offer_status = 'accepted'")}
   scope :enrolled, -> {where("application_status = 'enrolled'")}
   scope :application_complete, -> {where("application_status = 'application complete'")}
+  scope :current_camp_year_applications, -> { where('campyear = ? ', CampConfiguration.active_camp_year) }
 
   def display_name
     self.user.email # or whatever column you want

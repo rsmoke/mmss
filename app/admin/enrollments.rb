@@ -25,12 +25,13 @@ ActiveAdmin.register Enrollment, as: "Application" do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-
-  scope :all, :default => true
+  scope :current_camp_year_applications, :default => true, label: "Current years Applications"
+  scope :all
   scope :offered
   scope :accepted
   scope :application_complete
   scope :enrolled
+
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
