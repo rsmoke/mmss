@@ -25,6 +25,7 @@ ActiveAdmin.register SessionAssignment do
     f.actions
   end
 
+  filter :enrollment_id, as: :select, collection: Enrollment.all
   filter :camp_occurrence_id, as: :select, collection: CampOccurrence.active.no_any_session
   filter :offer_status, as: :select
 end

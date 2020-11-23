@@ -19,6 +19,7 @@ ActiveAdmin.register Payment do
 
   filter :user_id, as: :select, collection: User.all
   filter :account_type, as: :select
+  filter :created_at
 
 
   form do |f| # This is a formtastic form builder
