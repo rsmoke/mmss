@@ -18,11 +18,14 @@
 #  user_id            :bigint           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  camp_year          :integer
 #
 class Payment < ApplicationRecord
   validates :transaction_id, presence: true, uniqueness: true
   validates :total_amount, presence: true
 
   belongs_to :user
+
+  scope :current_camp_payments, -> { where('camp_year = ? ', CampConfiguration.active_camp_year) }
 
 end

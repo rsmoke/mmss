@@ -270,7 +270,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
     end
     
     panel "Payment Activity" do
-      table_for application.user.payments do
+      table_for application.user.payments.current_camp_payments do
         column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
         column(:account_type) { |atype| atype.account_type.titleize }
         column(:transaction_date) {|td| Date.parse(td.transaction_date) }
