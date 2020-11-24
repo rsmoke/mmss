@@ -16,6 +16,10 @@ module ApplicationHelper
     CampConfiguration.active.pick(:student_packet_url)
   end
 
+  def current_camp_fee
+    CampConfiguration.active_camp_fee_cents
+  end
+
   def applicant_status
     [
       ['*Select*', ''],
