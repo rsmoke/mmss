@@ -59,7 +59,7 @@
           </div>
         <% end %>
 
-        <% if current_user.payments.present? %>
+        <% if current_user.payments.current_camp_payments.present? %>
           <div class="sidebox_element">
             <%= link_to "Application Fee",
                         all_payments_path %>

@@ -43,7 +43,7 @@ class RecuploadsController < InheritedResources::Base
         RecuploadMailer.with(recupload: @recupload).applicant_received_email.deliver_now
         recom_id = @recupload.recommendation_id
         enroll_id = Recommendation.find(recom_id).enrollment_id
-        if Payment.where(user_id: Enrollment.find(enroll_id).user_id).exists?
+        if Payment.where(user_id: Enrollment.find(enroll_id).user_id).current_camp_payments.exists?
          Enrollment.find(enroll_id).update!(application_status: "application complete")
         end
       else
