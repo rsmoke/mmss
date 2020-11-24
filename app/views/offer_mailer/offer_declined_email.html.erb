@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+      <h3><%= "Hello #{@application.firstname}," %></h3>
+    <p><%= @offer_letter_text %>
+      <br>
+      You have declined:
+      <ul>
+          <li><%= @session_assignment.camp_occurrence.display_name %></li>
+      </ul>
+      <ul>
+          <li><%= Course.find(@course_assignment.pluck(:course_id)[0]).display_name %></li>
+      </ul>
+      <br>
+      <%= link_to 'MMSS - Michigan Math and Science Scholars', @url %>
+    </p>
+
+  </body>
+</html>
