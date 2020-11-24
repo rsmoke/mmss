@@ -27,7 +27,8 @@
           payer_identity: current_user.email,
           timestamp: params['timestamp'],
           transaction_hash: params['hash'],
-          user_id: current_user.id
+          user_id: current_user.id,
+          camp_year: current_camp_year
         )
 
         redirect_to all_payments_path, notice: "Your Payment Was Successfully Recorded"
@@ -134,6 +135,6 @@
       end
 
       def url_params
-        params.permit(:amount, :transactionType, :transactionStatus, :transactionId, :transactionTotalAmount, :transactionDate, :transactionAcountType, :transactionResultCode, :transactionResultMessage, :orderNumber, :timestamp, :hash)
+        params.permit(:amount, :transactionType, :transactionStatus, :transactionId, :transactionTotalAmount, :transactionDate, :transactionAcountType, :transactionResultCode, :transactionResultMessage, :orderNumber, :timestamp, :hash, :camp_year)
       end
   end
