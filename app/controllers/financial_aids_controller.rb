@@ -73,7 +73,7 @@ class FinancialAidsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_financial_aid
       if admin_signed_in?
-        @financial_aid = FinancialAid.find(params[:id])
+        @financial_aid = FinancialAid.where(enrollment_id: params[:enrollment_id])
       else
         @financial_aid = current_user.enrollments.last.financial_aid
       end
