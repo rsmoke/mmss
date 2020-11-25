@@ -34,7 +34,7 @@ class OfferMailer < ApplicationMailer
     @session_assignment = session_assignment
     @url = "https://lsa-math-mmss.miserver.it.umich.edu"
     @camp_config = CampConfiguration.find_by(active: true)
-    mail(to: @user.email, subject: "UM MMSS: Offer Accepted")
+    mail(to: @user.email, subject: "UM MMSS: Offer Declined")
   end
 end
 
