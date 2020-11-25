@@ -131,9 +131,28 @@
         <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid.to_i / 100 ).rjust(12,'.')}" %>
       </div>
       <% if @finaids.present? %>
-        <div class="text-gray-700">
-          <%= "#{'financial_aid_request'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
-        </div>
+        <% fin_aid_status = @finaids.pluck(:status) %>
+        <% if fin_aid_status.count("rejected") == fin_aid_status.count %>
+          <div class="text-gray-700">
+            <%= "#{'financial_aid_rejected'.humanize}" %>
+          </div>
+        <% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
+          <div class="text-gray-700">
+            <%= "#{'financial_aid_request'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
+          </div>
+        <% else %>
+          <% @finaids.each do |aid| %>
+            <% if aid.status == 'pending' %>
+              <div class="text-gray-700">
+                <%= "#{'financial_aid_request'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(aid.amount).rjust(12,'.')}" %>
+              </div>
+            <% elsif aid.status == 'awarded' %>
+              <div class="text-gray-700">
+                <%= "#{'financial_aid_awarded'.humanize.ljust(34, '.')} #{humanized_money_with_symbol(aid.amount).rjust(12,'.')}" %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
       <hr/>
       <div class="text-gray-700">
@@ -190,21 +209,40 @@
   <% if @finaids.present? %>
     <hr>
     <h5>Financial Aid</h5>
-    <% @finaids.each do |aid| %>
+    <% if fin_aid_status.count("rejected") == fin_aid_status.count %>
+      <%= "Status: rejected" %>
+    <% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
       <div class="card-deck">
-
         <div class="max-w-sm rounded overflow-hidden shadow-lg">
           <div class="bg-blue-500 px-4 text-white">
             Financial Aid Request
           </div>
           <div class="text-gray-700 text-sm">
-            <%= "Status: #{aid.status}" %>
+            <%= "Status: awarded" %>
           </div>
           <div class="text-gray-700 text-sm">
-            <%= "Amount: #{humanized_money_with_symbol(aid.amount )}" %>
+            <%= "Amount: #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 )}" %>
           </div>
         </div>
       </div>
+    <% else %>
+      <% @finaids.each do |aid| %>
+        <% if aid.status != "rejected" %>
+          <div class="card-deck">
+            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+              <div class="bg-blue-500 px-4 text-white">
+                Financial Aid Request
+              </div>
+              <div class="text-gray-700 text-sm">
+                <%= "Status: #{aid.status}" %>
+              </div>
+              <div class="text-gray-700 text-sm">
+                <%= "Amount: #{humanized_money_with_symbol(aid.amount )}" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 
