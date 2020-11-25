@@ -198,25 +198,10 @@
             Financial Aid Request
           </div>
           <div class="text-gray-700 text-sm">
-            <%= "Note: #{aid.note}" %>
-          </div>
-          <% if aid.taxform.attached? %>
-            <div class="text-gray-700 text-sm">
-              Tax Form uploaded:
-              <%= link_to aid.taxform.filename, url_for(aid.taxform) %>
-            </div>
-          <% end %>
-          <div class="text-gray-700 text-sm">
             <%= "Status: #{aid.status}" %>
           </div>
           <div class="text-gray-700 text-sm">
-            <%= "Financial source: #{aid.source}" %>
-          </div>
-          <div class="text-gray-700 text-sm">
             <%= "Amount: #{humanized_money_with_symbol(aid.amount )}" %>
-          </div>
-          <div class="text-gray-700 text-sm">
-            <%= "Date: #{aid.updated_at}" %>
           </div>
         </div>
       </div>
