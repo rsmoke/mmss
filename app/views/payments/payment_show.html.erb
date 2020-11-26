@@ -40,8 +40,7 @@
     <% end %>
 
     <% if current_user.enrollments.last.financial_aids.blank? && (@current_application_status == nil || @current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
-      <p class="mb-2">If you are applying for need-based financial support. Please fill out
-        the
+      <p class="mb-2">If you are applying for need-based financial support, please fill out the
         <br>
         <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
                 class: "btn btn-green pt-8" %>
