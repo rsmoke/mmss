@@ -107,6 +107,16 @@
             received an email from us!</strong>
           </p>
         <% end %>
+        <% if current_user.enrollments.last.financial_aid.blank? &&
+        (current_user.enrollments.last.application_status == nil || current_user.enrollments.last.application_status == "" ||
+        current_user.enrollments.last.application_status == "submitted" || current_user.enrollments.last.application_status == "application complete") %>
+      <p class="mb-2">If you are applying for need-based financial support, please fill out
+        the
+        <br>
+        <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
+                class: "btn btn-green pt-8" %>
+      </p>
+    <% end %>
 
         <p class="direction_notes"> Watch the progress window at the right
           to track the status of your application materials. You will receive an
