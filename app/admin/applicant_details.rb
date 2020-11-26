@@ -45,7 +45,7 @@ ActiveAdmin.register ApplicantDetail do
       f.input :parentstate, as: :select, collection: us_states
       f.input :parentstate_non_us
       f.input :parentzip
-      f.input :parentcountry
+      f.input :parentcountry, include_blank: true
       f.input :parentphone
       f.input :parentworkphone
       f.input :parentemail
