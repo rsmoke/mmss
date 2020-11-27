@@ -4,10 +4,11 @@ class SessionAssignmentsController < ApplicationController
     @session_assignment = SessionAssignment.find(params[:id])
     respond_to do |format|
       if @session_assignment.update(offer_status: "accepted")
-        session_id = @session_assignment.camp_occurrence_id
-        session_courses_ids = CampOccurrence.find(session_id).courses.pluck(:id)
-        current_enrollment = current_user.enrollments.last
-        @course_assignment = CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids)
+        # session_id = @session_assignment.camp_occurrence_id
+        # session_courses_ids = CampOccurrence.find(session_id).courses.pluck(:id)
+        # current_enrollment = current_user.enrollments.last
+        # @course_assignment = CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids)
+        @course_assignment = CourseAssignment.find_by(enrollment_id: @session_assignment.enrollment_id, course_id: CampOccurrence.find(@session_assignment.camp_occurrence_id).courses.ids)
         OfferMailer.offer_accepted_email(current_user, @session_assignment, @course_assignment).deliver_now
         status_array = SessionAssignment.where(enrollment_id: current_enrollment).pluck(:offer_status)
         if status_array.count("accepted") + status_array.count("declined") == status_array.size
@@ -27,10 +28,11 @@ class SessionAssignmentsController < ApplicationController
     @session_assignment = SessionAssignment.find(params[:id])
     respond_to do |format|
       if @session_assignment.update(offer_status: "declined")
-        current_enrollment = current_user.enrollments.last
-        session_id = @session_assignment.camp_occurrence_id
-        session_courses_ids = CampOccurrence.find(session_id).courses.pluck(:id)
-        @course_assignment = CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids)
+        # current_enrollment = current_user.enrollments.last
+        # session_id = @session_assignment.camp_occurrence_id
+        # session_courses_ids = CampOccurrence.find(session_id).courses.pluck(:id)
+        # @course_assignment = CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids)
+        @course_assignment = CourseAssignment.find_by(enrollment_id: @session_assignment.enrollment_id, course_id: CampOccurrence.find(@session_assignment.camp_occurrence_id).courses.ids)
         OfferMailer.offer_declined_email(current_user, @session_assignment, @course_assignment).deliver_now
         if CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids).exists?
           CourseAssignment.where(enrollment_id: current_enrollment, course_id: session_courses_ids).destroy_all

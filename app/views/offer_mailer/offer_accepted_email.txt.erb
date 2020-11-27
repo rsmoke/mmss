@@ -10,7 +10,7 @@ You have accepted:
 <%= "\r\n" %>
 To participate in:
 <%= "\r\n" %>
-  <%= Course.find(@course_assignment.pluck(:course_id)[0]).display_name %>
+  <%= Course.find(@course_assignment.course_id).display_name %>
   <%= "\r\n" %>
 =======================================
 <%= "\r\n" %>

@@ -12,7 +12,7 @@
           <li><%= @session_assignment.camp_occurrence.display_name %></li>
       </ul>
       <ul>
-          <li><%= Course.find(@course_assignment.pluck(:course_id)[0]).display_name %></li>
+          <li><%= Course.find(@course_assignment.course_id).display_name %></li>
       </ul>
       <br>
       <%= link_to 'MMSS - Michigan Math and Science Scholars', @url %>
