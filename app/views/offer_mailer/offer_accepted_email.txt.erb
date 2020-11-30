@@ -1,0 +1,24 @@
+<%= "Hello #{@application.firstname}," %>
+<%= "\r\n" %>
+<%= @offer_letter_text %>
+<%= "\r\n" %>
+=======================================
+You have accepted:
+<%= "\r\n" %>
+  <%= @session_assignment.camp_occurrence.display_name %>
+  <%= "\r\n" %>
+<%= "\r\n" %>
+To participate in:
+<%= "\r\n" %>
+  <%= Course.find(@course_assignment.course_id).display_name %>
+  <%= "\r\n" %>
+=======================================
+<%= "\r\n" %>
+Retain the login id: <%= @user.email %> and password that you created
+during the application process. You will need it to refer back to the
+application web site to review the events associated with your application.
+<%= "\r\n" %>
+<%= link_to 'MMSS - Michigan Math and Science Scholars', @url %>
+<%= "\r\n" %>
+
+
