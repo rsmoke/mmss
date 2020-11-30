@@ -297,7 +297,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
 
     end
 
-    if application.financial_aid.present?
+    if application.financial_aids.present?
       panel "Financial Aid Request" do
         table_for FinancialAid.where(enrollment_id: application) do
           column "Request" do |item|

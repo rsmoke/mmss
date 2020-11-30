@@ -32,7 +32,7 @@ class FinancialAidsController < ApplicationController
   # POST /financial_aids
   # POST /financial_aids.json
   def create
-    @financial_aid =  current_user.enrollments.last.create_financial_aid(financial_aid_params)
+    @financial_aid =  current_user.enrollments.last.financial_aids.create(financial_aid_params)
 
     respond_to do |format|
       if @financial_aid.save
@@ -75,7 +75,7 @@ class FinancialAidsController < ApplicationController
       if admin_signed_in?
         @financial_aid = FinancialAid.find(params[:id])
       else
-        @financial_aid = current_user.enrollments.last.financial_aid
+        @financial_aid = current_user.enrollments.last.financial_aids
       end
     end
 

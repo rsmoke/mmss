@@ -39,7 +39,7 @@
       </h6>
     <% end %>
 
-    <% if current_user.enrollments.last.financial_aid.blank? && (@current_application_status == nil || @current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
+    <% if current_user.enrollments.last.financial_aids.blank? && (@current_application_status == nil || @current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
       <p class="mb-2">If you are applying for need-based financial support. Please fill out
         the
         <br>

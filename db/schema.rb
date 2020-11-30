@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_141915) do
+ActiveRecord::Schema.define(version: 2020_11_30_023920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -237,7 +237,7 @@ ActiveRecord::Schema.define(version: 2020_11_24_141915) do
 
   create_table "financial_aids", force: :cascade do |t|
     t.bigint "enrollment_id", null: false
-    t.integer "amount_cents"
+    t.integer "amount_cents", default: 0
     t.string "source"
     t.text "note"
     t.string "status", default: "pending"

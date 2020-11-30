@@ -43,10 +43,10 @@
           </div>
         <% end %>
 
-        <% if current_user.enrollments.last.financial_aid.present? %>
+        <% if current_user.enrollments.last.financial_aids.present? %>
           <div class="sidebox_element">
             <%= link_to "Financial Aid",
-                        enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aid) %>
+                        enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aids) %>
 
             <% if FinancialAid.where(enrollment_id: current_user.enrollments.last).pluck(:status).include? 'awarded' %>
               - awarded
