@@ -107,7 +107,7 @@
             received an email from us!</strong>
           </p>
         <% end %>
-        <% if current_user.enrollments.last.financial_aid.blank? &&
+        <% if current_user.enrollments.last.financial_aids.blank? &&
         (current_user.enrollments.last.application_status == nil || current_user.enrollments.last.application_status == "" ||
         current_user.enrollments.last.application_status == "submitted" || current_user.enrollments.last.application_status == "application complete") %>
       <p class="mb-2">If you are applying for need-based financial support, please fill out
