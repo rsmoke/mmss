@@ -20,6 +20,15 @@
     <strong>Status:</strong>
     <%= "awarded" %>
   </p>
+  <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
+  <p>
+    <strong>Amount:</strong>
+    <%= humanized_money_with_symbol(@financial_aid.pluck(:amount_cents).sum.to_i / 100 ) %>
+  </p>
+  <p>
+    <strong>Status:</strong>
+    <%= "pending" %>
+  </p>
 <% else %>
   <% @financial_aids.each do |fa| %>
     <% if fa.status != "rejected" %>

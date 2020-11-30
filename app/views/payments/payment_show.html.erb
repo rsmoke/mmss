@@ -138,8 +138,13 @@
           </div>
         <% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
           <div class="text-gray-700">
+            <%= "#{'financial_aid_awarded'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
+          </div>
+        <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
+          <div class="text-gray-700">
             <%= "#{'financial_aid_request'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
           </div>
+
         <% else %>
           <% @finaids.each do |aid| %>
             <% if aid.status == 'pending' %>
