@@ -96,7 +96,7 @@
                   <% if Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id) %>
                     <%= Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id).title %>
                   <% else %>
-                  <%= "Contact MMSS admin"%>
+                    <%= "Contact MMSS admin"%>
                   <% end %>
                 </div>
               </div>

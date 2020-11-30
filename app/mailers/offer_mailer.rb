@@ -18,8 +18,12 @@ class OfferMailer < ApplicationMailer
     @offer_letter_text = CampConfiguration.active.last.offer_letter
     @application = ApplicantDetail.find_by(user_id: user)
     @enrollment = Enrollment.find_by(user_id: user)
-    @course_assignment = course_assignment
     @session_assignment = session_assignment
+    if course_assignment.present?
+      @course_assignment = course_assignment.course.display_name
+    else
+      @course_assignment =  "Contact MMSS admin to get a course assignment"
+    end
     @url = "https://lsa-math-mmss.miserver.it.umich.edu"
     @camp_config = CampConfiguration.find_by(active: true)
     mail(to: @user.email, subject: "UM MMSS: Offer Accepted")
@@ -30,8 +34,12 @@ class OfferMailer < ApplicationMailer
     @offer_letter_text = CampConfiguration.active.last.offer_letter
     @application = ApplicantDetail.find_by(user_id: user)
     @enrollment = Enrollment.find_by(user_id: user)
-    @course_assignment = course_assignment
     @session_assignment = session_assignment
+    if course_assignment.present?
+      @course_assignment = course_assignment.course.display_name
+    else
+      @course_assignment =  ""
+    end
     @url = "https://lsa-math-mmss.miserver.it.umich.edu"
     @camp_config = CampConfiguration.find_by(active: true)
     mail(to: @user.email, subject: "UM MMSS: Offer Declined")
