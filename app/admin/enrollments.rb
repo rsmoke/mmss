@@ -13,7 +13,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   :high_school_postalcode, :high_school_country, 
                   :year_in_school, :anticipated_graduation_year, 
                   :room_mate_request, :personal_statement, 
-                  :shirt_size, :notes, :application_status, 
+                  :shirt_size, :notes, :application_status, :campyear,
                   :offer_status, :partner_program, :transcript, :student_packet,
                   session_assignments_attributes: [:id, :camp_occurrence_id, :_destroy ],
                   course_assignments_attributes: [:id, :course_id, :_destroy ]
@@ -25,12 +25,13 @@ ActiveAdmin.register Enrollment, as: "Application" do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-
-  scope :all, :default => true
+  scope :current_camp_year_applications, :default => true, label: "Current years Applications"
+  scope :all
   scope :offered
   scope :accepted
   scope :application_complete
   scope :enrolled
+
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
@@ -38,6 +39,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
     f.inputs do
      f.input :user_id, as: :select, collection: User.all
      f.input :international
+     f.input :campyear
      f.input :high_school_name
      f.input :high_school_address1
      f.input :high_school_address2
@@ -105,6 +107,33 @@ ActiveAdmin.register Enrollment, as: "Application" do
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
 
+  # filter :user_id
+  # filter :enrollment_activities
+  # filter :registration_activities
+  # filter :session_activities
+  # filter :session_assignments, as: :select, collection: SessionAssignment.where(enrollment_id: Enrollment.all).pluck(:camp_occurrence_id).uniq
+  # filter :session_registrations
+  # filter :international
+  # filter :high_school_name
+  # filter :high_school_address1
+  # filter :high_school_address2
+  # filter :high_school_city
+  # filter :high_school_state
+  # filter :high_school_non_us
+  # filter :high_school_postalcode
+  # filter :high_school_country
+  filter :year_in_school, as: :select
+  filter :anticipated_graduation_year, as: :select
+  # filter :room_mate_request
+  # filter :personal_statement
+  # filter :shirt_size
+  # filter :notes
+  filter :application_status, as: :select
+  filter :offer_status, as: :select
+  filter :campyear, as: :select
+
+  # filter :partner_program
+
   index do
     selectable_column
     actions
@@ -136,11 +165,15 @@ ActiveAdmin.register Enrollment, as: "Application" do
     column :year_in_school
     column :anticipated_graduation_year
     column :room_mate_request
-    column :personal_statement, sortable: false do |ps|
-      truncate(ps.personal_statement, omision: "...", length: 25)
-    end
+    # column :personal_statement, sortable: false do |ps|
+    #   truncate(ps.personal_statement, omision: "...", length: 25)
+    # end
     column :notes
     column :partner_program
+    column "Camp Year" do |app|
+      app.campyear
+    end
+
   end
 
   show do
@@ -172,6 +205,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       row :offer_status
       row :application_status
       row :partner_program
+      row :campyear
     end
     # panel "Sessions" do
 
@@ -192,14 +226,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
         end
       end
 
-      panel "Activities/Services" do
-        table_for application.enrollment_activities do
-          column(:activity_id) { |item| item.activity.description }
-          column "Session" do |item| 
-            item.activity.camp_occurrence.description 
-          end
-        end
-      end
       panel "Course Assignment" do
         table_for application.course_assignments do
           column(:id) { |item| link_to(item.id, admin_course_assignment_path(item)) }
@@ -224,9 +250,27 @@ ActiveAdmin.register Enrollment, as: "Application" do
         end
       end
     # end
+    panel "Activities/Services" do
+      table_for Activity.where(camp_occurrence_id: application.session_assignments.accepted.pluck(:camp_occurrence_id)).order(:camp_occurrence_id) do
+        column "Assigned Activities" do |item|
+          # (:activity_id) { |item| item.description }
+          item.description
+        end
+        column "Session" do |item| 
+          item.camp_occurrence.description 
+        end
+      end
 
+      table_for application.enrollment_activities do
+        column(:activity_id) { |item| item.activity.description }
+        column "Session" do |item| 
+          item.activity.camp_occurrence.description 
+        end
+      end
+    end
+    
     panel "Payment Activity" do
-      table_for application.user.payments do
+      table_for application.user.payments.current_camp_payments do
         column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
         column(:account_type) { |atype| atype.account_type.titleize }
         column(:transaction_date) {|td| Date.parse(td.transaction_date) }
@@ -253,17 +297,22 @@ ActiveAdmin.register Enrollment, as: "Application" do
 
     end
 
-    if application.financial_aid.present?
+    if application.financial_aids.present?
       panel "Financial Aid Request" do
-        table_for application.financial_aid do
+        table_for FinancialAid.where(enrollment_id: application) do
           column "Request" do |item|
             if item.present?
-            link_to("view", admin_financial_aid_request_path(item))
+              link_to("view", admin_financial_aid_request_path(item))
             end
           end
-          column "Awarded" do |item|
+          column "Amount" do |item|
             if item.present?
-            item.awarded
+              humanized_money_with_symbol(item.amount)
+            end
+          end
+          column "Status" do |item|
+            if item.present?
+              item.status
             end
           end
 

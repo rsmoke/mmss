@@ -11,7 +11,7 @@
 #  updated_at        :datetime         not null
 #
 class Recupload < ApplicationRecord
-  belongs_to :recommendation, dependent: :destroy
+  belongs_to :recommendation
 
   # validates :letter, length: { minimum: 50 }
   validates :authorname, presence: true

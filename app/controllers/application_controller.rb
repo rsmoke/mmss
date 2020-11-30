@@ -1,17 +1,11 @@
 class ApplicationController < ActionController::Base
 
+  # def self.current_camp_year
+  #   return CampConfiguration.active_camp_year
+  # end
+  # helper_method :current_camp_year
+
 private
-
-  def user_has_application?(user)
-    # return true unless Application.find_by(user_id: user).nil?
-    if ApplicantDetail.find_by(user_id: user).nil?
-      false
-    else
-      true
-    end
-  end
-
-  helper_method :user_has_application?
 
 
 

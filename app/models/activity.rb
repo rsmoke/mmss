@@ -24,8 +24,12 @@ class Activity < ApplicationRecord
   validates :cost_cents, presence: true, numericality: { only_integer: true }
 
   def description_with_cost
-    "#{description} -- $#{humanized_money(cost_cents[0...-2])}"
+    "#{description} -- #{humanized_money_with_symbol(self.cost)}"
   end
 
   scope :active, -> { where(active: true).order(description: :asc) }
+  
+  def display_name
+    "#{self.description} - #{self.camp_occurrence.description}" # or whatever column you want
+  end
 end

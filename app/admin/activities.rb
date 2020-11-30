@@ -29,6 +29,13 @@ ActiveAdmin.register Activity do
   #   end
   #   f.actions         # adds the 'Submit' and 'Cancel' button
   # end
+  filter :camp_occurrence_id, label: "Session", as: :select, collection: CampOccurrence.order(begin_date: :desc).no_any_session
+  filter :description, as: :select
+  filter :cost_cents
+  filter :date_occurs
+  filter :active
+
+
 
   index do
     selectable_column

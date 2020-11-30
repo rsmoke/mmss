@@ -15,6 +15,13 @@ ActiveAdmin.register CampOccurrence, as: "Session Configurations" do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  filter :camp_configuration
+  filter :description, as: :select 
+  filter :begin_date 
+  filter :end_date 
+  filter :active
+
+
   index do
     selectable_column
     actions

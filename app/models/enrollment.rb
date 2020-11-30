@@ -23,6 +23,7 @@
 #  partner_program             :string
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
+#  campyear                    :integer
 #
 class Enrollment < ApplicationRecord
   after_update :send_offer_letter
@@ -46,7 +47,7 @@ class Enrollment < ApplicationRecord
   has_many :course_assignments, dependent: :destroy
   accepts_nested_attributes_for :course_assignments, allow_destroy: true
 
-  has_one :financial_aid, dependent: :destroy
+  has_many :financial_aids, dependent: :destroy
   has_many :travels, dependent: :destroy
   has_one :recommendation, dependent: :destroy
 
@@ -63,13 +64,17 @@ class Enrollment < ApplicationRecord
   validates :personal_statement, presence: true
   validates :personal_statement, length: { minimum: 100 }
 
-  validate :at_least_one_is_checked
+  validate :at_least_one_session_is_checked
+  validate :at_least_one_course_is_checked
+
+  validate :validate_transcript_presence
   validate :acceptable_transcript
 
   scope :offered, -> {where("offer_status = 'offered'")}
   scope :accepted, -> {where("offer_status = 'accepted'")}
   scope :enrolled, -> {where("application_status = 'enrolled'")}
   scope :application_complete, -> {where("application_status = 'application complete'")}
+  scope :current_camp_year_applications, -> { where('campyear = ? ', CampConfiguration.active_camp_year) }
 
   def display_name
     self.user.email # or whatever column you want
@@ -77,10 +82,20 @@ class Enrollment < ApplicationRecord
 
   private
 
-  def at_least_one_is_checked
+  def at_least_one_session_is_checked
     if session_registration_ids.empty?
       errors.add(:base, "Select at least one session")
     end
+  end
+
+  def at_least_one_course_is_checked
+    if course_registration_ids.empty?
+      errors.add(:base, "Select at least one course")
+    end
+  end
+
+  def validate_transcript_presence
+    errors.add(:transcript, 'should exist') unless self.transcript.attached?
   end
 
   def acceptable_transcript
@@ -101,5 +116,6 @@ class Enrollment < ApplicationRecord
       OfferMailer.offer_email(self.user_id).deliver_now
     end
   end
+
   # scope :current_enrollment, ->(user=@current_user) { where(user_id: user) }
 end

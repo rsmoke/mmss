@@ -1,0 +1,15 @@
+<%= "Hello #{@application.firstname}," %>
+<%= "\r\n" %>
+<%= @offer_letter_text %>
+<%= "\r\n" %>
+=======================================
+You have declined:
+<%= "\r\n" %>
+  <%= @session_assignment.camp_occurrence.display_name %>
+  <%= "\r\n" %>
+<%= "\r\n" %>
+  <%= @course_assignment %>
+  <%= "\r\n" %>
+=======================================
+<%= "\r\n" %>
+<%= link_to 'MMSS - Michigan Math and Science Scholars', @url %>

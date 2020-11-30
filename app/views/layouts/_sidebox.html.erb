@@ -6,15 +6,12 @@
       <p><strong>Progress Window</strong><p>
 
       <% if current_user.enrollments.present? && current_user.enrollments.last.persisted? %>
-        <% if current_user.enrollments.last.recommendation.present? %>
-          <% if current_user.enrollments.last.recommendation.recupload.present? && current_user.payments.present? %>
-            <span class="text-green-700 font-semibold">Application Complete</span>
-          <% else %>
-            <span class="text-red-500 font-semibold">Application incomplete</span>
-          <% end %>
+        <% if current_user.enrollments.last.application_status.present? %>
+          <span class="text-green-700 font-semibold"><%= current_user.enrollments.last.application_status.titleize %></span>
+        <% else %>
+          <span class="text-red-500 font-semibold">Application incomplete</span>
         <% end %>
       <% end %>
-
       <div class="sidebox_element"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> - submitted </div>
 
       <% if current_user.enrollments.present? && current_user.enrollments.last.persisted? %>
@@ -46,13 +43,15 @@
           </div>
         <% end %>
 
-        <% if current_user.enrollments.last.financial_aid.present? %>
+        <% if current_user.enrollments.last.financial_aids.present? %>
           <div class="sidebox_element">
             <%= link_to "Financial Aid",
-                        enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aid) %>
+                        enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aids) %>
 
-            <% if current_user.enrollments.last.financial_aid.awarded %>
+            <% if FinancialAid.where(enrollment_id: current_user.enrollments.last).pluck(:status).include? 'awarded' %>
               - awarded
+            <% elsif FinancialAid.where(enrollment_id: current_user.enrollments.last).pluck(:status).all? 'rejected' %>
+              - rejected
             <% else %>
               - pending
             <% end %>
@@ -60,7 +59,7 @@
           </div>
         <% end %>
 
-        <% if current_user.payments.present? %>
+        <% if current_user.payments.current_camp_payments.present? %>
           <div class="sidebox_element">
             <%= link_to "Application Fee",
                         all_payments_path %>
@@ -92,9 +91,13 @@
               <div>
                 <%= sa.camp_occurrence.display_name %>
                 <div>
-                <% course_ids = CourseAssignment.where(enrollment_id: current_enrollment).pluck(:course_id) %>
-                Course:
-                <%= Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id).title %>
+                  <% course_ids = CourseAssignment.where(enrollment_id: current_enrollment).pluck(:course_id) %>
+                  Course:
+                  <% if Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id) %>
+                    <%= Course.find_by(id: course_ids, camp_occurrence_id: sa.camp_occurrence_id).title %>
+                  <% else %>
+                    <%= "Contact MMSS admin"%>
+                  <% end %>
                 </div>
               </div>
               <% end %>

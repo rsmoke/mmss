@@ -30,6 +30,7 @@ class CampOccurrence < ApplicationRecord
   monetize :cost_cents
 
   scope :active, -> { where(active: true).order(description: :asc) }
+  scope :no_any_session, -> { where.not(description: "Any Session") }
 
   scope :session_description, ->(description="") { where(description: description).active.first}
 

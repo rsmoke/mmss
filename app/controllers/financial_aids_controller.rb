@@ -16,6 +16,7 @@ class FinancialAidsController < ApplicationController
   # GET /financial_aids/1
   # GET /financial_aids/1.json
   def show
+    @financial_aids = FinancialAid.where(enrollment_id: current_user.enrollments.last)
       # redirect_to root_path, alert: "Unauthorized access" unless @financial_aid.enrollment_id == current_user.enrollments.last.id
   end
 
@@ -31,7 +32,7 @@ class FinancialAidsController < ApplicationController
   # POST /financial_aids
   # POST /financial_aids.json
   def create
-    @financial_aid =  current_user.enrollments.last.create_financial_aid(financial_aid_params)
+    @financial_aid =  current_user.enrollments.last.financial_aids.create(financial_aid_params)
 
     respond_to do |format|
       if @financial_aid.save
@@ -71,15 +72,11 @@ class FinancialAidsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_financial_aid
-      if admin_signed_in?
-        @financial_aid = FinancialAid.find(params[:id])
-      else
-        @financial_aid = current_user.enrollments.last.financial_aid
-      end
+      @financial_aid = current_user.enrollments.last.financial_aids
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def financial_aid_params
-      params.require(:financial_aid).permit(:enrollment_id, :amount_cents, :source, :awarded, :note, :status, :taxform)
+      params.require(:financial_aid).permit(:enrollment_id, :amount_cents, :source, :note, :status, :taxform)
     end
 end

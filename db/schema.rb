@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_200649) do
+ActiveRecord::Schema.define(version: 2020_11_30_023920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_200649) do
     t.string "partner_program"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "campyear"
     t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
@@ -236,11 +237,10 @@ ActiveRecord::Schema.define(version: 2020_11_10_200649) do
 
   create_table "financial_aids", force: :cascade do |t|
     t.bigint "enrollment_id", null: false
-    t.integer "amount_cents"
+    t.integer "amount_cents", default: 0
     t.string "source"
-    t.boolean "awarded", default: false
     t.text "note"
-    t.string "status"
+    t.string "status", default: "pending"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["enrollment_id"], name: "index_financial_aids_on_enrollment_id"
@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_200649) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "camp_year"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 

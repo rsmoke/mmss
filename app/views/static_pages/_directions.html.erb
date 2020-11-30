@@ -28,7 +28,7 @@
             </ul>
             <ul class='direction_notes'>
               <div>You will be selecting the activities and courses you wish to partake in. 
-              After this is stage is complete your next step will be to rank the courses 
+              After this stage is complete, your next step will be to rank the courses 
               related to your interest.</div>
             </ul>
             <br>
@@ -53,11 +53,11 @@
            them directions on how to submit a recommendation for you, so please
            be certain that you enter their correct email address.
          </p>
-      <% elsif current_user.payments.empty? %>
+      <% elsif current_user.payments.current_camp_payments.empty? %>
         <div class="mb-2">Now that you've submitted your application, the next step is to make
-         sure you pay the $100 non-refundable application fee
-         <%= button_to "pay application fee",
-                      make_payment_path(amount: 100), class: 'bg-blue-700 hover:bg-blue-900 text-gray-100 font-normal py-1 px-2 rounded' %>
+         sure you pay the <%= humanized_money_with_symbol(current_camp_fee / 100) %> non-refundable application fee
+         <%= button_to "pay #{humanized_money_with_symbol(current_camp_fee / 100)} application fee",
+                      make_payment_path(amount: current_camp_fee / 100), class: 'bg-blue-700 hover:bg-blue-900 text-gray-100 font-normal py-1 px-2 rounded' %>
         </div>
         <p class="direction_notes font-semibold text-red-900">
           Payment of your application fee must be completed before you will be
@@ -79,13 +79,16 @@
         <% elsif current_user.enrollments.last.application_status == "offer accepted" %>
           <p class="direction_notes">
             Payment of the balance of program tuition and fees is due by
-            <%= @application_materials_due_date.strftime("%B %e, %Y") %>.
+            <%= @application_materials_due_date.strftime("%B %e, %Y") %>. Use the
+            payment form in your <%= link_to "Account Summary", all_payments_path %>.
           </p>
-          <h4>Download and Return the 
-            <%= link_to student_packet_url, target: "_blank" do %>
-                Student Information Packet
-              <% end %> 
-            as soon as possible!</h4>
+          <% unless current_enrollment.student_packet.attached? %>
+            <h4>Download and Return the 
+              <%= link_to student_packet_url, target: "_blank" do %>
+                  Student Information Packet
+                <% end %> 
+              as soon as possible!</h4>
+            <% end %>
         <% elsif current_user.enrollments.last.application_status == "offer declined" %>
           <p class="direction_notes">
             Thanks for your interest.
@@ -104,6 +107,16 @@
             received an email from us!</strong>
           </p>
         <% end %>
+        <% if current_user.enrollments.last.financial_aids.blank? &&
+        (current_user.enrollments.last.application_status == nil || current_user.enrollments.last.application_status == "" ||
+        current_user.enrollments.last.application_status == "submitted" || current_user.enrollments.last.application_status == "application complete") %>
+      <p class="mb-2">If you are applying for need-based financial support, please fill out
+        the
+        <br>
+        <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
+                class: "btn btn-green pt-8" %>
+      </p>
+    <% end %>
 
         <p class="direction_notes"> Watch the progress window at the right
           to track the status of your application materials. You will receive an

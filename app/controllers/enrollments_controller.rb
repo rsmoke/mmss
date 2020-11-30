@@ -1,5 +1,8 @@
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: [:show, :edit, :update, :destroy, :accept_offer, :decline_offer]
+  # before_action :set_enrollment, only: [:show, :edit, :update, :destroy, :accept_offer, :decline_offer]
+  before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
+  before_action :set_course_sessions
+  before_action :set_activities_sessions
   devise_group :logged_in, contains: [:user, :admin]
   before_action :authenticate_logged_in!
   # GET /enrollments
@@ -23,31 +26,10 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
-    @courses_session1 = CampOccurrence.session_description("Session 1").courses.order(title: :asc)
-    @courses_session2 = CampOccurrence.session_description("Session 2").courses.order(title: :asc)
-    @courses_session3 = CampOccurrence.session_description("Session 3").courses.order(title: :asc)
-    # @courses_session_any = (@courses_session1 + @courses_session2 + @courses_session3).uniq(&:title).sort_by(&:title)
-
- 
- 
-    @activities_session1 = CampOccurrence.session_description("Session 1").activities.order(description: :asc)
-    @activities_session2 = CampOccurrence.session_description("Session 2").activities.order(description: :asc)
-    @activities_session3 = CampOccurrence.session_description("Session 3").activities.order(description: :asc)
-    # @activities_session_any = (@activities_session1 + @activities_session2 + @activities_session3).uniq(&:description).sort_by(&:description)
   end
 
   # GET /enrollments/1/edit
   def edit
-    # @courses_session_any 
-    @courses_session1 = CampOccurrence.session_description("Session 1").courses.order(title: :asc)
-    @courses_session2 = CampOccurrence.session_description("Session 2").courses.order(title: :asc)
-    @courses_session3 = CampOccurrence.session_description("Session 3").courses.order(title: :asc)
-    # @courses_session_any = (@courses_session1 + @courses_session2 + @courses_session3).uniq(&:title).sort_by(&:title)
-
-    @activities_session1 = CampOccurrence.session_description("Session 1").activities.order(description: :asc)
-    @activities_session2 = CampOccurrence.session_description("Session 2").activities.order(description: :asc)
-    @activities_session3 = CampOccurrence.session_description("Session 3").activities.order(description: :asc)
-    # @activities_session_any = (@activities_session1 + @activities_session2 + @activities_session3).uniq(&:description).sort_by(&:description)
   end
 
   # POST /enrollments
@@ -90,34 +72,46 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-  def accept_offer
-    respond_to do |format|
-      if @enrollment.update(offer_status: "accepted", application_status: "enrolled")
-        format.html { redirect_to all_payments_path, notice: 'Offer was successfully accepted.' }
-        format.json { render :show, status: :ok, location: @enrollment }
-      else
-        format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
-        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def accept_offer
+  #   respond_to do |format|
+  #     if @enrollment.update(offer_status: "accepted", application_status: "enrolled")
+  #       format.html { redirect_to all_payments_path, notice: 'Offer was successfully accepted.' }
+  #       format.json { render :show, status: :ok, location: @enrollment }
+  #     else
+  #       format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
+  #       format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
-  def  decline_offer
-    respond_to do |format|
-      if @enrollment.update(offer_status: "declined")
-        format.html { redirect_to root_path, notice: 'Offer was successfully declined.' }
-        format.json { render :show, status: :ok, location: @enrollment }
-      else
-        format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
-        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def  decline_offer
+  #   respond_to do |format|
+  #     if @enrollment.update(offer_status: "declined")
+  #       format.html { redirect_to root_path, notice: 'Offer was successfully declined.' }
+  #       format.json { render :show, status: :ok, location: @enrollment }
+  #     else
+  #       format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
+  #       format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_enrollment
       @enrollment = Enrollment.find_by(user_id: current_user)
+    end
+
+    def set_course_sessions
+      @courses_session1 = CampOccurrence.session_description("Session 1").courses.order(title: :asc)
+      @courses_session2 = CampOccurrence.session_description("Session 2").courses.order(title: :asc)
+      @courses_session3 = CampOccurrence.session_description("Session 3").courses.order(title: :asc)  
+    end
+
+    def set_activities_sessions
+      @activities_session1 = CampOccurrence.session_description("Session 1").activities.order(description: :asc)
+      @activities_session2 = CampOccurrence.session_description("Session 2").activities.order(description: :asc)
+      @activities_session3 = CampOccurrence.session_description("Session 3").activities.order(description: :asc)  
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -132,7 +126,7 @@ class EnrollmentsController < ApplicationController
                           :personal_statement, :shirt_size, :notes,
                           :application_status, :offer_status,
                           :partner_program, :transcript,
-                          :student_packet,
+                          :student_packet, :campyear,
                           registration_activity_ids: [],
                           session_registration_ids: [],
                           course_registration_ids: [])

@@ -45,7 +45,7 @@ ActiveAdmin.register ApplicantDetail do
       f.input :parentstate, as: :select, collection: us_states
       f.input :parentstate_non_us
       f.input :parentzip
-      f.input :parentcountry
+      f.input :parentcountry, include_blank: true
       f.input :parentphone
       f.input :parentworkphone
       f.input :parentemail
@@ -54,9 +54,9 @@ ActiveAdmin.register ApplicantDetail do
 
   filter :gender, as: :select, collection: Gender.all.map{|a| [a.name, a.id]}
   filter :demographic, as: :select, collection: Demographic.all.map{|a| [a.name, a.id]}
-  filter :state, as: :select
-  filter :firstname, as: :select
-  filter :middlename
+  # filter :state, as: :select
+  # filter :firstname, as: :select
+  # filter :middlename
   filter :lastname, as: :select
 
   filter :us_citizen
@@ -64,25 +64,25 @@ ActiveAdmin.register ApplicantDetail do
   filter :birthdate
   filter :diet_restrictions
   filter :shirt_size, as: :select
-  filter :address1
-  filter :address2
-  filter :city
+  # filter :address1
+  # filter :address2
+  # filter :city
 
-  filter :state_non_us
-  filter :postalcode
-  filter :country, as: :select
-  filter :phone
+  # filter :state_non_us
+  # filter :postalcode
+  # filter :country, as: :select
+  # filter :phone
   filter :parentname
-  filter :parentaddress1
-  filter :parentaddress2
-  filter :parentcity
-  filter :parentstate
-  filter :parentstate_non_us
-  filter :parentzip
-  filter :parentcountry
-  filter :parentphone
-  filter :parentworkphone
-  filter :parentemail
+  # filter :parentaddress1
+  # filter :parentaddress2
+  # filter :parentcity
+  # filter :parentstate
+  # filter :parentstate_non_us
+  # filter :parentzip
+  # filter :parentcountry
+  # filter :parentphone
+  # filter :parentworkphone
+  # filter :parentemail
 
   index do 
     selectable_column
@@ -91,10 +91,21 @@ ActiveAdmin.register ApplicantDetail do
     # column :user_id, sortable: :user_id do |user|
     #   link_to user.applicant_email, admin_user_path(user.user_id)
     # end
-    column :firstname
-    column :middlename
-    column :lastname
-    column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
+    # column :firstname
+    # column :middlename
+    # column :lastname
+    column "Fullname" do |appdetail|
+      appdetail.full_name
+    end
+    column('eMail') do |app| 
+      if app.user.enrollments.exists?
+        div(title: 'Link to Application') do
+          link_to app.applicant_email, admin_application_path(app.user.enrollments.last) 
+        end
+      else 
+        app.applicant_email
+      end
+    end
     column :gender do |g|
       g.gender_name
     end
@@ -158,7 +169,16 @@ ActiveAdmin.register ApplicantDetail do
         # column :user_id do |user|
         #   link_to user.applicant_email, admin_user_path(user.user_id)
         # end
-        column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
+        # column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
+        column('eMail') do |app| 
+          if app.user.enrollments.exists?
+            div(title: 'Link to Application') do
+              link_to app.applicant_email, admin_application_path(app.user.enrollments.last) 
+            end
+          else
+            app.applicant_email
+          end
+        end
       end
     end
     active_admin_comments

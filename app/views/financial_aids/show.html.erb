@@ -1,32 +1,50 @@
 <% if admin_signed_in? %>
   <p>
     <strong>Enrollment:</strong>
-    <%= @financial_aid.enrollment_id %>
+    <%= @financial_aid.last.enrollment_id %>
   </p>
 <% end %>
 
-<% if @financial_aid.awarded %>
+<% fin_aid_status = @financial_aid.pluck(:status) %>
+<% if fin_aid_status.count("rejected") == fin_aid_status.count %>
   <p>
-    <strong>Awarded:</strong>
-    <%= @financial_aid.awarded %>
+    <strong>Status:</strong>
+    <%= "rejected" %>
   </p>
-
+<% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
   <p>
     <strong>Amount:</strong>
-    <%= humanized_money_with_symbol(@financial_aid.amount) %>
+    <%= humanized_money_with_symbol(@financial_aid.pluck(:amount_cents).sum.to_i / 100 ) %>
   </p>
-
   <p>
-    <strong>Source:</strong>
-    <%= @financial_aid.source %>
+    <strong>Status:</strong>
+    <%= "awarded" %>
   </p>
+  <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
+  <p>
+    <strong>Amount:</strong>
+    <%= humanized_money_with_symbol(@financial_aid.pluck(:amount_cents).sum.to_i / 100 ) %>
+  </p>
+  <p>
+    <strong>Status:</strong>
+    <%= "pending" %>
+  </p>
+<% else %>
+  <% @financial_aids.each do |fa| %>
+    <% if fa.status != "rejected" %>
+      <p>
+        <strong>Amount:</strong>
+        <%= humanized_money_with_symbol(fa.amount) %>
+      </p>
+      <p>
+        <strong>Status:</strong>
+        <%= fa.status %>
+      </p>
+      <hr>
+    <% end %>
+  <% end %>
 <% end %>
 
-<p>
-  <strong>Note:</strong>
-  <%= @financial_aid.note %>
-</p>
 
-
-<%= link_to 'Edit |', edit_financial_aid_path(@financial_aid) unless @financial_aid.awarded %>
+<%#= link_to 'Edit |', edit_financial_aid_path(@financial_aid) unless @financial_aid.awarded %>
 <%= link_to 'Home', root_path %>

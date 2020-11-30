@@ -25,16 +25,16 @@ ActiveAdmin.register_page "Dashboard" do
           if Enrollment.any?
             ul do
               Enrollment.limit(10).map do |enroll|
-                li link_to(enroll.user.email, admin_applicant_detail_path(enroll.user.applicant_detail))
+                li link_to(enroll.applicant_detail.full_name + ", " + enroll.user.email , admin_application_path(enroll))
               end
             end
           end
         end
 
-        panel "Recent Payments" do
-          if Payment.any?
+        panel "Recent Payments for #{current_camp_year} Camp" do
+          if Payment.current_camp_payments.any?
             ul do
-              Payment.limit(10).map do |payment|
+              Payment.current_camp_payments.limit(10).map do |payment|
                 li link_to("#{payment.user.email} - #{ humanized_money_with_symbol(payment.total_amount.to_f / 100)}", admin_payment_path(payment.id))
               end
             end

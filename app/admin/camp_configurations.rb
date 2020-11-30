@@ -15,6 +15,15 @@ ActiveAdmin.register CampConfiguration do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+
+  filter :application_open
+  filter :application_close
+  filter :priority
+  filter :application_materials_due
+  filter :camper_acceptance_due
+  filter :active
+  
   index do
     selectable_column
     actions
@@ -25,11 +34,30 @@ ActiveAdmin.register CampConfiguration do
     column :application_materials_due
     column :camper_acceptance_due
     column :active
-    column :offer_letter
+    # column :offer_letter
     column :student_packet_url
     column "Application Fee" do |af|
       humanized_money_with_symbol(af.application_fee)
     end
-
   end
+
+  show do
+    attributes_table do
+    row :camp_year
+    row :application_open
+    row :application_close
+    row :priority
+    row :application_materials_due
+    row :camper_acceptance_due
+    row :active
+    row "Offer Letter Text" do |item|
+      item.offer_letter
+    end
+    row :student_packet_url
+    row :application_fee_cents
+    row :created_at
+    row :updated_at 
+    end
+  end
+
 end
