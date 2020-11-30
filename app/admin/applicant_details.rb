@@ -98,8 +98,12 @@ ActiveAdmin.register ApplicantDetail do
       appdetail.full_name
     end
     column('eMail') do |app| 
-      div(title: 'Link to Application') do
-        link_to app.applicant_email, admin_application_path(app.user.enrollments.last) 
+      if app.user.enrollments.exists?
+        div(title: 'Link to Application') do
+          link_to app.applicant_email, admin_application_path(app.user.enrollments.last) 
+        end
+      else 
+        app.applicant_email
       end
     end
     column :gender do |g|
@@ -167,8 +171,12 @@ ActiveAdmin.register ApplicantDetail do
         # end
         # column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
         column('eMail') do |app| 
-          div(title: 'Link to Application') do
-            link_to app.applicant_email, admin_application_path(app.user.enrollments.last) 
+          if app.user.enrollments.exists?
+            div(title: 'Link to Application') do
+              link_to app.applicant_email, admin_application_path(app.user.enrollments.last) 
+            end
+          else
+            app.applicant_email
           end
         end
       end
