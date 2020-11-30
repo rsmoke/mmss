@@ -64,7 +64,10 @@ class Enrollment < ApplicationRecord
   validates :personal_statement, presence: true
   validates :personal_statement, length: { minimum: 100 }
 
-  validate :at_least_one_is_checked
+  validate :at_least_one_session_is_checked
+  validate :at_least_one_course_is_checked
+
+  validate :validate_transcript_presence
   validate :acceptable_transcript
 
   scope :offered, -> {where("offer_status = 'offered'")}
@@ -77,16 +80,22 @@ class Enrollment < ApplicationRecord
     self.user.email # or whatever column you want
   end
 
-  # def campyear
-  #   self.session_registrations.last.camp_configuration.camp_year
-  # end
-
   private
 
-  def at_least_one_is_checked
+  def at_least_one_session_is_checked
     if session_registration_ids.empty?
       errors.add(:base, "Select at least one session")
     end
+  end
+
+  def at_least_one_course_is_checked
+    if course_registration_ids.empty?
+      errors.add(:base, "Select at least one course")
+    end
+  end
+
+  def validate_transcript_presence
+    errors.add(:transcript, 'should exist') unless self.transcript.attached?
   end
 
   def acceptable_transcript
