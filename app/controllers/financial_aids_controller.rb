@@ -72,7 +72,7 @@ class FinancialAidsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_financial_aid
-      @financial_aid = current_user.enrollments.last.financial_aid
+      @financial_aid = current_user.enrollments.last.financial_aids
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
