@@ -1,7 +1,7 @@
 <% if admin_signed_in? %>
   <p>
     <strong>Enrollment:</strong>
-    <%= @financial_aid.enrollment_id %>
+    <%= @financial_aid.last.enrollment_id %>
   </p>
 <% end %>
 
