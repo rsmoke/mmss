@@ -1,28 +1,39 @@
 <% if admin_signed_in? %>
   <p>
     <strong>Enrollment:</strong>
-    <%= @financial_aid.enrollment_id %>
+    <%= @financial_aid.last.enrollment_id %>
   </p>
 <% end %>
 
-<% @financial_aids.each do |fa| %>
+<% fin_aid_status = @financial_aid.pluck(:status) %>
+<% if fin_aid_status.count("rejected") == fin_aid_status.count %>
+  <p>
+    <strong>Status:</strong>
+    <%= "rejected" %>
+  </p>
+<% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
   <p>
     <strong>Amount:</strong>
-    <%= humanized_money_with_symbol(fa.amount) %>
-  </p>
-  <p>
-    <strong>Source:</strong>
-    <%= fa.source %>
+    <%= humanized_money_with_symbol(@financial_aid.pluck(:amount_cents).sum.to_i / 100 ) %>
   </p>
   <p>
     <strong>Status:</strong>
-    <%= fa.status %>
+    <%= "awarded" %>
   </p>
-  <p>
-    <strong>Note:</strong>
-    <%= fa.note %>
-  </p>
-  <hr>
+<% else %>
+  <% @financial_aids.each do |fa| %>
+    <% if fa.status != "rejected" %>
+      <p>
+        <strong>Amount:</strong>
+        <%= humanized_money_with_symbol(fa.amount) %>
+      </p>
+      <p>
+        <strong>Status:</strong>
+        <%= fa.status %>
+      </p>
+      <hr>
+    <% end %>
+  <% end %>
 <% end %>
 
 
