@@ -63,15 +63,13 @@
   </span>
 </p>
 
-
+<div class="field">
+<%= form.label :amount_cents %>
+<%= form.number_field :amount_cents %>
+</div>
 
 
   <% if admin_signed_in? %>
-    <div class="field">
-      <%= form.label :amount_cents %>
-      <%= form.number_field :amount_cents %>
-    </div>
-
     <div class="field">
       <%= form.label :source %>
       <%= form.text_field :source %>
