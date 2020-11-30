@@ -43,7 +43,7 @@
           end
         else
           @user_current_enrollment = current_user.enrollments.last
-          @finaids = current_user.enrollments.last.financial_aid
+          @finaids = current_user.enrollments.last.financial_aids
           @finaids_ttl = @finaids.pluck(:amount_cents).sum
           @ttl_paid = current_user.payments.current_camp_payments.where(transaction_status: '1').pluck(:total_amount).map(&:to_i).sum      # cost_sessions = 1300 * @user_current_enrollment.session_registrations.size
           @total_cost = cost_sessions_ttl + cost_activities_ttl + CampConfiguration.active_camp_fee_cents
@@ -71,7 +71,7 @@
       @any_session_cost = CampOccurrence.find_by(description: "Any Session").cost_cents
       @user_current_enrollment = current_user.enrollments.last
       @current_application_status = @user_current_enrollment.application_status
-      @finaids = current_user.enrollments.last.financial_aid #need loop
+      @finaids = current_user.enrollments.last.financial_aids #need loop
       @finaids_ttl = @finaids.pluck(:amount_cents).sum
       @finaids_awarded_ttl = @finaids.where(status: "awarded").pluck(:amount_cents).sum
       @users_current_payments = current_user.payments.current_camp_payments
