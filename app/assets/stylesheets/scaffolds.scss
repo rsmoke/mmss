@@ -36,13 +36,28 @@ div.actions {
 #notice {
   color: green; }
 
-  div.field_with_errors {
-    width: 100%;
+  .field_with_errors {
+    // margin-left: 20px;
+    width: 180px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    // display: flex;
+    // width: 100%;
   }
   .field_with_errors label {
+    flex: 0 1 100px;
+    margin: 2px;
     color:red;
   }
-  div.field_with_errors input{
+
+  .field_with_errors select {
+  // flex: 1 1 70px
+    flex: 0 1 70px;
+    margin: 5px;
+    width: 100%;
+  }
+  .field_with_errors input{
     border:  solid red;
   }
 #error_explanation {

@@ -51,17 +51,16 @@ camp_configuration = CampConfiguration.create([
 ])
 
 camp_occurrence = CampOccurrence.create([
-  {camp_configuration_id: CampConfiguration.last, description: "Session 1", begin_date: "2021-09-14", end_date: "2021-09-21", active: true}
-  {camp_configuration_id: CampConfiguration.last, description: "Session 2", begin_date: "2021-09-23", end_date: "2021-09-30", active: true}
+  {camp_configuration_id: CampConfiguration.last, description: "Session 1", begin_date: "2021-09-14", end_date: "2021-09-21", active: true},
+  {camp_configuration_id: CampConfiguration.last, description: "Session 2", begin_date: "2021-09-23", end_date: "2021-09-30", active: true},
   {camp_configuration_id: CampConfiguration.last, description: "Session 3", begin_date: "2021-10-3", end_date: "2021-10-10", active: true}
-
-
   ])
+
 camp1 = CampOccurrence.first
 camp2 = CampOccurrence.second
 camp3 = CampOccurrence.last
 
-course1 = camp1.create([
+course1 = camp1.courses.create([
   {title: "Dissecting Life: Human Anatomy and Physiology", available_spaces: 25, status: "open"},
   {title: "Forensic Physics", available_spaces: 25, status: "open"},
   {title: "Graph Theory", available_spaces: 25, status: "open"},
