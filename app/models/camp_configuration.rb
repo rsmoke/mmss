@@ -25,6 +25,7 @@ class CampConfiguration < ApplicationRecord
   validates :priority, presence: true
   validates :application_materials_due, presence: true
   validates :camper_acceptance_due, presence: true
+  validate :only_one_active_camp
 
   monetize :application_fee_cents
 
@@ -36,5 +37,17 @@ class CampConfiguration < ApplicationRecord
 
   def display_name
     self.camp_year # or whatever column you want
+  end
+
+  def only_one_active_camp
+    return unless active?
+  
+    matches = CampConfiguration.active
+    if persisted?
+      matches = matches.where('id != ?', id)
+    end
+    if matches.exists?
+      errors.add(:active, 'cannot have another active camp')
+    end
   end
 end
