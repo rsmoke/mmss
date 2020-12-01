@@ -14,7 +14,7 @@ class StaticPagesController < ApplicationController
   private
     def set_current_enrollment
       if user_signed_in?
-        @current_enrollment = current_user.enrollments.current_camp_year_applications
+        @current_enrollment = current_user.enrollments.current_camp_year_applications.last
       end
     end
 end

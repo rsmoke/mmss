@@ -1,8 +1,8 @@
 class FinancialAidsController < ApplicationController
 
-  before_action :set_financial_aid, only: [:show, :edit, :update, :destroy]
   devise_group :logged_in, contains: [:user, :admin]
   before_action :set_current_enrollment
+  before_action :set_financial_aid, only: [:show, :edit, :update, :destroy]
   # before_action :authenticate_logged_in!
 
   # GET /financial_aids
@@ -72,7 +72,7 @@ class FinancialAidsController < ApplicationController
 
   private
     def set_current_enrollment
-      @current_enrollment = current_user.enrollments.current_camp_year_applications
+      @current_enrollment = current_user.enrollments.current_camp_year_applications.last
     end
 
     # Use callbacks to share common setup or constraints between actions.

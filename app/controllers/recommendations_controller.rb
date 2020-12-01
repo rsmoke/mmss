@@ -75,7 +75,7 @@ class RecommendationsController < ApplicationController
   private
 
     def set_current_enrollment
-      @current_enrollment = current_user.enrollments.current_camp_year_applications
+      @current_enrollment = current_user.enrollments.current_camp_year_applications.last
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_recommendation

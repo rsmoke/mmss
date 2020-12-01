@@ -75,7 +75,7 @@ class PaymentsController < ApplicationController
   private
 
     def set_current_enrollment
-      @current_enrollment = current_user.enrollments.current_camp_year_applications
+      @current_enrollment = current_user.enrollments.current_camp_year_applications.last
     end
 
     def generate_hash(amount = current_camp_fee / 100 )

@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def current_enrollment
-    @current_enrollment = current_user.enrollments.current_camp_year_applications
+    @current_enrollment = current_user.enrollments.current_camp_year_applications.last
   end
   
   def student_packet_url 

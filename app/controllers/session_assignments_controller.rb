@@ -61,7 +61,7 @@ class SessionAssignmentsController < ApplicationController
     end
 
     def set_current_enrollment
-      @current_enrollment = current_user.enrollments.current_camp_year_applications
+      @current_enrollment = current_user.enrollments.current_camp_year_applications.last
     end
 
 end
