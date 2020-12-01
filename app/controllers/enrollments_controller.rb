@@ -1,5 +1,4 @@
 class EnrollmentsController < ApplicationController
-  # before_action :set_enrollment, only: [:show, :edit, :update, :destroy, :accept_offer, :decline_offer]
   before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
   before_action :set_course_sessions
   before_action :set_activities_sessions
@@ -72,30 +71,6 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-  # def accept_offer
-  #   respond_to do |format|
-  #     if @enrollment.update(offer_status: "accepted", application_status: "enrolled")
-  #       format.html { redirect_to all_payments_path, notice: 'Offer was successfully accepted.' }
-  #       format.json { render :show, status: :ok, location: @enrollment }
-  #     else
-  #       format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
-  #       format.json { render json: @enrollment.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
-  # def  decline_offer
-  #   respond_to do |format|
-  #     if @enrollment.update(offer_status: "declined")
-  #       format.html { redirect_to root_path, notice: 'Offer was successfully declined.' }
-  #       format.json { render :show, status: :ok, location: @enrollment }
-  #     else
-  #       format.html { redirect_to root_path, notice: 'There was a problem processing the offer.' }
-  #       format.json { render json: @enrollment.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_enrollment
@@ -103,15 +78,31 @@ class EnrollmentsController < ApplicationController
     end
 
     def set_course_sessions
-      @courses_session1 = CampOccurrence.session_description("Session 1").courses.order(title: :asc)
-      @courses_session2 = CampOccurrence.session_description("Session 2").courses.order(title: :asc)
-      @courses_session3 = CampOccurrence.session_description("Session 3").courses.order(title: :asc)  
+      CampOccurrence.active.each do |ca|
+        if ca.description == "Session 1"
+          @courses_session1 = ca.courses.order(title: :asc)
+        end
+        if ca.description == "Session 2"
+          @courses_session2 = ca.courses.order(title: :asc)
+        end 
+        if ca.description == "Session 3"
+          @courses_session3 = ca.courses.order(title: :asc)
+        end
+      end  
     end
 
     def set_activities_sessions
-      @activities_session1 = CampOccurrence.session_description("Session 1").activities.order(description: :asc)
-      @activities_session2 = CampOccurrence.session_description("Session 2").activities.order(description: :asc)
-      @activities_session3 = CampOccurrence.session_description("Session 3").activities.order(description: :asc)  
+      CampOccurrence.active.each do |as|
+        if as.description == "Session 1"
+          @activities_session1 = as.activities.order(description: :asc)
+        end
+        if as.description == "Session 2"
+          @activities_session2 = as.activities.order(description: :asc)
+        end
+        if as.description == "Session 3"
+          @activities_session3 = as.activities.order(description: :asc)
+        end
+      end  
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
