@@ -36,11 +36,30 @@ div.actions {
 #notice {
   color: green; }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table; }
+  .field_with_errors {
+    // margin-left: 20px;
+    width: 210px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    // display: flex;
+    // width: 100%;
+  }
+  .field_with_errors label {
+    flex: 0 1 100px;
+    margin: 2px;
+    color:red;
+  }
 
+  .field_with_errors select {
+  // flex: 1 1 70px
+    flex: 0 1 70px;
+    margin: 5px;
+    width: 100%;
+  }
+  .field_with_errors input{
+    border:  solid red;
+  }
 #error_explanation {
   width: 450px;
   border: 2px solid red;
@@ -50,16 +69,17 @@ div.actions {
 
 #error_explanation h2 {
   text-align: left;
-  font-weight: bold;
   padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: -7px -7px 0;
-  background-color: #c00;
-  color: #fff; }
+  background-color:  #f0f0f0;;
+  color: red; }
 
 #error_explanation ul li {
   font-size: 12px;
-  list-style: square; }
+  list-style: square;
+  margin-left: 10px;
+}
 
 label {
-  display: block; }
+  display: block;}
