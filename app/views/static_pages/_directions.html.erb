@@ -2,9 +2,11 @@
   <h2>Directions:</h2>
   <% if current_user.applicant_detail.blank? %>
     <div class="mb-2">The first step is to
-      <%= link_to 'Register', new_applicant_detail_path,
-                  class: 'btn btn-blue' %>,
-      so that we know who you are.
+      <div class="mt-2">
+        <%= link_to 'Register', new_applicant_detail_path,
+                    class: 'btn btn-blue' %>,
+        so that we know who you are.
+      </div>
       <br>
       As you advance through the online application process, these directions
       will update accordingly to your progress. For many items you submit,
@@ -16,8 +18,10 @@
     </p>
   <% elsif @current_enrollment.nil? %>
     <div class="mb-2">The second step is to submit your application for
-      <%= link_to 'Camp Application', new_enrollment_path,
-                  class: 'btn btn-blue' %>
+      <div class="mt-2">
+        <%= link_to 'Camp Application', new_enrollment_path,
+                    class: 'btn btn-blue' %>
+      </div>
     </div>
       <p class='direction_notes'>Make sure that you have gathered all the
         required information, then work your way through the sections.
@@ -36,16 +40,20 @@
       </p>
   <% elsif @current_enrollment.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
     <div class="mb-2">The next step is to rank the courses you selected in the priority of interest.<br>
-      <%= link_to 'Course-Rankings',
-                    enrollment_course_preferences_path(@current_enrollment.id),
-                    class: 'btn btn-blue' %>
+      <div class="mt-2">
+        <%= link_to 'Course-Rankings',
+                      enrollment_course_preferences_path(@current_enrollment.id),
+                      class: 'btn btn-blue' %>
+      </div>
     </div>
       <p class='direction_notes'>Make sure that you give each course you selected a ranking.</p>   
   <% elsif @current_enrollment.recommendation.blank? %>
     <div class="mb-2">The next step is requesting a
+    <div class="mt-2">
       <%= link_to "Letter of Recommendation",
                   new_enrollment_recommendation_path(@current_enrollment),
                   class: 'btn btn-blue'  %>
+    </div>
     </div>
     <p class='direction_notes'>Please ask one of your most recent high school science or math
       teachers to submit a Letter of Recommendation. This is a required part
@@ -113,8 +121,10 @@
       <p class="mb-2">If you are applying for need-based financial support, please fill out
         the
         <br>
-        <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(@current_enrollment),
+        <div class="my-2">
+          <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(@current_enrollment),
                 class: "btn btn-green pt-8" %>
+        </div>
       </p>
     <% end %>
 
@@ -125,10 +135,12 @@
   <% end %>
 
 <% else %>
-  Please
-  <%= link_to 'Sign up', new_user_registration_path,
-            class: "btn btn-blue"  %>
-  or
-  <%= link_to 'Sign In - If you are returning', new_user_session_path,
-              class: "btn btn-blue" %>
+  <div class="mt-2">
+    Please
+    <%= link_to 'Sign up', new_user_registration_path,
+              class: "btn btn-blue"  %>
+    or
+    <%= link_to 'Sign In - If you are returning', new_user_session_path,
+                class: "btn btn-blue" %>
+  </div>
 <% end %>

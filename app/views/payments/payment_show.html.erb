@@ -42,8 +42,10 @@
     <% if @current_enrollment.financial_aids.blank? && (@current_application_status == nil || @current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
       <p class="mb-2">If you are applying for need-based financial support, please fill out the
         <br>
-        <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(@current_enrollment),
-                class: "btn btn-green pt-8" %>
+        <div class="my-2">
+          <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(@current_enrollment),
+                  class: "btn btn-green pt-8" %>
+        </div>
       </p>
     <% end %>
     <div class="direction_notes">You may email any questions to 
@@ -91,7 +93,7 @@
           <ul class="m-auto">
             <% if @session_registrations.present? %>
               <% if @has_any_session %>
-                <li class="text-right"><%= "Any Session -- #{humanized_money_with_symbol(@any_session_cost)}" %></li>
+                <li class="text-right"><%= "'Any Session' selected - watch for assignment" %></li>
               <% else %>
                 <% @session_registrations.each do |s| %>
                   <li class="text-right">

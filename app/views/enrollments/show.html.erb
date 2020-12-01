@@ -156,10 +156,12 @@
       <%= @current_enrollment.partner_program %>
     </p>
 <% end %>
-<% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>
-  <%= link_to 'Edit', edit_enrollment_path(@current_enrollment) %> |
-<% end %>
-<%= link_to 'Home', root_path %>
+<div class="mt-2">
+  <% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>
+    <%= link_to 'Edit', edit_enrollment_path(@current_enrollment), class: "btn btn-blue" %> |
+  <% end %>
+  <%= link_to 'Home', root_path, class: "btn btn-blue" %>
+</div>
 
 
 

@@ -82,7 +82,10 @@
     - requested
   <% end %>
 </p>
-<% if @current_enrollment.recommendation.recupload.blank? %>
-  <%= link_to 'Edit', edit_recommendation_path(@recommendation) %> |
-<% end %>
-<%= link_to 'Home', root_path %>
+
+<div class="mt-2">
+  <% if @current_enrollment.recommendation.recupload.blank? %>
+    <%= link_to 'Edit', edit_recommendation_path(@recommendation), class: "btn btn-blue" %> |
+  <% end %>
+  <%= link_to 'Home', root_path, class: "btn btn-blue" %>
+</div>
