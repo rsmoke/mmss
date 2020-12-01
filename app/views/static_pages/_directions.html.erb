@@ -1,115 +1,115 @@
-    <% if user_signed_in? %>
-      <h2>Directions:</h2>
-      <% if current_user.applicant_detail.blank? %>
-        <div class="mb-2">The first step is to
-          <%= link_to 'Register', new_applicant_detail_path,
-                      class: 'btn btn-blue' %>,
-          so that we know who you are.
-          <br>
-          As you advance through the online application process, these directions
-          will update accordingly to your progress. For many items you submit,
-          you will receive an event update on the right side of the screen.
-        </div>
-        <p class='direction_notes'>
-          Watch here for special information related to the step you currently
-          are on.
-        </p>
-      <% elsif current_user.enrollments.empty? %>
-        <div class="mb-2">The second step is to submit your application for
-          <%= link_to 'Camp Application', new_enrollment_path,
-                      class: 'btn btn-blue' %>
-        </div>
-          <p class='direction_notes'>Make sure that you have gathered all the
-            required information, then work your way through the sections.
-            <ul class='direction_notes'>
-              <div>High School Address</div>
-              <div>Transcript (in pdf format)</div>
-              <div>Your personal statement</div>
-            </ul>
-            <ul class='direction_notes'>
-              <div>You will be selecting the activities and courses you wish to partake in. 
-              After this stage is complete, your next step will be to rank the courses 
-              related to your interest.</div>
-            </ul>
-            <br>
-            Check your work before submitting. Once review of your application begins, you will not be able to make changes.
-          </p>
-      <% elsif current_user.enrollments.last.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
-        <div class="mb-2">The next step is to rank the courses you selected in the priority of interest.<br>
-          <%= link_to 'Course-Rankings',
-                        enrollment_course_preferences_path(current_user.enrollments.last.id),
-                        class: 'btn btn-blue' %>
-        </div>
-          <p class='direction_notes'>Make sure that you give each course you selected a ranking.</p>   
-      <% elsif current_user.enrollments.last.recommendation.blank? %>
-        <div class="mb-2">The next step is requesting a
-          <%= link_to "Letter of Recommendation",
-                      new_enrollment_recommendation_path(current_user.enrollments.last),
-                      class: 'btn btn-blue'  %>
-        </div>
-        <p class='direction_notes'>Please ask one of your most recent high school science or math
-          teachers to submit a Letter of Recommendation. This is a required part
-           of your application. Your recommender will be sent an email giving
-           them directions on how to submit a recommendation for you, so please
-           be certain that you enter their correct email address.
-         </p>
-      <% elsif current_user.payments.current_camp_payments.empty? %>
-        <div class="mb-2">Now that you've submitted your application, the next step is to make
-         sure you pay the <%= humanized_money_with_symbol(current_camp_fee / 100) %> non-refundable application fee
-         <%= button_to "pay #{humanized_money_with_symbol(current_camp_fee / 100)} application fee",
-                      make_payment_path(amount: current_camp_fee / 100), class: 'bg-blue-700 hover:bg-blue-900 text-gray-100 font-normal py-1 px-2 rounded' %>
-        </div>
-        <p class="direction_notes font-semibold text-red-900">
-          Payment of your application fee must be completed before you will be
-          considered for admission.
-        </p>
-        <p class="direction_notes">
-          International students may pay via wire transfer
-          (<a href="mailto:mmss@umich.edu">contact our office</a> for more
-          information regarding wire transfers for international students.)
-        </p>
-        <p class="direction_notes">You will receive an email from UM
-          MerchantServices confirming your credit card transactions.
-        </p>
-      <% else %>
-        <% if current_user.enrollments.last.offer_status == "offered" %>
-          <p class="direction_notes">
-            Please respond to our acceptance offer by making the appropriate
-            selection in the Progress Window.
-        <% elsif current_user.enrollments.last.application_status == "offer accepted" %>
-          <p class="direction_notes">
-            Payment of the balance of program tuition and fees is due by
-            <%= @application_materials_due_date.strftime("%B %e, %Y") %>. Use the
-            payment form in your <%= link_to "Account Summary", all_payments_path %>.
-          </p>
-          <% unless current_enrollment.student_packet.attached? %>
-            <h4>Download and Return the 
-              <%= link_to student_packet_url, target: "_blank" do %>
-                  Student Information Packet
-                <% end %> 
-              as soon as possible!</h4>
-            <% end %>
-        <% elsif current_user.enrollments.last.application_status == "offer declined" %>
-          <p class="direction_notes">
-            Thanks for your interest.
-          </p>
-        <% elsif current_user.enrollments.last.application_status == "enrolled" %>
-          <p class="direction_notes">
-            We look forward to seeing you at the <%= current_camp %> University of Michigan MMSS High School Summer Program.
-          </p>
-        <% else %>
-          <p class="direction_notes">
-            At this point, you have submitted all of the information needed from
-            YOU. However, <strong>please note that your application will not be
-            considered "complete", and will not be reviewed until we receive the
-            letter of recommendation from your teacher. Please check with your
-            teacher to make sure they know you have applied, and they have
-            received an email from us!</strong>
-          </p>
+<% if user_signed_in? %>
+  <h2>Directions:</h2>
+  <% if current_user.applicant_detail.blank? %>
+    <div class="mb-2">The first step is to
+      <%= link_to 'Register', new_applicant_detail_path,
+                  class: 'btn btn-blue' %>,
+      so that we know who you are.
+      <br>
+      As you advance through the online application process, these directions
+      will update accordingly to your progress. For many items you submit,
+      you will receive an event update on the right side of the screen.
+    </div>
+    <p class='direction_notes'>
+      Watch here for special information related to the step you currently
+      are on.
+    </p>
+  <% elsif current_user.enrollments.empty? %>
+    <div class="mb-2">The second step is to submit your application for
+      <%= link_to 'Camp Application', new_enrollment_path,
+                  class: 'btn btn-blue' %>
+    </div>
+      <p class='direction_notes'>Make sure that you have gathered all the
+        required information, then work your way through the sections.
+        <ul class='direction_notes'>
+          <div>High School Address</div>
+          <div>Transcript (in pdf format)</div>
+          <div>Your personal statement</div>
+        </ul>
+        <ul class='direction_notes'>
+          <div>You will be selecting the activities and courses you wish to partake in. 
+          After this stage is complete, your next step will be to rank the courses 
+          related to your interest.</div>
+        </ul>
+        <br>
+        Check your work before submitting. Once review of your application begins, you will not be able to make changes.
+      </p>
+  <% elsif current_user.enrollments.last.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
+    <div class="mb-2">The next step is to rank the courses you selected in the priority of interest.<br>
+      <%= link_to 'Course-Rankings',
+                    enrollment_course_preferences_path(current_user.enrollments.last.id),
+                    class: 'btn btn-blue' %>
+    </div>
+      <p class='direction_notes'>Make sure that you give each course you selected a ranking.</p>   
+  <% elsif current_user.enrollments.last.recommendation.blank? %>
+    <div class="mb-2">The next step is requesting a
+      <%= link_to "Letter of Recommendation",
+                  new_enrollment_recommendation_path(current_user.enrollments.last),
+                  class: 'btn btn-blue'  %>
+    </div>
+    <p class='direction_notes'>Please ask one of your most recent high school science or math
+      teachers to submit a Letter of Recommendation. This is a required part
+        of your application. Your recommender will be sent an email giving
+        them directions on how to submit a recommendation for you, so please
+        be certain that you enter their correct email address.
+      </p>
+  <% elsif current_user.payments.current_camp_payments.empty? %>
+    <div class="mb-2">Now that you've submitted your application, the next step is to make
+      sure you pay the <%= humanized_money_with_symbol(current_camp_fee / 100) %> non-refundable application fee
+      <%= button_to "pay #{humanized_money_with_symbol(current_camp_fee / 100)} application fee",
+                  make_payment_path(amount: current_camp_fee / 100), class: 'bg-blue-700 hover:bg-blue-900 text-gray-100 font-normal py-1 px-2 rounded' %>
+    </div>
+    <p class="direction_notes font-semibold text-red-900">
+      Payment of your application fee must be completed before you will be
+      considered for admission.
+    </p>
+    <p class="direction_notes">
+      International students may pay via wire transfer
+      (<a href="mailto:mmss@umich.edu">contact our office</a> for more
+      information regarding wire transfers for international students.)
+    </p>
+    <p class="direction_notes">You will receive an email from UM
+      MerchantServices confirming your credit card transactions.
+    </p>
+  <% else %>
+    <% if current_user.enrollments.last.offer_status == "offered" %>
+      <p class="direction_notes">
+        Please respond to our acceptance offer by making the appropriate
+        selection in the Progress Window.
+    <% elsif current_user.enrollments.last.application_status == "offer accepted" %>
+      <p class="direction_notes">
+        Payment of the balance of program tuition and fees is due by
+        <%= @application_materials_due_date.strftime("%B %e, %Y") %>. Use the
+        payment form in your <%= link_to "Account Summary", all_payments_path %>.
+      </p>
+      <% unless current_enrollment.student_packet.attached? %>
+        <h4>Download and Return the 
+          <%= link_to student_packet_url, target: "_blank" do %>
+              Student Information Packet
+            <% end %> 
+          as soon as possible!</h4>
         <% end %>
-        <% if current_user.enrollments.last.financial_aids.blank? &&
-        (current_user.enrollments.last.application_status == nil || current_user.enrollments.last.application_status == "" ||
-        current_user.enrollments.last.application_status == "submitted" || current_user.enrollments.last.application_status == "application complete") %>
+    <% elsif current_user.enrollments.last.application_status == "offer declined" %>
+      <p class="direction_notes">
+        Thanks for your interest.
+      </p>
+    <% elsif current_user.enrollments.last.application_status == "enrolled" %>
+      <p class="direction_notes">
+        We look forward to seeing you at the <%= current_camp %> University of Michigan MMSS High School Summer Program.
+      </p>
+    <% else %>
+      <p class="direction_notes">
+        At this point, you have submitted all of the information needed from
+        YOU. However, <strong>please note that your application will not be
+        considered "complete", and will not be reviewed until we receive the
+        letter of recommendation from your teacher. Please check with your
+        teacher to make sure they know you have applied, and they have
+        received an email from us!</strong>
+      </p>
+    <% end %>
+    <% if current_user.enrollments.last.financial_aids.blank? &&
+    (current_user.enrollments.last.application_status == nil || current_user.enrollments.last.application_status == "" ||
+    current_user.enrollments.last.application_status == "submitted" || current_user.enrollments.last.application_status == "application complete") %>
       <p class="mb-2">If you are applying for need-based financial support, please fill out
         the
         <br>
@@ -118,16 +118,17 @@
       </p>
     <% end %>
 
-        <p class="direction_notes"> Watch the progress window at the right
-          to track the status of your application materials. You will receive an
-          email with instructions for any additional steps that are required.
-        </p>
-      <% end %>
+    <p class="direction_notes"> Watch the progress window at the right
+      to track the status of your application materials. You will receive an
+      email with instructions for any additional steps that are required.
+    </p>
+  <% end %>
 
-    <% else %>
-      Please
-      <%= link_to 'Sign in', new_user_session_path,
-                  class: "btn btn-blue" %> or
-      <%= link_to 'Sign up', new_user_registration_path,
-                  class: "btn btn-blue"  %>
-    <% end %>
+<% else %>
+  Please
+  <%= link_to 'Sign up', new_user_registration_path,
+            class: "btn btn-blue"  %>
+  or
+  <%= link_to 'Sign In - If you are returning', new_user_session_path,
+              class: "btn btn-blue" %>
+<% end %>
