@@ -66,7 +66,7 @@ class CoursePreferencesController < ApplicationController
   private
 
     def current_enrollment
-      @current_enrollment = current_user.enrollments.last
+      @current_enrollment = current_user.enrollments.current_camp_year_applications
     end
 
     def course_preference
