@@ -76,7 +76,7 @@
               <div class="flex justify-start bg-gray-200 text-xs">
                 <ul class="m-auto">
                   Services & Activities
-                  <% @current_enrollment.find(sa.enrollment_id).registration_activities.where(camp_occurrence_id: sa.camp_occurrence_id).each do |ca| %>
+                  <% @current_enrollment.registration_activities.where(camp_occurrence_id: sa.camp_occurrence_id).each do |ca| %>
                     <li class="text-right">
                       <%= ca.description %> -- <%= humanized_money_with_symbol(ca.cost) %>
                      </li>
@@ -141,14 +141,14 @@
           </div>
         <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
           <div class="text-gray-700">
-            <%= "#{'financial_aid_request'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
+            <%= "#{'financial_aid_requested'.humanize}" %>
           </div>
 
         <% else %>
           <% @finaids.each do |aid| %>
             <% if aid.status == 'pending' %>
               <div class="text-gray-700">
-                <%= "#{'financial_aid_request'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(aid.amount).rjust(12,'.')}" %>
+                <%= "#{'financial_aid_requested'.humanize}" %>
               </div>
             <% elsif aid.status == 'awarded' %>
               <div class="text-gray-700">
@@ -215,6 +215,8 @@
     <h5>Financial Aid</h5>
     <% if fin_aid_status.count("rejected") == fin_aid_status.count %>
       <%= "Status: rejected" %>
+    <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
+      <%= "Status: pending" %>
     <% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
       <div class="card-deck">
         <div class="max-w-sm rounded overflow-hidden shadow-lg">

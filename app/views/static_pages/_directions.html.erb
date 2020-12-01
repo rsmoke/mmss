@@ -14,7 +14,7 @@
       Watch here for special information related to the step you currently
       are on.
     </p>
-  <% elsif @current_enrollment.empty? %>
+  <% elsif @current_enrollment.nil? %>
     <div class="mb-2">The second step is to submit your application for
       <%= link_to 'Camp Application', new_enrollment_path,
                   class: 'btn btn-blue' %>

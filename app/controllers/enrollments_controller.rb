@@ -17,9 +17,9 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/1
   # GET /enrollments/1.json
   def show
-    @registration_activities = @enrollment.registration_activities.order(camp_occurrence_id: :asc)
-    @session_registrations = @enrollment.session_registrations.order(description: :asc)
-    @course_registrations = @enrollment.course_registrations.order(camp_occurrence_id: :asc)
+    @registration_activities = @current_enrollment.registration_activities.order(camp_occurrence_id: :asc)
+    @session_registrations = @current_enrollment.session_registrations.order(description: :asc)
+    @course_registrations = @current_enrollment.course_registrations.order(camp_occurrence_id: :asc)
   end
 
   # GET /enrollments/new
@@ -51,12 +51,12 @@ class EnrollmentsController < ApplicationController
   # PATCH/PUT /enrollments/1.json
   def update
     respond_to do |format|
-      if @enrollment.update(enrollment_params)
+      if @current_enrollment.update(enrollment_params)
         format.html { redirect_to root_path, notice: 'Application was successfully updated.' }
-        format.json { render :show, status: :ok, location: @enrollment }
+        format.json { render :show, status: :ok, location: @current_enrollment }
       else
         format.html { render :edit }
-        format.json { render json: @enrollment.errors, status: :unprocessable_entity }
+        format.json { render json: @current_enrollment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -75,7 +75,7 @@ class EnrollmentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_current_enrollment
       # @enrollment = Enrollment.find_by(user_id: current_user)
-      @current_enrollment = current_user.enrollments.current_camp_year_applications
+      @current_enrollment = current_user.enrollments.current_camp_year_applications.last
     end
 
     def set_course_sessions
