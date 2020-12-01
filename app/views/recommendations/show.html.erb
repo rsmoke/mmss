@@ -73,16 +73,16 @@
 <p>
   <strong>Recommendation Letter status :</strong>
   <%# @recommendation.submitted_recommendation %>
-  <% if current_user.enrollments.last.recommendation.recupload.present? %>
+  <% if @current_enrollment.recommendation.recupload.present? %>
     - letter received
     <br>
       <strong>Date received:</strong>
-      <%= current_user.enrollments.last.recommendation.recupload.created_at.strftime("%B %d, %Y") %>
+      <%= @current_enrollment.recommendation.recupload.created_at.strftime("%B %d, %Y") %>
   <% else %>
     - requested
   <% end %>
 </p>
-<% if current_user.enrollments.last.recommendation.recupload.blank? %>
+<% if @current_enrollment.recommendation.recupload.blank? %>
   <%= link_to 'Edit', edit_recommendation_path(@recommendation) %> |
 <% end %>
 <%= link_to 'Home', root_path %>

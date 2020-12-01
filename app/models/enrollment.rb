@@ -117,5 +117,4 @@ class Enrollment < ApplicationRecord
     end
   end
 
-  # scope :current_enrollment, ->(user=@current_user) { where(user_id: user) }
 end

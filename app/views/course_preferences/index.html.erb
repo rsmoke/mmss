@@ -41,11 +41,11 @@
 <hr>
 
 <%= link_to 'Home', root_path %> |
-<% if current_user.enrollments.last.recommendation.blank? %>
+<% if @current_enrollment.recommendation.blank? %>
   <%= link_to "Letter of Recommendation",
-                        new_enrollment_recommendation_path(current_user.enrollments.last),
+                        new_enrollment_recommendation_path(@current_enrollment),
                         class: 'btn btn-blue'  %>
 <% else %>
   <%= link_to "Letter of Recommendation",
-                        enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
+                        enrollment_recommendation_path(@current_enrollment, @current_enrollment.recommendation ) %>
 <% end %>

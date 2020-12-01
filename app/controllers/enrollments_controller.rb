@@ -1,9 +1,9 @@
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_enrollment, only: [:show, :edit, :update, :destroy]
   before_action :set_course_sessions
   before_action :set_activities_sessions
   devise_group :logged_in, contains: [:user, :admin]
-  before_action :authenticate_logged_in!
+  # before_action :authenticate_logged_in!
   # GET /enrollments
   # GET /enrollments.json
   def index
@@ -73,8 +73,9 @@ class EnrollmentsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_enrollment
-      @enrollment = Enrollment.find_by(user_id: current_user)
+    def set_current_enrollment
+      # @enrollment = Enrollment.find_by(user_id: current_user)
+      @current_enrollment = current_user.enrollments.current_camp_year_applications
     end
 
     def set_course_sessions
