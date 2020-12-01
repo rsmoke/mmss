@@ -14,7 +14,7 @@
       Watch here for special information related to the step you currently
       are on.
     </p>
-  <% elsif current_user.enrollments.empty? %>
+  <% elsif @current_enrollment.nil? %>
     <div class="mb-2">The second step is to submit your application for
       <%= link_to 'Camp Application', new_enrollment_path,
                   class: 'btn btn-blue' %>
@@ -34,17 +34,17 @@
         <br>
         Check your work before submitting. Once review of your application begins, you will not be able to make changes.
       </p>
-  <% elsif current_user.enrollments.last.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
+  <% elsif @current_enrollment.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
     <div class="mb-2">The next step is to rank the courses you selected in the priority of interest.<br>
       <%= link_to 'Course-Rankings',
-                    enrollment_course_preferences_path(current_user.enrollments.last.id),
+                    enrollment_course_preferences_path(@current_enrollment.id),
                     class: 'btn btn-blue' %>
     </div>
       <p class='direction_notes'>Make sure that you give each course you selected a ranking.</p>   
-  <% elsif current_user.enrollments.last.recommendation.blank? %>
+  <% elsif @current_enrollment.recommendation.blank? %>
     <div class="mb-2">The next step is requesting a
       <%= link_to "Letter of Recommendation",
-                  new_enrollment_recommendation_path(current_user.enrollments.last),
+                  new_enrollment_recommendation_path(@current_enrollment),
                   class: 'btn btn-blue'  %>
     </div>
     <p class='direction_notes'>Please ask one of your most recent high school science or math
@@ -72,11 +72,11 @@
       MerchantServices confirming your credit card transactions.
     </p>
   <% else %>
-    <% if current_user.enrollments.last.offer_status == "offered" %>
+    <% if @current_enrollment.offer_status == "offered" %>
       <p class="direction_notes">
         Please respond to our acceptance offer by making the appropriate
         selection in the Progress Window.
-    <% elsif current_user.enrollments.last.application_status == "offer accepted" %>
+    <% elsif @current_enrollment.application_status == "offer accepted" %>
       <p class="direction_notes">
         Payment of the balance of program tuition and fees is due by
         <%= @application_materials_due_date.strftime("%B %e, %Y") %>. Use the
@@ -89,11 +89,11 @@
             <% end %> 
           as soon as possible!</h4>
         <% end %>
-    <% elsif current_user.enrollments.last.application_status == "offer declined" %>
+    <% elsif @current_enrollment.application_status == "offer declined" %>
       <p class="direction_notes">
         Thanks for your interest.
       </p>
-    <% elsif current_user.enrollments.last.application_status == "enrolled" %>
+    <% elsif @current_enrollment.application_status == "enrolled" %>
       <p class="direction_notes">
         We look forward to seeing you at the <%= current_camp %> University of Michigan MMSS High School Summer Program.
       </p>
@@ -107,13 +107,13 @@
         received an email from us!</strong>
       </p>
     <% end %>
-    <% if current_user.enrollments.last.financial_aids.blank? &&
-    (current_user.enrollments.last.application_status == nil || current_user.enrollments.last.application_status == "" ||
-    current_user.enrollments.last.application_status == "submitted" || current_user.enrollments.last.application_status == "application complete") %>
+    <% if @current_enrollment.financial_aids.blank? &&
+    (@current_enrollment.application_status == nil || @current_enrollment.application_status == "" ||
+    @current_enrollment.application_status == "submitted" || @current_enrollment.application_status == "application complete") %>
       <p class="mb-2">If you are applying for need-based financial support, please fill out
         the
         <br>
-        <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(current_user.enrollments.last),
+        <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(@current_enrollment),
                 class: "btn btn-green pt-8" %>
       </p>
     <% end %>

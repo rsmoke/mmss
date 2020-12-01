@@ -14,7 +14,7 @@ class RegistrationMailer < ApplicationMailer
     @application = ApplicantDetail.find_by(user_id: user)
     @url = "https://lsa-math-mmss.miserver.it.umich.edu"
     @camp_config = CampConfiguration.find_by(active: true)
-    @enrollment = user.enrollments.last
+    # @enrollment = user.enrollments.last
     mail(to: user.email, subject: "UM MMSS: Your enrollment in the #{@camp_config.display_name} camp is complete")
   end
 end

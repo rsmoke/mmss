@@ -1,6 +1,6 @@
 class CoursePreferencesController < ApplicationController
 
-  before_action :current_enrollment
+  before_action :set_current_enrollment
   before_action :course_preference, only: [ :edit, :create, :update, :new, :destroy ]
 
   def index
@@ -65,8 +65,8 @@ class CoursePreferencesController < ApplicationController
 
   private
 
-    def current_enrollment
-      @current_enrollment = current_user.enrollments.last
+    def set_current_enrollment
+      @current_enrollment = current_user.enrollments.current_camp_year_applications.last
     end
 
     def course_preference

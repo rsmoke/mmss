@@ -5,36 +5,36 @@
     <div id="sidebox">
       <p><strong>Progress Window</strong><p>
 
-      <% if current_user.enrollments.present? && current_user.enrollments.last.persisted? %>
-        <% if current_user.enrollments.last.application_status.present? %>
-          <span class="text-green-700 font-semibold"><%= current_user.enrollments.last.application_status.titleize %></span>
+      <% if @current_enrollment.present? && @current_enrollment.persisted? %>
+        <% if @current_enrollment.application_status.present? %>
+          <span class="text-green-700 font-semibold"><%= @current_enrollment.application_status.titleize %></span>
         <% else %>
           <span class="text-red-500 font-semibold">Application incomplete</span>
         <% end %>
       <% end %>
       <div class="sidebox_element"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> - submitted </div>
 
-      <% if current_user.enrollments.present? && current_user.enrollments.last.persisted? %>
+      <% if @current_enrollment.present? && @current_enrollment.persisted? %>
         <div class="sidebox_element">
           <%= link_to 'Session Selection',
-                        enrollment_path(current_user.enrollments.last) %> - submitted
+                        enrollment_path(@current_enrollment) %> - submitted
         </div>
         <div class="sidebox_sub_element">
           <%= link_to 'Course Rankings',
-                        enrollment_course_preferences_path(current_user.enrollments.last.id) %>
-            <% if current_user.enrollments.last.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
+                        enrollment_course_preferences_path(@current_enrollment.id) %>
+            <% if @current_enrollment.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
               - not complete
             <% else %>
               - submitted
             <% end %>
         </div>
 
-        <% if current_user.enrollments.last.recommendation.present? && current_user.enrollments.last.recommendation.persisted? %>
+        <% if @current_enrollment.recommendation.present? && @current_enrollment.recommendation.persisted? %>
           <div class="sidebox_element">
             <%= link_to "Letter of Recommendation",
-                        enrollment_recommendation_path(current_user.enrollments.last,current_user.enrollments.last.recommendation ) %>
+                        enrollment_recommendation_path(@current_enrollment,@current_enrollment.recommendation ) %>
 
-            <% if current_user.enrollments.last.recommendation.recupload.present? %>
+            <% if @current_enrollment.recommendation.recupload.present? %>
               - letter received
             <% else %>
               - requested
@@ -43,14 +43,14 @@
           </div>
         <% end %>
 
-        <% if current_user.enrollments.last.financial_aids.present? %>
+        <% if @current_enrollment.financial_aids.present? %>
           <div class="sidebox_element">
             <%= link_to "Financial Aid",
-                        enrollment_financial_aid_path(current_user.enrollments.last,current_user.enrollments.last.financial_aids) %>
+                        enrollment_financial_aid_path(@current_enrollment,@current_enrollment.financial_aids) %>
 
-            <% if FinancialAid.where(enrollment_id: current_user.enrollments.last).pluck(:status).include? 'awarded' %>
+            <% if FinancialAid.where(enrollment_id: @current_enrollment).pluck(:status).include? 'awarded' %>
               - awarded
-            <% elsif FinancialAid.where(enrollment_id: current_user.enrollments.last).pluck(:status).all? 'rejected' %>
+            <% elsif FinancialAid.where(enrollment_id: @current_enrollment).pluck(:status).all? 'rejected' %>
               - rejected
             <% else %>
               - pending
@@ -132,7 +132,7 @@
 
             <% end %>
           </div>
-        <% elsif current_user.enrollments.last.offer_status == "declined" %>
+        <% elsif @current_enrollment.offer_status == "declined" %>
           <hr>
           <div>
             <span class="text-red-700 font-semibold">You have declined admission</span>

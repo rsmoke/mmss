@@ -70,11 +70,11 @@ class Enrollment < ApplicationRecord
   validate :validate_transcript_presence
   validate :acceptable_transcript
 
-  scope :offered, -> {where("offer_status = 'offered'")}
-  scope :accepted, -> {where("offer_status = 'accepted'")}
-  scope :enrolled, -> {where("application_status = 'enrolled'")}
-  scope :application_complete, -> {where("application_status = 'application complete'")}
   scope :current_camp_year_applications, -> { where('campyear = ? ', CampConfiguration.active_camp_year) }
+  scope :offered, -> { current_camp_year_applications.where("offer_status = 'offered'")}
+  scope :accepted, -> { current_camp_year_applications.where("offer_status = 'accepted'")}
+  scope :enrolled, -> { current_camp_year_applications.where("application_status = 'enrolled'")}
+  scope :application_complete, -> {  current_camp_year_applications.where("application_status = 'application complete'")}
 
   def display_name
     self.user.email # or whatever column you want
@@ -117,5 +117,4 @@ class Enrollment < ApplicationRecord
     end
   end
 
-  # scope :current_enrollment, ->(user=@current_user) { where(user_id: user) }
 end

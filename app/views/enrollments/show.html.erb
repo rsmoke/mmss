@@ -2,93 +2,93 @@
 <% if admin_signed_in? %>
   <p>
     <small>User_id:
-    <%= @enrollment.user_id %>
+    <%= @current_enrollment.user_id %>
     </small>
   </p>
 <% end %>
 
 <p>
   <strong>User:</strong>
-  <%= @enrollment.applicant_detail.full_name %>
+  <%= @current_enrollment.applicant_detail.full_name %>
 </p>
 
 <p>
   <strong>Campyear:</strong>
-  <%= @enrollment.campyear %>
+  <%= @current_enrollment.campyear %>
 </p>
 
 <p>
   <strong>International:</strong>
-  <%= @enrollment.international %>
+  <%= @current_enrollment.international %>
 </p>
 
 <p>
   <strong>High school name:</strong>
-  <%= @enrollment.high_school_name %>
+  <%= @current_enrollment.high_school_name %>
 </p>
 
 <p>
   <strong>High school address1:</strong>
-  <%= @enrollment.high_school_address1 %>
+  <%= @current_enrollment.high_school_address1 %>
 </p>
 
 <p>
   <strong>High school address2:</strong>
-  <%= @enrollment.high_school_address2 %>
+  <%= @current_enrollment.high_school_address2 %>
 </p>
 
 <p>
   <strong>High school city:</strong>
-  <%= @enrollment.high_school_city %>
+  <%= @current_enrollment.high_school_city %>
 </p>
 
 <p>
   <strong>High school state:</strong>
-  <%= @enrollment.high_school_state %>
+  <%= @current_enrollment.high_school_state %>
 </p>
 
 <p>
   <strong>High school non us:</strong>
-  <%= @enrollment.high_school_non_us %>
+  <%= @current_enrollment.high_school_non_us %>
 </p>
 
 <p>
   <strong>High school postalcode:</strong>
-  <%= @enrollment.high_school_postalcode %>
+  <%= @current_enrollment.high_school_postalcode %>
 </p>
 
 <p>
   <strong>High school country:</strong>
-  <%= @enrollment.high_school_country %>
+  <%= @current_enrollment.high_school_country %>
 </p>
 
 <p>
   <strong>Year in school:</strong>
-  <%= @enrollment.year_in_school %>
+  <%= @current_enrollment.year_in_school %>
 </p>
 
 <p>
   <strong>Anticipated graduation year:</strong>
-  <%= @enrollment.anticipated_graduation_year %>
+  <%= @current_enrollment.anticipated_graduation_year %>
 </p>
 
 <p>
   <strong>Room mate request:</strong>
-  <%= @enrollment.room_mate_request %>
+  <%= @current_enrollment.room_mate_request %>
 </p>
 
 <p class="current-uploaded-docs h-40 overflow-auto">
   <strong>Personal statement:</strong>
-  <%= @enrollment.personal_statement %>
+  <%= @current_enrollment.personal_statement %>
 </p>
 
-<% if @enrollment.transcript.attached? %>
+<% if @current_enrollment.transcript.attached? %>
   <p class="current-uploaded-docs">
-    <strong>Transcript:</strong> <%= link_to @enrollment.transcript.filename, url_for(@enrollment.transcript) %>
+    <strong>Transcript:</strong> <%= link_to @current_enrollment.transcript.filename, url_for(@current_enrollment.transcript) %>
   </p>
 <% else %>
   <p class="text-lg text-orange-500">
-    Use the <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> button to add a transcript!
+    Use the <%= link_to 'Edit', edit_enrollment_path(@current_enrollment) %> button to add a transcript!
   </p>
 <% end %>
 
@@ -127,7 +127,7 @@
     <ul>
       <% @course_registrations.each do |c| %>
         <li>
-          <%= c.title %> [ <%= @enrollment.course_preferences.find_by(course_id: c.id).ranking %> ] -- <%= c.camp_occurrence.description %>
+          <%= c.title %> [ <%= @current_enrollment.course_preferences.find_by(course_id: c.id).ranking %> ] -- <%= c.camp_occurrence.description %>
         </li>
       <% end %>
     </ul>
@@ -138,26 +138,26 @@
 <% if admin_signed_in? %>
   <h4>Administrative area</h4>
     <strong>Notes:</strong>
-    <%= @enrollment.notes %>
+    <%= @current_enrollment.notes %>
 
 
     <p>
       <strong>Application status:</strong>
-      <%= @enrollment.application_status %>
+      <%= @current_enrollment.application_status %>
     </p>
 
     <p>
       <strong>Offer status:</strong>
-      <%= @enrollment.offer_status %>
+      <%= @current_enrollment.offer_status %>
     </p>
 
     <p>
       <strong>Partner program:</strong>
-      <%= @enrollment.partner_program %>
+      <%= @current_enrollment.partner_program %>
     </p>
 <% end %>
-<% if @enrollment.application_status == "" || @enrollment.application_status == nil %>
-  <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
+<% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>
+  <%= link_to 'Edit', edit_enrollment_path(@current_enrollment) %> |
 <% end %>
 <%= link_to 'Home', root_path %>
 

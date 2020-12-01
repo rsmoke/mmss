@@ -1,7 +1,9 @@
 class FinancialAidsController < ApplicationController
-  before_action :set_financial_aid, only: [:show, :edit, :update, :destroy]
+
   devise_group :logged_in, contains: [:user, :admin]
-  before_action :authenticate_logged_in!
+  before_action :set_current_enrollment
+  before_action :set_financial_aid, only: [:show, :edit, :update, :destroy]
+  # before_action :authenticate_logged_in!
 
   # GET /financial_aids
   # GET /financial_aids.json
@@ -9,15 +11,14 @@ class FinancialAidsController < ApplicationController
     if admin_signed_in?
       @financial_aids = FinancialAid.all
     else
-      @financial_aids = FinancialAid.where(enrollment_id: current_user.enrollments.last)
+      @financial_aids = FinancialAid.where(enrollment_id: @current_enrollment)
     end
   end
 
   # GET /financial_aids/1
   # GET /financial_aids/1.json
   def show
-    @financial_aids = FinancialAid.where(enrollment_id: current_user.enrollments.last)
-      # redirect_to root_path, alert: "Unauthorized access" unless @financial_aid.enrollment_id == current_user.enrollments.last.id
+    @financial_aids = FinancialAid.where(enrollment_id: @current_enrollment)
   end
 
   # GET /financial_aids/new
@@ -32,7 +33,7 @@ class FinancialAidsController < ApplicationController
   # POST /financial_aids
   # POST /financial_aids.json
   def create
-    @financial_aid =  current_user.enrollments.last.financial_aids.create(financial_aid_params)
+    @financial_aid =  @current_enrollment.financial_aids.create(financial_aid_params)
 
     respond_to do |format|
       if @financial_aid.save
@@ -70,9 +71,13 @@ class FinancialAidsController < ApplicationController
   end
 
   private
+    def set_current_enrollment
+      @current_enrollment = current_user.enrollments.current_camp_year_applications.last
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_financial_aid
-      @financial_aid = current_user.enrollments.last.financial_aids
+      @financial_aid = @current_enrollment.financial_aids
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

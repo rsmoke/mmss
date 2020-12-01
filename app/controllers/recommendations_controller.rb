@@ -1,7 +1,8 @@
 class RecommendationsController < ApplicationController
   before_action :set_recommendation, only: [:show, :edit, :update, :destroy]
   devise_group :logged_in, contains: [:user, :admin]
-  before_action :authenticate_logged_in!
+  before_action :set_current_enrollment
+  # before_action :authenticate_logged_in!
   # GET /recommendations
   # GET /recommendations.json
   def index
@@ -23,7 +24,7 @@ class RecommendationsController < ApplicationController
 
   # GET /recommendations/1/edit
   def edit
-    if current_user.enrollments.last.recommendation.recupload.present?
+    if @current_enrollment.recommendation.recupload.present?
       redirect_to root_path
     end
   end
@@ -72,6 +73,10 @@ class RecommendationsController < ApplicationController
   end
 
   private
+
+    def set_current_enrollment
+      @current_enrollment = current_user.enrollments.current_camp_year_applications.last
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_recommendation
       @recommendation = Recommendation.find(params[:id])
