@@ -76,9 +76,9 @@
               <%= as.offer_status %>
               </div>
             <% else %>
-              <div>
-                <%= button_to "Accept", accept_session_offer_path(as.id), class: "float:left bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded w-1/3" %>
-                <%= button_to "Decline", decline_session_offer_path(as.id), class: "float:left bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded w-1/3" %>
+              <div class="my-2">
+                <%= link_to "Accept", accept_session_offer_path(as.id), method: "POST", class: "btn btn-blue" %> |
+                <%= link_to "Decline", decline_session_offer_path(as.id), method: "POST", class: "btn btn-red" %>
               </div>
             <% end %>
           <% end %>
