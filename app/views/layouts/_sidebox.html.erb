@@ -103,12 +103,13 @@
               <% end %>
             <% end %>
             <hr>
-            <h4>Download and return the 
-              <%= link_to student_packet_url, target: "_blank" do %>
-                Student Information Packet
-              <% end %>
-              as soon as possible.
-              </h4>
+            <h4>Download and return the <br>
+              <div class="my-2">
+                <%= link_to student_packet_url, class: "btn btn-blue", target: "_blank" do %>
+                  Student Information Packet
+                <% end %>
+              </div>
+            </h4>
             <%= form_with(model: current_enrollment, local: true) do |form| %>
               <% if current_enrollment.student_packet.attached? %>
                 <div class='current-uploaded-docs'>
