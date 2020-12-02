@@ -1,8 +1,5 @@
 <h4>Number of applicants who applied to each session</h4>
 
 <% CampOccurrence.active.each do |co| %>
-<li><%= co.description %> has <%= pluralize(SessionActivity.all.where(camp_occurrence_id: co.id).count, 'applicant') %>.
-
-
-
+  <li><%= co.description %> has <%= pluralize(SessionActivity.where(camp_occurrence_id: co.id).count, 'applicant') %>.
 <% end %>

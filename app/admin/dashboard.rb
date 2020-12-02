@@ -21,10 +21,10 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
-        panel "Recent Applications" do
-          if Enrollment.any?
+        panel "Recent Applications for #{current_camp_year} Camp" do
+          if Enrollment.current_camp_year_applications.any?
             ul do
-              Enrollment.limit(10).map do |enroll|
+              Enrollment.current_camp_year_applications.limit(10).map do |enroll|
                 li link_to(enroll.applicant_detail.full_name + ", " + enroll.user.email , admin_application_path(enroll))
               end
             end
@@ -46,6 +46,12 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Session Stats" do
           div do
             render("/admin/session_enrolled", model: "dashboard")
+          end
+
+          hr
+
+          div do
+            render("/admin/session_assigned", model: "dashboard")
           end
 
           hr

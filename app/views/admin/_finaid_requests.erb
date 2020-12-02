@@ -1,5 +1,5 @@
-<% if FinancialAid.present? %>
-  <% FinancialAid.all.each do |fa| %>
+<% if FinancialAid.where(enrollment_id: Enrollment.current_camp_year_applications).present? %>
+  <% FinancialAid.where(enrollment_id: Enrollment.current_camp_year_applications).each do |fa| %>
     <li><%= link_to fa.enrollment.applicant_detail.user.email, admin_financial_aid_request_path(fa) %>
     <%= "#{humanized_money_with_symbol(fa.amount)} -- #{fa.status}" %>
   <% end %>
