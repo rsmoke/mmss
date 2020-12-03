@@ -2,7 +2,7 @@ require 'digest'
 require 'time'
 
 class PaymentsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only: [:payment_receipt]
   before_action :authenticate_user!
   before_action :set_current_enrollment
 
