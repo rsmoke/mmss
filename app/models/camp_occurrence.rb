@@ -13,6 +13,7 @@
 #  cost_cents            :integer
 #
 class CampOccurrence < ApplicationRecord
+  include MoneyRails::ActionViewExtension
   belongs_to :camp_configuration
   has_many :activities, dependent: :destroy
   has_many :courses, dependent: :destroy
@@ -39,6 +40,14 @@ class CampOccurrence < ApplicationRecord
       "#{description}"
     else
       "#{description} -- #{begin_date} until #{end_date}"
+    end
+  end
+
+  def description_with_date_and_price
+    if description == "Any Session"
+      "#{description}"
+    else
+      "#{description} -- #{begin_date} until #{end_date} -- #{humanized_money_with_symbol(self.cost)}" 
     end
   end
 
