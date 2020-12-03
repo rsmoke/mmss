@@ -56,48 +56,39 @@ camp_occurrence = CampOccurrence.create([
   {camp_configuration_id: CampConfiguration.last, description: "Session 3", begin_date: "2021-10-3", end_date: "2021-10-10", active: true}
   ])
 
-camp1 = CampOccurrence.first
-camp2 = CampOccurrence.second
-camp3 = CampOccurrence.last
-
-course1 = camp1.courses.create([
-  {title: "Dissecting Life: Human Anatomy and Physiology", available_spaces: 25, status: "open"},
-  {title: "Forensic Physics", available_spaces: 25, status: "open"},
-  {title: "Graph Theory", available_spaces: 25, status: "open"},
-  {title: "Hex and the 4 Cs", available_spaces: 25, status: "open"},
-  {title: "Life, Death and Change: Landscapes and Human Impact", available_spaces: 25, status: "open"},
-  {title: "Mathematical Modeling in Biology", available_spaces: 25, status: "open"},
-  {title: "Mathematics and Music Theory", available_spaces: 25, status: "open"},
-  {title: "Relativity: A Journey through Warped Space and Time", available_spaces: 25, status: "open"},
-  {title: "Roller Coaster Physics", available_spaces: 25, status: "open"},
-  {title: "Sampling, Monte Carlo and Problem Solving: How Analyzing Statistics Helps us Improve", available_spaces: 25, status: "open"},
-  {title: "The Physics of Magic and the Magic of Physics", available_spaces: 25, status: "open"}
-])
-
-course2 = camp2.create([
-  {title: "Catalysis, Solar Energy and Green Chemical Synthesis", available_spaces: 25, status: "open"},
-  {title: "Dissecting Life: Human Anatomy and Physiology", available_spaces: 25, status: "open"},
-  {title: "Forensic Physics", available_spaces: 25, status: "open"},
-  {title: "Graph Theory", available_spaces: 25, status: "open"},
-  {title: "Human Identification: Forensic Anthropology Methods", available_spaces: 25, status: "open"},
-  {title: "Mathematics and the Internet", available_spaces: 25, status: "open"},
-  {title: "Mathematics of Decisions, Elections and Games", available_spaces: 25, status: "open"},
-  {title: "Organic Chemistry 101: Orgo Boot Camp", available_spaces: 25, status: "open"},
-  {title: "Paleobiology - Biodiversity and mass extinctions through deep time", available_spaces: 25, status: "open"}
-])
-
-course3 = camp3.create([
-  {title: "Art and Mathematics", available_spaces: 25, status: "open"},
-  {title: "Biological Oceanography ? Food web dynamics in the marine world", available_spaces: 25, status: "open"},
-  {title: "Brain and Behavior", available_spaces: 25, status: "open"},
-  {title: "Climbing the Distance Ladder to the Big Bang: How Astronomers Survey the Universe", available_spaces: 25, status: "open"},
-  {title: "Dissecting Life: Human Anatomy and Physiology", available_spaces: 25, status: "open"},
-  {title: "Fibonacci Numbers", available_spaces: 25, status: "open"},
-  {title: "Graph Theory", available_spaces: 25, status: "open"},
-  {title: "Human Identification: Forensic Anthropology Methods", available_spaces: 25, status: "open"},
-  {title: "Mathematics of Cryptography", available_spaces: 25, status: "open"},
-  {title: "Organic Chemistry 101: Orgo Boot Camp", available_spaces: 25, status: "open"},
-  {title: "Relativity: A Journey through Warped Space and Time", available_spaces: 25, status: "open"},
-  {title: "Surface Chemistry", available_spaces: 25, status: "open"},
-  {title: "Sustainable Polymers", available_spaces: 25, status: "open"}
-])
+  camp1 = CampOccurrence.first
+  camp2 = CampOccurrence.second
+  
+  course1 = camp1.courses.create([
+  {title: "Survey in Modern Physics",available_spaces: 16,status: "open"},
+  {title: "Greatest Hits in Vertebrate Evolution",available_spaces: 16,status: "open"},
+  {title: "Data, Distributions and Decisions: The Science of Statistics",available_spaces: 16,status: "open"},
+  {title: "Catalysis, Solar Energy and Green Chemical Synthesis",available_spaces: 16,status: "open"},
+  {title: "Art and Mathematics",available_spaces: 16,status: "open"},
+  {title: "The Physics of Magic and the Magic of Physics",available_spaces: 16,status: "open"},
+  {title: "Life, Death and Change: Landscapes and Human Impact",available_spaces: 16,status: "open"},
+  {title: "Hex and the 4 Cs",available_spaces: 16,status: "open"},
+  {title: "Data Science of Happiness",available_spaces: 16,status: "open"},
+  {title: "Climbing the Distance Ladder to the Big Bang: How Astronomers Survey the Universe",available_spaces: 16,status: "open"},
+  {title: "Sustainable Polymers",available_spaces: 25,status: "open"},
+  {title: "Surface Chemistry",available_spaces: 16,status: "open"},
+  {title: "Relativity: A Journey through Warped Space and Time",available_spaces: 16,status: "open"},
+  {title: "Organic Chemistry 101: Orgo Boot Camp",available_spaces: 16,status: "open"}
+  ])
+  
+  course2 = camp2.courses.create([
+  {title: "Mathematics of Cryptography",available_spaces: 16,status: "open"},
+  {title: "Human Identification: Forensic Anthropology Methods",available_spaces: 16,status: "open"},
+  {title: "Fibonacci Numbers",available_spaces: 16,status: "open"},
+  {title: "Dissecting Life: Human Anatomy and Physiology",available_spaces: 16,status: "open"},
+  {title: "Brain and Behavior",available_spaces: 16,status: "open"},
+  {title: "Organic Chemistry 101: Orgo Boot Camp",available_spaces: 16,status: "open"},
+  {title: "Mathematics of Decisions, Elections and Games",available_spaces: 16,status: "open"},
+  {title: "Mathematics and the Internet",available_spaces: 16,status: "open"},
+  {title: "Graph Theory",available_spaces: 16,status: "open"},
+  {title: "Forensic Physics",available_spaces: 16,status: "open"},
+  {title: "Mathematics and Music Theory",available_spaces: 16,status: "open"},
+  {title: "Mathematical Modeling in Biology",available_spaces: 16,status: "open"},
+  {title: "Forensic Physics",available_spaces: 16,status: "open"},
+  {title: "Catalysis, Solar Energy and Green Chemical Synthesis",available_spaces: 16,status: "open"}
+  ])
