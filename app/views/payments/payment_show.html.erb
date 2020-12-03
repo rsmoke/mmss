@@ -1,7 +1,9 @@
 <% provide(:title, 'Payment Receipts') %>
 <h2>Your Payment Receipts</h2>
 <% if admin_signed_in? %>
+  <h2>========== Administrative area ==========</h2>
   <h4>Application Status: <%= @current_application_status %></h4>
+  <p>====================================</p>
 <% end %>
 <% if @users_current_payments.count < 1 %>
   <h6>You have not made a payment yet. Payment can be made via check or money
