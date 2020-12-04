@@ -1,5 +1,6 @@
 <% fin_aid_status = @financial_aid.pluck(:status) %>
 <% if fin_aid_status.count("rejected") == fin_aid_status.count %>
+<h3>Here is the status of your Financial Aid request</h3>
   <p>
     <strong>Status:</strong>
     <%= "rejected" %>
