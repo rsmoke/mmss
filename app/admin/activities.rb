@@ -16,31 +16,29 @@ ActiveAdmin.register Activity do
   #   permitted
   # end
 
-
-  # form do |f| # This is a formtastic form builder
-  #   f.semantic_errors # shows errors on :base
-  #   # f.inputs           # builds an input field for every attribute
-  #   f.inputs do
-  #     f.input :camp_occurrence_id, as: :select, collection: CampOccurrence.all
-  #     f.input :description
-  #     f.input :cost_cents
-  #     f.input :date_occurs
-  #     f.input :active
-  #   end
-  #   f.actions         # adds the 'Submit' and 'Cancel' button
-  # end
   filter :camp_occurrence_id, label: "Session", as: :select, collection: CampOccurrence.order(begin_date: :desc).no_any_session
   filter :description, as: :select
   filter :cost_cents
   filter :date_occurs
   filter :active
 
+  form do |f|
+    f.semantic_errors
+    f.inputs do
+      f.input :camp_occurrence, label: "Session", as: :select, collection: CampOccurrence.order(begin_date: :desc).no_any_session
+      f.input :description
+      f.input :cost_cents
+      f.input :date_occurs
+      f.input :active
+    end
+    f.actions
+  end
 
 
   index do
     selectable_column
     actions
-    column "Camp Occurrence" do |ca|
+    column "Session" do |ca|
       ca.camp_occurrence
     end
     column :description
@@ -55,7 +53,7 @@ ActiveAdmin.register Activity do
 
   show do
     attributes_table do
-      row "Camp Occurrence" do |ca|
+      row "Session" do |ca|
         ca.camp_occurrence
       end
       row :description
