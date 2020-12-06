@@ -31,4 +31,32 @@ ActiveAdmin.register Course do
     end
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
+
+  index do
+    actions
+    column "Session" do |ss|
+      ss.camp_occurrence
+    end
+    column :title
+    column :available_spaces
+    column :status
+    column :created_at
+    column :updated_at
+
+  end
+
+  show do
+    attributes_table do
+      row "Session" do |ss|
+        ss.camp_occurrence
+      end
+      row :title
+      row :available_spaces
+      row :status
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
+  end
+
 end
