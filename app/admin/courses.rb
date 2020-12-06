@@ -39,6 +39,9 @@ ActiveAdmin.register Course do
     end
     column :title
     column :available_spaces
+    column "Open Spaces" do |op|
+      op.available_spaces - CourseAssignment.number_of_assignments(op.id)
+    end
     column :status
     column :created_at
     column :updated_at
@@ -52,6 +55,9 @@ ActiveAdmin.register Course do
       end
       row :title
       row :available_spaces
+      row "Open Spaces" do |op|
+        op.available_spaces - CourseAssignment.number_of_assignments(op.id)
+      end
       row :status
       row :created_at
       row :updated_at
