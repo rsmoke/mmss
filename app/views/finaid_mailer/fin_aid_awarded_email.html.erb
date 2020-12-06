@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+      <h1>Hello <%= "#{@student.firstname} #{@student.lastname}" %></h1>
+    <p>
+    You are awarded <%= "#{humanized_money_with_symbol(@finaid.amount)}" %> of financial aid.
+    Please make your payment as soon as possible to finalize admission.
+    </p>
+    <p>
+    <%= link_to 'MMSS - Michigan Math and Science Scholars', @url %>
+  </p>
+  </body>
+</html>
