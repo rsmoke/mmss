@@ -75,6 +75,7 @@ group :development do
   gem 'meta_request', '~> 0.7.2'
 
   gem 'letter_opener'
+  gem 'letter_opener_web', '~> 1.3', '>= 1.3.1'
 
   gem 'capistrano', require: false
   gem 'capistrano3-puma'
