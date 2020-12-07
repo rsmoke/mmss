@@ -4,7 +4,7 @@
 #
 #  id            :bigint           not null, primary key
 #  enrollment_id :bigint           not null
-#  amount_cents  :integer
+#  amount_cents  :integer          default(0)
 #  source        :string
 #  note          :text
 #  status        :string           default("pending")

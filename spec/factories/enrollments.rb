@@ -24,6 +24,7 @@
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  campyear                    :integer
+#  application_deadline        :date
 #
 FactoryBot.define do
   factory :enrollment do
