@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-      <h4><%= "Hello #{@application.firstname}," %></h4>
-      <br>
-      You have declined:
-      <ul>
-          <li><%= @session_assignment.camp_occurrence.display_name %></li>
-      </ul>
-      <ul>
-          <li><%= @course_assignment %></li>
-      </ul>
-      <br>
-      <%= link_to 'MMSS - Michigan Math and Science Scholars', @url %>
-    </p>
-
-  </body>
-</html>
+<h4><%= "Hello #{@application.firstname}," %></h4>
+<p>
+  You have declined:
+  <ul>
+      <li><%= @session_assignment.camp_occurrence.display_name %></li>
+  </ul>
+  <ul>
+      <li><%= @course_assignment %></li>
+  </ul>
+</p>

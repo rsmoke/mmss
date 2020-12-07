@@ -1,26 +1,14 @@
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-      <h4>Hello <%= "#{@application.firstname} #{@application.lastname}" %></h4>
-    <p>
-      This is a confirmation that you are enrolled for the Michigan
-      Math & Science Scholars High School Program for the Summer <%= @camp_config.camp_year %> camp.
-    </p>
-    <p>
-      Continue to check your email for any further updates.
-    </p>
-    <p>
-      Retain the login id: <span class="text-semibold"><%= @user_detail.email %>
-      </span> and password that you created during the application process. You
-      will need it to refer back to the application web site to review the
-      events associated with your application.
-    </p>
-    <p>
-      <%= link_to 'MMSS - Michigan Math and Science Scholars', @url %>
-    </p>
-  </body>
-</html>
+<h4>Hello <%= "#{@application.firstname} #{@application.lastname}" %></h4>
+<p>
+  This is a confirmation that you are enrolled for the Michigan
+  Math & Science Scholars High School Program for the Summer <%= @camp_config.camp_year %> camp.
+</p>
+<p>
+  Continue to check your email for any further updates.
+</p>
+<p>
+  Retain the login id: <span class="text-semibold"><%= @user_detail.email %>
+  </span> and password that you created during the application process. You
+  will need it to refer back to the application web site to review the
+  events associated with your application.
+</p>
