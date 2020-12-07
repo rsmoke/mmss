@@ -1,6 +1,6 @@
 class FinaidMailer < ApplicationMailer
 
-  default from: 'University of Michigan MMSS High School Summer Program <mmss-recommend@umich.edu>'
+  default from: 'University of Michigan MMSS High School Summer Program <mmss@umich.edu>'
 
   def fin_aid_awarded_email(finaid)
     @url = "https://lsa-math-mmss.miserver.it.umich.edu"

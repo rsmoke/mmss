@@ -10,11 +10,12 @@
   <body>
     <%= yield %>
     <p>
-      MMSS Office Staff<br>
-      mmss@umich.edu
+      eMail: MMSS Office Staff - mmss@umich.edu<br>
+      URL:  <%= link_to "MMSS Student Portal", @url %>
     </p>
 
     <div>
+    Address:
       <address class="text-xs">
         Michigan Math and Science Scholars
       <br>  Department of Mathematics
