@@ -14,7 +14,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   :year_in_school, :anticipated_graduation_year, 
                   :room_mate_request, :personal_statement, 
                   :shirt_size, :notes, :application_status, :campyear,
-                  :offer_status, :partner_program, :transcript, :student_packet,
+                  :offer_status, :partner_program, :transcript, :student_packet, :application_deadline,
                   session_assignments_attributes: [:id, :camp_occurrence_id, :_destroy ],
                   course_assignments_attributes: [:id, :course_id, :_destroy ]
   #
@@ -101,6 +101,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
     if application.session_assignments.any? and application.course_assignments.any?
       f.inputs do
         f.input :offer_status, as: :select, collection: ['accepted','declined','offered']
+        f.input :application_deadline
         f.input :application_status, as: :select, collection: ['enrolled', 'application complete', 'offer accepted', 'offer declined','submitted']
       end
     end
@@ -130,6 +131,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
   # filter :notes
   filter :application_status, as: :select
   filter :offer_status, as: :select
+  filter :application_deadline
   filter :campyear, as: :select
 
   # filter :partner_program
@@ -152,6 +154,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       end
     end
     column :offer_status
+    column :application_deadline
     column :application_status
     column :international
     # column :high_school_name
@@ -203,6 +206,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       row :personal_statement
       row :notes
       row :offer_status
+      row :application_deadline
       row :application_status
       row :partner_program
       row :campyear
