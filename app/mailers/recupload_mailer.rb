@@ -5,6 +5,7 @@ class RecuploadMailer < ApplicationMailer
     @recupload = params[:recupload]
     @recommendation = Recommendation.find(@recupload.recommendation_id)
     @student = @recommendation.enrollment.user.applicant_detail
+    @url = "https://lsa-math-mmss.miserver.it.umich.edu"
     mail(to: @recommendation.email, subject: "Recommendation for #{@student.firstname} #{@student.lastname}")
   end
 

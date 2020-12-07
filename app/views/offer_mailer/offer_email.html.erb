@@ -22,7 +22,7 @@
       <li><%= ac.course.display_name %></li>
     <% end %>
   </ul>
-  Your application deadline: <%= @enrollment.application_deadline %>
+  Your application deadline: <%= @enrollment.application_deadline.strftime("%B %d, %Y") %>
 </p>
 <p>
   Please visit your application at <%= link_to "MMSS Student Portal", @url %>, and accept or decline this offer.

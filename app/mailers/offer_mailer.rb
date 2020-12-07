@@ -5,7 +5,7 @@ class OfferMailer < ApplicationMailer
     @user = User.find(user)
     @offer_letter_text = CampConfiguration.active.last.offer_letter
     @application = ApplicantDetail.find_by(user_id: user)
-    @enrollment = Enrollment.find_by(user_id: user)
+    @enrollment = Enrollment.current_camp_year_applications.find_by(user_id: user)
     @assigned_courses = @enrollment.course_assignments
     @assigned_sessions = @enrollment.session_assignments
     @url = "https://lsa-math-mmss.miserver.it.umich.edu"
@@ -17,7 +17,7 @@ class OfferMailer < ApplicationMailer
     @user = user
     @offer_letter_text = CampConfiguration.active.last.offer_letter
     @application = ApplicantDetail.find_by(user_id: user)
-    @enrollment = Enrollment.find_by(user_id: user)
+    @enrollment = Enrollment.current_camp_year_applications.find_by(user_id: user)
     @session_assignment = session_assignment
     if course_assignment.present?
       @course_assignment = course_assignment.course.display_name
@@ -33,7 +33,7 @@ class OfferMailer < ApplicationMailer
     @user = user
     @offer_letter_text = CampConfiguration.active.last.offer_letter
     @application = ApplicantDetail.find_by(user_id: user)
-    @enrollment = Enrollment.find_by(user_id: user)
+    @enrollment = Enrollment.current_camp_year_applications.find_by(user_id: user)
     @session_assignment = session_assignment
     if course_assignment.present?
       @course_assignment = course_assignment.course.display_name
