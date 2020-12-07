@@ -8,7 +8,8 @@
   <%= link_to "your student portal", @url %> to accept or decline your admission.
 </p>
 
-<p><%= @offer_letter_text %></p>
+<p><%= @offer_letter_text.html_safe %></p>
+<hr>
 <p>
   You have been assigned to:
   <ul>
@@ -24,6 +25,7 @@
   </ul>
   Your application deadline: <%= @enrollment.application_deadline.strftime("%B %d, %Y") %>
 </p>
+<hr>
 <p>
   Please visit your application at <%= link_to "MMSS Student Portal", @url %>, and accept or decline this offer.
 </p>
