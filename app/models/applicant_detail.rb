@@ -12,7 +12,7 @@
 #  demographic        :string
 #  birthdate          :date             not null
 #  diet_restrictions  :string
-#  shirt_size         :string           not null
+#  shirt_size         :string
 #  address1           :string           not null
 #  address2           :string
 #  city               :string           not null
@@ -46,7 +46,7 @@ class ApplicantDetail < ApplicationRecord
   # validates :demographic, presence: true
   validates :birthdate, presence: true
   # validates :diet_restrictions, presence: true
-  validates :shirt_size, presence: true
+  # validates :shirt_size, presence: true
   validates :address1, presence: true
   validates :city, presence: true
   validates :state, presence: { message: "needs to be selected or if you are
