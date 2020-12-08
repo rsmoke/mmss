@@ -24,9 +24,11 @@
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  campyear                    :integer
+#  application_deadline        :date
 #
 class Enrollment < ApplicationRecord
   after_update :send_offer_letter
+  before_update :set_application_deadline
 
   belongs_to :user
   has_one :applicant_detail, through: :user
@@ -53,7 +55,6 @@ class Enrollment < ApplicationRecord
 
   has_one_attached :transcript
   has_one_attached :student_packet
-
 
   validates :high_school_name, presence: true
   validates :high_school_address1, presence: true
@@ -114,6 +115,12 @@ class Enrollment < ApplicationRecord
   def send_offer_letter
     if self.offer_status == "offered"
       OfferMailer.offer_email(self.user_id).deliver_now
+    end
+  end
+
+  def set_application_deadline
+    if self.session_assignments.present? && self.course_assignments.present?
+      self.application_deadline = 30.days.from_now unless self.application_deadline.present?
     end
   end
 

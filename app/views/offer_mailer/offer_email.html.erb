@@ -1,29 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-      <h3><%= "Hello #{@application.firstname}," %></h3>
-    <p><%= @offer_letter_text %>
-      <br>
-      You have been assigned to:
-      <ul>
-        <% @assigned_sessions.each do |as| %>
-          <li><%= as.camp_occurrence.display_name %></li>
-        <% end %>
-      </ul>
-      <br>
-      To participate in:
-      <ul>
-        <% @assigned_courses.each do |ac| %>
-          <li><%= ac.course.display_name %></li>
-        <% end %>
-      </ul>
-      <br>
+<h4><%= "Hello #{@application.firstname}," %></h4>
+<p>Congratulations! I am writing to inform you that you have been 
+  admitted into the <%= @enrollment.campyear %> Michigan Math and 
+  Science Scholars (MMSS) summer program held at the University 
+  of Michigan in Ann Arbor! 
+</p>
+<p>In order to finalize your admission, please log in to 
+  <%= link_to "your student portal", @url %> to accept or decline your admission.
+</p>
 
-      Please visit your application at <%= @url %>, and accept or decline this offer.
-    </p>
-
-  </body>
-</html>
+<p><%= @offer_letter_text.html_safe %></p>
+<hr>
+<p>
+  You have been assigned to:
+  <ul>
+    <% @assigned_sessions.each do |as| %>
+      <li><%= as.camp_occurrence.display_name %></li>
+    <% end %>
+  </ul>
+  To participate in:
+  <ul>
+    <% @assigned_courses.each do |ac| %>
+      <li><%= ac.course.display_name %></li>
+    <% end %>
+  </ul>
+  Your application deadline: <%= @enrollment.application_deadline.strftime("%B %d, %Y") %>
+</p>
+<hr>
+<p>
+  Please visit your application at <%= link_to "MMSS Student Portal", @url %>, and accept or decline this offer.
+</p>

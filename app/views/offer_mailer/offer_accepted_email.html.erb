@@ -1,29 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-      <h3><%= "Hello #{@application.firstname}," %></h3>
-    <p>
-      You have accepted:
-      <ul>
-          <li><%= @session_assignment.camp_occurrence.display_name %></li>
-      </ul>
-      <br>
-      To participate in:
-      <ul>
-          <li><%= @course_assignment %></li>
-      </ul>
-      <br>
-
-      Retain the login id: <%= @user.email %> and password that you created
-      during the application process. You will need it to refer back to the
-      application web site to review the events associated with your application.    
-    </p>
-    <p>
-      <%= link_to 'MMSS - Michigan Math and Science Scholars', @url %>
-    </p>
-
-  </body>
-</html>
+<h4><%= "Hello #{@application.firstname}," %></h4>
+<p>
+  You have accepted:
+  <ul>
+      <li><%= @session_assignment.camp_occurrence.display_name %></li>
+  </ul>
+  To participate in:
+  <ul>
+      <li><%= @course_assignment %></li>
+  </ul>
+</p>
+<p>
+  Retain the login id: <%= @user.email %> and password that you created
+  during the application process. You will need it to refer back to the
+  application web site to review the events associated with your application.    
+</p>

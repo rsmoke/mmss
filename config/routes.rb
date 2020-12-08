@@ -88,4 +88,8 @@ Rails.application.routes.draw do
   get 'recupload_error', to: 'recuploads#error'
   get 'recupload_success', to: 'recuploads#success'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
 end
