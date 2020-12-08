@@ -12,7 +12,7 @@
 #  demographic        :string
 #  birthdate          :date             not null
 #  diet_restrictions  :string
-#  shirt_size         :string           not null
+#  shirt_size         :string
 #  address1           :string           not null
 #  address2           :string
 #  city               :string           not null

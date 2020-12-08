@@ -8,13 +8,6 @@ ActiveAdmin.register ApplicantDetail do
   #
    permit_params :user_id, :firstname, :middlename, :lastname, :gender, :us_citizen, :demographic, :birthdate, :diet_restrictions, :shirt_size, :address1, :address2, :city, :state, :state_non_us, :postalcode, :country, :phone, :parentname, :parentaddress1, :parentaddress2, :parentcity, :parentstate, :parentstate_non_us, :parentzip, :parentcountry, :parentphone, :parentworkphone, :parentemail
   #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:user_id, :firstname, :middlename, :lastname, :gender, :us_citizen, :demographic, :birthdate, :diet_restrictions, :shirt_size, :address1, :address2, :city, :state, :state_non_us, :postalcode, :country, :phone, :parentname, :parentaddress1, :parentaddress2, :parentcity, :parentstate, :parentstate_non_us, :parentzip, :parentcountry, :parentphone, :parentworkphone, :parentemail]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
     # f.inputs           # builds an input field for every attribute
@@ -29,7 +22,7 @@ ActiveAdmin.register ApplicantDetail do
       f.input :demographic, as: :select, collection: Demographic.all
       f.input :birthdate
       f.input :diet_restrictions
-      f.input :shirt_size
+      # f.input :shirt_size
       f.input :address1
       f.input :address2
       f.input :city
@@ -54,46 +47,15 @@ ActiveAdmin.register ApplicantDetail do
 
   filter :gender, as: :select, collection: Gender.all.map{|a| [a.name, a.id]}
   filter :demographic, as: :select, collection: Demographic.all.map{|a| [a.name, a.id]}
-  # filter :state, as: :select
-  # filter :firstname, as: :select
-  # filter :middlename
   filter :lastname, as: :select
-
   filter :us_citizen
-
   filter :birthdate
   filter :diet_restrictions
-  filter :shirt_size, as: :select
-  # filter :address1
-  # filter :address2
-  # filter :city
-
-  # filter :state_non_us
-  # filter :postalcode
-  # filter :country, as: :select
-  # filter :phone
   filter :parentname
-  # filter :parentaddress1
-  # filter :parentaddress2
-  # filter :parentcity
-  # filter :parentstate
-  # filter :parentstate_non_us
-  # filter :parentzip
-  # filter :parentcountry
-  # filter :parentphone
-  # filter :parentworkphone
-  # filter :parentemail
 
   index do 
     selectable_column
     actions
-    # column :id
-    # column :user_id, sortable: :user_id do |user|
-    #   link_to user.applicant_email, admin_user_path(user.user_id)
-    # end
-    # column :firstname
-    # column :middlename
-    # column :lastname
     column "Fullname" do |appdetail|
       appdetail.full_name
     end
@@ -111,13 +73,11 @@ ActiveAdmin.register ApplicantDetail do
     end
     column :us_citizen
     column :demographic do |d| 
-     # if d.exists?
         d.demographic_name
-     # end
     end
     column :birthdate
     column :diet_restrictions
-    column :shirt_size
+    # column :shirt_size
     column :address1
     column :address2
     column :city
@@ -126,38 +86,10 @@ ActiveAdmin.register ApplicantDetail do
     column :postalcode
     column :country
     column :phone
-    # column :parentname
-    # column :parentaddress1
-    # column :parentaddress2
-    # column :parentcity
-    # column :parentstate
-    # column :parentstate_non_us
-    # column :parentzip
-    # column :parentcountry
-    # column :parentphone
-    # column :parentworkphone
-    # column :parentemail
     column :created_at
     column :updated_at
-    # actions
   end
 
-  # show do
-  #   attributes_table do
-  #     row :id
-  #     row :email
-  #     row :firstname
-  #     row :middlename
-  #     row :lastname
-  #     row :gender do |g|
-  #       g.gender_name
-  #     end
-
-  #     row :created_at
-  #     row :updated_at
-  #   end
-  #   active_admin_comments
-  # end
   show do
     panel "Applications" do
       table_for applicant_detail do
@@ -166,10 +98,6 @@ ActiveAdmin.register ApplicantDetail do
         column :gender do |g|
           g.gender_name
         end
-        # column :user_id do |user|
-        #   link_to user.applicant_email, admin_user_path(user.user_id)
-        # end
-        # column('eMail') { |user| link_to user.applicant_email, admin_user_path(user.user_id) }
         column('eMail') do |app| 
           if app.user.enrollments.exists?
             div(title: 'Link to Application') do
@@ -192,7 +120,7 @@ ActiveAdmin.register ApplicantDetail do
       end
       row :birthdate
       row :diet_restrictions
-      row :shirt_size
+      # row :shirt_size
       row :address1
       row :address2
       row :city
@@ -202,17 +130,9 @@ ActiveAdmin.register ApplicantDetail do
       row :country
       row :phone
       row :parentname
-      # column :parentaddress1
-      # column :parentaddress2
-      # column :parentcity
-      # column :parentstate
-      # column :parentstate_non_us
-      # column :parentzip
-      # column :parentcountry
       row :parentphone
       row :parentworkphone
       row :parentemail
-      # row('Published?') { |b| status_tag b.published? }
     end
   end
 end
