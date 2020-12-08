@@ -71,6 +71,8 @@ class Enrollment < ApplicationRecord
   validate :validate_transcript_presence
   validate :acceptable_transcript
 
+  validate :acceptable_student_packet
+
   scope :current_camp_year_applications, -> { where('campyear = ? ', CampConfiguration.active_camp_year) }
   scope :offered, -> { current_camp_year_applications.where("offer_status = 'offered'")}
   scope :accepted, -> { current_camp_year_applications.where("offer_status = 'accepted'")}
@@ -109,6 +111,19 @@ class Enrollment < ApplicationRecord
     acceptable_types = ["image/png", "image/jpeg", "application/pdf"]
     unless acceptable_types.include?(transcript.content_type)
       errors.add(:transcript, "must be file type PDF, JPEG or PNG")
+    end
+  end
+
+  def acceptable_student_packet
+    return unless student_packet.attached?
+
+    unless student_packet.blob.byte_size <= 20.megabyte
+      errors.add(:student_packet, "is too big - file size cannot exceed 20Mbyte")
+    end
+
+    acceptable_types = ["image/png", "image/jpeg", "application/pdf"]
+    unless acceptable_types.include?(student_packet.content_type)
+      errors.add(:student_packet, "must be file type PDF, JPEG or PNG")
     end
   end
 

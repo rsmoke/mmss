@@ -19,4 +19,21 @@ class Recupload < ApplicationRecord
 
   has_one_attached :recletter
 
+  validate :acceptable_recletter
+
+  private
+
+  def acceptable_recletter
+    return unless recletter.attached?
+
+    unless recletter.blob.byte_size <= 20.megabyte
+      errors.add(:recletter, "is too big - file size cannot exceed 20Mbyte")
+    end
+
+    acceptable_types = ["image/png", "image/jpeg", "application/pdf"]
+    unless acceptable_types.include?(recletter.content_type)
+      errors.add(:recletter, "must be file type PDF, JPEG or PNG")
+    end
+  end
+
 end

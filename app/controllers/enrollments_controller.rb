@@ -55,8 +55,12 @@ class EnrollmentsController < ApplicationController
         format.html { redirect_to root_path, notice: 'Application was successfully updated.' }
         format.json { render :show, status: :ok, location: @current_enrollment }
       else
-        format.html { render :edit }
-        format.json { render json: @current_enrollment.errors, status: :unprocessable_entity }
+        if @current_enrollment.errors.include?(:student_packet)
+          format.html { redirect_to root_path, alert: @current_enrollment.errors.full_messages.to_sentence }
+        else
+          format.html { render :edit }
+          format.json { render json: @current_enrollment.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

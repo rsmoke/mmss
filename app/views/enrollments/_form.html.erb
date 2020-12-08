@@ -309,12 +309,13 @@
       <%= form.text_field :partner_program %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <% if enrollment.new_record? %>
-      <%= form.submit "Submit Application" %>
-    <% else %>
-      <%= form.submit "Update Application" %>
-    <% end %>
-  </div>
+    <div class="actions">
+      <% if enrollment.new_record? %>
+        <%= form.submit "Submit Application" %>
+      <% else %>
+        <% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>  %>
+          <%= form.submit "Update Application" %>
+        <% end %>
+      <% end %>
+    </div>
 <% end %>
