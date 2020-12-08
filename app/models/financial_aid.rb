@@ -21,7 +21,22 @@ class FinancialAid < ApplicationRecord
 
   monetize :amount_cents
 
+  validate :acceptable_taxform
+
   private
+
+  def acceptable_taxform
+    return unless taxform.attached?
+
+    unless taxform.blob.byte_size <= 20.megabyte
+      errors.add(:taxform, "is too big - file size cannot exceed 20Mbyte")
+    end
+
+    acceptable_types = ["image/png", "image/jpeg", "application/pdf"]
+    unless acceptable_types.include?(taxform.content_type)
+      errors.add(:taxform, "must be file type PDF, JPEG or PNG")
+    end
+  end
 
   def send_status_watch_email
     if self.status == 'awarded'
