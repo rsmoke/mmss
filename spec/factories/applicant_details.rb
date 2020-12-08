@@ -41,28 +41,28 @@ FactoryBot.define do
     firstname { "Chester" }
     # middlename { "The" }
     lastname { "Tester" }
-    gender { "Male" }
-    us_citizen { true }
-    demographic { "MyString" }
+    gender { "1" }
+    # us_citizen { true }
+    # demographic { "2" }
     birthdate { "2019-07-22" }
-    diet_restrictions { "peanuts" }
-    shirt_size { "Large" }
+    # diet_restrictions { "peanuts" }
+    # shirt_size { "Large" }
     address1 { "123 Main Street" }
     # address2 { "MyString" }
     city { "Saline" }
-    # state { "MyString" }
+    state { "MI" }
     # state_non_us { "MyString" }
     postalcode { "48896" }
     country { "US" }
     phone { "1234567890" }
     parentname { "Cheryl Stooge" }
-    parentaddress1 { "123 Main Street" }
+    # parentaddress1 { "123 Main Street" }
     # parentaddress2 { "MyString" }
-    parentcity { "Saline" }
+    # parentcity { "Saline" }
     # parentstate { "MyString" }
     # parentstate_non_us { "MyString" }
-    parentzip { "48896" }
-    parentcountry { "US" }
+    # parentzip { "48896" }
+    # parentcountry { "US" }
     parentphone { "9876543217" }
     # parentworkphone { "MyString" }
     parentemail { "cheryl.tester@tester.com" }

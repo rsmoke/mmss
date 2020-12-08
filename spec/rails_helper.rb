@@ -66,11 +66,4 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
 end
 
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
-end
-
 Capybara.javascript_driver = ENV['SHOW_BROWSER'] ? :selenium_chrome : :selenium_chrome_headless

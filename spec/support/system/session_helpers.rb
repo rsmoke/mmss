@@ -21,7 +21,7 @@ module Features
       visit new_admin_session_path
       fill_in 'Email', with: admin_user.email
       fill_in 'Password', with: admin_user.password
-      click_button 'Log in'
+      click_button 'Login'
     end
 
     def sign_in_invalid

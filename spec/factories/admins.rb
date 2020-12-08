@@ -21,6 +21,8 @@
 #
 FactoryBot.define do
   factory :admin do
-    
+    email { 'sdmin@tester.com' }
+    password { 'papercutadmin' }
+    password_confirmation { 'papercutadmin' }
   end
 end
