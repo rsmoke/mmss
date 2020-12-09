@@ -18,9 +18,9 @@
       <h2 class= "section-header">Sessions</h2>
       <p class="direction_notes">
         If you want to attend multiple sessions, please check the box corresponding
-        to each of the sessions you wish to attend. If you would like to attend only
+        to each of the sessions you wish to attend.<br><br>If you would like to attend only
         one session, but do not have a preference as to which session, please check
-        the <i>"Any Session"</i> box, <strong>along with the boxes corresponding to
+        the <i>"Any Session"</i> box <strong>AND all the boxes corresponding to
         each of the sessions you are able to attend.</strong>
         <br><br>
           You will be charged seperately for each session you attend.
@@ -158,11 +158,10 @@
 
   <h2 class= "section-header">Applicant School History</h2>
   <div class="field">
-
     <%= form.text_field :user_id, hidden: true %>
   </div>
-  <div class="field">
 
+  <div class="field">
     <%= form.hidden_field :campyear, value: current_camp_year %>
   </div>
 
@@ -217,8 +216,13 @@
   </div>
 
   <hr>
+  <div class="mt-2">
+    <%= form.check_box :international, class: "form-checkbox"  %>
+    <%= form.label :international, "I require a letter to obtaining a Visa", class: "inline-flex items-center ml-1" %>
+  </div>
+
   <div class="field">
-    <%= form.label :room_mate_request, "Name of preferred roommate (optional, and for residential program only): ", class: 'form-optional' %>
+    <%= form.label :room_mate_request, "Name of preferred roommate: ", class: 'form-optional' %>
     <%= form.text_field :room_mate_request %>
   </div>
 
@@ -256,30 +260,14 @@
   <% end %>
   <p class="direction_notes">
     <span class="text-red-500">
-      Please upload a pdf copy of your high school transcript<br> (Maximum size is 20Mb and file format is PDF, JPG, PNG)
+      Upload a pdf copy of your high school transcript<br> (Maximum size is 20Mb and file format is PDF, JPG, PNG)
     </span>
     <br>
       This is a required part of your application. It does NOT need to be an
       official copy sent directly from your school's office. Screen print outs are
       accepted as well as composite copies of report cards from ALL previous high
       school terms/years.
-    <br>
-      If you can not upload your transcript electronically, please send a copy
-      (or have your high school send a copy) of your high school transcript to:
-  </p>
-    <address class="px-4 pt-2">
-      Michigan Math and Science Scholars<br>
-      Department of Mathematics<br>
-      530 Church Street<br>
-      2074 East Hall<br>
-      Ann Arbor, MI 48109-1043
-    </address>
-  <p class="direction_notes">
-      The transcript can be mailed to the above address, faxed to 734.763.0937 or
-      e-mailed as a scanned attachment to mmss@umich.edu, if you can not upload
-      your transcript electronically. You will be notified by email when your
-      transcript has arrived in the MMSS office.
-    <br>
+      <br>
     <span class="text-red-500">
       Your application will not be considered complete and reviewed until we have
       received this material.
@@ -313,7 +301,7 @@
       <% if enrollment.new_record? %>
         <%= form.submit "Submit Application" %>
       <% else %>
-        <% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>  %>
+        <% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>
           <%= form.submit "Update Application" %>
         <% end %>
       <% end %>
