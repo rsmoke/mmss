@@ -3,11 +3,11 @@
     <p class="text-center text-lg"><%= @applicant_detail.firstname %> <%= @applicant_detail.middlename %> <%= @applicant_detail.lastname %></p>
   </div>
   <div class="px-6 py-4">
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm text-gray-700 mr-2 mb-2">Birthdate: <%= @applicant_detail.birthdate.strftime("%B %d, %Y") %></span>
-    <div class="inline-block bg-gray-100 rounded-lg px-3 py-1 text-sm text-gray-700 mr-2 mb-2">
+    <span class="bg-gray-200 rounded-full px-3 py-1 text-sm text-gray-700 mr-2 mb-2">Birthdate: <%= @applicant_detail.birthdate.strftime("%B %d, %Y") %></span>
+    <div class="bg-gray-100 rounded-lg px-3 py-1 text-sm text-gray-700 mr-2 mb-2">
       Diet restrictions: <%= @applicant_detail.diet_restrictions %>
     </div>
-    <div class="inline-block bg-gray-200 rounded-lg px-3 py-1 text-sm text-gray-700 mr-2 mb-2">
+    <div class="bg-gray-200 rounded-lg px-3 py-1 text-sm text-gray-700 mr-2 mb-2">
       <ul>
         <li>Gender: <%= gender_description(@applicant_detail.gender) %></li>
         <li><%= @us_citizen %></li>
