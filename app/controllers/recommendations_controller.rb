@@ -4,7 +4,7 @@ class RecommendationsController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :destroy]
   
   before_action :set_recommendation, only: [:show, :edit, :update, :destroy]
-  before_action :set_current_enrollment, except: [:send_request_email, :show]
+  before_action :set_current_enrollment, except: [:send_request_email]
 
   # GET /recommendations
   # GET /recommendations.json
