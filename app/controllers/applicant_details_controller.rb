@@ -1,6 +1,9 @@
 class ApplicantDetailsController < ApplicationController
-  before_action :set_applicant_detail, only: [:show, :edit, :update, :destroy]
+  devise_group :logged_in, contains: [:user, :admin]
+  before_action :authenticate_logged_in!
   before_action :authenticate_admin!, only: [:index, :destroy]
+  before_action :set_applicant_detail, only: [:show, :edit, :update, :destroy]
+
 
   # GET /applicant_details
   # GET /applicant_details.json
