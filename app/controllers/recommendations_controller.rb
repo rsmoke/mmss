@@ -4,7 +4,7 @@ class RecommendationsController < ApplicationController
   before_action :authenticate_admin!, only: [:index, :destroy]
   
   before_action :set_recommendation, only: [:show, :edit, :update, :destroy]
-  before_action :set_current_enrollment
+  before_action :set_current_enrollment, except: [:send_request_email, :show]
 
   # GET /recommendations
   # GET /recommendations.json
@@ -75,6 +75,14 @@ class RecommendationsController < ApplicationController
     end
   end
 
+  def send_request_email
+    @recommendation = Recommendation.find_by(id: params[:recommendation_id])
+    RecommendationMailer.with(recommendation: @recommendation).request_email.deliver_now
+    respond_to do |format|
+      format.html { redirect_to admin_recommendation_path(@recommendation), notice: 'Request was sent!' }
+    end
+  end
+
   private
 
     def set_current_enrollment
@@ -87,6 +95,6 @@ class RecommendationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recommendation_params
-      params.require(:recommendation).permit(:enrollment_id, :email, :lastname, :firstname, :organization, :address1, :address2, :city, :state, :state_non_us, :postalcode, :country, :phone_number, :best_contact_time, :submitted_recommendation, :date_submitted)
+      params.require(:recommendation).permit(:enrollment_id, :email, :lastname, :firstname, :organization, :address1, :address2, :city, :state, :state_non_us, :postalcode, :country, :phone_number, :best_contact_time, :submitted_recommendation, :date_submitted, :recommendation_id)
     end
 end
