@@ -30,9 +30,7 @@ ActiveAdmin.register Recupload do
 
   index do
     selectable_column
-    column :id, sortable: :id do |e|
-      link_to e.id, admin_recupload_path(e)
-    end
+    actions
     column :recommendation_id, sortable: :recommendation_id do |ri|
       link_to ri.recommendation_id, admin_recommendation_path(ri.recommendation_id)
     end
@@ -44,7 +42,6 @@ ActiveAdmin.register Recupload do
       end
     end
     column :authorname
-    actions
   end
 
   show do
