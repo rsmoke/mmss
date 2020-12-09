@@ -2,11 +2,8 @@
   <h2>Directions:</h2>
   <% if current_user.applicant_detail.blank? %>
     <div class="mb-2">The first step is to
-      <div class="mt-2">
         <%= link_to 'Register', new_applicant_detail_path,
-                    class: 'btn btn-blue' %>,
-        so that we know who you are.
-      </div>
+                    class: 'btn btn-blue' %>, so that we know who you are.
       <br>
       As you advance through the online application process, these directions
       will update accordingly to your progress. For many items you submit,
