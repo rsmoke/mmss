@@ -65,7 +65,7 @@ class PaymentsController < ApplicationController
     @registration_activities = @current_enrollment.registration_activities.order(camp_occurrence_id: :asc)
     @session_registrations = @current_enrollment.session_registrations.order(description: :asc)
     @has_any_session = @session_registrations.pluck(:description).include?("Any Session")
-    @any_session_cost = CampOccurrence.find_by(description: "Any Session").cost_cents
+    # @any_session_cost = CampOccurrence.find_by(description: "Any Session").cost_cents
     @current_application_status = @current_enrollment.application_status
     @finaids = @current_enrollment.financial_aids #need loop
     @finaids_ttl = @finaids.pluck(:amount_cents).sum
