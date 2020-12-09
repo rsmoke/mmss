@@ -17,6 +17,11 @@ ActiveAdmin.register Recommendation do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  action_item :import_demo, only: :show do
+    link_to 'Resend request', send_request_email_path(:id)
+  end
+
   form do |f|
     f.semantic_errors
     f.inputs do
@@ -42,9 +47,10 @@ ActiveAdmin.register Recommendation do
 
   index do
     selectable_column
-    column :id, sortable: :id do |e|
-      link_to e.id, admin_recommendation_path(e)
-    end
+    # column :id, sortable: :id do |e|
+    #   link_to e.id, admin_recommendation_path(e)
+    # end
+    actions
     column :enrollment_id, sortable: :enrollment_id do |ei|
       link_to ei.enrollment.display_name, admin_application_path(ei.enrollment_id)
     end
@@ -63,15 +69,20 @@ ActiveAdmin.register Recommendation do
     column :best_contact_time
     # column :submitted_recommendation
     # column :date_submitted
-    actions
+ 
   end
 
   show do
     attributes_table do
-      row :id
-      row :email
-      row :lastname
+      row "mail link", :id do |recid|
+        link_to 'Resend request', send_request_email_path(recid)
+      end
+      row  :enrollment_id do |ei|
+        link_to ei.enrollment.display_name, admin_application_path(ei.enrollment_id)
+      end
       row :firstname
+      row :lastname
+      row :email
       row :organization
       row :address1
       row :address2
@@ -84,7 +95,13 @@ ActiveAdmin.register Recommendation do
       row :best_contact_time
       row :created_at
       row :updated_at
+      # row "Resend request" do
+      #   link_to 'Resend request', send_request_email_path(:id)
+      # end
     end
+    # panel "Send recommendation letter again" do
+      
+    #   end
     active_admin_comments
   end
 

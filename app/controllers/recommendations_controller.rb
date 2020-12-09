@@ -1,7 +1,7 @@
 class RecommendationsController < ApplicationController
   before_action :set_recommendation, only: [:show, :edit, :update, :destroy]
   devise_group :logged_in, contains: [:user, :admin]
-  before_action :set_current_enrollment
+  before_action :set_current_enrollment, except: [:send_request_email]
   # before_action :authenticate_logged_in!
   # GET /recommendations
   # GET /recommendations.json
@@ -70,6 +70,12 @@ class RecommendationsController < ApplicationController
       format.html { redirect_to enrollment_recommendations_url, notice: 'Recommendation was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def send_request_email(recommendation_id)
+    @recommendation = Recommendation.find(recommendation_id)
+    RecommendationMailer.with(recommendation: @recommendation).request_email.deliver_now
+    flash.now[:notice] = 'Request was sent!'
   end
 
   private

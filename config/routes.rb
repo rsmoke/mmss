@@ -92,4 +92,6 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
+  get 'send_request_email(id)', to: 'recommendations#send_request_email', as: :send_request_email
+
 end
