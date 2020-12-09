@@ -11,7 +11,7 @@ class ApplicantDetailsController < ApplicationController
   # GET /applicant_details/1
   # GET /applicant_details/1.json
   def show
-
+    @us_citizen = citizen_status
   end
 
   # GET /applicant_details/new
@@ -67,6 +67,14 @@ class ApplicantDetailsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_applicant_detail
       @applicant_detail = current_user.applicant_detail
+    end
+
+    def citizen_status
+      if @applicant_detail.us_citizen
+        "You are a US citizen"
+      else
+        nil 
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,137 +1,51 @@
+<div class="max-w-sm rounded overflow-hidden shadow-lg">
+  <div class="text-yellow-um_yellow bg-blue-um_blue p-2">
+    <p class="text-center text-lg"><%= @applicant_detail.firstname %> <%= @applicant_detail.middlename %> <%= @applicant_detail.lastname %></p>
+  </div>
+  <div class="px-6 py-4">
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm text-gray-700 mr-2 mb-2">Birthdate: <%= @applicant_detail.birthdate.strftime("%B %d, %Y") %></span>
+    <div class="inline-block bg-gray-100 rounded-lg px-3 py-1 text-sm text-gray-700 mr-2 mb-2">
+      Diet restrictions: <%= @applicant_detail.diet_restrictions %>
+    </div>
+    <div class="inline-block bg-gray-200 rounded-lg px-3 py-1 text-sm text-gray-700 mr-2 mb-2">
+      <ul>
+        <li>Gender: <%= gender_description(@applicant_detail.gender) %></li>
+        <li><%= @us_citizen %></li>
+        <li>Demographic: <%= demographic_description(@applicant_detail) %></li>
+      </ul>
+    </div>
+    <p class="text-gray-700 text-base">
+      Address:
+      <ul class="pl-4">
+        <li><%= @applicant_detail.address1 %></li>
+        <li><%= @applicant_detail.address2 %></li>
+        <li><%= @applicant_detail.city %>, <%= @applicant_detail.state %> <%= @applicant_detail.state_non_us %> <%= @applicant_detail.postalcode %></li>
+        <li><%= @applicant_detail.country %></li>
+        <li><%= @applicant_detail.phone %></li>
+      </ul>
+    </p>
+    <div class="text-base my-2 border-2 border-gray-200">
+      <p class="text-gray-700 text-base">
+        Parent information:
+        <ul class="pl-4">
+          <li><%= @applicant_detail.parentname %></li>
+          <li><%= @applicant_detail.parentaddress1%></li>
+          <li><%= @applicant_detail.parentaddress2 %></li>
+          <li><%= @applicant_detail.parentcity %> <%= @applicant_detail.parentstate %> <%= @applicant_detail.parentstate_non_us %> <%= @applicant_detail.parentzip %></li>
+          <li><%= @applicant_detail.parentcountry %></li>
+          <li>Phone:
+            <ul class="pl-2">
+              <li><%= @applicant_detail.parentphone %></li>
+              <li><%= @applicant_detail.parentworkphone %></li>
+            </ul>
+          </li>
+          <li>eMail: <%= @applicant_detail.parentemail %></li>
+        </ul>
+      </p>
+    </div>
 
-<p>
-  <strong>Firstname:</strong>
-  <%= @applicant_detail.firstname %>
-</p>
-
-<p>
-  <strong>Middlename:</strong>
-  <%= @applicant_detail.middlename %>
-</p>
-
-<p>
-  <strong>Lastname:</strong>
-  <%= @applicant_detail.lastname %>
-</p>
-
-<p>
-  <strong>Birthdate:</strong>
-  <%= @applicant_detail.birthdate.strftime("%B %d, %Y") %>
-</p>
-
-<p>
-  <strong>Diet restrictions:</strong>
-  <%= @applicant_detail.diet_restrictions %>
-</p>
-
-<p>
-  <strong>Address1:</strong>
-  <%= @applicant_detail.address1 %>
-</p>
-
-<p>
-  <strong>Address2:</strong>
-  <%= @applicant_detail.address2 %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @applicant_detail.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @applicant_detail.state %>
-</p>
-
-<p>
-  <strong>State non us:</strong>
-  <%= @applicant_detail.state_non_us %>
-</p>
-
-<p>
-  <strong>Postalcode:</strong>
-  <%= @applicant_detail.postalcode %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @applicant_detail.country %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @applicant_detail.phone %>
-</p>
-
-<p>
-  <strong>Parentname:</strong>
-  <%= @applicant_detail.parentname %>
-</p>
-
-<p>
-  <strong>Parentaddress1:</strong>
-  <%= @applicant_detail.parentaddress1 %>
-</p>
-
-<p>
-  <strong>Parentaddress2:</strong>
-  <%= @applicant_detail.parentaddress2 %>
-</p>
-
-<p>
-  <strong>Parentcity:</strong>
-  <%= @applicant_detail.parentcity %>
-</p>
-
-<p>
-  <strong>Parentstate:</strong>
-  <%= @applicant_detail.parentstate %>
-</p>
-
-<p>
-  <strong>Parentstate non us:</strong>
-  <%= @applicant_detail.parentstate_non_us %>
-</p>
-
-<p>
-  <strong>Parentzip:</strong>
-  <%= @applicant_detail.parentzip %>
-</p>
-
-<p>
-  <strong>Parentcountry:</strong>
-  <%= @applicant_detail.parentcountry %>
-</p>
-
-<p>
-  <strong>Parentphone:</strong>
-  <%= @applicant_detail.parentphone %>
-</p>
-
-<p>
-  <strong>Parentworkphone:</strong>
-  <%= @applicant_detail.parentworkphone %>
-</p>
-
-<p>
-  <strong>Parentemail:</strong>
-  <%= @applicant_detail.parentemail %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= gender_description(@applicant_detail.gender) %>
-</p>
-
-<p>
-  <strong>US citizen:</strong>
-  <%= @applicant_detail.us_citizen %>
-</p>
-<p>
-  <strong>Demographic:</strong>
-    <%= demographic_description(@applicant_detail) %>
-</p>
+  </div>
+</div>
 
 <% if admin_signed_in? %>
 <h2>========== Administrative area ==========</h2>

@@ -20,6 +20,7 @@ class EnrollmentsController < ApplicationController
     @registration_activities = @current_enrollment.registration_activities.order(camp_occurrence_id: :asc)
     @session_registrations = @current_enrollment.session_registrations.order(description: :asc)
     @course_registrations = @current_enrollment.course_registrations.order(camp_occurrence_id: :asc)
+    @room_mate = get_room_mate
   end
 
   # GET /enrollments/new
@@ -78,7 +79,6 @@ class EnrollmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_current_enrollment
-      # @enrollment = Enrollment.find_by(user_id: current_user)
       @current_enrollment = current_user.enrollments.current_camp_year_applications.last
     end
 
@@ -108,6 +108,14 @@ class EnrollmentsController < ApplicationController
           @activities_session3 = as.activities.order(description: :asc)
         end
       end  
+    end
+
+    def get_room_mate
+      unless @current_enrollment.room_mate_request.blank?
+        "I want to room with #{@current_enrollment.room_mate_request}."
+      else
+        "No specific room mate requested"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

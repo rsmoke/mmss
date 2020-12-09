@@ -1,72 +1,35 @@
-<p>
-  <strong>User:</strong>
-  <%= @current_enrollment.applicant_detail.full_name %>
-</p>
-
-<p>
-  <strong>Campyear:</strong>
-  <%= @current_enrollment.campyear %>
-</p>
-
-<p>
-  <strong>International:</strong>
-  <%= @current_enrollment.international %>
-</p>
-
-<p>
-  <strong>High school name:</strong>
-  <%= @current_enrollment.high_school_name %>
-</p>
-
-<p>
-  <strong>High school address1:</strong>
-  <%= @current_enrollment.high_school_address1 %>
-</p>
-
-<p>
-  <strong>High school address2:</strong>
-  <%= @current_enrollment.high_school_address2 %>
-</p>
-
-<p>
-  <strong>High school city:</strong>
-  <%= @current_enrollment.high_school_city %>
-</p>
-
-<p>
-  <strong>High school state:</strong>
-  <%= @current_enrollment.high_school_state %>
-</p>
-
-<p>
-  <strong>High school non us:</strong>
-  <%= @current_enrollment.high_school_non_us %>
-</p>
-
-<p>
-  <strong>High school postalcode:</strong>
-  <%= @current_enrollment.high_school_postalcode %>
-</p>
-
-<p>
-  <strong>High school country:</strong>
-  <%= @current_enrollment.high_school_country %>
-</p>
-
-<p>
-  <strong>Year in school:</strong>
-  <%= @current_enrollment.year_in_school %>
-</p>
-
-<p>
-  <strong>Anticipated graduation year:</strong>
-  <%= @current_enrollment.anticipated_graduation_year %>
-</p>
-
-<p>
-  <strong>Room mate request:</strong>
-  <%= @current_enrollment.room_mate_request %>
-</p>
+<div class="max-w rounded overflow-hidden shadow-lg mb-2">
+  <div class="text-yellow-um_yellow bg-blue-um_blue p-2">
+    <p class="text-center text-lg"><%= @current_enrollment.applicant_detail.full_name %>'s <%= @current_enrollment.campyear %> Application</p>
+  </div>
+  <div class="px-6 py-2">
+    <div class="bg-gray-200 rounded-lg px-3 py-1 text-base text-gray-700 mr-2 mb-2">
+      <ul>
+        <li>Grade level: <%= @current_enrollment.year_in_school %></li>
+        <li>Expected graduation: <%= @current_enrollment.anticipated_graduation_year %></li>
+      </ul>
+    </div>
+    <div class="bg-gray-200 rounded-lg px-3 py-1 text-base text-gray-700 mr-2 mb-2">
+      <p class="text-gray-700">
+        High school information:
+          <ul class="pl-4">
+            <li><%= @current_enrollment.high_school_name %></li>
+            <li><%= @current_enrollment.high_school_address1 %></li>
+            <li><%= @current_enrollment.high_school_address2 %></li>
+            <li>
+              <%= @current_enrollment.high_school_city %>, 
+              <%= @current_enrollment.high_school_state %>
+              <%= @current_enrollment.high_school_non_us %>
+              <%= @current_enrollment.high_school_postalcode %>
+            </li>
+            <li><%= @current_enrollment.high_school_country %></li>
+          </ul>
+      </p>
+    </div>
+    <div class="bg-gray-200 rounded-lg px-3 text-gray-700 mr-2">
+      <%= @room_mate %>
+    </div>
+  </div>
 
 <p class="current-uploaded-docs h-40 overflow-auto">
   <strong>Personal statement:</strong>
@@ -152,12 +115,10 @@
     <%= @current_enrollment.partner_program %>
   </p>
 <% end %>
+</div>
 <div class="mt-2">
   <% if @current_enrollment.application_status == "" || @current_enrollment.application_status == nil %>
     <%= link_to 'Edit', edit_enrollment_path(@current_enrollment), class: "btn btn-blue" %> |
   <% end %>
   <%= link_to 'Home', root_path, class: "btn btn-blue" %>
 </div>
-
-
-

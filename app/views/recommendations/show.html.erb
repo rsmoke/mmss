@@ -1,80 +1,38 @@
-<p>
-  <strong>Email:</strong>
-  <%= @recommendation.email %>
-</p>
+<div class="max-w-sm rounded overflow-hidden shadow-lg">
+  <div class="text-yellow-um_yellow bg-blue-um_blue p-2">
+    <p class="text-center text-lg">Letter of Recommendation</p>
+  </div>
+  <div class="px-6 py-4">
+    <p class="text-gray-700">
+      <ul class="pl-4">
+        <li class="text-base"><%= @recommendation.firstname %> <%= @recommendation.lastname %></li>
+        <li>eMail: <%= @recommendation.email %></li>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @recommendation.lastname %>
-</p>
+        <li>Organization: 
+          <ul class="pl-2">
+            <li><%= @recommendation.organization %></li>
+            <li><%= @recommendation.address1 %></li>
+            <li><%= @recommendation.address2 %></li>
+            <li><%= @recommendation.city %> <%= @recommendation.state %> <%= @recommendation.state_non_us %> <%= @recommendation.postalcode %></li>
+            <li><%= @recommendation.country %></li>
+            <li><%= @recommendation.phone_number %></li>
+            <li><%= @recommendation.best_contact_time %></li>
+          </ul>
+        </li>
+      </ul>
+    <p>
 
-<p>
-  <strong>Firstname:</strong>
-  <%= @recommendation.firstname %>
-</p>
-
-<p>
-  <strong>Organization:</strong>
-  <%= @recommendation.organization %>
-</p>
-
-<p>
-  <strong>Address1:</strong>
-  <%= @recommendation.address1 %>
-</p>
-
-<p>
-  <strong>Address2:</strong>
-  <%= @recommendation.address2 %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @recommendation.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @recommendation.state %>
-</p>
-
-<p>
-  <strong>State non us:</strong>
-  <%= @recommendation.state_non_us %>
-</p>
-
-<p>
-  <strong>Postalcode:</strong>
-  <%= @recommendation.postalcode %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @recommendation.country %>
-</p>
-
-<p>
-  <strong>Phone number:</strong>
-  <%= @recommendation.phone_number %>
-</p>
-
-<p>
-  <strong>Best contact time:</strong>
-  <%= @recommendation.best_contact_time %>
-</p>
-
-<p>
-  <strong>Recommendation Letter status :</strong>
-  <%# @recommendation.submitted_recommendation %>
-  <% if @current_enrollment.recommendation.recupload.present? %>
-    - letter received
-    <br>
-      <strong>Date received:</strong>
-      <%= @current_enrollment.recommendation.recupload.created_at.strftime("%B %d, %Y") %>
-  <% else %>
-    - requested
-  <% end %>
-</p>
+    <div class="inline-block bg-gray-100 rounded-lg px-3 py-1 text-sm text-gray-700 mr-2 mb-2">
+      Letter status:
+        <% if @current_enrollment.recommendation.recupload.present? %>
+          <br>
+          <span class="text-green-800 pl-2">Received on <%= @current_enrollment.recommendation.recupload.created_at.strftime("%b %d, %Y") %></span>
+        <% else %>
+          requested
+        <% end %>
+    </div>
+  </div>
+</div>
 <% if admin_signed_in? %>
 <h2>========== Administrative area ==========</h2>
   <p>
