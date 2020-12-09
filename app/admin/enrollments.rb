@@ -114,7 +114,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
   # filter :session_activities
   # filter :session_assignments, as: :select, collection: SessionAssignment.where(enrollment_id: Enrollment.all).pluck(:camp_occurrence_id).uniq
   # filter :session_registrations
-  # filter :international
+  filter :international
   # filter :high_school_name
   # filter :high_school_address1
   # filter :high_school_address2
