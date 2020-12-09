@@ -1,5 +1,9 @@
 class RecuploadsController < InheritedResources::Base
-  before_action :authenticate_admin!, except: [:index, :success, :error, :show, :new, :create]
+  # devise_group :logged_in, contains: [:user, :admin]
+  # before_action :authenticate_logged_in!
+  # before_action :authenticate_admin!, only: [:index, :destroy]
+
+  before_action :authenticate_admin!, except: [:success, :error, :new, :create]
   before_action :set_recupload, only: [:show, :edit, :update, :destroy]
   before_action :get_recommendation, only: [:new]
 

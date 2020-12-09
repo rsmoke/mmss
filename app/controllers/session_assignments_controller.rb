@@ -1,5 +1,8 @@
 class SessionAssignmentsController < ApplicationController
-  before_action :authenticate_user!
+  devise_group :logged_in, contains: [:user, :admin]
+  before_action :authenticate_logged_in!
+  before_action :authenticate_admin!, only: [:index, :destroy]
+  
   before_action :set_current_enrollment
   before_action :set_session_assignment
   before_action :set_course_assignment
