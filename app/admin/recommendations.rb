@@ -18,10 +18,6 @@ ActiveAdmin.register Recommendation do
   #   permitted
   # end
 
-  action_item :import_demo, only: :show do
-    link_to 'Resend request', send_request_email_path(:id)
-  end
-
   form do |f|
     f.semantic_errors
     f.inputs do
@@ -75,8 +71,9 @@ ActiveAdmin.register Recommendation do
   show do
     attributes_table do
       row "mail link", :id do |recid|
-        link_to 'Resend request', send_request_email_path(recid)
+        link_to 'Resend request', send_request_email_path(recommendation_id: recid), { class: "btn" }
       end
+      row :id
       row  :enrollment_id do |ei|
         link_to ei.enrollment.display_name, admin_application_path(ei.enrollment_id)
       end
