@@ -16,7 +16,7 @@ ActiveAdmin.register CoursePreference do
   #   permitted
   # end
   filter :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
-  filter :course_id, as: :select, collection: Course.where(camp_occurrence_id: CampOccurrence.active)
+  filter :course_id, as: :select, collection: Course.where(camp_occurrence_id: CampOccurrence.active).order(camp_occurrence_id: :asc, title: :asc)
 
 
   index do 
