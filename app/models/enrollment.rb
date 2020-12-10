@@ -80,7 +80,7 @@ class Enrollment < ApplicationRecord
   scope :application_complete, -> {  current_camp_year_applications.where("application_status = 'application complete'")}
 
   def display_name
-    self.user.email # or whatever column you want
+    "#{self.applicant_detail.full_name} - #{self.user.email}"
   end
 
   private
