@@ -44,7 +44,7 @@ ActiveAdmin.register Payment do
   index do
     actions
     column "User" do |p|
-      p.user
+      p.user.applicant_detail.full_name_and_email
     end
     column "Type" do |tt|
       tt.transaction_type
@@ -63,7 +63,6 @@ ActiveAdmin.register Payment do
     column :user_account    
     column :payer_identity  
     column :timestamp       
-    column :transaction_hash 
     column :camp_year
  
   end

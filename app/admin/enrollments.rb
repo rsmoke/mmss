@@ -139,7 +139,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
   index do
     selectable_column
     actions
-    column('eMail') { |application| link_to application.user.email, admin_user_path(application.user_id) }
+    column('Applicant') { |application| link_to application.display_name, admin_user_path(application.user_id) }
     # column :user_id, sortable: :user_id do |user|
     #   link_to user.display_name, admin_applicant_details_path(:user_id)
     # end

@@ -26,7 +26,7 @@ ActiveAdmin.register SessionAssignment do
   end
 
   index do
-    column ('Enrollment') { |sa| link_to sa.enrollment.user.email, admin_application_path(sa.enrollment_id) }
+    column ('Enrollment') { |sa| link_to sa.enrollment.display_name, admin_application_path(sa.enrollment_id) }
     column "Session" do |sa|
       sa.camp_occurrence
     end

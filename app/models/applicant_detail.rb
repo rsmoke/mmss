@@ -62,8 +62,12 @@ def full_name
 end
 
 def applicant_email
-  User.find(self.user_id).email 
+  User.find(self.user_id).email
 end# or whatever column you wantend
+
+def full_name_and_email
+  "#{full_name} - #{applicant_email}"
+end
 
 def gender_name
   Gender.find(self.gender).name
