@@ -8,14 +8,7 @@ ActiveAdmin.register Recupload do
   # Uncomment all parameters which should be permitted for assignment
   #
    permit_params :letter, :authorname, :studentname, :recommendation_id, :rechash, :recletter
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:enrollment_id, :email, :lastname, :firstname, :organization, :address1, :address2, :city, :state, :state_non_us, :postalcode, :country, :phone_number, :best_contact_time, :submitted_recommendation, :date_submitted]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+
   form do |f|
     f.semantic_errors
     f.inputs do
@@ -34,14 +27,18 @@ ActiveAdmin.register Recupload do
     column :recommendation_id, sortable: :recommendation_id do |ri|
       link_to ri.recommendation_id, admin_recommendation_path(ri.recommendation_id)
     end
-    column :studentname
+    column "Applicant" do |app|
+      app.recommendation.enrollment.display_name
+    end
+    column "Author/Reccommender" do |auth|
+      auth.authorname
+    end
     column :letter
     column "Attached File" do |reclet|
       if reclet.recletter.attached?
         link_to reclet.recletter.filename, url_for(reclet.recletter)
       end
     end
-    column :authorname
   end
 
   show do
