@@ -15,7 +15,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  filter :enrollment_id, as: :select, collection: Enrollment.all
+  filter :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
   filter :status, as: :select 
   filter :source, as: :select
 
@@ -23,7 +23,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
     f.semantic_errors # shows errors on :base
     # f.inputs           # builds an input field for every attribute
     f.inputs do
-      f.input :enrollment_id, as: :select, collection: Enrollment.all
+      f.input :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
       f.input :amount_cents
       f.input :source
       f.input :note

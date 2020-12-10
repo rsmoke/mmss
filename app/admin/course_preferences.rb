@@ -15,6 +15,9 @@ ActiveAdmin.register CoursePreference do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  filter :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
+  filter :course_id, as: :select, collection: Course.where(camp_occurrence_id: CampOccurrence.active)
+
 
   index do 
     selectable_column

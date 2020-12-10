@@ -7,13 +7,39 @@ ActiveAdmin.register CourseAssignment do
   # Uncomment all parameters which should be permitted for assignment
   #
    permit_params :enrollment_id, :course_id
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:enrollment_id, :course_id]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+
+   filter :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
+   filter :course_id, as: :select, collection: Course.where(camp_occurrence_id: CampOccurrence.active)
+
+   form do |f|
+    f.inputs do
+      f.input :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
+      f.input :course_id, label: "Course", as: :select, collection: Course.where(camp_occurrence_id: CampOccurrence.active)
+    end
+    f.actions
+  end
+
+  index do
+    selectable_column
+    actions
+    column ('Enrollment') { |ca| link_to ca.enrollment.display_name, admin_application_path(ca.enrollment_id) }
+    column "Course" do |ca|
+      ca.course
+    end
+    column :created_at
+    column :updated_at
+  end
+
+  show do
+    attributes_table do
+      row ('Enrollment') { |ca| link_to ca.enrollment.display_name, admin_application_path(ca.enrollment_id) }
+    row "Course" do |ca|
+      ca.course
+    end
+    row :created_at
+    row :updated_at
+    end
+    active_admin_comments
+  end
+ 
 end
