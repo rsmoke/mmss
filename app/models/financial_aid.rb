@@ -28,8 +28,8 @@ class FinancialAid < ApplicationRecord
   def acceptable_taxform
     return unless taxform.attached?
 
-    unless taxform.blob.byte_size <= 20.megabyte
-      errors.add(:taxform, "is too big - file size cannot exceed 20Mbyte")
+    unless taxform.blob.byte_size <= 5.megabyte
+      errors.add(:taxform, "is too big - file size cannot exceed 5Mbyte")
     end
 
     acceptable_types = ["image/png", "image/jpeg", "application/pdf"]
