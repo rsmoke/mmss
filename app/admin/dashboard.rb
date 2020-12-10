@@ -2,26 +2,10 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
   content title: proc { I18n.t("active_admin.dashboard") } do
-    # div class: "blank_slate_container", id: "dashboard_default_message" do
-    #   span class: "blank_slate" do
-    #     span I18n.t("active_admin.dashboard_welcome.welcome")
-    #     small I18n.t("active_admin.dashboard_welcome.call_to_action")
-    #   end
-    # end
-
-    # Here is an example of a simple dashboard with columns and panels.
-
-    # columns do
-    #   panel "Partial display Demo" do
-    #     div do
-    #       render("/admin/testing_partial_display", model: "dashboard")
-    #     end
-    #   end
-    # end
 
     columns do
       column do
-        panel "Recent Applications for #{current_camp_year} Camp" do
+        panel link_to("Recent Applications for #{current_camp_year} Camp", admin_applications_path) do
           if Enrollment.current_camp_year_applications.any?
             ul do
               Enrollment.current_camp_year_applications.limit(10).map do |enroll|
@@ -31,13 +15,19 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
 
-        panel "Recent Payments for #{current_camp_year} Camp" do
+        panel link_to("Recent Payments for #{current_camp_year} Camp", admin_payments_path) do
           if Payment.current_camp_payments.any?
             ul do
               Payment.current_camp_payments.limit(10).map do |payment|
-                li link_to("#{payment.user.email} - #{ humanized_money_with_symbol(payment.total_amount.to_f / 100)}", admin_payment_path(payment.id))
+                li link_to("#{payment.user.applicant_detail.full_name_and_email} - #{ humanized_money_with_symbol(payment.total_amount.to_f / 100)}", admin_payment_path(payment.id))
               end
             end
+          end
+        end
+
+        panel link_to("Financial Aid Requests", admin_financial_aid_requests_path) do
+          div do
+            render("/admin/finaid_requests", model: "dashboard")
           end
         end
       end
@@ -61,11 +51,11 @@ ActiveAdmin.register_page "Dashboard" do
           end
         end
 
-        panel "Financial Aid Requests" do
-          div do
-            render("/admin/finaid_requests", model: "dashboard")
-          end
-        end
+        # panel "Financial Aid Requests" do
+        #   div do
+        #     render("/admin/finaid_requests", model: "dashboard")
+        #   end
+        # end
       end
     end
   end # content
