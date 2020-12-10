@@ -30,8 +30,8 @@
     </div>
   <% else %>
     <div class="field">
-      <%= form.label :taxform, class: 'important' %>
-      <%= form.file_field :taxform, required: true %>
+      <%= form.label :taxform%>
+      <%= form.file_field :taxform %>
     </div>
   <% end %>
 <p class="direction_notes">
@@ -40,22 +40,9 @@
   </span>
   <br>
     To be considered for support, it will be necessary to provide the MMSS program with a copy of your parents' or guardians' latest tax return (first page only). Your application for financial aid will not be considered until the MMSS program receives this document. Include any additional documentation describing extenuating circumstances.
-  <br><br>
-    If you can not upload your Tax Form electronically, please send a copy
-    your parents' or guardians' latest tax return (first page only) with the Social Security Number redacted to:
-</p>
-  <address>
-    Michigan Math and Science Scholars<br>
-    Department of Mathematics<br>
-    530 Church Street<br>
-    2074 East Hall<br>
-    Ann Arbor, MI 48109-1043
-  </address>
-<p class="direction_notes">
-  If you can not upload your Tax form electronically.
-    The Tax form can be mailed to the above address, faxed to 734.763.0937 or
-    e-mailed as a scanned attachment to mmss@umich.edu, You will be notified by email when your
-    transcript has arrived in the MMSS office.
+  <br>
+    If you can not upload your Tax form electronically.
+    The Tax form can be e-mailed as a scanned attachment to mmss@umich.edu.
   <br>
   <span class="text-red-500">
     Your application will not be considered complete and reviewed until we have
