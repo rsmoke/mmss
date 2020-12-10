@@ -35,6 +35,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
 
   index do
     selectable_column
+    actions
     column :id, sortable: :id do |f|
       link_to f.id, admin_financial_aid_request_path(f)
     end
@@ -52,8 +53,6 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
     column :source
     column :note
     column :status
-
-    actions
   end
 
   show do

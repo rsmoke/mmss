@@ -18,6 +18,7 @@ ActiveAdmin.register CoursePreference do
 
   index do 
     selectable_column
+    actions
     column :id
     column :enrollment
     column "Session" do |cp|
@@ -27,7 +28,6 @@ ActiveAdmin.register CoursePreference do
     column :ranking
     column :created_at
     column :updated_at
-    actions
   end
 
 end

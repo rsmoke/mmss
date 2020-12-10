@@ -26,6 +26,7 @@ ActiveAdmin.register SessionAssignment do
   end
 
   index do
+    actions
     column ('Enrollment') { |sa| link_to sa.enrollment.display_name, admin_application_path(sa.enrollment_id) }
     column "Session" do |sa|
       sa.camp_occurrence
@@ -33,7 +34,6 @@ ActiveAdmin.register SessionAssignment do
     column :created_at
     column :updated_at
     column :offer_status
-    actions
   end
 
   show do
