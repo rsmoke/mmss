@@ -33,6 +33,7 @@ ActiveAdmin.register Course do
   end
 
   index do
+    selectable_column
     actions
     column "Session" do |ss|
       ss.camp_occurrence

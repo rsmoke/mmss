@@ -108,41 +108,18 @@ ActiveAdmin.register Enrollment, as: "Application" do
     f.actions         # adds the 'Submit' and 'Cancel' button
   end
 
-  # filter :user_id
-  # filter :enrollment_activities
-  # filter :registration_activities
-  # filter :session_activities
-  # filter :session_assignments, as: :select, collection: SessionAssignment.where(enrollment_id: Enrollment.all).pluck(:camp_occurrence_id).uniq
-  # filter :session_registrations
   filter :international
-  # filter :high_school_name
-  # filter :high_school_address1
-  # filter :high_school_address2
-  # filter :high_school_city
-  # filter :high_school_state
-  # filter :high_school_non_us
-  # filter :high_school_postalcode
-  # filter :high_school_country
   filter :year_in_school, as: :select
   filter :anticipated_graduation_year, as: :select
-  # filter :room_mate_request
-  # filter :personal_statement
-  # filter :shirt_size
-  # filter :notes
   filter :application_status, as: :select
   filter :offer_status, as: :select
   filter :application_deadline
   filter :campyear, as: :select
 
-  # filter :partner_program
-
   index do
     selectable_column
     actions
     column('Applicant') { |application| link_to application.display_name, admin_user_path(application.user_id) }
-    # column :user_id, sortable: :user_id do |user|
-    #   link_to user.display_name, admin_applicant_details_path(:user_id)
-    # end
     column "Transcript" do |enroll|
       if enroll.transcript.attached?
         link_to enroll.transcript.filename, url_for(enroll.transcript)
@@ -157,20 +134,9 @@ ActiveAdmin.register Enrollment, as: "Application" do
     column :application_deadline
     column :application_status
     column :international
-    # column :high_school_name
-    # column :high_school_address1
-    # column :high_school_address2
-    # column :high_school_city
-    # column :high_school_state
-    # column :high_school_non_us
-    # column :high_school_postalcode
-    # column :high_school_country
     column :year_in_school
     column :anticipated_graduation_year
     column :room_mate_request
-    # column :personal_statement, sortable: false do |ps|
-    #   truncate(ps.personal_statement, omision: "...", length: 25)
-    # end
     column :notes
     column :partner_program
     column "Camp Year" do |app|
@@ -182,27 +148,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
   show do
     attributes_table do
       row :user_id do |user| link_to(user.applicant_detail.full_name.titleize, admin_applicant_detail_path(user.applicant_detail)) end
-      # row link_to application.user.email, admin_user_path(application.user_id) 
-      # link_to(enroll.user.email, admin_applicant_detail_path(enroll.user.applicant_detail))
-      # row :id
-      # row :user_id do |user| user.display_name end
-      # row :transcript do |tr|
-      #   if tr.transcript.attached?
-      #     link_to tr.transcript.filename, url_for(tr.transcript)
-      #   end
-      # end
-      # row :international
-      # row :high_school_name
-      # row :high_school_address1
-      # row :high_school_address2
-      # row :high_school_city
-      # row :high_school_state
-      # row :high_school_non_us
-      # row :high_school_postalcode
-      # row :high_school_country
-      # row :year_in_school
-      # row :anticipated_graduation_year
-      # row :room_mate_request
       row :personal_statement
       row :notes
       row :offer_status
@@ -211,16 +156,12 @@ ActiveAdmin.register Enrollment, as: "Application" do
       row :partner_program
       row :campyear
     end
-    # panel "Sessions" do
 
       panel "Session Assignment" do
         table_for application.session_assignments do
           column(:id) { |item| link_to(item.id, admin_session_assignment_path(item)) }
           column(:camp_occurrence_id) { |item| item.camp_occurrence.description }
           column(:offer_status)
-          # column "Assigned Sessions" do |item| 
-          #   item.description 
-          # end
         end
 
         table_for application.session_registrations do
@@ -239,9 +180,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
           end
         end
 
-      # panel "Course Preferences" do
         table_for application.course_preferences do
-          # column(:course_id) { |item| item.course.title }
           column "User Course Preference" do |item| 
             item.course.title 
           end
@@ -257,7 +196,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
     panel "Activities/Services" do
       table_for Activity.where(camp_occurrence_id: application.session_assignments.accepted.pluck(:camp_occurrence_id)).order(:camp_occurrence_id) do
         column "Assigned Activities" do |item|
-          # (:activity_id) { |item| item.description }
           item.description
         end
         column "Session" do |item| 
@@ -330,7 +268,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
   sidebar "Details", only: :show do
     attributes_table_for application do
       row :id
-      # row :user_id do |user| user.display_name end
       row :transcript do |tr|
         if tr.transcript.attached?
           link_to tr.transcript.filename, url_for(tr.transcript)
