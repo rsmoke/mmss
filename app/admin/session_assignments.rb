@@ -18,7 +18,7 @@ ActiveAdmin.register SessionAssignment do
 
   form do |f|
     f.inputs do
-      f.input :enrollment_id, as: :select, collection: Enrollment.all
+      f.input :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
       f.input :camp_occurrence_id, label: "Session", as: :select, collection: CampOccurrence.active
       f.input :offer_status, as: :select, collection: ['accepted','declined']
     end
@@ -26,6 +26,7 @@ ActiveAdmin.register SessionAssignment do
   end
 
   index do
+    selectable_column
     actions
     column ('Enrollment') { |sa| link_to sa.enrollment.display_name, admin_application_path(sa.enrollment_id) }
     column "Session" do |sa|
@@ -50,7 +51,7 @@ ActiveAdmin.register SessionAssignment do
   end
 
 
-  filter :enrollment_id, as: :select, collection: Enrollment.all
+  filter :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
   filter :camp_occurrence_id, label: "Session", as: :select, collection: CampOccurrence.active.no_any_session
   filter :offer_status, as: :select
 end

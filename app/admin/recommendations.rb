@@ -21,7 +21,7 @@ ActiveAdmin.register Recommendation do
   form do |f|
     f.semantic_errors
     f.inputs do
-      f.input :enrollment_id, as: :select, collection: Enrollment.all
+      f.input :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
       f.input :email
       f.input :lastname
       f.input :firstname
