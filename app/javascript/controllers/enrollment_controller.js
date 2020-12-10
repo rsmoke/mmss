@@ -10,7 +10,6 @@ export default class extends Controller {
         this.showCourses(el.dataset.index)
       }
     })
-
   }
   
   display_toggle_session() {
@@ -21,6 +20,9 @@ export default class extends Controller {
       this.uncheckAll(item_index)
       this.showSession(item_index)
       this.showCourses(item_index)
+    }
+    if (item_index == 0) {
+      this.appendMessage()
     }
   }
 
@@ -34,10 +36,16 @@ export default class extends Controller {
     this.coursesTargets[index -1].classList.toggle("session--hide")
   }
 
+  appendMessage(){
+    if ($('#any_message').length > 0){
+      $('#any_message').remove();
+    }else{
+      $('.form-checkbox[data-index="0"]').parent().after("<span id='any_message'><br>Also check all the boxes corresponding to each of the sessions you are able to attend.</span>");
+    }
+  }
+
   uncheckAll(divid) {
     $('#sessionActivity' + divid + ' :checkbox:enabled').prop('checked', false);
     $('#sessionCourses' + divid + ' :checkbox:enabled').prop('checked', false);
   }
-
 }
-
