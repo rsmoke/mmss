@@ -62,3 +62,8 @@ en:
         parentphone: "Parent/Guardian Phone"
         parentworkphone: "Parent/Guardian Work Phone"
         parentemail: "Parent/Guardian eMail"
+
+      recommendation:
+        firstname: "First Name"
+        lastname: "Last Name"
+        postalcode: "Postal Code"
