@@ -32,7 +32,7 @@ ActiveAdmin.register Recommendation do
       f.input :state, as: :select, collection: us_states
       f.input :state_non_us
       f.input :postalcode
-      f.input :country
+      f.input :country, include_blank: true
       f.input :phone_number
       f.input :best_contact_time
       # f.input :submitted_recommendation
