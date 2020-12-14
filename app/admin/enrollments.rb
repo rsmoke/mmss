@@ -210,7 +210,16 @@ ActiveAdmin.register Enrollment, as: "Application" do
         end
       end
     end
-    
+
+    panel "Current Balances" do
+      attributes_table_for application do
+        row "Total Balance Due" do |applicant|
+          # humanized_money_with_symbol(applicant.balance_due / 100)
+        end
+
+      end
+    end
+
     panel "Payment Activity" do
       table_for application.user.payments.current_camp_payments do
         column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
