@@ -48,7 +48,7 @@ div.actions {
   .field_with_errors label {
     flex: 0 1 100px;
     margin: 2px;
-    color:red;
+    color: #d70303;
   }
 
   .field_with_errors select {
@@ -58,11 +58,11 @@ div.actions {
     width: 100%;
   }
   .field_with_errors input{
-    border:  solid red;
+    border:  solid #d70303;
   }
 #error_explanation {
   width: 450px;
-  border: 2px solid red;
+  border: 2px solid #d70303;
   padding: 7px 7px 0;
   margin-bottom: 20px;
   background-color: #f0f0f0; }
@@ -73,7 +73,7 @@ div.actions {
   font-size: 12px;
   margin: -7px -7px 0;
   background-color:  #f0f0f0;;
-  color: red; }
+  color: #d70303; }
 
 #error_explanation ul li {
   font-size: 12px;

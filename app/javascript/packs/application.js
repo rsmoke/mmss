@@ -19,3 +19,10 @@ import 'controllers'
 //
 const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+$(document).ready(function () {
+  $("input[required]").each(function(index) {
+    var id = $(this).attr('id');
+    $('label[for="'+id+'"]').append('*');
+  });
+});
