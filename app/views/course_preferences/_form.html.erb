@@ -4,8 +4,7 @@
 
   <div class="field">
     <%= form.label :ranking %>
-    <%# <%= form.select :ranking, ((1..10).map {|i| [i,i] }), include_blank: true %>
-     <%= form.select :ranking, (@remaining_selections.map {|i| [i,i] }), include_blank: true %>
+     <%= form.select :ranking, (@remaining_selections.map {|i| [i,i] }), include_blank:  "Select Rank" %>
   </div>
 
   <div class="actions">

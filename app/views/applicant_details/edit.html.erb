@@ -1,7 +1,9 @@
-<h1>Editing Applicant Detail</h1>
-
-<%= render 'form', applicant_detail: @applicant_detail %>
-
+<div class="max-w rounded overflow-hidden shadow-lg">
+  <h1 class="text-yellow-um_yellow bg-blue-um_blue p-2">Editing Applicant Detail</h1>
+  <div class="m-2">
+    <%= render 'form', applicant_detail: @applicant_detail %>
+  </div>
+</div>
 <div class="mt-2">
-  <%= link_to 'Show', @applicant_detail, class: "btn btn-blue" %>
+  <%= link_to 'Back', @applicant_detail, class: "btn btn-blue" %>
 </div>

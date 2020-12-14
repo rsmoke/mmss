@@ -1,7 +1,10 @@
-<h1>New Application</h1>
-
-<%= render 'form', enrollment: @enrollment %>
+<div class="max-w rounded overflow-hidden shadow-lg">
+  <h1 class="text-yellow-um_yellow bg-blue-um_blue p-2">New Application</h1>
+  <div class="m-2">
+    <%= render 'form', enrollment: @enrollment %>
+  </div>
+</div>
 
 <div class="mt-2">
-  <%= link_to 'Back', enrollments_path, class: "btn btn-blue" %>
+  <%= link_to 'Back', root_path, class: "btn btn-blue" %>
 </div>
