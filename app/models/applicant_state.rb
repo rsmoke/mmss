@@ -1,9 +1,18 @@
+# class ApplicantState < Module
+#   def initialize(enrollment)
+#     @curr_enrollment = enrollment
+#   end
 module ApplicantState
-
-  # def initialize(current_user)
-  #   @curr_enrollment = current_user.enrollments.current_camp_year_applications.last
-  #   # @session_registrations = @current_enrollment.session_registrations.order(description: :asc)
+  # extend ActiveSupport::Concern
+  # included do
+  #   before_action :get_current_enrollment
   # end
+
+  def get_current_enrollment
+    if @current_enrollment
+      @curr_enrollment = @current_enrollment
+    end
+  end
 
   def registration_activities 
     @current_enrollment.registration_activities.order(camp_occurrence_id: :asc)
@@ -34,11 +43,11 @@ module ApplicantState
   end
 
   def users_current_payments
-    current_user.payments.current_camp_payments
+    @current_enrollment.user.payments.current_camp_payments
   end
 
   def ttl_paid
-    current_user.payments.current_camp_payments.where(transaction_status: '1').pluck(:total_amount).map(&:to_i).sum
+    @current_enrollment.user.payments.current_camp_payments.where(transaction_status: '1').pluck(:total_amount).map(&:to_i).sum
   end
 
   def total_cost

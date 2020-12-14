@@ -64,16 +64,17 @@ class PaymentsController < ApplicationController
 
   def payment_show
     redirect_to root_url unless current_user.payments.current_camp_payments
-    @registration_activities = registration_activities
-    @has_any_session = session_registrations.pluck(:description).include?("Any Session")
-     @current_application_status = current_application_status
-    @finaids = finaids
-    @finaids_ttl = finaids_ttl
-    @finaids_awarded_ttl = finaids_awarded_ttl
-    @users_current_payments = users_current_payments
-    @ttl_paid = ttl_paid
+     @registration_activities = registration_activities
+     @has_any_session = session_registrations.pluck(:description).include?("Any Session")
+    @current_application_status = current_application_status
+     @finaids = finaids
+     @finaids_ttl = finaids_ttl
+    # @finaids_awarded_ttl = finaids_awarded_ttl
+     @users_current_payments = users_current_payments
+    # @ttl_paid = ttl_paid
      @total_cost = total_cost
-    @balance_due = balance_due
+     @balance_due = balance_due
+     @session_registrations = session_registrations
   end
 
   private

@@ -21,6 +21,8 @@
 #  camp_year          :integer
 #
 class Payment < ApplicationRecord
+  # include ApplicantState
+
   validates :transaction_id, presence: true, uniqueness: true
   validates :total_amount, presence: true
 
