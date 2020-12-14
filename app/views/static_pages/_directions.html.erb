@@ -1,5 +1,16 @@
 <% if user_signed_in? %>
   <h2>Directions:</h2>
+
+  <% if user_signed_in? && @current_enrollment %>
+    <div class= "border border-2">
+      <%= "Current Enrollment: #{@current_enrollment}" %>
+      <br>
+      <%= "Total_cost: #{humanized_money_with_symbol(@total_cost / 100 )}" %>
+      <br>
+      <%= "Current Amount Due: #{humanized_money_with_symbol(@balance_due / 100 )}" %>
+    </div>
+  <% end %>
+
   <% if current_user.applicant_detail.blank? %>
     <div class="mb-2">The first step is to
         <%= link_to 'Register', new_applicant_detail_path,
