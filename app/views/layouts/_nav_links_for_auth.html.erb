@@ -6,19 +6,14 @@
       <%= image_pack_tag "MMSS_Logo.png", alt:"MMSS Logo", size: "250x36"  %>
     <% end %>
   </div>
-<!--   <div class="block lg:hidden">
-    <button class="flex items-center px-3 py-2 border rounded text-blue-900 border-blue-900 hover:text-white hover:border-white">
-      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-    </button>
-  </div> -->
   <div class="w-full block flex sm:items-center sm:w-auto">
     <div class= "flex justify-end">
       <% if user_signed_in? %>
         <div>
-          <%= link_to current_user.email, edit_user_registration_path, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-um_blue hover:text-blue-900 mr-4" %>
+          <%= link_to current_user.email, edit_user_registration_path, class: "inline-block btn btn-sm btn-blue mr-1" %>
         </div>
         <div>
-          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "inline-block mt-4 leading-none lg:mt-0 text-blue-um_blue hover:text-blue-900 mr-4" %>
+          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "inline-block btn btn-sm btn-teal ml-1" %>
         </div>
       <% end %>
     </div>
