@@ -38,7 +38,7 @@ class FinancialAidsController < ApplicationController
 
     respond_to do |format|
       if @financial_aid.save
-        format.html { redirect_to payments_path, notice: 'Financial aid was successfully created.' }
+        format.html { redirect_to all_payments_path, notice: 'Financial aid was successfully created.' }
         format.json { render :show, status: :created, location: @financial_aid }
       else
         format.html { render :new }
