@@ -12,11 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :note, "Please include a brief explanation of why you are applying for financial support" %>
-    <%= form.text_area :note %>
+    <%= form.label :note, "Explanation" %>
+    <%= form.text_area :note, required: true %>
   </div>
-
-<h4>Upload the first page of your most recent Tax Return</h4>
   <% if @financial_aid.taxform.attached? %>
     <div class='current-uploaded-docs'>
       <p>
@@ -34,21 +32,22 @@
       <%= form.file_field :taxform %>
     </div>
   <% end %>
-<p class="direction_notes">
-  <span class="text-red-500">
-    Please upload a pdf copy of your parents' or guardians' latest tax return (first page only) with the Social Security Number redacted.
-  </span>
+<div class="direction_notes">
+  <p class="text-red-700">
+    Upload a pdf copy of your parents' or guardians' latest tax return (first page only) 
+    <strong>with the Social Security Number redacted</strong>.
+    <br> 
+    (Maximum size is 5Mb and file format is PDF, JPG, PNG)
+  </p>
+  <p>
+    Your application for financial aid will not be considered until the MMSS program 
+    receives this document. Include any additional documentation describing 
+    extenuating circumstances.
   <br>
-    To be considered for support, it will be necessary to provide the MMSS program with a copy of your parents' or guardians' latest tax return (first page only). Your application for financial aid will not be considered until the MMSS program receives this document. Include any additional documentation describing extenuating circumstances.
-  <br>
-    If you can not upload your Tax form electronically.
     The Tax form can be e-mailed as a scanned attachment to mmss@umich.edu.
-  <br>
-  <span class="text-red-500">
-    Your application will not be considered complete and reviewed until we have
-    received this material.
-  </span>
-</p>
+  </p>
+
+</div>
 
   <% if admin_signed_in? %>
     <h2>========== Administrative area ==========</h2>
@@ -82,3 +81,4 @@
     <% end %>
   </div>
 <% end %>
+<%= javascript_pack_tag 'required_stars' %>

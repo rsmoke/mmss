@@ -1,5 +1,9 @@
-<h1>Editing Recommendation</h1>
-
-<%= render 'form', recommendation: @recommendation %>
-
-<%= link_to 'Show', @recommendation %>
+<div class="max-w rounded overflow-hidden shadow-lg">
+  <h1 class="text-yellow-um_yellow bg-blue-um_blue p-2">Editing Recommendation</h1>
+  <div class="m-2">
+    <%= render 'form', recommendation: @recommendation %>
+  </div>
+</div>
+<div class="mt-2">
+  <%= link_to 'Back', recommendation_path(@recommendation), class: "btn btn-blue" %>
+</div>

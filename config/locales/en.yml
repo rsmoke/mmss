@@ -61,8 +61,16 @@ en:
         parentcountry: "Parent/Guardian Country"
         parentphone: "Parent/Guardian Phone"
         parentworkphone: "Parent/Guardian Work Phone"
-        parentemail: "Parent/Guardian eMail"
-
+        parentemail: "Parent/Guardian email"
+        state: "State (Select Non-US if international)*"
+        country: "Country*"
+        birthdate: "Birthdate*"
+        gender: "Gender*"
+      
+      enrollment:
+        high_school_state: "High school state (Select Non-US if international)*"
+        high_school_country: "High school country*"
+      
       recommendation:
         firstname: "First Name"
         lastname: "Last Name"

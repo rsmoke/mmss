@@ -21,6 +21,7 @@ class FinancialAid < ApplicationRecord
 
   monetize :amount_cents
 
+  validates :note, presence: :true
   validate :acceptable_taxform
 
   private
