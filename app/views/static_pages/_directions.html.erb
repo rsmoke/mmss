@@ -14,36 +14,40 @@
       are on.
     </p>
   <% elsif @current_enrollment.nil? %>
-    <div class="mb-2">The second step is to submit your application for
-      <div class="mt-2">
+      <div class="m-2">
         <%= link_to 'Camp Application', new_enrollment_path,
                     class: 'btn btn-blue' %>
-      </div>
+      
+      <p class ="mt-2">The second step is to submit your application.</p>
+      <p>Check your work before submitting. Once review of your application begins, you will not be able to make changes.</p>
     </div>
       <p class='direction_notes'>Make sure that you have gathered all the
         required information, then work your way through the sections.
-        <ul class='direction_notes'>
-          <div>High School Address</div>
-          <div>Transcript (in pdf format)</div>
-          <div>Your personal statement</div>
-        </ul>
-        <ul class='direction_notes'>
-          <div>You will be selecting the activities and courses you wish to partake in. 
-          After this stage is complete, your next step will be to rank the courses 
-          related to your interest.</div>
-        </ul>
-        <br>
-        Check your work before submitting. Once review of your application begins, you will not be able to make changes.
       </p>
+     
+      <div class='direction_notes'>
+        <ul>
+          <li>High School Address</li>
+          <li>Transcript (in pdf, png, or jpg format)</li>
+          <li>Your personal statement</li>
+        </ul>
+        </div>
+        <p class='direction_notes'>
+          You will be selecting the activities and courses you wish to partake in. 
+          After this stage is complete, your next step will be to rank the courses 
+          related to your interest.
+        </p>
+        
   <% elsif @current_enrollment.course_preferences.pluck(:ranking).any?{ |e| e.nil? } %>
-    <div class="mb-2">The next step is to rank the courses you selected in the priority of interest.<br>
-      <div class="mt-2">
-        <%= link_to 'Course-Rankings',
-                      enrollment_course_preferences_path(@current_enrollment.id),
-                      class: 'btn btn-blue' %>
-      </div>
+    <div class="m-2">
+      <%= link_to 'Course-Rankings',
+                        enrollment_course_preferences_path(@current_enrollment.id),
+                        class: 'btn btn-blue' %>
+        <p class="mt-2">
+          The next step is to rank the courses you selected in the priority of interest with 1 being your first preference.
+        </p>
     </div>
-      <p class='direction_notes'>Make sure that you give each course you selected a ranking.</p>   
+    <div class='m-2 direction_notes'>Make sure that you give each course you selected a ranking. </div>   
   <% elsif @current_enrollment.recommendation.blank? %>
     <div class="mb-2">The next step is requesting a
     <div class="mt-2">

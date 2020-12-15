@@ -157,9 +157,7 @@
   <% end %>
 
   <h2 class= "section-header">Applicant School History</h2>
-  <div class="field">
     <%= form.text_field :user_id, hidden: true %>
-  </div>
 
   <div class="field">
     <%= form.hidden_field :campyear, value: current_camp_year %>
@@ -307,3 +305,4 @@
       <% end %>
     </div>
 <% end %>
+<%= javascript_pack_tag 'required_stars' %>
