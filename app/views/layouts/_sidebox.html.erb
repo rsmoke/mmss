@@ -128,8 +128,9 @@
                   <%= form.file_field :student_packet, required: true %>
                 </div>
               <% end %>
-
-              <%= form.submit "Upload Student Packet", id: 'student_packet_submit', class: "btn btn-green" %>
+              <div class="actions">
+                <%= form.submit "Upload Student Packet", id: 'student_packet_submit' %>
+              </div>
 
             <% end %>
           </div>
