@@ -17,8 +17,9 @@
   </div>
 
   <div class="field">
-    <%= form.label :studentname, "Enter the name of the student you are recommending" %>
-    <%= form.text_field :studentname %>
+    <%= form.label :studentname, "The name of the student you are recommending" %>
+    <%= @student.full_name %>
+    <%= form.text_field :studentname, value: @student.full_name %>
   </div>
 
   <div class="field">
