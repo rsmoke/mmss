@@ -82,52 +82,57 @@
     </p>
   <% else %>
     <% if @current_enrollment.offer_status == "offered" %>
-      <p class="direction_notes">
-        Please respond to our acceptance offer by making the appropriate
-        selection in the Progress Window.
+      <div class="m-2">
+        <p class="direction_notes">
+          Please respond to our acceptance offer by making the appropriate
+          selection in the Progress Window.</p>
+      </div>
     <% elsif @current_enrollment.application_status == "offer accepted" %>
-      <p class="direction_notes">
-        Payment of the balance of program tuition and fees is due by
-        <%= @application_materials_due_date.strftime("%B %e, %Y") %>. Use the
-        payment form in your
+      <div class="m-2">
+        <% unless current_enrollment.student_packet.attached? %>
+          <p>You need to download, fill out and upload the Student Information Packet using
+          the button in the progress window to the right.</p>
+        <% end %>
+        <p>Payment of the program tuition and fees is due by
+        <%= @application_materials_due_date.strftime("%B %e, %Y") %>. To 
+        check your account balance click the button below.</p>
         <div class="my-2">
           <%= link_to "Account Summary", all_payments_path, class: "btn btn-blue pt-8"%>
         </div>
-      </p>
-      <% unless current_enrollment.student_packet.attached? %>
-        <h4 class="my-2">Download and Return the
-          <%= link_to student_packet_url, class: "btn btn-blue mr-1", target: "_blank" do %>
-              Student Information Packet
-            <% end %> 
-          as soon as possible!</h4>
-        <% end %>
+      </div>
     <% elsif @current_enrollment.application_status == "offer declined" %>
-      <p class="direction_notes">
-        Thanks for your interest.
-      </p>
+      <div class="m-2">
+        <p class="direction_notes">
+          Thanks for your interest.
+        </p>
+      </div>
     <% elsif @current_enrollment.application_status == "enrolled" %>
-      <p class="direction_notes">
-        We look forward to seeing you at the <%= current_camp %> University of Michigan MMSS High School Summer Program.
-      </p>
+      <div class="m-2">
+        <p class="direction_notes">
+          We look forward to seeing you at the <%= current_camp %> University of Michigan MMSS High School Summer Program.
+        </p>
+      </div>
     <% else %>
-      <p class="direction_notes">
-        At this point, you have submitted all of the information needed from
-        YOU. 
-        <% if @current_enrollment.recommendation.recupload.blank? %>
-          However, <strong>please note that your application will not be
-          considered "complete", and will not be reviewed until we receive the
-          letter of recommendation from your teacher. Please check with your
-          teacher to make sure they know you have applied, and they have
-          received an email from us!</strong>
-        <% end %>
-      </p>
+      <div class="m-2">
+        <p class="direction_notes">
+          At this point, you have submitted all of the information needed from
+          YOU. 
+          <% if @current_enrollment.recommendation.recupload.blank? %>
+            However, <strong>please note that your application will not be
+            considered "complete", and will not be reviewed until we receive the
+            letter of recommendation from your teacher. Please check with your
+            teacher to make sure they know you have applied, and they have
+            received an email from us!</strong>
+          <% end %>
+        </p>
+      </div>
     <% end %>
 
     <% if @current_enrollment.financial_aids.blank? &&
     (@current_enrollment.application_status == nil || @current_enrollment.application_status == "" ||
     @current_enrollment.application_status == "submitted" || @current_enrollment.application_status == "application complete") %>
         <div class="m-2">
-        <p class="mb-2">If you are applying for need-based financial support, please fill out a request.</p>
+          <p class="mb-2">If you are applying for need-based financial support, please fill out a request.</p>
           <%= link_to "Financial Aid Request", new_enrollment_financial_aid_path(@current_enrollment),
                 class: "btn btn-blue" %>
         </div>
