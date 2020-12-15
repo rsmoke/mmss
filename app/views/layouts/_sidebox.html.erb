@@ -31,11 +31,11 @@
 
         <% if @current_enrollment.recommendation.present? && @current_enrollment.recommendation.persisted? %>
           <div class="sidebox_element">
-            <%= link_to "Letter of Recommendation",
+            <%= link_to "Recommendation",
                         enrollment_recommendation_path(@current_enrollment,@current_enrollment.recommendation ) %>
 
             <% if @current_enrollment.recommendation.recupload.present? %>
-              - letter received
+              - received
             <% else %>
               - requested
             <% end %>
