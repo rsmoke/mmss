@@ -11,18 +11,5 @@ require("css/application.sass")
 require("css/_footer.sass")
 
 import 'controllers'
-// import "../css/application.sass"
-// import "../css/_footer.sass"
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-//
-const images = require.context('../images', true)
-// const imagePath = (name) => images(name, true)
 
-$(document).ready(function () {
-  $("input[required]").each(function(index) {
-    var id = $(this).attr('id');
-    $('label[for="'+id+'"]').append('*');
-  });
-});
+const images = require.context('../images', true)
