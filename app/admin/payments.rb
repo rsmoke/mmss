@@ -29,8 +29,10 @@ ActiveAdmin.register Payment do
     f.inputs do
       f.input :user_id, as: :select, collection: User.all
       f.input :total_amount
-      f.input :transaction_type, input_html: {value: "1"}
-      f.input :transaction_status, input_html: {value: "1"}
+      li "Transaction Type #{f.object.transaction_type}" unless f.object.new_record?
+      f.input :transaction_type, input_html: {value: "1"} unless f.object.persisted?
+      li "Transaction Status #{f.object.transaction_status}" unless f.object.new_record?
+      f.input :transaction_status, input_html: {value: "1"} unless f.object.persisted?
       f.input :transaction_id
       f.input :account_type
       f.input :result_message

@@ -1,4 +1,6 @@
 class EnrollmentsController < ApplicationController
+  include ApplicantState
+
   devise_group :logged_in, contains: [:user, :admin]
   before_action :authenticate_logged_in!
   before_action :authenticate_admin!, only: [:index, :destroy]
@@ -56,6 +58,10 @@ class EnrollmentsController < ApplicationController
   def update
     respond_to do |format|
       if @current_enrollment.update(enrollment_params)
+        if @current_enrollment.student_packet.attached? && balance_due == 0
+          @current_enrollment.update!(application_status: "enrolled")
+          RegistrationMailer.app_enrolled_email(current_user).deliver_now
+        end
         format.html { redirect_to root_path, notice: 'Application was successfully updated.' }
         format.json { render :show, status: :ok, location: @current_enrollment }
       else
