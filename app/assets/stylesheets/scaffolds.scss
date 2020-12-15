@@ -8,6 +8,11 @@ body, p, ol, ul, td {
   font-size: 12px;
   line-height: 18px; }
 
+ul li {
+  list-style: square;
+  margin-left: 10px;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;
