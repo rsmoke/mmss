@@ -14,11 +14,11 @@
       are on.
     </p>
   <% elsif @current_enrollment.nil? %>
-      <div class="m-2">
-        <%= link_to 'Camp Application', new_enrollment_path,
-                    class: 'btn btn-blue' %>
+    <div class="m-2">
+      <%= link_to 'Camp Application', new_enrollment_path,
+                  class: 'btn btn-blue' %>
       
-      <p class ="mt-2">The second step is to submit your application.</p>
+      <p class ="mt-2">The next step is to submit your application.</p>
       <p>Check your work before submitting. Once review of your application begins, you will not be able to make changes.</p>
     </div>
       <p class='direction_notes'>Make sure that you have gathered all the
@@ -31,7 +31,7 @@
           <li>Transcript (in pdf, png, or jpg format)</li>
           <li>Your personal statement</li>
         </ul>
-        </div>
+      </div>
         <p class='direction_notes'>
           You will be selecting the activities and courses you wish to partake in. 
           After this stage is complete, your next step will be to rank the courses 
@@ -49,19 +49,19 @@
     </div>
     <div class='m-2 direction_notes'>Make sure that you give each course you selected a ranking. </div>   
   <% elsif @current_enrollment.recommendation.blank? %>
-    <div class="mb-2">The next step is requesting a
-    <div class="mt-2">
+    <div class="m-2">
       <%= link_to "Letter of Recommendation",
                   new_enrollment_recommendation_path(@current_enrollment),
                   class: 'btn btn-blue'  %>
+        <p class="mt-2">Please ask one of your most recent high school science or math
+      teachers to submit a Letter of Recommendation. </p>
     </div>
+    <div class='direction_notes'>
+      This is a required part
+      of your application. Your recommender will be sent an email giving
+      them directions on how to submit a recommendation for you, so please
+      be certain that you enter their correct email address.
     </div>
-    <p class='direction_notes'>Please ask one of your most recent high school science or math
-      teachers to submit a Letter of Recommendation. This is a required part
-        of your application. Your recommender will be sent an email giving
-        them directions on how to submit a recommendation for you, so please
-        be certain that you enter their correct email address.
-      </p>
   <% elsif current_user.payments.current_camp_payments.empty? %>
     <div class="mb-2">Now that you've submitted your application, the next step is to make
       sure you pay the <%= humanized_money_with_symbol(current_camp_fee / 100) %> non-refundable application fee
