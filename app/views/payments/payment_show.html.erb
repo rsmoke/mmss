@@ -2,269 +2,258 @@
   <h1 class="text-yellow-um_yellow bg-blue-um_blue p-2">
     <p class="text-center text-lg">Your Payment Receipts</p>
   </h1>
-
-<% if admin_signed_in? %>
-  <h2>========== Administrative area ==========</h2>
-  <h4>Application Status: <%= @current_application_status %></h4>
-  <p>====================================</p>
-<% end %>
-<% if @users_current_payments.count < 1 %>
-  <h6>You have not made a payment yet. Payment can be made via check or money
-  order from a U.S. based bank, or via credit card. International students may
-  pay via wire transfer (contact our office for more information regarding wire
-  transfers for international students.)
-  <%= button_to "pay the #{humanized_money_with_symbol(current_camp_fee / 100)} non-refundable application fee",
-                make_payment_path(amount: current_camp_fee / 100), class: 'btn btn-green' %></h6>
-<% else %>
-    <% if @current_application_status == "offer accepted" %>
-      <h6>
-        Your application materials have been received and processed, and we are
-        pleased to offer you a spot for MMSS <%= current_camp_year %>.
-        Your official notification and course assignment are found in your
-        notification email.
-        <br>
-        Paying the tuition and service fees is a requirement of participation.
-        Please continue paying your camp fees at this time.
-      </h6>
-      <hr class="w-75" />
-    <% elsif  @current_application_status == "offer declined" %>
-    <p> Thanks for your interest.</p>
-    <% elsif  @current_application_status == "enrolled" %>
-    <p> Thank you for paying all your fees. We look forward to seeing you at MMSS <%= current_camp_year %>.</p>
-    <% else %>
-      <h6 class="mt-4">
-        Thank you for your Michigan Math and Science Scholars Application. When we
-        have received all your application components your file will be reviewed.
-        <br>
-        The process may take up to 6 weeks as we conduct our admissions on a
-        rolling basis.
-        <br>
-        Please continue to check your email, and the Progress Window, for
-         updates on your application.
-      </h6>
+  <div class="mx-2">
+    <% if admin_signed_in? %>
+      <h2>========== Administrative area ==========</h2>
+      <h4>Application Status: <%= @current_application_status %></h4>
+      <p>====================================</p>
     <% end %>
 
-    <% if @current_enrollment.financial_aids.blank? && (@current_application_status == nil || @current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
-      <p class="mb-2">If you are applying for need-based financial support, please fill out the
-        <br>
-        <div class="my-2">
-          <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(@current_enrollment),
-                  class: "btn btn-green pt-8" %>
-        </div>
+    <% if @users_current_payments.count < 1 %>
+      <p class="my-2">You have not made a payment yet. Payment can be made via check or money
+        order from a U.S. based bank, or via credit card. International students may
+        pay via wire transfer (contact our office for more information regarding wire
+        transfers for international students.)
+        <%= button_to "pay the #{humanized_money_with_symbol(current_camp_fee / 100)} non-refundable application fee",
+                      make_payment_path(amount: current_camp_fee / 100), class: 'btn btn-green' %>
       </p>
-    <% end %>
-    <div class="direction_notes">You may email any questions to 
-    <%= mail_to "mmss@umich.edu", subject: "Question about MMSS"  do %>
-        <strong>mmss@umich.edu</strong>
-      <% end %>
-    </div>
-
-  <hr class="w-75"/>
-
-  <div class="max-w-sm rounded overflow-hidden shadow-lg">
-    <h6 class="bg-green-700 px-4 text-white">
-      Account Summary
-    </h6>
-    <div class="p-4">
-      <div class="font-bold text-xs mb-2">
-        <%= "#{'application_fee_(non-refundable)'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(CampConfiguration.active.last.application_fee).rjust(12,'.')}" %>
-      </div>
-      <div class="font-bold text-base mb-2">
-        <% if @current_application_status == "enrolled" %>
-          <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost / 100).rjust(12,'.')}" %>
+    <% else %>
+        <% if @current_application_status == "offer accepted" %>
+          <p class=my-2>
+            Your application materials have been received and processed, and we are
+            pleased to offer you a spot for MMSS <%= current_camp_year %>.
+            Your official notification and course assignment are found in your
+            notification email.
+            <br>
+            Paying the tuition and service fees is a requirement of participation.
+            Please continue paying your camp fees at this time.
+          </p>
+          <hr class="w-75" />
+        <% elsif  @current_application_status == "offer declined" %>
+          <p class="my-2"> Thanks for your interest.</p>
+        <% elsif  @current_application_status == "enrolled" %>
+          <p> Thank you for paying all your fees. We look forward to seeing you at MMSS <%= current_camp_year %>.</p>
+        <% else %>
+          <p class="my-2">
+            Thank you for your Michigan Math and Science Scholars Application. When we
+            have received all your application components your file will be reviewed.
+            <br>
+            The process may take up to 6 weeks as we conduct our admissions on a
+            rolling basis.
+            <br>
+            Please continue to check your email, and the Progress Window, for
+            updates on your application.
+          </p>
         <% end %>
-      </div>
-      <% if @current_application_status == "offer accepted" %>
-        <% @current_enrollment.session_assignments.each do |sa| %>
-          <% if sa.offer_status == "accepted" %>
-            <div>
-              <%= sa.camp_occurrence.display_name %>
-                -- <%= humanized_money_with_symbol(Enrollment.find(sa.enrollment_id).session_registrations.find(sa.camp_occurrence_id).cost) %>
-              <div class="flex justify-start bg-gray-200 text-xs">
-                <ul class="m-auto">
-                  Services & Activities
-                  <% @current_enrollment.registration_activities.where(camp_occurrence_id: sa.camp_occurrence_id).each do |ca| %>
-                    <li class="text-right">
-                      <%= ca.description %> -- <%= humanized_money_with_symbol(ca.cost) %>
-                     </li>
+
+        <% if @current_enrollment.financial_aids.blank? && (@current_application_status == nil || @current_application_status == "" || @current_application_status == "submitted" || @current_application_status == "application complete") %>
+          <p class="mb-2">If you are applying for need-based financial support, please fill out the
+            <br>
+            <div class="my-2">
+              <%= link_to "Financial Aid Application", new_enrollment_financial_aid_path(@current_enrollment),
+                      class: "btn btn-green pt-8" %>
+            </div>
+          </p>
+        <% end %>
+        <div class="direction_notes">You may email any questions to 
+          <%= mail_to "mmss@umich.edu", subject: "Question about MMSS"  do %>
+            <strong>mmss@umich.edu</strong>
+          <% end %>
+        </div>
+
+        <hr class="w-75"/>
+
+      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <h5 class="bg-green-700 px-4 text-white">
+          Account Summary
+        </h5>
+        <div class="p-4">
+          <div class="font-bold text-xs mb-2">
+            <%= "#{'application_fee_(non-refundable)'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(CampConfiguration.active.last.application_fee).rjust(12,'.')}" %>
+          </div>
+          <div class="font-bold text-base mb-2">
+            <% if @current_application_status == "enrolled" %>
+              <%= "#{'total_cost'.humanize.ljust(24, '.')} #{humanized_money_with_symbol(@total_cost / 100).rjust(12,'.')}" %>
+            <% end %>
+          </div>
+          <% if @current_application_status == "offer accepted" %>
+            <% @current_enrollment.session_assignments.each do |sa| %>
+              <% if sa.offer_status == "accepted" %>
+                <div>
+                  <%= sa.camp_occurrence.display_name %>
+                    -- <%= humanized_money_with_symbol(Enrollment.find(sa.enrollment_id).session_registrations.find(sa.camp_occurrence_id).cost) %>
+                  <div class="flex justify-start bg-gray-200 text-xs">
+                    <ul class="m-auto">
+                      Services & Activities
+                      <% @current_enrollment.registration_activities.where(camp_occurrence_id: sa.camp_occurrence_id).each do |ca| %>
+                        <li class="text-right">
+                          <%= ca.description %> -- <%= humanized_money_with_symbol(ca.cost) %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <div class="flex justify-start bg-gray-200 text-xs">
+              <ul class="m-auto">
+                <% if @session_registrations.present? %>
+                  <% if @has_any_session %>
+                    <li class="text-right"><%= "'Any Session' selected - watch for assignment" %></li>
+                  <% else %>
+                    <% @session_registrations.each do |s| %>
+                      <li class="text-right">
+                        <%= s.description_with_date %> -- <%= humanized_money_with_symbol(s.cost) %>
+                      </li>
+                    <% end %>
                   <% end %>
-                </ul>
-              </div>
+                <% end %>
+                <hr class="hr-thin">
+                <% if @registration_activities.present? %>
+                  <% @session_registrations.each do |sr| %>
+                    <% unless sr.description == "Any Session"%>
+                      <ul>
+                        <li>
+                          <%= "#{sr.description} services & activities" %>
+                          <ul>
+                            <% @registration_activities.each do |r| %>
+                              <% if r.camp_occurrence == sr %>
+                                <li class="text-right">
+                                  <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
+                                </li>
+                              <% end %>
+                            <% end %>
+                          </ul>
+                        </li>
+                        <hr class="hr-thin border-dotted">
+                      </ul>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </ul>
             </div>
           <% end %>
-        <% end %>
-      <% else %>
-        <div class="flex justify-start bg-gray-200 text-xs">
-          <ul class="m-auto">
-            <% if @session_registrations.present? %>
-              <% if @has_any_session %>
-                <li class="text-right"><%= "'Any Session' selected - watch for assignment" %></li>
-              <% else %>
-                <% @session_registrations.each do |s| %>
-                  <li class="text-right">
-                    <%= s.description_with_date %> -- <%= humanized_money_with_symbol(s.cost) %>
-                  </li>
-                <% end %>
-              <% end %>
-            <% end %>
-            <hr class="hr-thin">
-            <% if @registration_activities.present? %>
-              <% @session_registrations.each do |sr| %>
-                <% unless sr.description == "Any Session"%>
-                  <ul>
-                    <li>
-                      <%= "#{sr.description} services & activities" %>
-                      <ul>
-                        <% @registration_activities.each do |r| %>
-                          <% if r.camp_occurrence == sr %>
-                            <li class="text-right">
-                              <%= r.description %> -- <%= humanized_money_with_symbol(r.cost) %>
-                            </li>
-                          <% end %>
-                        <% end %>
-                      </ul>
-                    </li>
-                    <hr class="hr-thin border-dotted">
-                  </ul>
-                <% end %>
-              <% end %>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
 
-      <div class="text-gray-700">
-        <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid.to_i / 100 ).rjust(12,'.')}" %>
-      </div>
-      <% if @finaids.present? %>
-        <% fin_aid_status = @finaids.pluck(:status) %>
-        <% if fin_aid_status.count("rejected") == fin_aid_status.count %>
           <div class="text-gray-700">
-            <%= "#{'financial_aid_rejected'.humanize}" %>
+            <%= "#{'amount_paid'.humanize.ljust(36, '.')} #{humanized_money_with_symbol(@ttl_paid.to_i / 100 ).rjust(12,'.')}" %>
           </div>
-        <% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
-          <div class="text-gray-700">
-            <%= "#{'financial_aid_awarded'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
-          </div>
-        <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
-          <div class="text-gray-700">
-            <%= "#{'financial_aid_requested'.humanize}" %>
-          </div>
-
-        <% else %>
-          <% @finaids.each do |aid| %>
-            <% if aid.status == 'pending' %>
+          <% if @finaids.present? %>
+            <% fin_aid_status = @finaids.pluck(:status) %>
+            <% if fin_aid_status.count("rejected") == fin_aid_status.count %>
+              <div class="text-gray-700">
+                <%= "#{'financial_aid_rejected'.humanize}" %>
+              </div>
+            <% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
+              <div class="text-gray-700">
+                <%= "#{'financial_aid_awarded'.humanize.ljust(35, '.')} #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 ).rjust(12,'.')}" %>
+              </div>
+            <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
               <div class="text-gray-700">
                 <%= "#{'financial_aid_requested'.humanize}" %>
               </div>
-            <% elsif aid.status == 'awarded' %>
-              <div class="text-gray-700">
-                <%= "#{'financial_aid_awarded'.humanize.ljust(34, '.')} #{humanized_money_with_symbol(aid.amount).rjust(12,'.')}" %>
-              </div>
+
+            <% else %>
+              <% @finaids.each do |aid| %>
+                <% if aid.status == 'pending' %>
+                  <div class="text-gray-700">
+                    <%= "#{'financial_aid_requested'.humanize}" %>
+                  </div>
+                <% elsif aid.status == 'awarded' %>
+                  <div class="text-gray-700">
+                    <%= "#{'financial_aid_awarded'.humanize.ljust(34, '.')} #{humanized_money_with_symbol(aid.amount).rjust(12,'.')}" %>
+                  </div>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      <% end %>
-      <hr/>
-      <div class="text-gray-700">
-        <% if @current_application_status == "offer accepted" %>
-          <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due.to_i / 100 ).rjust(12,'.')}" %>
+          <hr/>
+          <div class="text-gray-700">
+            <% if @current_application_status == "offer accepted" %>
+              <%= "#{'balance_due'.humanize.ljust(37, '.')} #{humanized_money_with_symbol(@balance_due.to_i / 100 ).rjust(12,'.')}" %>
+            <% end %>
+          </div>
+        </div>
+
+        <% if @current_application_status == "offer accepted" && @balance_due > 0 %>
+          <div class="w-2/3">
+            <p>Enter a payment up to the balance due amount:</p>
+              <%= form_with url: make_payment_path, local: true do |f| %>
+                <%= f.number_field :amount, value: "#{@balance_due.to_i / 100 }", within: 1..10000, required: true %>
+                <div class="actions">
+                  <%= f.submit "Pay Now"%>
+                </div>
+              <% end %>
+          </div>
         <% end %>
       </div>
-    </div>
 
-    <% if @current_application_status == "offer accepted" && @balance_due > 0 %>
-      <div class="w-2/3">
-        <p>Enter a payment up to the balance due amount:</p>
-          <%= form_with url: make_payment_path, local: true do |f| %>
-            <%= f.number_field :amount, value: "#{@balance_due.to_i / 100 }", within: 1..10000, required: true %>
-            <div class="actions">
-              <%= f.submit "Pay Now"%>
+      <hr class="w-75"/>
+
+      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <h5 class="max-w-sm rounded-t text-white bg-green-700 px-4">Your transactions:</h5>
+        <div class="card-deck">
+          <% @users_current_payments.each do |payment| %>
+              <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <h6 class="text-green-700 px-2">
+                  <%= "Transaction ID: #{payment.transaction_id}" %>
+                </h6>
+                <div class="ml-4 text-gray-700">
+                  <p>
+                    <%= "Credit Card: #{payment.account_type}" %>
+                  </p>
+                  <p>
+                    <%= "Message: #{payment.result_message}" %>
+                  </p>
+                  <p>
+                    <%= "Amount: #{humanized_money_with_symbol(payment.total_amount.to_f / 100 )}" %>
+                  </p>
+                  <p>
+                    <%= "Date: #{Time.parse(payment.transaction_date).strftime("%b %e, %Y at %l:%M %p")}" %>
+                  </p>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="direction_notes my-2">
+        You will receive an email confirmation from
+        'MerchantCreditCard&#64;umich.edu' for each transaction.
+      </div>
+
+      <% if @finaids.present? %>
+        <hr>
+        <div class="max-w-sm rounded overflow-hidden shadow-lg mb-2">
+          <h5 class="max-w-sm rounded-t text-white bg-green-700 px-4">Financial Aid</h5>
+          <% if fin_aid_status.count("rejected") == fin_aid_status.count %>
+            <p class="mx-2">Status: rejected</p>
+          <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
+            <p class="mx-2">Status: pending</p>
+          <% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
+            <div class="card-deck">
+              <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <p class="mx-2">Status: awarded -- <%= "Amount: #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 )}" %>
+                </p>
+              </div>
+            </div>
+          <% else %>
+            <div class="card-deck">
+              <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <% @finaids.each do |aid| %>
+                  <% if aid.status != "rejected" %>
+                        <p class="mx-2">
+                          <%= "Status: #{aid.status}" %> -- <%= "Amount: #{humanized_money_with_symbol(aid.amount )}" %>
+                        </p>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           <% end %>
-      </div>
-    <% end %>
-  </div>
-
-  <hr class="w-75"/>
-
-  <h5>Your transactions:</h5>
-  <div class="card-deck">
-    <% @users_current_payments.each do |payment| %>
-        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-          <h6 class="bg-green-500 px-4 text-white">
-            <%= "Transaction ID: #{payment.transaction_id}" %>
-          </h6>
-
-          <div class="text-gray-700 text-sm">
-            <%= "Credit Card: #{payment.account_type}" %>
-          </div>
-          <div class="text-gray-700 text-sm">
-            <%= "Message: #{payment.result_message}" %>
-          </div>
-          <div class="text-gray-700 text-sm">
-            <%= "Amount: #{humanized_money_with_symbol(payment.total_amount.to_f / 100 )}" %>
-          </div>
-          <div class="text-gray-700 text-sm">
-            <%= "Date: #{Time.parse(payment.transaction_date).strftime("%b %e, %Y at %l:%M %p")}" %>
-          </div>
         </div>
-    <% end %>
-  </div>
-
-  <div class="direction_notes">
-    You will receive an email confirmation from
-    'MerchantCreditCard&#64;umich.edu' for each transaction.
-  </div>
-
-  <% if @finaids.present? %>
-    <hr>
-    <h5>Financial Aid</h5>
-    <% if fin_aid_status.count("rejected") == fin_aid_status.count %>
-      <%= "Status: rejected" %>
-    <% elsif fin_aid_status.count("pending") == fin_aid_status.count %>
-      <%= "Status: pending" %>
-    <% elsif fin_aid_status.count("awarded") == fin_aid_status.count %>
-      <div class="card-deck">
-        <div class="max-w-sm rounded overflow-hidden shadow-lg">
-          <div class="bg-blue-500 px-4 text-white">
-            Financial Aid Request
-          </div>
-          <div class="text-gray-700 text-sm">
-            <%= "Status: awarded" %>
-          </div>
-          <div class="text-gray-700 text-sm">
-            <%= "Amount: #{humanized_money_with_symbol(@finaids_ttl.to_i / 100 )}" %>
-          </div>
-        </div>
-      </div>
-    <% else %>
-      <% @finaids.each do |aid| %>
-        <% if aid.status != "rejected" %>
-          <div class="card-deck">
-            <div class="max-w-sm rounded overflow-hidden shadow-lg">
-              <div class="bg-blue-500 px-4 text-white">
-                Financial Aid Request
-              </div>
-              <div class="text-gray-700 text-sm">
-                <%= "Status: #{aid.status}" %>
-              </div>
-              <div class="text-gray-700 text-sm">
-                <%= "Amount: #{humanized_money_with_symbol(aid.amount )}" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-
-  <div class="direction_notes">
-    You may email any questions to
-    <%= mail_to "mmss@umich.edu" %>
   </div>
-<% end %>
-
 </div>
 
 <div class="mt-2">
