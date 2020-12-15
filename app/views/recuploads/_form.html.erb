@@ -13,17 +13,21 @@
 
   <div class="field">
     <%= form.label :authorname, "Enter your name" %>
-    <%= form.text_field :authorname %>
+    <%= form.text_field :authorname, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :studentname, "Enter the name of the student you are recommending" %>
-    <%= form.text_field :studentname %>
+    <%= form.label :studentname, "The name of the student you are recommending" %>
+    <%= form.text_field :studentname, value: @student.full_name, required: true %>
   </div>
 
   <div class="field">
     <%= form.hidden_field :recommendation_id %>
   </div>
+
+  <p class="direction_notes">
+    You can type or upload your letter.
+  </p>
 
   <div class="field">
     <%= form.label :letter %>
@@ -31,42 +35,19 @@
   </div>
 
   <div class="display-box mt-4">
-    <p class="direction_notes">
-      If you prefer to upload a recommendation letter in PDF format you may do
-      so here:
-    </p>
-    <%# if @recupload.recletter.attached? %>
-      <%# <div class='current-uploaded-docs'> %>
-        <%# <p>
-          <strong>Recommendation currently uploaded:</strong> %>
-          <%#= link_to @recupload.recletter.filename, url_for(@recupload.recletter) %>
-        <%# </p>
-      </div> %>
-      <%# <div class="field"> %>
-        <%#= form.label :recletter, 'Update Recommendation Letter' %>
-        <%#= form.file_field :recletter %>
-      <%# </div> %>
-    <%# else %>
-      <div class="field">
-        <%= form.label :recletter, "Upload Recommendation Letter" %>
-        <%= form.file_field :recletter %>
-      </div>
-    <%# end %>
-    <p>
+
+    <div class="field">
+      <%= form.label :recletter, "Upload Recommendation Letter" %>
+      <%= form.file_field :recletter %>
+    </div>
+    <p class="direction_notes">Maximum size is 5Mb and valid file formats are PDF, JPG, PNG</p>
+    <p class= "my-2">
       The recommendation can also be faxed to 734.763.0937,
-      e-mailed as a scanned attachment to 
+      emailed as a scanned attachment to 
       <%= mail_to "mmss@umich.edu", subject: "Recommendation Letter for MMSS"  do %>
         <strong>mmss@umich.edu</strong>
       <% end %>
-       or mailed to:
     </p>
-    <address class="px-4 pt-2">
-      Michigan Math and Science Scholars<br>
-      Department of Mathematics<br>
-      530 Church Street<br>
-      2074 East Hall<br>
-      Ann Arbor, MI 48109-1043
-    </address>
   </div>
 
   <div class="actions">
@@ -75,3 +56,4 @@
 <% end %>
 
 <%= javascript_pack_tag 'rec_file_select' %>
+<%= javascript_pack_tag 'required_stars' %>

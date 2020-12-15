@@ -7,9 +7,9 @@
 
       <% if @current_enrollment.present? && @current_enrollment.persisted? %>
         <% if @current_enrollment.application_status.present? %>
-          <span class="text-green-700 font-semibold"><%= @current_enrollment.application_status.titleize %></span>
+          <span class="text-green-800 font-semibold"><%= @current_enrollment.application_status.titleize %></span>
         <% else %>
-          <span class="text-red-500 font-semibold">Application incomplete</span>
+          <span class="text-red-700 font-semibold">Application incomplete</span>
         <% end %>
       <% end %>
       <div class="sidebox_element"> <%= link_to 'Applicant Details', applicant_detail_path(current_user.applicant_detail) %> - submitted </div>
@@ -31,11 +31,11 @@
 
         <% if @current_enrollment.recommendation.present? && @current_enrollment.recommendation.persisted? %>
           <div class="sidebox_element">
-            <%= link_to "Letter of Recommendation",
+            <%= link_to "Recommendation",
                         enrollment_recommendation_path(@current_enrollment,@current_enrollment.recommendation ) %>
 
             <% if @current_enrollment.recommendation.recupload.present? %>
-              - letter received
+              - received
             <% else %>
               - requested
             <% end %>
@@ -128,8 +128,9 @@
                   <%= form.file_field :student_packet, required: true %>
                 </div>
               <% end %>
-
-              <%= form.submit "Upload Student Packet", id: 'student_packet_submit', class: "btn btn-green" %>
+              <div class="actions">
+                <%= form.submit "Upload Student Packet", id: 'student_packet_submit' %>
+              </div>
 
             <% end %>
           </div>

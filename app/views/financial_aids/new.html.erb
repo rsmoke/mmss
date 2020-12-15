@@ -1,10 +1,15 @@
-<h1>New Financial Aid</h1>
-<h6>To be considered for need based financial aid support, it will be necessary
-  to provide the MMSS program with a brief explanation of why you are applying for financial support and a copy of your parents' or guardians' latest
-  tax return (first page only) <strong>with the Social Security Number
-  redacted</strong>.
- </h6>
- <br>
+<div class="max-w rounded overflow-hidden shadow-lg">
+  <h1 class="text-yellow-um_yellow bg-blue-um_blue p-2">New Financial Aid</h1>
+  <p class="direction_notes">To be considered for need based financial aid support, it will be necessary
+    to provide the MMSS program with a brief explanation of why you are applying for financial support and a copy of your parents' or guardians' latest
+    tax return (first page only) <strong>with the Social Security Number
+    redacted</strong>.
+  </p>
+  <div class="m-2">
+    <%= render 'form', financial_aid: @financial_aid %>
+  </div>
+</div>
 
-<%= render 'form', financial_aid: @financial_aid %>
-
+<div class="mt-2">
+  <%= link_to 'Back', root_path, class: "btn btn-blue" %>
+</div>

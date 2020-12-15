@@ -14,7 +14,7 @@
 
   <%= content_tag :div, nil, data: {controller: "enrollment"} do %>
 
-    <div class="field">
+    <div>
       <h2 class= "section-header">Sessions</h2>
       <p class="direction_notes">
         If you want to attend multiple sessions, please check the box corresponding
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="field">
+    <div>
       <h2 class= "section-header">Activities & Services</h2>
       <p class="direction_notes">
         Check the box corresponding to each of the services you want to add for the
@@ -96,7 +96,7 @@
       <% end %>
     </div>
 
-    <div class="field">
+    <div>
       <h2 class= "section-header">Courses</h2>
       <p class="direction_notes">
         Check the box next to each course in which you are interested. You will be able to rank your choices in order of preference in a later step.
@@ -157,9 +157,7 @@
   <% end %>
 
   <h2 class= "section-header">Applicant School History</h2>
-  <div class="field">
     <%= form.text_field :user_id, hidden: true %>
-  </div>
 
   <div class="field">
     <%= form.hidden_field :campyear, value: current_camp_year %>
@@ -259,7 +257,7 @@
     </div>
   <% end %>
   <p class="direction_notes">
-    <span class="text-red-500">
+    <span class="text-red-700">
       Upload a pdf copy of your high school transcript<br> (Maximum size is 5Mb and file format is PDF, JPG, PNG)
     </span>
     <br>
@@ -268,7 +266,7 @@
       accepted as well as composite copies of report cards from ALL previous high
       school terms/years.
       <br>
-    <span class="text-red-500">
+    <span class="text-red-700">
       Your application will not be considered complete and reviewed until we have
       received this material.
     </span>
@@ -307,3 +305,4 @@
       <% end %>
     </div>
 <% end %>
+<%= javascript_pack_tag 'required_stars' %>

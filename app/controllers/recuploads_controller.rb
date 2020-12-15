@@ -29,6 +29,7 @@ class RecuploadsController < InheritedResources::Base
       redirect_to recupload_error_path, alert: "A recommendation has already been submitted for this user"
     else
       @recupload = @recommendation.build_recupload
+      @student = ApplicantDetail.find(params[:id])
     end
   end
 

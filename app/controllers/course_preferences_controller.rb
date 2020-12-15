@@ -57,8 +57,13 @@ class CoursePreferencesController < ApplicationController
     @course_preference = @current_enrollment.course_preferences.find(params[:id])
     respond_to do |format|
       if  @course_preference.update(cp_params)
-        format.html { redirect_to course_preferences_path, notice: 'Course Preference was successfully updated.' }
-        format.json { render :show, status: :ok, location: course_preferences_path }
+        if @current_enrollment.course_preferences.pluck(:ranking).any?{ |e| e.nil? }
+          format.html { redirect_to course_preferences_path, notice: 'Course Preference was successfully updated.' }
+          format.json { render :show, status: :ok, location: course_preferences_path }
+        else
+          format.html { redirect_to root_path, notice: 'Course Preference was successfully updated.' }
+          format.json { render :show, status: :ok, location: root_path }
+        end
       else
         format.html { render :edit }
         format.json { render json: @course_preference.errors, status: :unprocessable_entity }
