@@ -6,7 +6,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :enrollment_id, :amount_cents, :source, :note, :status
+   permit_params :enrollment_id, :amount_cents, :source, :note, :status, :payments_deadline
   #
   # or
   #
@@ -28,6 +28,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       f.input :source
       f.input :note
       f.input :status, as: :select, collection: financial_aid_status
+      f.input :payments_deadline
       f.input :taxform, as: :file
     end
     f.actions         # adds the 'Submit' and 'Cancel' button
@@ -53,6 +54,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
     column :source
     column :note
     column :status
+    column :payments_deadline
   end
 
   show do
@@ -72,6 +74,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
       row :source
       row :note
       row :status
+      row :payments_deadline
     end
     active_admin_comments
   end

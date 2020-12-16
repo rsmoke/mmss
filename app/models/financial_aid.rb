@@ -2,14 +2,15 @@
 #
 # Table name: financial_aids
 #
-#  id            :bigint           not null, primary key
-#  enrollment_id :bigint           not null
-#  amount_cents  :integer          default(0)
-#  source        :string
-#  note          :text
-#  status        :string           default("pending")
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                :bigint           not null, primary key
+#  enrollment_id     :bigint           not null
+#  amount_cents      :integer          default(0)
+#  source            :string
+#  note              :text
+#  status            :string           default("pending")
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  payments_deadline :date
 #
 class FinancialAid < ApplicationRecord
 
@@ -23,6 +24,7 @@ class FinancialAid < ApplicationRecord
 
   validates :note, presence: :true
   validate :acceptable_taxform
+  validate :set_deadline
 
   private
 
@@ -47,5 +49,18 @@ class FinancialAid < ApplicationRecord
       FinaidMailer.fin_aid_rejected_email(self).deliver_now
     end
   end
+
+  def set_deadline
+    return if self.status == 'pending'
+    
+    if self.payments_deadline.blank? || self.amount_cents <= 0
+      errors.add(:payments_deadline, "you need to set a date")
+    end
+
+    if self.amount_cents <= 0
+      errors.add(:amount_cents, "you need to set an amount")
+    end
+  end
+    
 
 end
