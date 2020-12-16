@@ -1,18 +1,4 @@
-# class ApplicantState < Module
-#   def initialize(enrollment)
-#     @curr_enrollment = enrollment
-#   end
 module ApplicantState
-  # extend ActiveSupport::Concern
-  # included do
-  #   before_action :get_current_enrollment
-  # end
-
-  def get_current_enrollment
-    if @current_enrollment
-      @curr_enrollment = @current_enrollment
-    end
-  end
 
   def registration_activities 
     @current_enrollment.registration_activities.order(camp_occurrence_id: :asc)
