@@ -2,12 +2,16 @@ require 'digest'
 require 'time'
 
 class PaymentsController < ApplicationController
+  include ApplicantState
+
   skip_before_action :verify_authenticity_token, only: [:payment_receipt]
   devise_group :logged_in, contains: [:user, :admin]
   before_action :authenticate_logged_in!
   before_action :authenticate_admin!, only: [:index, :destroy]
 
   before_action :set_current_enrollment
+
+
 
   def index
     redirect_to root_url
@@ -33,24 +37,10 @@ class PaymentsController < ApplicationController
         user_id: current_user.id,
         camp_year: CampConfiguration.active_camp_year
       )
-      redirect_to all_payments_path, notice: "Your Payment Was Successfully Recorded"
-      if current_user.payments.current_camp_payments.where(transaction_status: 1).count == 1
-        RegistrationMailer.app_complete_email(current_user).deliver_now
-        @current_enrollment.update!(application_status: "submitted")
-        if @current_enrollment.recommendation.recupload.present? 
-          @current_enrollment.update!(application_status: "application complete")
-        end
+      if params['transactionStatus'] != '1'
+        redirect_to all_payments_path, alert: "Your payment was not successfull"
       else
-        @finaids = @current_enrollment.financial_aids
-        @finaids_ttl = @finaids.pluck(:amount_cents).sum
-        @ttl_paid = current_user.payments.current_camp_payments.where(transaction_status: '1').pluck(:total_amount).map(&:to_i).sum      # cost_sessions = 1300 * @user_current_enrollment.session_registrations.size
-        @total_cost = cost_sessions_ttl + cost_activities_ttl + CampConfiguration.active_camp_fee_cents
-        @balance_due = @total_cost.to_i - @finaids_ttl.to_i - @ttl_paid.to_i
-        if @balance_due == 0
-          @current_enrollment.update!(application_status: "enrolled")
-          # send enrollment complete email
-          RegistrationMailer.app_enrolled_email(current_user).deliver_now
-        end
+        redirect_to all_payments_path, notice: "Your payment was successfully recorded"
       end
     end
   end
@@ -62,18 +52,16 @@ class PaymentsController < ApplicationController
 
   def payment_show
     redirect_to root_url unless current_user.payments.current_camp_payments
-    @registration_activities = @current_enrollment.registration_activities.order(camp_occurrence_id: :asc)
-    @session_registrations = @current_enrollment.session_registrations.order(description: :asc)
-    @has_any_session = @session_registrations.pluck(:description).include?("Any Session")
-    # @any_session_cost = CampOccurrence.find_by(description: "Any Session").cost_cents
-    @current_application_status = @current_enrollment.application_status
-    @finaids = @current_enrollment.financial_aids #need loop
-    @finaids_ttl = @finaids.pluck(:amount_cents).sum
-    @finaids_awarded_ttl = @finaids.where(status: "awarded").pluck(:amount_cents).sum
-    @users_current_payments = current_user.payments.current_camp_payments
-    @ttl_paid = current_user.payments.current_camp_payments.where(transaction_status: '1').pluck(:total_amount).map(&:to_i).sum
-    @total_cost = cost_sessions_ttl + cost_activities_ttl + CampConfiguration.active_camp_fee_cents
-    @balance_due = @total_cost.to_i - @finaids_awarded_ttl.to_i - @ttl_paid.to_i
+     @registration_activities = registration_activities
+     @has_any_session = session_registrations.pluck(:description).include?("Any Session")
+     @current_application_status = current_application_status
+     @finaids = finaids
+     @finaids_ttl = finaids_ttl
+     @users_current_payments = users_current_payments
+     @ttl_paid = ttl_paid
+     @total_cost = total_cost
+     @balance_due = balance_due
+     @session_registrations = session_registrations
   end
 
   private
@@ -120,20 +108,6 @@ class PaymentsController < ApplicationController
       # Final URL
       url_for_payment = initial_hash.map{|k,v| "#{k}=#{v}&" unless k == 'key'}.join('')
       final_url = connection_hash[url_to_use] + '?' + url_for_payment + 'hash=' + encoded_hash
-    end
-
-    def assigned_sessions_ids 
-      SessionAssignment.where(enrollment_id: @current_enrollment, offer_status: "accepted").pluck(:camp_occurrence_id)
-    end
-
-    def cost_sessions_ttl
-      # sum of each session use is assigned to 
-      CampOccurrence.where(id: assigned_sessions_ids).pluck(:cost_cents).sum
-    end
-
-    def cost_activities_ttl
-      activity_ids = EnrollmentActivity.where(enrollment_id: @current_enrollment).pluck(:activity_id)
-      Activity.where(id: activity_ids, camp_occurrence_id: assigned_sessions_ids).pluck(:cost_cents).sum
     end
 
     def url_params

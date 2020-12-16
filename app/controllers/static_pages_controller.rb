@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  include ApplicantState
   # devise_group :logged_in, contains: [:user, :admin]
   # before_action :authenticate_logged_in!, except: [:contact :privacy]
   # before_action :authenticate_admin!, only: [:destroy]
@@ -6,6 +7,10 @@ class StaticPagesController < ApplicationController
 
   def index
     @application_materials_due_date = CampConfiguration.active_camp_materials_due_date
+    if user_signed_in? && @current_enrollment
+      @balance_due = balance_due
+      @total_cost = total_cost
+    end
   end
 
   def contact
