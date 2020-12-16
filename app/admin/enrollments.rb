@@ -17,14 +17,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   :offer_status, :partner_program, :transcript, :student_packet, :application_deadline,
                   session_assignments_attributes: [:id, :camp_occurrence_id, :_destroy ],
                   course_assignments_attributes: [:id, :course_id, :_destroy ]
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:user_id, :international, :high_school_name, :high_school_address1, :high_school_address2, :high_school_city, :high_school_state, :high_school_non_us, :high_school_postalcode, :high_school_country, :year_in_school, :anticipated_graduation_year, :room_mate_request, :personal_statement, :shirt_size, :notes, :application_status, :offer_status, :partner_program]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+
   scope :current_camp_year_applications, :default => true, label: "Current years Applications"
   scope :all
   scope :offered
@@ -32,10 +25,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
   scope :application_complete
   scope :enrolled
 
-
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
-    # f.inputs           # builds an input field for every attribute
     f.inputs do
      f.input :user_id, as: :select, collection: User.all
      f.input :international
@@ -52,9 +43,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
      f.input :anticipated_graduation_year
      f.input :room_mate_request
      f.input :personal_statement
-    #  panel "Upload Details" do
-    #   render("/admin/testing_partial_display")
-    #   end
 
       table_for application do
         column "Current Transcript" do |item| 
@@ -79,7 +67,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
       f.semantic_errors
       f.has_many :session_assignments, heading: 'Session Assignments',
                   allow_destroy: true,
-                  # allow_destroy:  -> (s) { s.destroy_course_assignment? },
                   new_record: true do |a|
                     a.input :offer_status, input_html: { disabled: true }
                     a.input :camp_occurrence_id, as: :select, collection: application.session_registrations
@@ -92,7 +79,6 @@ ActiveAdmin.register Enrollment, as: "Application" do
       f.has_many :course_assignments, heading: 'Course Assignments',
                   allow_destroy: true,
                   new_record: true do |a|
-                    # a.input :course_id, as: :select, collection: application.course_registrations
                     a.input :course_id, as: :select, collection:
                     application.course_registrations.order(:camp_occurrence_id).map{|u| ["#{u.title}, #{u.camp_occurrence.description}, 
                     rank - #{application.course_preferences.find_by(course_id: u.id).ranking}, available - #{u.available_spaces - CourseAssignment.number_of_assignments(u.id)}", u.id]}
@@ -192,7 +178,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
           end
         end
       end
-    # end
+
     panel "Activities/Services" do
       table_for Activity.where(camp_occurrence_id: application.session_assignments.accepted.pluck(:camp_occurrence_id)).order(:camp_occurrence_id) do
         column "Assigned Activities" do |item|
@@ -211,21 +197,38 @@ ActiveAdmin.register Enrollment, as: "Application" do
       end
     end
 
-    panel "Current Balances" do
-      attributes_table_for application do
-        row "Total Balance Due" do |applicant|
-          # humanized_money_with_symbol(applicant.balance_due / 100)
+    app_pay_status = PaymentState.new(application)
+    panel "Finances -- [Balance Due: #{humanized_money_with_symbol(app_pay_status.balance_due / 100)} Total Cost: #{humanized_money_with_symbol(app_pay_status.total_cost / 100)}]" do
+      panel "Payment Activity" do
+        table_for application.user.payments.current_camp_payments do
+          column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
+          column(:account_type) { |atype| atype.account_type.titleize }
+          column(:transaction_date) {|td| Date.parse(td.transaction_date) }
+          column(:total_amount) { |ta|  humanized_money_with_symbol(ta.total_amount.to_f / 100) }
         end
-
       end
-    end
 
-    panel "Payment Activity" do
-      table_for application.user.payments.current_camp_payments do
-        column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
-        column(:account_type) { |atype| atype.account_type.titleize }
-        column(:transaction_date) {|td| Date.parse(td.transaction_date) }
-        column(:total_amount) { |ta|  humanized_money_with_symbol(ta.total_amount.to_f / 100) }
+      if application.financial_aids.present?
+        panel "Financial Aid Request" do
+          table_for FinancialAid.where(enrollment_id: application) do
+            column "Request" do |item|
+              if item.present?
+                link_to("view", admin_financial_aid_request_path(item))
+              end
+            end
+            column "Amount" do |item|
+              if item.present?
+                humanized_money_with_symbol(item.amount)
+              end
+            end
+            column "Status" do |item|
+              if item.present?
+                item.status
+              end
+            end
+
+          end
+        end
       end
     end
 
@@ -245,32 +248,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
           end
         end
       end
-
     end
-
-    if application.financial_aids.present?
-      panel "Financial Aid Request" do
-        table_for FinancialAid.where(enrollment_id: application) do
-          column "Request" do |item|
-            if item.present?
-              link_to("view", admin_financial_aid_request_path(item))
-            end
-          end
-          column "Amount" do |item|
-            if item.present?
-              humanized_money_with_symbol(item.amount)
-            end
-          end
-          column "Status" do |item|
-            if item.present?
-              item.status
-            end
-          end
-
-        end
-      end
-    end
-
     active_admin_comments
   end
 
