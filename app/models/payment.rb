@@ -22,8 +22,8 @@
 #
 class Payment < ApplicationRecord
   include ApplicantState
-  before_save :set_current_enrollment
-  after_commit :send_enrolled_letter, if: :persisted?
+
+  after_commit :set_status, if: :persisted?
 
   validates :transaction_id, presence: true, uniqueness: true
   validates :total_amount, presence: true
@@ -34,15 +34,21 @@ class Payment < ApplicationRecord
 
   private
 
-  def set_current_enrollment
-    @current_enrollment = self.user.enrollments.current_camp_year_applications.last
-  end
+  def set_status
+    return unless self.transaction_status == '1'
 
-  def send_enrolled_letter
-    if balance_due == 0 && @current_enrollment.student_packet.attached?
-      @current_enrollment.update!(application_status: "enrolled")
-      # send enrollment complete email
-      RegistrationMailer.app_enrolled_email(self.user).deliver_now
+    @current_enrollment = self.user.enrollments.current_camp_year_applications.last
+    if self.user.payments.current_camp_payments.where(transaction_status: 1).count == 1
+      RegistrationMailer.app_complete_email(self.user).deliver_now
+      @current_enrollment.update!(application_status: "submitted")
+      if @current_enrollment.recommendation.recupload.present? 
+        @current_enrollment.update!(application_status: "application complete")
+      end
+    else 
+      if balance_due == 0 && @current_enrollment.student_packet.attached?
+        @current_enrollment.update!(application_status: "enrolled")
+        RegistrationMailer.app_enrolled_email(self.user).deliver_now
+      end
     end
   end
 end
