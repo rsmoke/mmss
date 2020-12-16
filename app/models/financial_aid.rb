@@ -47,6 +47,10 @@ class FinancialAid < ApplicationRecord
 
     if self.status == 'awarded'
       FinaidMailer.fin_aid_awarded_email(self, balance_due).deliver_now
+      if @current_enrollment.student_packet.attached? && balance_due == 0
+        @current_enrollment.update!(application_status: "enrolled")
+        RegistrationMailer.app_enrolled_email(@current_enrollment.user).deliver_now
+      end
     end
     if self.status == 'rejected'
       FinaidMailer.fin_aid_rejected_email(self, balance_due).deliver_now
