@@ -22,6 +22,8 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
     # f.inputs           # builds an input field for every attribute
+    app_pay_status = PaymentState.new(financial_aid_request.enrollment)
+    text_node "<strong>Balance Due: #{humanized_money_with_symbol(app_pay_status.balance_due / 100)}</strong>".html_safe
     f.inputs do
       f.input :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
       f.input :amount_cents
@@ -58,6 +60,8 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   end
 
   show do
+    app_pay_status = PaymentState.new(financial_aid_request.enrollment)
+    text_node "<strong>Balance Due: #{humanized_money_with_symbol(app_pay_status.balance_due / 100)}</strong>".html_safe
     attributes_table do
       row :id
       row "Application" do |ap|
