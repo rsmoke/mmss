@@ -83,6 +83,6 @@ class FinancialAidsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def financial_aid_params
-      params.require(:financial_aid).permit(:enrollment_id, :amount_cents, :source, :note, :status, :taxform)
+      params.require(:financial_aid).permit(:enrollment_id, :amount_cents, :source, :note, :status, :taxform, :payments_deadline)
     end
 end
