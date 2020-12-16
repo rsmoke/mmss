@@ -4,9 +4,11 @@ Hello <%= "#{@student.firstname} #{@student.lastname}" %>
       I am happy to report that you have been awarded financial aid in the amount 
       of <%= "#{humanized_money_with_symbol(@finaid.amount)}" %>.
 <%= "\r\n" %>
-      Your remaining balance is <%= "#{humanized_money_with_symbol(@balance_due / 100)}" %>. Please log in to your student portal 
-      and pay your balance by <%= "#{@finaid.payments_deadline.strftime("%B %d, %Y")}" %>
+      Your remaining balance is <%= "#{humanized_money_with_symbol(@balance_due / 100)}" %>.
+<% unless @balance_due <= 0 %>
+      Please log in to your student portal and pay your balance by <%= "#{@finaid.payments_deadline.strftime("%B %d, %Y")}" %>
       in order to finalize your enrollment.
+<% end %>
 <%= "\r\n" %>
       Congratulations on your achievements in your scholastic studies! 
 <%= "\r\n" %>
