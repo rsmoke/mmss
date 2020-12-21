@@ -4,9 +4,8 @@
         <%= link_to 'Registration', new_applicant_detail_path,
                     class: 'btn btn-blue' %>
       <p class ="mt-2">
-        As you advance through the online application process, these directions
-        will update accordingly to your progress. For many items you submit,
-        you will receive an event update on the right side of the screen.
+        As you advance through the application process, these directions will be updated. 
+        For many items you submit, you will receive an event update on the right side of the screen.
       </p>
     </div>
     <p class='direction_notes'>
@@ -33,7 +32,7 @@
         </ul>
       </div>
         <p class='direction_notes'>
-          You will be selecting the activities and courses you wish to partake in. 
+          You will be selecting the activities and courses you wish to participate in. 
           After this stage is complete, your next step will be to rank the courses 
           related to your interest.
         </p>
@@ -44,13 +43,14 @@
                         enrollment_course_preferences_path(@current_enrollment.id),
                         class: 'btn btn-blue' %>
         <p class="mt-2">
-          The next step is to rank the courses you selected in the priority of interest with 1 being your first preference.
+          The next step is to rank the courses you selected in priority of interest. You should give a 
+          rank of "1" for the first or highest preferred course.
         </p>
     </div>
     <div class='m-2 direction_notes'>Make sure that you give each course you selected a ranking. </div>   
   <% elsif @current_enrollment.recommendation.blank? %>
     <div class="m-2">
-      <%= link_to "Letter of Recommendation",
+      <%= link_to "Request Letter of Recommendation",
                   new_enrollment_recommendation_path(@current_enrollment),
                   class: 'btn btn-blue'  %>
         <p class="mt-2">Please ask one of your most recent high school science or math
