@@ -47,7 +47,8 @@ gem 'money-rails', '~>1.12'
 # https://github.com/norman/friendly_id
 # gem 'friendly_id', '~> 5.4.0'
 
-# gem 'newrelic-infinite_tracing'
+gem 'newrelic_rpm'
+gem 'newrelic-infinite_tracing'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
