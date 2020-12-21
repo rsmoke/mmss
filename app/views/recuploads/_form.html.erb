@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :studentname, "The name of the student you are recommending" %>
-    <%= form.text_field :studentname, value: @student.full_name, required: true %>
+    <%= form.text_field :studentname, value: @student, required: true %>
   </div>
 
   <div class="field">
@@ -57,3 +57,4 @@
 
 <%= javascript_pack_tag 'rec_file_select' %>
 <%= javascript_pack_tag 'required_stars' %>
+<%= javascript_pack_tag 'filesize_check' %>

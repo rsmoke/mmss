@@ -29,6 +29,7 @@
 class Enrollment < ApplicationRecord
   after_update :send_offer_letter
   before_update :set_application_deadline
+  after_commit :send_enroll_letter, if: :persisted?
 
   belongs_to :user
   has_one :applicant_detail, through: :user
@@ -130,6 +131,12 @@ class Enrollment < ApplicationRecord
   def send_offer_letter
     if self.offer_status == "offered"
       OfferMailer.offer_email(self.user_id).deliver_now
+    end
+  end
+
+  def send_enroll_letter
+    if self.application_status == "enrolled"
+      RegistrationMailer.app_enrolled_email(self.user).deliver_now
     end
   end
 

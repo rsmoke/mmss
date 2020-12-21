@@ -6,6 +6,7 @@ class RecuploadsController < InheritedResources::Base
   before_action :authenticate_admin!, except: [:success, :error, :new, :create]
   before_action :set_recupload, only: [:show, :edit, :update, :destroy]
   before_action :get_recommendation, only: [:new]
+  before_action :get_student, only: [:create]
 
   def index
     redirect_to root_path unless admin_signed_in?
@@ -29,7 +30,6 @@ class RecuploadsController < InheritedResources::Base
       redirect_to recupload_error_path, alert: "A recommendation has already been submitted for this user"
     else
       @recupload = @recommendation.build_recupload
-      @student = ApplicantDetail.find(params[:id])
     end
   end
 
@@ -80,6 +80,11 @@ class RecuploadsController < InheritedResources::Base
       hash_val = params['hash']
       rec_id = hash_val.split("nGklDoc2egIkzFxr0U").last.to_i
       @recommendation = Recommendation.find(rec_id)
+      @student = ApplicantDetail.find(params[:id]).full_name
+    end
+
+    def get_student
+      @student = params[:recupload]['studentname']
     end
 
     def recupload_params

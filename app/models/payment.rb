@@ -47,7 +47,6 @@ class Payment < ApplicationRecord
     else 
       if balance_due == 0 && @current_enrollment.student_packet.attached?
         @current_enrollment.update!(application_status: "enrolled")
-        RegistrationMailer.app_enrolled_email(self.user).deliver_now
       end
     end
   end
