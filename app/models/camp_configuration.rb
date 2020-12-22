@@ -31,8 +31,10 @@ class CampConfiguration < ApplicationRecord
 
   scope :active, -> { where(active: true) }
 
-  scope :active_camp_year, -> { where(active: true).pick(:camp_year) }
-  scope :active_camp_materials_due_date, -> { where(active: true).pick(:application_materials_due) }
+  scope :active_camp_year, -> { self.active.pick(:camp_year) }
+  scope :active_camp_year_application_open, -> { self.active.pick(:application_open) }
+  scope :active_camp_year_application_close, -> { self.active.pick(:application_close) }
+  scope :active_camp_materials_due_date, -> { self.active.pick(:application_materials_due) }
   scope :active_camp_fee_cents, -> { self.active.pick(:application_fee_cents) }
 
   def display_name
