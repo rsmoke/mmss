@@ -4,6 +4,14 @@ module ApplicationHelper
       CampConfiguration.active_camp_year
   end
 
+  def current_camp_year_app_opens
+    CampConfiguration.active_camp_year_application_open
+  end
+
+  def current_camp_year_app_closed
+    CampConfiguration.active_camp_year_application_close
+  end
+
   def current_enrolled_applicants
       Enrollment.enrolled
   end
