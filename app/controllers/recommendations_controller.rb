@@ -16,7 +16,7 @@ class RecommendationsController < ApplicationController
   # GET /recommendations/1
   # GET /recommendations/1.json
   def show
-    # @enrollment = Enrollment.find(params[:enrollment_id])
+
   end
 
   # GET /recommendations/new

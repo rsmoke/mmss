@@ -34,7 +34,6 @@ ActiveAdmin.register CampConfiguration do
     column :application_materials_due
     column :camper_acceptance_due
     column :active
-    # column :offer_letter
     column :student_packet_url
     column "Application Fee" do |af|
       humanized_money_with_symbol(af.application_fee)

@@ -50,12 +50,6 @@ ActiveAdmin.register_page "Dashboard" do
             render("/admin/session_applied", model: "dashboard")
           end
         end
-
-        # panel "Financial Aid Requests" do
-        #   div do
-        #     render("/admin/finaid_requests", model: "dashboard")
-        #   end
-        # end
       end
     end
   end # content

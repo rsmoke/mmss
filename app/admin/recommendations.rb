@@ -35,17 +35,12 @@ ActiveAdmin.register Recommendation do
       f.input :country, include_blank: true
       f.input :phone_number
       f.input :best_contact_time
-      # f.input :submitted_recommendation
-      # f.input :date_submitted
     end
     f.actions
   end
 
   index do
     selectable_column
-    # column :id, sortable: :id do |e|
-    #   link_to e.id, admin_recommendation_path(e)
-    # end
     actions
     column :enrollment_id, sortable: :enrollment_id do |ei|
       link_to ei.enrollment.display_name, admin_application_path(ei.enrollment_id)
@@ -63,9 +58,6 @@ ActiveAdmin.register Recommendation do
     column :country
     column :phone_number
     column :best_contact_time
-    # column :submitted_recommendation
-    # column :date_submitted
- 
   end
 
   show do
@@ -92,13 +84,7 @@ ActiveAdmin.register Recommendation do
       row :best_contact_time
       row :created_at
       row :updated_at
-      # row "Resend request" do
-      #   link_to 'Resend request', send_request_email_path(:id)
-      # end
     end
-    # panel "Send recommendation letter again" do
-      
-    #   end
     active_admin_comments
   end
 
