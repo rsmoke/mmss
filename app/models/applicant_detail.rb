@@ -49,10 +49,10 @@ class ApplicantDetail < ApplicationRecord
                                           outside of the US select *Non-US*" }
   validates :postalcode, presence: true
   validates :country, presence: true
-  validates :phone, presence: true, format: { with: /\A(\+|00)?[1-9][0-9 \-?\(\)\.]{7,}\z/, message: "number format should be xxx-xxx-xxxx"}
+  validates :phone, presence: true, format: { with: /\A(\+|00)?[0-9][0-9 \-?\(\)\.]{7,}\z/, message: "number format is incorrect"}
 
   validates :parentname, presence: true
-  validates :parentphone, presence: true, format: { with: /\A(\+|00)?[1-9][0-9 \-?\(\)\.]{7,}\z/, message: "number format should be xxx-xxx-xxxx"}
+  validates :parentphone, presence: true, format: { with: /\A(\+|00)?[0-9][0-9 \-?\(\)\.]{7,}\z/, message: "number format is incorrect"}
   validates :parentemail, presence: true, length: {maximum: 255},
                     format: {with: URI::MailTo::EMAIL_REGEXP, message: "only allows valid emails"}
 
