@@ -7,10 +7,6 @@ class StaticPagesController < ApplicationController
 
   def index
     @application_materials_due_date = CampConfiguration.active_camp_materials_due_date
-    if user_signed_in? && @current_enrollment
-      @balance_due = balance_due
-      @total_cost = total_cost
-    end
   end
 
   def contact
