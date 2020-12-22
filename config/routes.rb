@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: 'static_pages#index'
 
   devise_for :admins, ActiveAdmin::Devise.config
+  get '/admin/reports/all_complete_apps', to: 'admin/reports#all_complete_apps', as: :admin_reports_all_complete_apps
   ActiveAdmin.routes(self)
   # authenticated :admin do
     resources :genders
