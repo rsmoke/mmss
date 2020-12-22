@@ -8,10 +8,11 @@ ActiveAdmin.register ApplicantDetail do
   #
    permit_params :user_id, :firstname, :middlename, :lastname, :gender, :us_citizen, :demographic, :birthdate, :diet_restrictions, :shirt_size, :address1, :address2, :city, :state, :state_non_us, :postalcode, :country, :phone, :parentname, :parentaddress1, :parentaddress2, :parentcity, :parentstate, :parentstate_non_us, :parentzip, :parentcountry, :parentphone, :parentworkphone, :parentemail
   #
+  actions :index, :show, :new, :create, :update, :edit
+
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
     # f.inputs           # builds an input field for every attribute
-    f.actions 
     f.inputs do
       f.input :user_id, as: :select, collection: User.all
       f.input :firstname
@@ -43,6 +44,7 @@ ActiveAdmin.register ApplicantDetail do
       f.input :parentworkphone
       f.input :parentemail
     end
+    f.actions 
   end
 
   filter :gender, as: :select, collection: Gender.all.map{|a| [a.name, a.id]}
