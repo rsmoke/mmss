@@ -4,12 +4,20 @@ module ApplicationHelper
       CampConfiguration.active_camp_year
   end
 
-  def current_camp_year_app_opens
-    CampConfiguration.active_camp_year_application_open
+  def registration_open 
+    if CampConfiguration.active.exists?
+      Date.today >= CampConfiguration.active_camp_year_application_open && Date.today < CampConfiguration.active_camp_year_application_close
+    else
+      false
+    end
   end
 
-  def current_camp_year_app_closed
-    CampConfiguration.active_camp_year_application_close
+  def new_registration_closed
+    if CampConfiguration.active.exists?
+      Date.today >= CampConfiguration.active_camp_year_application_close
+    else
+      false
+    end
   end
 
   def current_enrolled_applicants

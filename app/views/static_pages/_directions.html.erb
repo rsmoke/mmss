@@ -109,7 +109,7 @@
     <% elsif @current_enrollment.application_status == "enrolled" %>
       <div class="m-2">
         <p class="direction_notes">
-          We look forward to seeing you at the <%= current_camp %> University of Michigan MMSS High School Summer Program.
+          We look forward to seeing you at the <%= @current_camp_year %> University of Michigan MMSS High School Summer Program.
         </p>
       </div>
     <% else %>
@@ -146,14 +146,14 @@
 
 <% else %>
   <% if @active_camp_exists %>
-    <% if Date.today >= current_camp_year_app_opens && Date.today < current_camp_year_app_closed %>
+    <% if registration_open %>
       <div class="mt-2">
         <%= link_to 'Sign up', new_user_registration_path,
                   class: "btn btn-blue"  %>
         <%= link_to 'Returning User - Sign In', new_user_session_path,
                     class: "btn btn-blue" %>
       </div>
-    <% elsif Date.today >= current_camp_year_app_closed %>
+    <% elsif new_registration_closed %>
       <div class="mt-2">
         <p class='direction_notes mb-2' >We have closed the registration for new applications.</p>
         <%= link_to 'Returning User - Sign In', new_user_session_path,
