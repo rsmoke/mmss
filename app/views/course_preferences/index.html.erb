@@ -19,7 +19,7 @@
       <hr>
     <% end %>
 
-    <% if @current_enrollment_session1.present? %>
+    <% if @current_enrollment_session2.present? %>
       <h3>Session 2</h3>
         <ul>
           <% @current_enrollment_session2_courses.each do |sc| %>
@@ -34,7 +34,7 @@
     <% end %>
 
     <% if @current_enrollment_session3.present? %>
-      <h3>Session 1</h3>
+      <h3>Session 3</h3>
         <ul>
           <% @current_enrollment_session3_courses.each do |sc| %>
             <li class="m-2"><%= sc.title %> Rank: [ <%= @current_enrollment_course_preferences_all.find_by(course_id: sc.id).ranking %> ]
