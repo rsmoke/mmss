@@ -93,13 +93,13 @@ class EnrollmentsController < ApplicationController
     def set_course_sessions
       CampOccurrence.active.each do |ca|
         if ca.description == "Session 1"
-          @courses_session1 = ca.courses.order(title: :asc)
+          @courses_session1 = ca.courses.is_open.order(title: :asc)
         end
         if ca.description == "Session 2"
-          @courses_session2 = ca.courses.order(title: :asc)
+          @courses_session2 = ca.courses.is_open.order(title: :asc)
         end 
         if ca.description == "Session 3"
-          @courses_session3 = ca.courses.order(title: :asc)
+          @courses_session3 = ca.courses.is_open.order(title: :asc)
         end
       end  
     end
@@ -107,13 +107,13 @@ class EnrollmentsController < ApplicationController
     def set_activities_sessions
       CampOccurrence.active.each do |as|
         if as.description == "Session 1"
-          @activities_session1 = as.activities.order(description: :asc)
+          @activities_session1 = as.activities.active.order(description: :asc)
         end
         if as.description == "Session 2"
-          @activities_session2 = as.activities.order(description: :asc)
+          @activities_session2 = as.activities.active.order(description: :asc)
         end
         if as.description == "Session 3"
-          @activities_session3 = as.activities.order(description: :asc)
+          @activities_session3 = as.activities.active.order(description: :asc)
         end
       end  
     end
