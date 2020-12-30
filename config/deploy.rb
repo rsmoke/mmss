@@ -80,6 +80,7 @@ namespace :deploy do
      upload! "config/master.key",  "#{shared_path}/config/master.key"
      upload! "config/puma_prod.rb",  "#{shared_path}/config/puma.rb"
      upload! "config/nginx_prod.conf",  "#{shared_path}/config/nginx.conf"
+     upload! "config/lsa-was-base-c096c776ead3.json",  "#{shared_path}/config/lsa-was-base-c096c776ead3.json"
     end
   end
 
@@ -115,7 +116,7 @@ namespace :maintenance do
 end
 
 # Default value for :linked_files and linked_dirs is []
-set :linked_files, %w{config/puma.rb config/nginx.conf config/master.key}
+set :linked_files, %w{config/puma.rb config/nginx.conf config/master.key config/lsa-was-base-c096c776ead3.json}
 set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle .bundle public/system public/uploads}
 set :linked_dirs, fetch(:linked_dirs, []).push('public/packs', 'node_modules')
 
