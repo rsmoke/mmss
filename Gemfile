@@ -40,6 +40,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'country_select', '~> 4.0'
 gem 'money-rails', '~>1.12'
 
+# Rails app rake and capistrano tasks to create and restore dumps of database and assets.
+gem 'dump'
 # Phone number validation (yet to be implemented in this app)
 # https://github.com/mobi/telephone_number
 # gem 'telephone_number'
