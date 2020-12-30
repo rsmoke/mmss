@@ -26,6 +26,9 @@
 # Ignore gcp auth
 /config/lsa-was-base-c096c776ead3.json
 
+# ignore db dump files
+/dump/*
+
 /public/packs
 /public/packs-test
 /node_modules
