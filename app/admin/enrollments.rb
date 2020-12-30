@@ -26,7 +26,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
   scope :enrolled
 
   form do |f| # This is a formtastic form builder
-    f.semantic_errors # shows errors on :base
+    f.semantic_errors *f.object.errors.keys # shows errors on :base
     f.inputs do
      f.input :user_id, as: :select, collection: User.all
      f.input :international
