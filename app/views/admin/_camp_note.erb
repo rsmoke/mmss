@@ -3,11 +3,16 @@
     <% if cn.notetype == "notice"%>
       <div class="bg-gray-200 border border-yellow-600 mt-4 p-2" >
     <% else %>
-      <div class="bg-red-600 border border-red-800 text-gray-100 mt-4 p-2" >
+      <div class="bg-yellow-200 border border-red-800 mt-4 p-2 flex wrap space-between" >
+        <div class="mr-2">
+          <%= render :partial => 'svg/alert' %>
+        </div>
     <% end %>
-      Starting: <%= (cn.opendate).strftime("%a, %b %-d, %Y at %l:%M %p") %>
-      <br>Ending: <%= (cn.closedate).strftime("%a, %b %-d, %Y at %l:%M %p") %>
-      <br><%= cn.note %>
-    </div> 
+        <div>
+        Starting: <%= (cn.opendate).strftime("%a, %b %-d, %Y at %l:%M %p") %>
+          <br>Ending: <%= (cn.closedate).strftime("%a, %b %-d, %Y at %l:%M %p") %>
+          <br><strong><%= cn.note %></strong>
+        </div>
+      </div> 
   <% end %>
 <% end %>
