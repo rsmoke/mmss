@@ -50,6 +50,12 @@ ActiveAdmin.register_page "Dashboard" do
             render("/admin/session_applied", model: "dashboard")
           end
         end
+
+        panel "Active Camp Note" do
+          div do
+            render("/admin/camp_note", model: "dashboard")
+          end
+        end
       end
     end
   end # content
