@@ -128,4 +128,11 @@ module ApplicationHelper
       ['Wyoming', 'WY']
     ]
   end
+
+  def campnote_types
+    [
+      ['Alert','alert'],
+      ['Notice','notice']
+    ]
+  end
 end
