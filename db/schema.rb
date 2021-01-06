@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_16_183556) do
+ActiveRecord::Schema.define(version: 2021_01_06_154640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,15 @@ ActiveRecord::Schema.define(version: 2020_12_16_183556) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "cost_cents"
     t.index ["camp_configuration_id"], name: "index_camp_occurrences_on_camp_configuration_id"
+  end
+
+  create_table "campnotes", force: :cascade do |t|
+    t.string "note"
+    t.datetime "opendate"
+    t.datetime "closedate"
+    t.string "notetype"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "course_assignments", force: :cascade do |t|
