@@ -1,7 +1,7 @@
 <% Campnote.all.each do |cn| %>
   <% if (cn.opendate..cn.closedate).include? DateTime.now %>
-      <li>Start display: <%= (cn.opendate).strftime("%a, %b %-d, %Y at %l:%M %p") %> </li>
-      <li>End display: <%= (cn.closedate).strftime("%a, %b %-d, %Y at %l:%M %p") %> </li>
-      <li>Message: <%= cn.note %> </li>
+      Starting: <%= (cn.opendate).strftime("%a, %b %-d, %Y at %l:%M %p") %>
+      <br>Ending: <%= (cn.closedate).strftime("%a, %b %-d, %Y at %l:%M %p") %>
+      <br><%= cn.note %>
   <% end %>
 <% end %>
