@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :campnotes
   resources :recuploads
   resources :feedbacks
   # resources :payments
