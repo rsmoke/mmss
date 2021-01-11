@@ -84,6 +84,10 @@ class Enrollment < ApplicationRecord
     "#{self.applicant_detail.full_name} - #{self.user.email}"
   end
 
+  def last_name
+    "#{self.applicant_detail.lastname} - #{self.user.email}"
+  end
+
   private
 
   def at_least_one_session_is_checked
