@@ -20,10 +20,13 @@ ActiveAdmin.register Enrollment, as: "Application" do
 
   scope :current_camp_year_applications, :default => true, label: "Current years Applications"
   scope :all
-  scope :offered
-  scope :accepted
-  scope :application_complete
-  scope :enrolled
+
+  scope :offered, group: :offer_status
+  scope :accepted, group: :offer_status
+
+  scope :application_complete, group: :application_status
+  scope :application_complete_not_offered, group: :application_status
+  scope :enrolled, group: :application_status
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors *f.object.errors.keys # shows errors on :base

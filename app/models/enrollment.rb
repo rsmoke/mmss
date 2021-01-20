@@ -79,6 +79,7 @@ class Enrollment < ApplicationRecord
   scope :accepted, -> { current_camp_year_applications.where("offer_status = 'accepted'")}
   scope :enrolled, -> { current_camp_year_applications.where("application_status = 'enrolled'")}
   scope :application_complete, -> {  current_camp_year_applications.where("application_status = 'application complete'")}
+  scope :application_complete_not_offered, -> {  application_complete.where(offer_status: [nil, ""])}
 
   def display_name
     "#{self.applicant_detail.full_name} - #{self.user.email}"
