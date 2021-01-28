@@ -150,7 +150,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
       panel "Session Assignment" do
         table_for application.session_assignments do
           column(:id) { |item| link_to(item.id, admin_session_assignment_path(item)) }
-          column(:camp_occurrence_id) { |item| item.camp_occurrence.description }
+          column ("Session") { |item| item.camp_occurrence.description }
           column(:offer_status)
         end
 
