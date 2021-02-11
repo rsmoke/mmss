@@ -203,6 +203,7 @@ ActiveAdmin.register Enrollment, as: "Application" do
 
     app_pay_status = PaymentState.new(application)
     panel "Finances -- [Balance Due: #{humanized_money_with_symbol(app_pay_status.balance_due / 100)} Total Cost: #{humanized_money_with_symbol(app_pay_status.total_cost / 100)}]" do
+
       panel "Payment Activity" do
         table_for application.user.payments.current_camp_payments do
           column(:id) { |aid| link_to(aid.id, admin_payment_path(aid.id)) }
@@ -212,6 +213,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
         end
       end
 
+      text_node link_to("[Add Financial Aid Request]", new_admin_financial_aid_request_path(:enrollment_id => application))
+      
       if application.financial_aids.present?
         panel "Financial Aid Request" do
           table_for FinancialAid.where(enrollment_id: application) do
