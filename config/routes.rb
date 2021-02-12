@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   devise_for :admins, ActiveAdmin::Devise.config
   get '/admin/reports/all_complete_apps', to: 'admin/reports#all_complete_apps', as: :admin_reports_all_complete_apps
+  get '/admin/reports/registered_but_not_aplied', to: 'admin/reports#registered_but_not_aplied', as: :admin_reports_registered_but_not_aplied
   ActiveAdmin.routes(self)
   # authenticated :admin do
     resources :genders
