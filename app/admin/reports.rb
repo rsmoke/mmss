@@ -7,6 +7,7 @@ ActiveAdmin.register_page "Reports" do
       panel "queries" do
         ul do
           li link_to "report - all complete apps (choose year and status)", admin_reports_all_complete_apps_path
+          li link_to "report - registered but not applied", admin_reports_registered_but_not_applied_path
           # li link_to "datasheet- all complete apps (choose year and status)", admin_reports_path
           # li link_to "batch process- all complete apps (choose year, status and event)", admin_reports_path
           # li link_to "batch process (non-citizens)- completed apps (choose year, status and event)", admin_reports_path
@@ -23,6 +24,12 @@ ActiveAdmin.register_page "Reports" do
   end # content
 
   controller do
+    def registered_but_not_applied
+      query = "COPY (SELECT u.id, u.email, (ad.firstname || ' ' || ad.lastname) AS name FROM users AS u
+      JOIN applicant_details AS ad on u.id = ad.user_id WHERE ad.user_id NOT IN (SELECT e.user_id FROM enrollments AS e))
+      to STDOUT with csv header;"
+      make_csv(query, "registered_but_not_applied")
+    end
 
     def all_complete_apps
       query = "COPY (SELECT (ad.firstname || ' ' || ad.lastname) AS name, (SELECT genders.name FROM genders WHERE
