@@ -6,7 +6,7 @@ ActiveAdmin.register FinancialAid, as: "Financial Aid Request" do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :enrollment_id, :amount_cents, :source, :note, :status, :payments_deadline
+   permit_params :enrollment_id, :amount_cents, :source, :note, :status, :payments_deadline, :taxform
   #
   # or
   #
