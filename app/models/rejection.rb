@@ -10,4 +10,6 @@
 #
 class Rejection < ApplicationRecord
   belongs_to :enrollment
+
+  validates :reason, presence: true
 end
