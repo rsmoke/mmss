@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rejections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Enrollment</th>
+      <th>Reason</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rejections.each do |rejection| %>
+      <tr>
+        <td><%= rejection.enrollment_id %></td>
+        <td><%= rejection.reason %></td>
+        <td><%= link_to 'Show', rejection %></td>
+        <td><%= link_to 'Edit', edit_rejection_path(rejection) %></td>
+        <td><%= link_to 'Destroy', rejection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rejection', new_rejection_path %>

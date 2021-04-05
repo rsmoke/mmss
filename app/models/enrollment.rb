@@ -54,6 +54,8 @@ class Enrollment < ApplicationRecord
   has_many :travels, dependent: :destroy
   has_one :recommendation, dependent: :destroy
 
+  has_one :rejection, dependent: :destroy
+
   has_one_attached :transcript
   has_one_attached :student_packet
 
