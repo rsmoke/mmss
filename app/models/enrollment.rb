@@ -147,6 +147,12 @@ class Enrollment < ApplicationRecord
     end
   end
 
+  def send_enroll_letter
+    if self.application_status == "rejected"
+      RejectedMailer.app_rejected_email(self.user).deliver_now
+    end
+  end
+
   def set_application_deadline
     if self.session_assignments.present? && self.course_assignments.present?
       self.application_deadline = 30.days.from_now unless self.application_deadline.present?
