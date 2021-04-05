@@ -30,6 +30,7 @@ class Enrollment < ApplicationRecord
   after_update :send_offer_letter
   before_update :set_application_deadline
   after_commit :send_enroll_letter, if: :persisted?
+  after_commit :send_rejected_letter, if: :persisted?
 
   belongs_to :user
   has_one :applicant_detail, through: :user
@@ -147,9 +148,9 @@ class Enrollment < ApplicationRecord
     end
   end
 
-  def send_enroll_letter
+  def send_rejected_letter
     if self.application_status == "rejected"
-      RejectedMailer.app_rejected_email(self.user).deliver_now
+      RejectedMailer.app_rejected_email(self).deliver_now
     end
   end
 
