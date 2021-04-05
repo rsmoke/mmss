@@ -28,6 +28,10 @@ ActiveAdmin.register Enrollment, as: "Application" do
   scope :application_complete_not_offered, group: :application_status
   scope :enrolled, group: :application_status
 
+  action_item :set_waitlisted, only: :show do
+    button_to "Place on Wait List", waitlisted_path(application) if ["", "submitted", "application complete"].include? application.application_status
+  end
+
   form do |f| # This is a formtastic form builder
     f.semantic_errors *f.object.errors.keys # shows errors on :base
     f.inputs do
