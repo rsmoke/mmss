@@ -9,7 +9,14 @@
 #  updated_at    :datetime         not null
 #
 class Rejection < ApplicationRecord
+  after_commit :set_rejection_status, if: :persisted?
   belongs_to :enrollment
 
   validates :reason, presence: true
+
+
+  def set_rejection_status
+    Enrollment.find(enrollment_id).update!(application_status: "rejected")
+  end
+
 end
