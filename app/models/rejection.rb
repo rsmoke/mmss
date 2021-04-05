@@ -16,6 +16,18 @@ class Rejection < ApplicationRecord
 
 
   def set_rejection_status
+    if CourseAssignment.where(enrollment_id: enrollment).present?
+      CourseAssignment.where(enrollment_id: enrollment).each do |ca|
+        ca.destroy
+      end
+    end
+    
+    if SessionAssignment.where(enrollment_id: enrollment).present?
+      SessionAssignment.where(enrollment_id: enrollment).each do |sa|
+        sa.destroy
+      end
+    end
+
     Enrollment.find(enrollment_id).update!(application_status: "rejected")
   end
 
