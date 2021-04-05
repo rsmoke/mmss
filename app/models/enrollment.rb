@@ -31,6 +31,7 @@ class Enrollment < ApplicationRecord
   before_update :set_application_deadline
   after_commit :send_enroll_letter, if: :persisted?
   after_commit :send_rejected_letter, if: :persisted?
+  after_commit :send_waitlisted_letter, if: :persisted?
 
   belongs_to :user
   has_one :applicant_detail, through: :user
@@ -151,6 +152,12 @@ class Enrollment < ApplicationRecord
   def send_rejected_letter
     if self.application_status == "rejected"
       RejectedMailer.app_rejected_email(self).deliver_now
+    end
+  end
+
+  def send_waitlisted_letter
+    if self.application_status == "waitlisted"
+      WaitlistedMailer.app_waitlisted_email(self).deliver_now
     end
   end
 

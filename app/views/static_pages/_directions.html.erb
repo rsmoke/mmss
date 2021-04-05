@@ -81,7 +81,12 @@
       MerchantServices confirming your credit card transactions.
     </p>
   <% else %>
-    <% if @current_enrollment.application_status == "rejected" %>
+    <% if @current_enrollment.application_status == "waitlisted" %>
+      <div class="m-2">
+        <p class="direction_notes">
+          Your application was placed onto the wait list.</p>
+      </div>
+    <% elsif @current_enrollment.application_status == "rejected" %>
       <div class="m-2">
         <p class="direction_notes">
           Your application was rejected.</p>

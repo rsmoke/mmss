@@ -5,7 +5,7 @@ class EnrollmentsController < ApplicationController
   before_action :authenticate_logged_in!
   before_action :authenticate_admin!, only: [:index, :destroy]
 
-  before_action :set_current_enrollment, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_enrollment, only: [:show, :edit, :update, :destroy, :add_to_waitlist]
   before_action :set_course_sessions
   before_action :set_activities_sessions
 
@@ -80,6 +80,14 @@ class EnrollmentsController < ApplicationController
     @enrollment.destroy
     respond_to do |format|
       format.html { redirect_to enrollments_url, notice: 'Enrollment was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def add_to_waitlist
+    @current_enrollment.update(application_status: 'waitlisted')
+    respond_to do |format|
+      format.html { redirect_to admin_applications_path, notice: 'Application was placed on waitlist.' }
       format.json { head :no_content }
     end
   end
