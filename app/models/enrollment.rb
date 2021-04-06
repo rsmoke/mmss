@@ -138,26 +138,34 @@ class Enrollment < ApplicationRecord
   end
 
   def send_offer_letter
-    if self.offer_status == "offered"
-      OfferMailer.offer_email(self.user_id).deliver_now
+    if previous_changes[:offer_status]
+      if self.offer_status == "offered"
+        OfferMailer.offer_email(self.user_id).deliver_now
+      end
     end
   end
 
   def send_enroll_letter
-    if self.application_status == "enrolled"
-      RegistrationMailer.app_enrolled_email(self.user).deliver_now
+    if previous_changes[:application_status]
+      if self.application_status == "enrolled"
+        RegistrationMailer.app_enrolled_email(self.user).deliver_now
+      end
     end
   end
 
   def send_rejected_letter
-    if self.application_status == "rejected"
-      RejectedMailer.app_rejected_email(self).deliver_now
+    if previous_changes[:application_status]
+      if self.application_status == "rejected"
+        RejectedMailer.app_rejected_email(self).deliver_now
+      end
     end
   end
 
   def send_waitlisted_letter
-    if self.application_status == "waitlisted"
-      WaitlistedMailer.app_waitlisted_email(self).deliver_now
+    if previous_changes[:application_status]
+      if self.application_status == "waitlisted"
+        WaitlistedMailer.app_waitlisted_email(self).deliver_now
+      end
     end
   end
 
