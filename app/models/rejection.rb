@@ -28,7 +28,7 @@ class Rejection < ApplicationRecord
       end
     end
 
-    Enrollment.find(enrollment_id).update!(application_status: "rejected")
+    Enrollment.find(enrollment_id).update!(application_status: "rejected", offer_status: "")
   end
 
 end
