@@ -15,5 +15,18 @@ ActiveAdmin.register Rejection do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+  form do |f| # This is a formtastic form builder
+    f.semantic_errors # shows errors on :base
+    f.inputs do
+      if params[:enrollment_id]
+        li "<strong>Application: #{Enrollment.find(params[:enrollment_id]).display_name}</strong>".html_safe
+        f.input :enrollment_id, input_html: {value: params[:enrollment_id]}, as: :hidden
+      else
+        f.input :enrollment_id, as: :select, collection: Enrollment.current_camp_year_applications
+      end
+      f.input :reason
+    end
+    f.actions         # adds the 'Submit' and 'Cancel' button
+  end
+
 end
