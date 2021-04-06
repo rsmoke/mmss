@@ -71,6 +71,15 @@
           <hr>
           <% current_enrollment.session_assignments.each do |as| %>
             <%= as.camp_occurrence.display_name %>
+                <div>
+                  <% course_ids = CourseAssignment.where(enrollment_id: current_enrollment).pluck(:course_id) %>
+                  Course:
+                  <% if Course.find_by(id: course_ids, camp_occurrence_id: as.camp_occurrence_id) %>
+                    <%= Course.find_by(id: course_ids, camp_occurrence_id: as.camp_occurrence_id).title %>
+                  <% else %>
+                    <%= "Contact MMSS admin"%>
+                  <% end %>
+                </div>
             <% if as.offer_status.present? %>
               <div>
               <%= as.offer_status %>
@@ -81,6 +90,7 @@
                 <%= link_to "Decline", decline_session_offer_path(as.id), method: "POST", class: "btn btn-red" %>
               </div>
             <% end %>
+            <hr>
           <% end %>
         <% elsif current_enrollment.offer_status == "accepted" %>
           <hr>
