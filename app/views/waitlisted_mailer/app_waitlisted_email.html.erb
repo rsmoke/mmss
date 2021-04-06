@@ -5,7 +5,7 @@
   <%= @camp_config.camp_year %> camp was placed on a wait list.
 </p> 
 <p>
-  <%= @camp_config.waitlist_letter %>
+  <%= @camp_config.waitlist_letter.html_safe %>
 </p>
 <p>
   If an opening becomes available we will contact you with 

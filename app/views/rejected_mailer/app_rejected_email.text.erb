@@ -4,7 +4,7 @@
   Science Scholars High School Program for the Summer
   <%= @camp_config.camp_year %> camp was rejected. 
   <%= "\r\n" %>
-  <%= @camp_config.reject_letter %>
+  <%= @camp_config.reject_letter.html_safe %>
   <%= "\r\n" %>
   We have reviewed your 
   application and it was rejected for the following reason(s): <%= @reason %>
