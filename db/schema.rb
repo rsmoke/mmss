@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_05_185605) do
+ActiveRecord::Schema.define(version: 2021_04_06_122231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(version: 2021_04_05_185605) do
     t.text "offer_letter"
     t.string "student_packet_url"
     t.integer "application_fee_cents"
+    t.text "reject_letter"
+    t.text "waitlist_letter"
     t.index ["camp_year"], name: "index_camp_configurations_on_camp_year", unique: true
   end
 
