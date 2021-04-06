@@ -53,7 +53,7 @@ ActiveAdmin.register_page "Dashboard" do
 
         panel "Active Camp Note" do
           div do
-            render("/admin/camp_note", model: "dashboard")
+            render("/admin/dashboard_camp_note", model: "dashboard")
           end
         end
       end

@@ -9,7 +9,9 @@
         </div>
     <% end %>
         <div>
-          <%= cn.note %>
+          Starting: <%= (cn.opendate).strftime("%a, %b %-d, %Y at %l:%M %p") %>
+          <br>Ending: <%= (cn.closedate).strftime("%a, %b %-d, %Y at %l:%M %p") %>
+          <br><%= cn.note %>
         </div>
       </div> 
   <% end %>
