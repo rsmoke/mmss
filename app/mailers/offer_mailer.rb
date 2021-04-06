@@ -11,6 +11,7 @@ class OfferMailer < ApplicationMailer
     @url = "https://lsa-math-mmss.miserver.it.umich.edu"
     @camp_config = CampConfiguration.find_by(active: true)
     mail(to: @user.email, subject: "UM MMSS: Offer to attend Michigan Math and Science Scholars")
+    @enrollment.update(application_status: "application complete") unless @enrollment.application_status == "application complete"
   end
 
   def offer_accepted_email(user, session_assignment, course_assignment)
