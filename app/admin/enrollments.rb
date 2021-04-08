@@ -14,7 +14,8 @@ ActiveAdmin.register Enrollment, as: "Application" do
                   :year_in_school, :anticipated_graduation_year, 
                   :room_mate_request, :personal_statement, 
                   :shirt_size, :notes, :application_status, :campyear,
-                  :offer_status, :partner_program, :transcript, :student_packet, :application_deadline,
+                  :offer_status, :partner_program, :transcript, :student_packet, 
+                  :application_deadline,
                   session_assignments_attributes: [:id, :camp_occurrence_id, :_destroy ],
                   course_assignments_attributes: [:id, :course_id, :_destroy ]
 
@@ -27,6 +28,14 @@ ActiveAdmin.register Enrollment, as: "Application" do
   scope :application_complete, group: :application_status
   scope :application_complete_not_offered, group: :application_status
   scope :enrolled, group: :application_status
+
+  action_item :set_waitlisted, only: :show do
+    text_node link_to("Place on Wait List", waitlisted_path(application), data: { confirm: 'Are you sure you want to wait list this application?'}, method: :post ) if ["", "submitted", "application complete"].include? application.application_status
+  end
+
+  action_item :set_rejected, only: :show do
+    text_node link_to("Reject Applicant", new_admin_rejection_path(:enrollment_id => application)) if ["", "submitted", "application complete"].include? application.application_status
+  end
 
   form do |f| # This is a formtastic form builder
     f.semantic_errors *f.object.errors.keys # shows errors on :base
@@ -179,6 +188,9 @@ ActiveAdmin.register Enrollment, as: "Application" do
           end
           column "Session" do |item| 
             item.course.camp_occurrence.description 
+          end
+          column "Available" do |item| 
+            item.course.available_spaces - CourseAssignment.number_of_assignments(item.course_id)
           end
         end
       end

@@ -84,6 +84,15 @@ class EnrollmentsController < ApplicationController
     end
   end
 
+  def add_to_waitlist
+    @enrollment = Enrollment.find(params[:id])
+    @enrollment.update(application_status: 'waitlisted')
+    respond_to do |format|
+      format.html { redirect_to admin_applications_path, notice: 'Application was placed on waitlist.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_current_enrollment

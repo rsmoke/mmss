@@ -6,7 +6,11 @@ ActiveAdmin.register CampConfiguration do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :camp_year, :application_open, :application_close, :priority, :application_materials_due, :camper_acceptance_due, :active, :offer_letter, :student_packet_url, :application_fee_cents
+   permit_params  :camp_year, :application_open, :application_close, 
+                  :priority, :application_materials_due, 
+                  :camper_acceptance_due, :active, :offer_letter, 
+                  :student_packet_url, :application_fee_cents, 
+                  :reject_letter, :waitlist_letter
   #
   # or
   #
@@ -51,6 +55,12 @@ ActiveAdmin.register CampConfiguration do
     row :active
     row "Offer Letter Text" do |item|
       item.offer_letter
+    end
+    row "Rejection Letter Text" do |item|
+      item.reject_letter
+    end
+    row "Wait list Letter Text" do |item|
+      item.waitlist_letter
     end
     row :student_packet_url
     row :application_fee_cents

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_154640) do
+ActiveRecord::Schema.define(version: 2021_04_06_122231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(version: 2021_01_06_154640) do
     t.text "offer_letter"
     t.string "student_packet_url"
     t.integer "application_fee_cents"
+    t.text "reject_letter"
+    t.text "waitlist_letter"
     t.index ["camp_year"], name: "index_camp_configurations_on_camp_year", unique: true
   end
 
@@ -316,6 +318,14 @@ ActiveRecord::Schema.define(version: 2021_01_06_154640) do
     t.index ["recommendation_id"], name: "index_recuploads_on_recommendation_id"
   end
 
+  create_table "rejections", force: :cascade do |t|
+    t.bigint "enrollment_id", null: false
+    t.text "reason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enrollment_id"], name: "index_rejections_on_enrollment_id"
+  end
+
   create_table "session_activities", force: :cascade do |t|
     t.bigint "enrollment_id", null: false
     t.bigint "camp_occurrence_id", null: false
@@ -383,6 +393,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_154640) do
   add_foreign_key "payments", "users"
   add_foreign_key "recommendations", "enrollments"
   add_foreign_key "recuploads", "recommendations"
+  add_foreign_key "rejections", "enrollments"
   add_foreign_key "session_activities", "camp_occurrences"
   add_foreign_key "session_activities", "enrollments"
   add_foreign_key "session_assignments", "camp_occurrences"

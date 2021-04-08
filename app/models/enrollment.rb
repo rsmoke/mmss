@@ -30,6 +30,8 @@ class Enrollment < ApplicationRecord
   after_update :send_offer_letter
   before_update :set_application_deadline
   after_commit :send_enroll_letter, if: :persisted?
+  after_commit :send_rejected_letter, if: :persisted?
+  after_commit :send_waitlisted_letter, if: :persisted?
 
   belongs_to :user
   has_one :applicant_detail, through: :user
@@ -53,6 +55,8 @@ class Enrollment < ApplicationRecord
   has_many :financial_aids, dependent: :destroy
   has_many :travels, dependent: :destroy
   has_one :recommendation, dependent: :destroy
+
+  has_one :rejection, dependent: :destroy
 
   has_one_attached :transcript
   has_one_attached :student_packet
@@ -134,14 +138,34 @@ class Enrollment < ApplicationRecord
   end
 
   def send_offer_letter
-    if self.offer_status == "offered"
-      OfferMailer.offer_email(self.user_id).deliver_now
+    if previous_changes[:offer_status]
+      if self.offer_status == "offered"
+        OfferMailer.offer_email(self.user_id).deliver_now
+      end
     end
   end
 
   def send_enroll_letter
-    if self.application_status == "enrolled"
-      RegistrationMailer.app_enrolled_email(self.user).deliver_now
+    if previous_changes[:application_status]
+      if self.application_status == "enrolled"
+        RegistrationMailer.app_enrolled_email(self.user).deliver_now
+      end
+    end
+  end
+
+  def send_rejected_letter
+    if previous_changes[:application_status]
+      if self.application_status == "rejected"
+        RejectedMailer.app_rejected_email(self).deliver_now
+      end
+    end
+  end
+
+  def send_waitlisted_letter
+    if previous_changes[:application_status]
+      if self.application_status == "waitlisted"
+        WaitlistedMailer.app_waitlisted_email(self).deliver_now
+      end
     end
   end
 

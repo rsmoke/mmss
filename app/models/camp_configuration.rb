@@ -15,6 +15,8 @@
 #  offer_letter              :text
 #  student_packet_url        :string
 #  application_fee_cents     :integer
+#  reject_letter             :text
+#  waitlist_letter           :text
 #
 class CampConfiguration < ApplicationRecord
   has_many :camp_occurrences, dependent: :destroy
