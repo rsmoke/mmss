@@ -3,12 +3,15 @@ Hello <%= "#{@student.firstname} #{@student.lastname}" %>
       Thank you for your interest in the Michigan Math and Science Scholars! 
       I am happy to report that you have been awarded financial aid in the amount 
       of <%= "#{humanized_money_with_symbol(@finaid.amount)}" %>.
+<% unless @balance_due <= 0 %>
 <%= "\r\n" %>
       Your remaining balance is <%= "#{humanized_money_with_symbol(@balance_due / 100)}" %>.
-<% unless @balance_due <= 0 %>
+<%= "\r\n" %>
       Please log in to your student portal and pay your balance by <%= "#{@finaid.payments_deadline.strftime("%B %d, %Y")}" %>
       in order to finalize your enrollment.
 <% end %>
+<%= "\r\n" %>
+      Please ensure that you still accept your offer and upload the required documents to your student portal by May 1.
 <%= "\r\n" %>
       Congratulations on your achievements in your scholastic studies! 
 <%= "\r\n" %>
