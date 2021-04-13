@@ -225,7 +225,9 @@ ActiveAdmin.register Enrollment, as: "Application" do
         end
       end
 
-      text_node link_to("[Add Financial Aid Request]", new_admin_financial_aid_request_path(:enrollment_id => application))
+      text_node link_to("[Add Financial Aid Request]", new_admin_financial_aid_request_path(:enrollment_id => application)) 
+      text_node " --- "
+      text_node link_to("[Add Manual Payment]", new_admin_payment_path(:enrollment_id => application))
       
       if application.financial_aids.present?
         panel "Financial Aid Request" do
