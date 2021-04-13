@@ -27,7 +27,12 @@ ActiveAdmin.register Payment do
   form do |f| # This is a formtastic form builder
     f.semantic_errors # shows errors on :base
     f.inputs do
-      f.input :user_id, as: :select, collection: User.all
+      if params[:enrollment_id]
+        li "<strong>Application: #{Enrollment.find(params[:enrollment_id]).display_name}</strong>".html_safe
+        f.input :user_id, input_html: {value: Enrollment.find(params[:enrollment_id]).user_id}, as: :hidden
+      else
+        f.input :user_id, as: :select, collection: Enrollment.current_camp_year_applications.map { |enrol| [enrol.last_name, enrol.user_id]}.sort 
+      end
       f.input :total_amount
       li "Transaction Type #{f.object.transaction_type}" unless f.object.new_record?
       f.input :transaction_type, input_html: {value: "1"} unless f.object.persisted?
