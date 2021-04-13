@@ -41,8 +41,10 @@ class Payment < ApplicationRecord
     if self.user.payments.current_camp_payments.where(transaction_status: 1).count == 1
       RegistrationMailer.app_complete_email(self.user).deliver_now
       @current_enrollment.update!(application_status: "submitted")
-      if @current_enrollment.recommendation.recupload.present? 
-        @current_enrollment.update!(application_status: "application complete")
+      if @current_enrollment.recommendation.present?
+        if @current_enrollment.recommendation.recupload.present? 
+          @current_enrollment.update!(application_status: "application complete")
+        end
       end
     else 
       if balance_due == 0 && @current_enrollment.student_packet.attached?
