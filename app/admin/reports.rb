@@ -8,7 +8,7 @@ ActiveAdmin.register_page "Reports" do
         ul do
           li link_to "report - all complete apps (choose year and status)", admin_reports_all_complete_apps_path
           li link_to "report - registered but not applied", admin_reports_registered_but_not_applied_path
-          # li link_to "datasheet- all complete apps (choose year and status)", admin_reports_path
+          li link_to "report- enrolled_with_addresses", admin_reports_enrolled_with_addresses_path
           # li link_to "batch process- all complete apps (choose year, status and event)", admin_reports_path
           # li link_to "batch process (non-citizens)- completed apps (choose year, status and event)", admin_reports_path
           # li link_to "datasheet- financial transactions within dates (choose dates)", admin_reports_path
@@ -56,6 +56,17 @@ ActiveAdmin.register_page "Reports" do
       LEFT JOIN recommendations AS r ON r.enrollment_id = e.id
       LEFT JOIN financial_aids AS fa ON fa.enrollment_id = e.id) to STDOUT with csv header;"
       make_csv(query, "all_complete_apps")
+    end
+
+    def enrolled_with_addresses
+      query = "COPY (Select distinct(ad.lastname || ', ' || ad.firstname) AS name, ad.lastname, ad.firstname, u.email,
+              ad.address1, ad.address2, ad.city, ad.state, ad.state_non_us, ad.postalcode, ad.country 
+              FROM enrollments AS e 
+              LEFT JOIN users AS u ON e.user_id = u.id
+              JOIN applicant_details AS ad ON ad.user_id = e.user_id
+              WHERE e.application_status = 'enrolled' AND e.campyear = 2021 ORDER BY name)
+              to STDOUT with csv header;"
+      make_csv(query, "enrolled_with_addresses")
     end
 
     def make_csv(query, title)
