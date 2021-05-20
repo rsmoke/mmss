@@ -70,13 +70,14 @@ ActiveAdmin.register_page "Reports" do
     end
 
     def course_assignments_with_students
-      query = "COPY (SELECT ca.course_id, cor.camp_occurrence_id, co.description, cor.title, en.user_id, ad.lastname, ad.firstname 
+      query = "COPY (SELECT co.description, cor.title, en.user_id, ad.lastname, ad.firstname, u.email
       FROM course_assignments ca 
       JOIN enrollments en ON ca.enrollment_id = en.id 
       JOIN applicant_details AS ad ON ad.user_id = en.user_id 
       JOIN courses AS cor ON ca.course_id = cor.id 
       JOIN camp_occurrences AS co ON cor.camp_occurrence_id = co.id
-      ORDER BY cor.camp_occurrence_id, cor.title)
+      LEFT JOIN users AS u ON en.user_id = u.id
+      ORDER BY co.description, cor.title)
       to STDOUT with csv header;"
       make_csv(query, "course_assignments_with_students")
     end
