@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/admin/reports/all_complete_apps', to: 'admin/reports#all_complete_apps', as: :admin_reports_all_complete_apps
   get '/admin/reports/registered_but_not_applied', to: 'admin/reports#registered_but_not_applied', as: :admin_reports_registered_but_not_applied
   get '/admin/reports/enrolled_with_addresses', to: 'admin/reports#enrolled_with_addresses', as: :admin_reports_enrolled_with_addresses
+  get '/admin/reports/course_assignments_with_students', to: 'admin/reports#course_assignments_with_students', as: :admin_reports_course_assignments_with_students
 
   ActiveAdmin.routes(self)
   # authenticated :admin do
