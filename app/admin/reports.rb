@@ -9,7 +9,7 @@ ActiveAdmin.register_page "Reports" do
           li link_to "report - all complete apps (choose year and status)", admin_reports_all_complete_apps_path
           li link_to "report - registered but not applied", admin_reports_registered_but_not_applied_path
           li link_to "report- enrolled_with_addresses", admin_reports_enrolled_with_addresses_path
-          # li link_to "batch process- all complete apps (choose year, status and event)", admin_reports_path
+          li link_to "report - course_assignments_with_students", admin_reports_course_assignments_with_students_path
           # li link_to "batch process (non-citizens)- completed apps (choose year, status and event)", admin_reports_path
           # li link_to "datasheet- financial transactions within dates (choose dates)", admin_reports_path
           # li link_to "datasheet- assigned courses (choose year)", admin_reports_path
@@ -67,6 +67,18 @@ ActiveAdmin.register_page "Reports" do
               WHERE e.application_status = 'enrolled' AND e.campyear = 2021 ORDER BY name)
               to STDOUT with csv header;"
       make_csv(query, "enrolled_with_addresses")
+    end
+
+    def course_assignments_with_students
+      query = "COPY (SELECT ca.course_id, cor.camp_occurrence_id, co.description, cor.title, en.user_id, ad.lastname, ad.firstname 
+      FROM course_assignments ca 
+      JOIN enrollments en ON ca.enrollment_id = en.id 
+      JOIN applicant_details AS ad ON ad.user_id = en.user_id 
+      JOIN courses AS cor ON ca.course_id = cor.id 
+      JOIN camp_occurrences AS co ON cor.camp_occurrence_id = co.id
+      ORDER BY cor.camp_occurrence_id, cor.title)
+      to STDOUT with csv header;"
+      make_csv(query, "course_assignments_with_students")
     end
 
     def make_csv(query, title)
